@@ -73,27 +73,28 @@ narro/
 ## Phase 0 — Project Setup
 
 ### Task 0.1: Initialize Astro project
-- [ ] Scaffold Astro project in `/Users/dorletz/projects/narro/frontend/`
-- [ ] Configure TypeScript
-- [ ] Set up basic folder structure
+- [x] Scaffold Astro project in `/Users/dorletz/projects/narro/frontend/`
+- [x] Configure TypeScript
+- [x] Set up basic folder structure
 
 ### Task 0.2: Integrate Tailwind CSS
-- [ ] Install and configure Tailwind CSS with Astro
-- [ ] Set up `tailwind.config.mjs`
-- [ ] Configure PostCSS
-- [ ] Add base Tailwind directives to root layout
+- [x] Install and configure Tailwind CSS with Astro
+- [x] Set up `tailwind.config.mjs`
+- [x] Configure PostCSS
+- [x] Add base Tailwind directives to root layout
 
 ### Task 0.3: Extract design tokens from Figma
-- [ ] Extract color palette (primary, secondary, accent, neutrals)
-- [ ] Extract typography scale (font families, sizes, weights, line heights)
-- [ ] Extract spacing scale
-- [ ] Map tokens to CSS custom properties / Tailwind config
+- [x] Extract color palette (primary, secondary, accent, neutrals)
+- [x] Extract typography scale (font families, sizes, weights, line heights)
+- [x] Extract spacing scale
+- [x] Map tokens to CSS custom properties / Tailwind config
 
 ### Task 0.4: Install Keystatic
-- [ ] Install `keystatic` and `@keystatic/core`
-- [ ] Initialize Keystatic config (`src/content/config.ts`)
-- [ ] Configure Keystatic for content collections
-- [ ] Verify Keystatic admin panel runs locally
+- [x] Install `keystatic` and `@keystatic/core`
+- [x] Initialize Keystatic config (`keystatic.config.ts`)
+- [x] Configure Keystatic for content collections (8 singletons + 1 collection)
+- [x] Create content schemas (hero, servicii, studii-de-caz, studiu-detaliat, program-social, contact, story-time, navigation)
+- [x] Verify build runs cleanly (`astro build` passes)
 
 ---
 
