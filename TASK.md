@@ -101,43 +101,45 @@ narro/
 ## Phase 1 — Shared Components & Layout
 
 ### Task 1.1: Header
-- [ ] Build responsive Header component (desktop + mobile)
-- [ ] Extract navigation structure from Figma
-- [ ] Add mobile hamburger menu with toggle
-- [ ] Implement logo (from Figma `Logo` frame)
-- [ ] Add responsive navigation links
-- [ ] Connect navigation to Keystatic-managed menu content
-- [ ] Add sticky/fixed header behavior if specified in design
+- [x] Build responsive Header component (desktop + mobile)
+- [x] Navigation structure from Figma (8 links)
+- [x] Mobile hamburger menu with toggle animation
+- [x] Logo (text-based, from Figma)
+- [x] Responsive navigation links with hover states
+- [x] Desktop contact info (phone, email) + social icons
+- [x] Sticky header with z-50
+- [x] Keyboard-accessible mobile menu
 
 ### Task 1.2: Footer
-- [ ] Build Footer component (desktop + mobile)
-- [ ] Extract footer content structure from Figma
-- [ ] Add footer links, contact info, social icons
-- [ ] Add copyright line
-- [ ] Ensure responsive layout
+- [x] Build Footer component (desktop + mobile)
+- [x] Footer links, contact info, social icons
+- [x] Copyright line with dynamic year
+- [x] Responsive 3-column layout
+- [x] Purple bg matching header
 
 ### Task 1.3: Cookie Consent Banner
-- [ ] Build CookieConsent component
-- [ ] Design accepts/declines UI
-- [ ] Implement localStorage-based consent tracking
-- [ ] Add dismissible banner with smooth animation
-- [ ] Ensure accessible (keyboard navigation, ARIA labels)
+- [x] Build CookieConsent component
+- [x] Accepts/declines UI with themed buttons
+- [x] localStorage-based consent tracking
+- [x] Dismissible banner with smooth slide-up animation
+- [x] Accessible (keyboard navigation, ARIA labels)
 
 ### Task 1.4: Page Layout Wrapper
-- [ ] Build `PageLayout.astro` — wraps all pages
-- [ ] Includes Header, Footer, CookieConsent
-- [ ] Supports custom page title and metadata
-- [ ] Responsive container system
+- [x] Build `PageLayout.astro` — wraps all pages
+- [x] Includes Header, Footer, CookieConsent
+- [x] Supports custom page title and metadata
+- [x] Responsive container system
 
 ### Task 1.5: UI Primitives
-- [ ] `Button.astro` — primary, secondary, outline variants
-- [ ] `Card.astro` — with image, title, description variants
-- [ ] `Section.astro` — consistent padding/margin wrapper
-- [ ] `Heading.astro` — H1–H6 with Figma typography styles
-- [ ] `TextBlock.astro` — styled paragraph blocks
-- [ ] `ImageBlock.astro` — responsive image with alt text
-- [ ] `CtaSection.astro` — call-to-action block
-- [ ] `Divider.astro` — section separators
+- [x] `Button.astro` — primary, secondary, outline variants
+- [x] `Card.astro` — with image, title, description variants
+- [x] `Section.astro` — consistent padding/margin wrapper
+- [x] `Heading.astro` — H1–H6 with Figma typography styles
+- [x] `TextBlock.astro` — styled paragraph blocks
+- [x] `ImageBlock.astro` — responsive image with alt text
+- [x] `CtaBlock.astro` — call-to-action block
+- [x] `Divider.astro` — section separators
+- [x] Section components: HeroSection, FeaturesSection, TestimonialsSection, CtaSection, GridSection, ContactFormSection
 
 ---
 

@@ -1,0 +1,52 @@
+---
+// Grid section for flexible content layouts
+
+interface Props {
+  columns?: 1 | 2 | 3 | 4;
+  title?: string;
+  subtitle?: string;
+  bg?: 'white' | 'neutral' | 'primary' | 'accent';
+}
+
+const {
+  columns = 3,
+  title,
+  subtitle,
+  bg = 'white',
+} = Astro.props;
+
+import Heading from '../ui/Heading.astro';
+import TextBlock from '../ui/TextBlock.astro';
+
+const columnClasses = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 md:grid-cols-2',
+  3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+  4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
+};
+
+const bgClasses = {
+  white: 'bg-white',
+  neutral: 'bg-neutral-50',
+  primary: 'bg-primary text-white',
+  accent: 'bg-accent text-neutral-900',
+};
+---
+
+<section class={`py-16 md:py-24 ${bgClasses[bg]}`}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {(title || subtitle) && (
+      <div class="text-center mb-12">
+        {title && <Heading level={2}>{title}</Heading>}
+        {subtitle && (
+          <TextBlock class="mt-4 max-w-2xl mx-auto" color={bg === 'white' ? 'muted' : 'default'}>
+            {subtitle}
+          </TextBlock>
+        )}
+      </div>
+    )}
+    <div class={`grid ${columnClasses[columns]} gap-6 lg:gap-8`}>
+      <slot />
+    </div>
+  </div>
+</section>

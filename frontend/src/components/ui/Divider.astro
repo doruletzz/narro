@@ -1,0 +1,23 @@
+---
+// Section divider
+
+interface Props {
+  class?: string;
+  color?: string;
+  thickness?: 'thin' | 'medium' | 'thick';
+}
+
+const {
+  class: customClass = '',
+  color = 'bg-neutral-200',
+  thickness = 'medium',
+} = Astro.props;
+
+const thicknessClasses = {
+  thin: 'h-px',
+  medium: 'h-0.5',
+  thick: 'h-1',
+};
+---
+
+<div class={`${color} ${thicknessClasses[thickness]} ${customClass}`} role="separator" />

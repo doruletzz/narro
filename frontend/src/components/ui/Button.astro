@@ -1,0 +1,46 @@
+---
+// Button component with primary, secondary, and outline variants
+
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  disabled = false,
+  fullWidth = false,
+  type = 'button',
+} = Astro.props;
+
+const variantClasses = {
+  primary: 'bg-accent text-neutral-900 hover:bg-accent-dark border border-transparent',
+  secondary: 'bg-primary text-white hover:bg-primary-dark border border-transparent',
+  outline: 'bg-transparent text-primary border border-primary hover:bg-primary hover:text-white',
+};
+
+const sizeClasses = {
+  sm: 'px-3 py-1.5 text-sm',
+  md: 'px-5 py-2.5 text-base',
+  lg: 'px-6 py-3 text-lg',
+};
+
+const fullWidthClass = fullWidth ? 'w-full' : '';
+const disabledClass = disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : '';
+const baseClass = `inline-flex items-center justify-center font-semibold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ${sizeClasses[size]} ${fullWidthClass} ${disabledClass}`;
+
+const Element = href ? 'a' : 'button';
+const elementProps = href
+  ? { href, ...(disabled ? { 'aria-disabled': 'true', tabindex: -1 } : {}) }
+  : { type, disabled };
+---
+
+<Element class={`${baseClass} ${variantClasses[variant]}`} {...elementProps}>
+  <slot />
+</Element>

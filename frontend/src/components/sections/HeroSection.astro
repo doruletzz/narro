@@ -1,0 +1,59 @@
+---
+// Hero section component
+
+interface Props {
+  headline?: string;
+  subheadline?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  ctaVariant?: 'primary' | 'secondary' | 'outline';
+  backgroundImage?: string;
+  backgroundType?: 'image' | 'gradient' | 'solid';
+  class?: string;
+}
+
+const {
+  headline,
+  subheadline,
+  ctaText = 'Get Started',
+  ctaLink = '#',
+  ctaVariant = 'primary',
+  backgroundImage,
+  backgroundType = 'gradient',
+  class: customClass = '',
+} = Astro.props;
+
+import Button from '../ui/Button.astro';
+
+const bgClass = backgroundType === 'image' && backgroundImage
+  ? `bg-cover bg-center bg-no-repeat`
+  : backgroundType === 'gradient'
+    ? 'bg-gradient-to-br from-primary via-primary-light to-accent'
+    : 'bg-primary';
+---
+
+<section class={`${bgClass} text-white min-h-[60vh] md:min-h-[80vh] flex items-center ${customClass}`} style={backgroundImage && backgroundType === 'image' ? `background-image: url('${backgroundImage}')` : ''}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+    <div class="max-w-3xl">
+      {headline && (
+        <h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold leading-tight tracking-tight mb-6">
+          {headline}
+        </h1>
+      )}
+      {subheadline && (
+        <p class="text-lg md:text-xl lg:text-2xl text-white/80 leading-relaxed mb-8 max-w-2xl">
+          {subheadline}
+        </p>
+      )}
+      {ctaText && (
+        <div class="flex flex-wrap gap-4">
+          <Button variant={ctaVariant} href={ctaLink}>
+            {ctaText}
+          </Button>
+          <slot name="cta-secondary" />
+        </div>
+      )}
+      <slot />
+    </div>
+  </div>
+</section>

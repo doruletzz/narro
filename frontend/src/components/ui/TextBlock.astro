@@ -1,0 +1,32 @@
+---
+// Styled paragraph text block
+
+interface Props {
+  size?: 'sm' | 'base' | 'lg' | 'xl';
+  class?: string;
+  color?: 'default' | 'muted' | 'white';
+}
+
+const {
+  size = 'base',
+  class: customClass = '',
+  color = 'default',
+} = Astro.props;
+
+const sizeClasses = {
+  sm: 'text-sm',
+  base: 'text-base',
+  lg: 'text-lg',
+  xl: 'text-xl',
+};
+
+const colorClasses = {
+  default: 'text-neutral-900',
+  muted: 'text-neutral-600',
+  white: 'text-white',
+};
+---
+
+<p class={`font-body leading-relaxed ${sizeClasses[size]} ${colorClasses[color]} ${customClass}`}>
+  <slot />
+</p>

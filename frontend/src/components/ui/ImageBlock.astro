@@ -1,0 +1,36 @@
+---
+// Responsive image block with alt text
+
+interface Props {
+  src: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  aspectRatio?: string;
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+}
+
+const {
+  src,
+  alt = '',
+  width,
+  height,
+  class: customClass = '',
+  aspectRatio = 'auto',
+  objectFit = 'cover',
+} = Astro.props;
+
+const aspectClass = aspectRatio !== 'auto' ? `aspect-${aspectRatio}` : '';
+---
+
+<div class={`relative overflow-hidden bg-neutral-100 ${aspectClass} ${customClass}`}>
+  <img
+    src={src}
+    alt={alt}
+    {...width ? { width } : {}}
+    {...height ? { height } : {}}
+    class={`w-full ${objectFit === 'cover' ? 'h-full object-cover' : 'h-full object-' + objectFit}`}
+    loading="lazy"
+  />
+</div>

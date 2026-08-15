@@ -1,0 +1,31 @@
+---
+// CTA section
+
+interface Props {
+  heading?: string;
+  subheading?: string;
+  buttonText?: string;
+  buttonLink?: string;
+  variant?: 'primary' | 'accent' | 'neutral';
+}
+
+const {
+  heading,
+  subheading,
+  buttonText,
+  buttonLink,
+  variant = 'primary',
+} = Astro.props;
+
+import CtaBlock from '../ui/CtaBlock.astro';
+---
+
+<CtaBlock
+  heading={heading}
+  subheading={subheading}
+  buttonText={buttonText}
+  buttonLink={buttonLink}
+  bg={variant}
+>
+  <slot />
+</CtaBlock>

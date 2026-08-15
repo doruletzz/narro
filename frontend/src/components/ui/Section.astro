@@ -1,0 +1,40 @@
+---
+// Section wrapper with consistent padding
+
+interface Props {
+  id?: string;
+  class?: string;
+  bg?: 'white' | 'neutral' | 'primary' | 'accent' | 'transparent';
+  maxWidth?: string;
+  padding?: 'sm' | 'md' | 'lg' | 'xl';
+}
+
+const {
+  id,
+  class: customClass = '',
+  bg = 'white',
+  maxWidth = 'max-w-7xl',
+  padding = 'lg',
+} = Astro.props;
+
+const bgClasses = {
+  white: 'bg-white',
+  neutral: 'bg-neutral-50',
+  primary: 'bg-primary',
+  accent: 'bg-accent',
+  transparent: 'bg-transparent',
+};
+
+const paddingClasses = {
+  sm: 'py-8',
+  md: 'py-12',
+  lg: 'py-16',
+  xl: 'py-24',
+};
+---
+
+<section id={id} class={`${bgClasses[bg]} ${paddingClasses[padding]} ${customClass}`}>
+  <div class={`${maxWidth} mx-auto px-4 sm:px-6 lg:px-8`}>
+    <slot />
+  </div>
+</section>

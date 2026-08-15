@@ -1,0 +1,61 @@
+---
+// Call-to-action block
+
+interface Props {
+  heading?: string;
+  subheading?: string;
+  buttonText?: string;
+  buttonLink?: string;
+  buttonVariant?: 'primary' | 'secondary' | 'outline';
+  bg?: 'primary' | 'accent' | 'neutral' | 'white';
+  textAlign?: 'left' | 'center' | 'right';
+  class?: string;
+}
+
+const {
+  heading,
+  subheading,
+  buttonText = 'Learn More',
+  buttonLink = '#',
+  buttonVariant = 'primary',
+  bg = 'primary',
+  textAlign = 'center',
+  class: customClass = '',
+} = Astro.props;
+
+import Button from '../ui/Button.astro';
+
+const bgClasses = {
+  primary: 'bg-primary text-white',
+  accent: 'bg-accent text-neutral-900',
+  neutral: 'bg-neutral-50 text-neutral-900',
+  white: 'bg-white text-neutral-900',
+};
+
+const alignClasses = {
+  left: 'text-left items-start',
+  center: 'text-center items-center',
+  right: 'text-right items-end',
+};
+---
+
+<div class={`${bgClasses[bg]} py-16 px-4 sm:px-6 lg:px-8 ${customClass}`}>
+  <div class="max-w-3xl mx-auto flex flex-col gap-6 ${alignClasses[textAlign]}">
+    {heading && (
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold tracking-tight">
+        {heading}
+      </h2>
+    )}
+    {subheading && (
+      <p class="text-lg md:text-xl opacity-80 max-w-xl mx-auto">
+        {subheading}
+      </p>
+    )}
+    <div class="pt-2">
+      <Button variant={buttonVariant} href={buttonLink}>
+        {buttonText}
+      </Button>
+    </div>
+    <slot />
+  </div>
+</div>

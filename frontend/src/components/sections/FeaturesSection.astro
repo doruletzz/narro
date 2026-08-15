@@ -1,0 +1,42 @@
+---
+// Features section with cards
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  features?: Array<{
+    icon?: string;
+    title: string;
+    description: string;
+  }>;
+}
+
+const { title, subtitle, features = [] } = Astro.props;
+
+import Heading from '../ui/Heading.astro';
+import TextBlock from '../ui/TextBlock.astro';
+import Card from '../ui/Card.astro';
+---
+
+<section class="py-16 md:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {(title || subtitle) && (
+      <div class="text-center mb-12 md:mb-16">
+        {title && <Heading level={2}>{title}</Heading>}
+        {subtitle && (
+          <TextBlock class="mt-4 max-w-2xl mx-auto text-neutral-600">{subtitle}</TextBlock>
+        )}
+      </div>
+    )}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {features.map((feature) => (
+        <Card
+          title={feature.title}
+          description={feature.description}
+          variant="hover-lift"
+        />
+      ))}
+    </div>
+    <slot />
+  </div>
+</section>
