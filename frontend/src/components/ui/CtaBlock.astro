@@ -1,61 +1,43 @@
 ---
-// Call-to-action block
+// CtaBlock component — matches Figma's "ZI-NE CARE-I TREABA?" CTA:
+// - Background image
+// - Pink pill banner with text + arrow button
+// - Centered at bottom of section
 
 interface Props {
-  heading?: string;
-  subheading?: string;
+  imageUrl?: string;
   buttonText?: string;
-  buttonLink?: string;
-  buttonVariant?: 'primary' | 'secondary' | 'outline';
-  bg?: 'primary' | 'accent' | 'neutral' | 'white';
-  textAlign?: 'left' | 'center' | 'right';
-  class?: string;
+  link?: string;
 }
 
 const {
-  heading,
-  subheading,
-  buttonText = 'Learn More',
-  buttonLink = '#',
-  buttonVariant = 'primary',
-  bg = 'primary',
-  textAlign = 'center',
-  class: customClass = '',
+  imageUrl = 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1000&q=80',
+  buttonText = 'ZI-NE CARE-I TREABA?',
+  link = '/contact',
 } = Astro.props;
-
-import Button from '../ui/Button.astro';
-
-const bgClasses = {
-  primary: 'bg-primary text-white',
-  accent: 'bg-accent text-neutral-900',
-  neutral: 'bg-neutral-50 text-neutral-900',
-  white: 'bg-white text-neutral-900',
-};
-
-const alignClasses = {
-  left: 'text-left items-start',
-  center: 'text-center items-center',
-  right: 'text-right items-end',
-};
 ---
 
-<div class={`${bgClasses[bg]} py-16 px-4 sm:px-6 lg:px-8 ${customClass}`}>
-  <div class="max-w-3xl mx-auto flex flex-col gap-6 ${alignClasses[textAlign]}">
-    {heading && (
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold tracking-tight">
-        {heading}
-      </h2>
-    )}
-    {subheading && (
-      <p class="text-lg md:text-xl opacity-80 max-w-xl mx-auto">
-        {subheading}
-      </p>
-    )}
-    <div class="pt-2">
-      <Button variant={buttonVariant} href={buttonLink}>
-        {buttonText}
-      </Button>
+<section class="relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="relative">
+      <img
+        src={imageUrl}
+        alt="CTA — Zi-ne care-i treaba"
+        class="w-full aspect-[16/9] object-cover rounded-2xl"
+      />
+      <div class="absolute inset-0 flex items-end justify-center pb-12">
+        <a
+          href={link}
+          class="bg-[#ff99d8] rounded-full px-8 md:px-12 py-5 flex items-center gap-4 group"
+        >
+          <span class="text-2xl md:text-3xl font-heading font-bold text-primary tracking-wider">{buttonText}</span>
+          <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-[#110088] transition-colors">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg>
+          </div>
+        </a>
+      </div>
     </div>
-    <slot />
   </div>
-</div>
+</section>

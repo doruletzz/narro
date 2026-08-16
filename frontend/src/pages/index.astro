@@ -2,7 +2,398 @@
 import PageLayout from '../layouts/PageLayout.astro';
 ---
 
-<PageLayout>
-  <h1 class="text-4xl font-bold">Narro</h1>
-  <p class="mt-4 text-lg">Bine ai venit!</p>
+<PageLayout title="Narro — Branding și Comunicare Vizuală" description="Dăm viață brandului tău. Branding, design vizual și comunicare pentru business-uri și organizații sociale.">
+
+  <style is:global>
+    /* Hand-drawn doodle styles matching Figma */
+    .doodle-scribble {
+      opacity: 0.7;
+    }
+    .doodle-scribble path,
+    .doodle-scribble ellipse,
+    .doodle-scribble circle {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  </style>
+
+  <!-- ===== Hero Section ===== -->
+  <section class="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8" style="background-color: #f5f0eb;">
+    <!-- Doodle decorations matching Figma style — colorful scattered scribbles -->
+    <!-- Top-left: pink scribble star -->
+    <div class="absolute top-6 left-8 sm:left-16 md:left-20 w-14 sm:w-16 pointer-events-none doodle-scribble" style="transform: rotate(-12deg);">
+      <svg viewBox="0 0 120 120" fill="none">
+        <path d="M60 10 L65 45 L100 45 L72 62 L85 95 L60 75 L35 95 L48 62 L20 45 L55 45Z" stroke="#ff99d8" stroke-width="3.5" fill="none"/>
+      </svg>
+    </div>
+    <!-- Top-center-left: green scribble spiral -->
+    <div class="absolute top-20 left-1/4 w-12 sm:w-14 pointer-events-none doodle-scribble" style="transform: rotate(15deg);">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 50 Q55 40 50 30 Q40 25 30 35 Q25 50 35 60 Q50 65 65 55 Q75 40 70 25 Q60 5 40 10 Q15 20 15 50 Q15 80 40 90 Q70 95 90 70" stroke="#4ade80" stroke-width="3" fill="none" opacity="0.6"/>
+      </svg>
+    </div>
+    <!-- Top-right: orange scribble -->
+    <div class="absolute top-10 right-8 sm:right-16 md:right-24 w-20 sm:w-24 pointer-events-none doodle-scribble" style="transform: rotate(-25deg);">
+      <svg viewBox="0 0 150 80" fill="none">
+        <path d="M10 40 Q30 10 60 40 Q90 70 120 40 Q140 20 145 40" stroke="#f97316" stroke-width="3.5" fill="none"/>
+        <path d="M15 50 Q35 25 55 50 Q75 75 95 50 Q115 30 140 50" stroke="#f97316" stroke-width="2.5" fill="none" opacity="0.5"/>
+      </svg>
+    </div>
+    <!-- Below title left: blue scribble swirl -->
+    <div class="absolute top-48 sm:top-56 left-4 sm:left-10 w-16 sm:w-20 pointer-events-none doodle-scribble">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M20 80 Q10 50 30 30 Q50 10 70 25 Q90 40 85 65 Q80 90 55 90 Q30 90 20 80Z" stroke="#2200d8" stroke-width="3" fill="none" opacity="0.4"/>
+        <path d="M30 75 Q25 55 40 40 Q55 25 70 35 Q85 45 80 60" stroke="#2200d8" stroke-width="2" fill="none" opacity="0.3"/>
+      </svg>
+    </div>
+    <!-- Below title right: yellow scribble -->
+    <div class="absolute top-44 sm:top-52 right-4 sm:right-10 w-14 sm:w-16 pointer-events-none doodle-scribble" style="transform: rotate(20deg);">
+      <svg viewBox="0 0 100 80" fill="none">
+        <path d="M10 40 Q25 15 50 30 Q75 45 90 20" stroke="#facc15" stroke-width="3" fill="none"/>
+        <path d="M15 55 Q30 35 55 48 Q80 60 95 35" stroke="#facc15" stroke-width="2.5" fill="none" opacity="0.5"/>
+      </svg>
+    </div>
+    <!-- Bottom-left: pink scribble lines -->
+    <div class="absolute bottom-12 sm:bottom-20 left-4 sm:left-12 w-24 sm:w-32 pointer-events-none doodle-scribble" style="transform: rotate(8deg);">
+      <svg viewBox="0 0 150 60" fill="none">
+        <path d="M5 30 Q25 10 50 25 Q75 40 100 20 Q125 5 145 25" stroke="#ff99d8" stroke-width="3" fill="none"/>
+        <path d="M10 40 Q30 20 55 35 Q80 50 105 30 Q130 15 148 35" stroke="#ff99d8" stroke-width="2" fill="none" opacity="0.5"/>
+        <path d="M0 20 Q20 0 45 15 Q70 30 95 10 Q120 -5 150 15" stroke="#ff99d8" stroke-width="2" fill="none" opacity="0.3"/>
+      </svg>
+    </div>
+    <!-- Bottom-right: green scribble -->
+    <div class="absolute bottom-8 sm:bottom-16 right-4 sm:right-12 w-20 sm:w-24 pointer-events-none doodle-scribble" style="transform: rotate(-15deg);">
+      <svg viewBox="0 0 120 70" fill="none">
+        <path d="M10 35 Q30 10 60 25 Q90 40 110 15" stroke="#4ade80" stroke-width="3" fill="none"/>
+        <path d="M5 50 Q25 30 55 45 Q85 60 105 35" stroke="#4ade80" stroke-width="2.5" fill="none" opacity="0.5"/>
+      </svg>
+    </div>
+    <!-- Scattered small dots and shapes -->
+    <div class="absolute top-32 right-1/4 w-4 h-4 pointer-events-none">
+      <div class="w-full h-full rounded-full" style="background: #ff99d8; opacity: 0.4;"></div>
+    </div>
+    <div class="absolute top-56 left-1/3 w-3 h-3 pointer-events-none">
+      <div class="w-full h-full rounded-full" style="background: #facc15; opacity: 0.5;"></div>
+    </div>
+
+    <div class="max-w-5xl mx-auto relative z-10">
+      <div class="text-center">
+        <!-- CTA badge — pink pill -->
+        <a href="/contact" class="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white rounded-full mb-8" style="background-color: #ff99d8;">
+          ZI-NE CARE-I TREABA
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold leading-[1.1] tracking-tight" style="color: #2200d8;">
+          Titlu lung cu bucata de text de subliniat.
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Manifesto Section ===== -->
+  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24" style="background-color: #f5f0eb;">
+    <!-- Pink scribble rays above/left of image -->
+    <div class="absolute top-8 sm:top-12 left-8 sm:left-16 md:left-20 w-24 sm:w-32 pointer-events-none doodle-scribble" style="transform: rotate(-15deg);">
+      <svg viewBox="0 0 150 80" fill="none">
+        <path d="M10 70 Q25 50 30 30" stroke="#ff99d8" stroke-width="3.5" fill="none"/>
+        <path d="M25 75 Q40 55 48 35" stroke="#ff99d8" stroke-width="3" fill="none"/>
+        <path d="M40 78 Q55 58 62 38" stroke="#ff99d8" stroke-width="2.5" fill="none"/>
+        <path d="M55 75 Q68 55 75 35" stroke="#ff99d8" stroke-width="3" fill="none"/>
+        <path d="M70 70 Q82 50 88 30" stroke="#ff99d8" stroke-width="2.5" fill="none"/>
+      </svg>
+    </div>
+    <!-- Pink crown doodle above image -->
+    <div class="absolute top-4 sm:top-8 left-1/3 sm:left-1/3 w-12 sm:w-16 pointer-events-none doodle-scribble">
+      <svg viewBox="0 0 100 60" fill="none">
+        <path d="M15 55 L20 25 L35 40 L50 15 L65 40 L80 25 L85 55" stroke="#facc15" stroke-width="4" fill="none"/>
+      </svg>
+    </div>
+    <!-- Orange scribble below image -->
+    <div class="absolute bottom-8 sm:bottom-12 left-8 sm:left-16 w-20 sm:w-28 pointer-events-none doodle-scribble" style="transform: rotate(10deg);">
+      <svg viewBox="0 0 120 50" fill="none">
+        <path d="M5 25 Q20 5 40 20 Q60 35 80 15 Q100 -5 115 20" stroke="#f97316" stroke-width="3" fill="none"/>
+        <path d="M10 35 Q25 15 45 30 Q65 45 85 25 Q105 10 120 30" stroke="#f97316" stroke-width="2" fill="none" opacity="0.5"/>
+      </svg>
+    </div>
+    <!-- Large pink spiral on the right side — matching Figma -->
+    <div class="absolute bottom-4 sm:bottom-8 right-4 sm:right-8 md:right-16 w-28 sm:w-40 md:w-48 pointer-events-none doodle-scribble">
+      <svg viewBox="0 0 150 150" fill="none">
+        <path d="M75 75 Q78 65 85 60 Q95 55 100 65 Q105 80 95 90 Q80 100 65 95 Q45 88 40 70 Q35 50 50 35 Q65 20 85 25 Q110 30 120 55 Q130 80 125 105 Q118 130 95 138 Q70 145 45 135 Q20 125 12 100 Q5 75 15 50 Q25 25 50 15 Q75 5 100 15 Q125 25 138 50 Q150 75 148 105" stroke="#ff99d8" stroke-width="4" fill="none"/>
+      </svg>
+    </div>
+
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <!-- Image -->
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-lg overflow-hidden">
+            <!-- TODO: Replace with Figma asset — 3 women on rocket image -->
+            <img
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80"
+              alt="Echipa Narro — Branding manifest"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+        <!-- Text -->
+        <div class="space-y-5 pt-2 lg:pt-4">
+          <h2 class="text-xl sm:text-2xl font-heading font-bold uppercase tracking-[0.2em]" style="color: #ff99d8;">MANIFESTO</h2>
+          <div class="space-y-4 text-neutral-800 leading-relaxed text-sm sm:text-base">
+            <p>
+              <strong>Branding</strong> wears many faces. We peel them back like bad wallpaper. We find the heartbeat and let it set the pace.
+            </p>
+            <p>
+              <strong>The result:</strong> a logo that bites, a palette that sings, a font that winks back. All of them alive. All of them trouble.
+            </p>
+            <p>
+              You will recognize it by its constant motion. It fidgets. It interrupts. It leaves the room then comes back with better stories.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Directia Section ===== -->
+  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24" style="background-color: #f5f0eb;">
+    <!-- Blue scribble decorations below -->
+    <div class="absolute bottom-4 sm:bottom-8 left-8 sm:left-20 w-28 sm:w-40 pointer-events-none doodle-scribble" style="transform: rotate(5deg);">
+      <svg viewBox="0 0 160 60" fill="none">
+        <path d="M5 30 Q25 10 50 25 Q75 40 100 20 Q125 5 155 25" stroke="#2200d8" stroke-width="3" fill="none" opacity="0.3"/>
+        <path d="M10 40 Q30 20 55 35 Q80 50 105 30 Q130 15 158 35" stroke="#2200d8" stroke-width="2" fill="none" opacity="0.2"/>
+      </svg>
+    </div>
+
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-xl sm:text-2xl font-heading font-bold uppercase tracking-[0.2em] mb-8 sm:mb-10" style="color: #ff99d8;">DIRECTIA</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <!-- Branding Card -->
+        <div class="rounded-lg overflow-hidden border-2" style="border-color: #2200d8;">
+          <div class="aspect-[4/3]">
+            <!-- TODO: Replace with Figma asset — blue fish on pink background -->
+            <img
+              src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80"
+              alt="Branding — Identitate vizuală"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="p-4 sm:p-5" style="background-color: #f5f0eb;">
+            <p class="text-[10px] sm:text-xs uppercase tracking-wide mb-1" style="color: #2200d8; opacity: 0.5;">viața-i grea</p>
+            <h3 class="text-lg sm:text-xl font-heading font-bold" style="color: #2200d8;">Branding</h3>
+            <p class="text-xs sm:text-sm text-neutral-700 mt-2 leading-relaxed">
+              Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
+            </p>
+          </div>
+        </div>
+        <!-- Social Media Card -->
+        <div class="rounded-lg overflow-hidden border-2" style="border-color: #2200d8;">
+          <div class="aspect-[4/3]">
+            <!-- TODO: Replace with Figma asset — orange shape + phone mockup -->
+            <img
+              src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=600&q=80"
+              alt="Social Media — Social media management"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="p-4 sm:p-5" style="background-color: #f5f0eb;">
+            <p class="text-[10px] sm:text-xs uppercase tracking-wide mb-1" style="color: #ff99d8;">Ce s-a câștigat și ce</p>
+            <h3 class="text-lg sm:text-xl font-heading font-bold" style="color: #2200d8;">Social Media</h3>
+            <p class="text-xs sm:text-sm text-neutral-700 mt-2 leading-relaxed">
+              Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
+            </p>
+          </div>
+        </div>
+        <!-- Continut Foto-Video Card -->
+        <div class="rounded-lg overflow-hidden border-2" style="border-color: #2200d8;">
+          <div class="aspect-[4/3]">
+            <!-- TODO: Replace with Figma asset — purple tech graphics with "Take what you need" -->
+            <img
+              src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&q=80"
+              alt="Continut Foto-Video — Content creation"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="p-4 sm:p-5" style="background-color: #f5f0eb;">
+            <p class="text-[10px] sm:text-xs uppercase tracking-wide mb-1" style="color: #2200d8; opacity: 0.5;">Take what you need de la</p>
+            <h3 class="text-lg sm:text-xl font-heading font-bold" style="color: #2200d8;">Continut Foto-Video</h3>
+            <p class="text-xs sm:text-sm text-neutral-700 mt-2 leading-relaxed">
+              Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Teaser Section ===== -->
+  <section class="relative overflow-hidden" style="background-color: #2200d8;">
+    <!-- Heading bar -->
+    <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+      <h2 class="text-sm sm:text-base font-heading font-bold text-center uppercase tracking-[0.2em]" style="color: #ff99d8;">TEASER</h2>
+    </div>
+    <!-- Full-width image -->
+    <div class="px-0 sm:px-4 md:px-8 lg:px-16">
+      <!-- TODO: Replace with Figma asset — people serving food wearing masks -->
+      <img
+        src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=1400&q=80"
+        alt="Teaser — Echipa Narro la acțiune socială"
+        class="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover"
+      />
+    </div>
+    <!-- Text below image -->
+    <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 text-center">
+      <p class="text-white/80 max-w-xl mx-auto text-xs sm:text-sm leading-relaxed">
+        Lorem ipsum dolor sit amet consectetur. Facilisis elit amet sed sem nunc mattis. Quis etiam sem nunc mattis amet bibendum risus.
+      </p>
+      <a href="/studii-de-caz" class="inline-flex items-center gap-1 text-xs sm:text-sm font-medium mt-2 sm:mt-3 transition-colors hover:text-white" style="color: #ff99d8;">
+        Află mai multe
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+      </a>
+    </div>
+    <!-- Pink spiral doodle on right -->
+    <div class="absolute bottom-4 sm:bottom-8 right-4 sm:right-8 w-16 sm:w-24 pointer-events-none doodle-scribble">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 50 Q53 42 58 38 Q65 35 68 42 Q72 52 65 58 Q55 65 45 60 Q32 55 28 42 Q24 28 35 20 Q48 12 60 20 Q75 30 72 48 Q70 68 55 78 Q40 88 25 78 Q10 68 12 48 Q14 28 30 18" stroke="#ff99d8" stroke-width="3" fill="none" opacity="0.6"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== Studii de Caz Section ===== -->
+  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24" style="background-color: #f5f0eb;">
+    <!-- Doodle decorations matching Figma -->
+    <!-- Pink scribble star top right -->
+    <div class="absolute top-8 sm:top-12 right-8 sm:right-20 w-12 sm:w-16 pointer-events-none doodle-scribble" style="transform: rotate(12deg);">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 5 L58 38 L92 38 L65 55 L75 88 L50 70 L25 88 L35 55 L8 38 L42 38Z" stroke="#ff99d8" stroke-width="3.5" fill="none"/>
+      </svg>
+    </div>
+    <!-- Orange eye doodle right side -->
+    <div class="absolute top-1/3 right-4 sm:right-12 w-14 sm:w-20 pointer-events-none doodle-scribble">
+      <svg viewBox="0 0 100 70" fill="none">
+        <path d="M5 35 Q25 5 50 5 Q75 5 95 35 Q75 65 50 65 Q25 65 5 35Z" stroke="#f97316" stroke-width="3" fill="none"/>
+        <circle cx="50" cy="35" r="10" fill="#f97316" opacity="0.4"/>
+      </svg>
+    </div>
+    <!-- Blue scribble star bottom right -->
+    <div class="absolute bottom-16 sm:bottom-24 right-8 sm:right-16 w-12 sm:w-16 pointer-events-none doodle-scribble" style="transform: rotate(-20deg);">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 5 L58 38 L92 38 L65 55 L75 88 L50 70 L25 88 L35 55 L8 38 L42 38Z" stroke="#3b82f6" stroke-width="3" fill="none"/>
+      </svg>
+    </div>
+    <!-- Green scribble bottom center -->
+    <div class="absolute bottom-4 sm:bottom-8 left-1/3 w-14 sm:w-18 pointer-events-none doodle-scribble" style="transform: rotate(8deg);">
+      <svg viewBox="0 0 100 50" fill="none">
+        <path d="M5 25 Q25 5 50 20 Q75 35 95 15" stroke="#4ade80" stroke-width="3" fill="none"/>
+        <path d="M10 35 Q30 15 55 30 Q80 45 100 25" stroke="#4ade80" stroke-width="2" fill="none" opacity="0.5"/>
+      </svg>
+    </div>
+    <!-- Yellow scribble left side -->
+    <div class="absolute top-1/2 left-4 sm:left-8 w-10 sm:w-14 pointer-events-none doodle-scribble" style="transform: rotate(-10deg);">
+      <svg viewBox="0 0 80 80" fill="none">
+        <path d="M10 40 Q25 15 50 30 Q75 45 70 65" stroke="#facc15" stroke-width="3" fill="none"/>
+      </svg>
+    </div>
+    <!-- Pink scribble left -->
+    <div class="absolute bottom-1/3 left-4 sm:left-12 w-16 sm:w-20 pointer-events-none doodle-scribble" style="transform: rotate(5deg);">
+      <svg viewBox="0 0 100 60" fill="none">
+        <path d="M5 30 Q25 10 50 25 Q75 40 95 20" stroke="#ff99d8" stroke-width="3" fill="none"/>
+      </svg>
+    </div>
+    <!-- Blue swirl bottom -->
+    <div class="absolute bottom-12 sm:bottom-20 left-1/4 sm:left-1/3 w-14 sm:w-18 pointer-events-none doodle-scribble">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 50 Q55 40 50 30 Q40 25 30 35 Q25 50 35 60 Q50 65 65 55 Q75 40 70 25" stroke="#3b82f6" stroke-width="3" fill="none" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-xl sm:text-2xl font-heading font-bold uppercase tracking-[0.2em] mb-8 sm:mb-10" style="color: #ff99d8;">STUDII DE CAZ</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
+        <!-- Case Study 1 -->
+        <div>
+          <div class="aspect-[4/3] rounded-lg overflow-hidden mb-4">
+            <!-- TODO: Replace with Figma asset — food bowls photo -->
+            <img
+              src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=700&q=80"
+              alt="Studiu de caz 1"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <h3 class="text-sm font-heading font-bold mb-2" style="color: #2200d8;">STUDIU DE CAZ #1</h3>
+          <p class="text-xs sm:text-sm text-neutral-700 leading-relaxed mb-3">
+            Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
+          </p>
+          <a href="/studiu-de-caz/startupx" class="inline-flex items-center gap-1 text-xs font-medium uppercase tracking-widest transition-colors hover:text-[#ff99d8]" style="color: #2200d8;">
+            Află mai multe
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+        <!-- Case Study 2 -->
+        <div>
+          <div class="aspect-[4/3] rounded-lg overflow-hidden mb-4">
+            <!-- TODO: Replace with Figma asset — tacos photo -->
+            <img
+              src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=700&q=80"
+              alt="Studiu de caz 2"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <h3 class="text-sm font-heading font-bold mb-2" style="color: #2200d8;">STUDIU DE CAZ #2</h3>
+          <p class="text-xs sm:text-sm text-neutral-700 leading-relaxed mb-3">
+            Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
+          </p>
+          <a href="/studiu-de-caz/brandy" class="inline-flex items-center gap-1 text-xs font-medium uppercase tracking-widest transition-colors hover:text-[#ff99d8]" style="color: #2200d8;">
+            Află mai multe
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA Banner ===== -->
+  <section class="relative overflow-hidden py-8 sm:py-12" style="background-color: #f5f0eb;">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative">
+        <!-- Background with pink scribble decorations -->
+        <div class="absolute inset-0 pointer-events-none doodle-scribble">
+          <svg class="absolute top-4 left-4 sm:left-8 w-20 sm:w-28" viewBox="0 0 120 80" fill="none" style="transform: rotate(-10deg);">
+            <path d="M5 40 Q25 15 50 30 Q75 45 100 25 Q115 15 118 35" stroke="#ff99d8" stroke-width="3" fill="none"/>
+            <path d="M10 55 Q30 35 55 50 Q80 65 105 45" stroke="#ff99d8" stroke-width="2" fill="none" opacity="0.5"/>
+          </svg>
+          <svg class="absolute top-8 right-4 sm:right-8 w-16 sm:w-24" viewBox="0 0 100 60" fill="none" style="transform: rotate(15deg);">
+            <path d="M5 30 Q25 10 50 25 Q75 40 95 20" stroke="#ff99d8" stroke-width="3" fill="none"/>
+          </svg>
+          <svg class="absolute bottom-8 left-1/4 w-20 sm:w-28" viewBox="0 0 120 80" fill="none" style="transform: rotate(5deg);">
+            <path d="M5 40 Q30 15 55 35 Q80 55 105 30 Q118 20 115 45" stroke="#ff99d8" stroke-width="3" fill="none"/>
+          </svg>
+          <svg class="absolute bottom-4 right-1/3 w-14 sm:w-20" viewBox="0 0 100 60" fill="none" style="transform: rotate(-8deg);">
+            <path d="M5 30 Q30 5 55 25 Q80 45 98 25" stroke="#ff99d8" stroke-width="2.5" fill="none"/>
+          </svg>
+        </div>
+        <!-- Image -->
+        <div class="relative rounded-2xl overflow-hidden">
+          <!-- TODO: Replace with Figma asset — two women shopping photo -->
+          <img
+            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1000&q=80"
+            alt="CTA — Zi-ne care-i treaba"
+            class="w-full aspect-[16/9] object-cover"
+          />
+        </div>
+        <!-- Pink pill CTA centered at bottom -->
+        <div class="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2">
+          <a href="/contact" class="inline-flex items-center gap-2 sm:gap-3 bg-[#ff99d8] rounded-full px-6 sm:px-8 md:px-12 py-3 sm:py-4 flex-shrink-0">
+            <span class="text-base sm:text-xl md:text-2xl font-heading font-bold uppercase tracking-wider" style="color: #2200d8;">ZI-NE CARE-I TREABA</span>
+            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: #2200d8;">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="#ffffff" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </PageLayout>

@@ -1,31 +1,26 @@
 ---
-// CTA section
+// CTA section — wrapper for the pink pill CtaBlock
+// Matches Figma's consistent "ZI-NE CARE-I TREABA?" CTA pattern
+
+import CtaBlock from '../ui/CtaBlock.astro';
 
 interface Props {
-  heading?: string;
-  subheading?: string;
+  imageUrl?: string;
   buttonText?: string;
-  buttonLink?: string;
-  variant?: 'primary' | 'accent' | 'neutral';
+  link?: string;
 }
 
 const {
-  heading,
-  subheading,
-  buttonText,
-  buttonLink,
-  variant = 'primary',
+  imageUrl,
+  buttonText = 'ZI-NE CARE-I TREABA?',
+  link = '/contact',
 } = Astro.props;
-
-import CtaBlock from '../ui/CtaBlock.astro';
 ---
 
 <CtaBlock
-  heading={heading}
-  subheading={subheading}
+  imageUrl={imageUrl}
   buttonText={buttonText}
-  buttonLink={buttonLink}
-  bg={variant}
+  link={link}
 >
   <slot />
 </CtaBlock>

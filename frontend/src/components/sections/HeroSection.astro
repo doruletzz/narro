@@ -1,5 +1,9 @@
 ---
-// Hero section component
+// Hero section component — matches Figma design:
+// - Cream/white background with decorative doodle elements
+// - Large headline with subheadline
+// - CTA button(s)
+// - Gradient or image background options available
 
 interface Props {
   headline?: string;
@@ -8,8 +12,9 @@ interface Props {
   ctaLink?: string;
   ctaVariant?: 'primary' | 'secondary' | 'outline';
   backgroundImage?: string;
-  backgroundType?: 'image' | 'gradient' | 'solid';
+  backgroundType?: 'image' | 'gradient' | 'solid' | 'cream';
   class?: string;
+  pillLabel?: string;
 }
 
 const {
@@ -19,22 +24,30 @@ const {
   ctaLink = '#',
   ctaVariant = 'primary',
   backgroundImage,
-  backgroundType = 'gradient',
+  backgroundType = 'cream',
   class: customClass = '',
+  pillLabel,
 } = Astro.props;
 
 import Button from '../ui/Button.astro';
 
 const bgClass = backgroundType === 'image' && backgroundImage
-  ? `bg-cover bg-center bg-no-repeat`
+  ? 'bg-cover bg-center bg-no-repeat'
   : backgroundType === 'gradient'
     ? 'bg-gradient-to-br from-primary via-primary-light to-accent'
-    : 'bg-primary';
+    : backgroundType === 'solid'
+      ? 'bg-primary'
+      : 'bg-cream text-primary';
 ---
 
 <section class={`${bgClass} text-white min-h-[60vh] md:min-h-[80vh] flex items-center ${customClass}`} style={backgroundImage && backgroundType === 'image' ? `background-image: url('${backgroundImage}')` : ''}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
     <div class="max-w-3xl">
+      {pillLabel && (
+        <span class="inline-block px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white bg-[#ff99d8] rounded-full mb-6">
+          {pillLabel}
+        </span>
+      )}
       {headline && (
         <h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold leading-tight tracking-tight mb-6">
           {headline}

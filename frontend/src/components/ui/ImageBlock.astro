@@ -1,36 +1,33 @@
 ---
-// Responsive image block with alt text
+// ImageBlock component — matches Figma:
+// - Rounded corners (rounded-lg or rounded-2xl)
+// - Object-cover images
+// - Optional lazy loading
 
 interface Props {
   src: string;
-  alt?: string;
-  width?: number;
-  height?: number;
-  class?: string;
+  alt: string;
+  rounded?: 'lg' | '2xl';
   aspectRatio?: string;
-  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  lazy?: boolean;
 }
 
 const {
   src,
-  alt = '',
-  width,
-  height,
-  class: customClass = '',
-  aspectRatio = 'auto',
-  objectFit = 'cover',
+  alt,
+  rounded = 'lg',
+  aspectRatio,
+  lazy = true,
 } = Astro.props;
 
-const aspectClass = aspectRatio !== 'auto' ? `aspect-${aspectRatio}` : '';
+const roundedClass = rounded === '2xl' ? 'rounded-2xl' : 'rounded-lg';
 ---
 
-<div class={`relative overflow-hidden bg-neutral-100 ${aspectClass} ${customClass}`}>
+<div class={`${aspectRatio || ''} ${aspectRatio ? roundedClass : ''} bg-cream overflow-hidden`}>
   <img
     src={src}
     alt={alt}
-    {...width ? { width } : {}}
-    {...height ? { height } : {}}
-    class={`w-full ${objectFit === 'cover' ? 'h-full object-cover' : 'h-full object-' + objectFit}`}
-    loading="lazy"
+    class={`w-full h-full object-cover ${!aspectRatio ? roundedClass : ''}`}
+    loading={lazy ? 'lazy' : 'eager'}
   />
 </div>

@@ -1,32 +1,28 @@
 ---
-// Styled paragraph text block
+// TextBlock component — matches Figma:
+// - Leading-relaxed text
+// - neutral-700 color for body text
+// - neutral-600 for secondary text
 
 interface Props {
-  size?: 'sm' | 'base' | 'lg' | 'xl';
-  class?: string;
-  color?: 'default' | 'muted' | 'white';
+  variant?: 'body' | 'secondary' | 'caption';
+  className?: string;
 }
 
 const {
-  size = 'base',
-  class: customClass = '',
-  color = 'default',
+  variant = 'body',
+  className = '',
 } = Astro.props;
 
-const sizeClasses = {
-  sm: 'text-sm',
-  base: 'text-base',
-  lg: 'text-lg',
-  xl: 'text-xl',
+const variantClasses: Record<string, string> = {
+  'body': 'text-neutral-700 leading-relaxed',
+  'secondary': 'text-neutral-600 leading-relaxed',
+  'caption': 'text-xs text-neutral-500',
 };
 
-const colorClasses = {
-  default: 'text-neutral-900',
-  muted: 'text-neutral-600',
-  white: 'text-white',
-};
+const classes = `${variantClasses[variant]} ${className}`;
 ---
 
-<p class={`font-body leading-relaxed ${sizeClasses[size]} ${colorClasses[color]} ${customClass}`}>
+<p class={classes}>
   <slot />
 </p>

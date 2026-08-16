@@ -1,0 +1,180 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Servicii — Narro" description="Cele 3 direcții: Branding, Social Media, Continut Foto-Video. Oferim soluții complete de branding și comunicare.">
+
+  <!-- Cele 3 Directii Section — 3 vertical image cards -->
+  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-20 bg-cream">
+    <!-- Doodle accents -->
+    <div class="absolute top-8 left-8 w-12 h-12 pointer-events-none">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 5 L60 35 L95 35 L67 55 L77 85 L50 68 L23 85 L33 55 L5 35 L40 35Z" stroke="#facc15" stroke-width="3" opacity="0.5"/>
+      </svg>
+    </div>
+    
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-heading font-bold text-[#ff99d8] uppercase tracking-widest mb-10">CELE 3 DIRECTII</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Branding Card -->
+        <div class="rounded-lg overflow-hidden border border-primary/30">
+          <div class="aspect-[3/4] bg-white relative">
+            <img
+              src="https://images.unsplash.com/photo-1558618666-fcd25c85f32e?w=600&q=80"
+              alt="Branding — Identitate vizuală"
+              class="w-full h-full object-cover"
+            />
+            <!-- Subtle tag on image -->
+            <div class="absolute bottom-3 left-3 px-3 py-1 bg-white/90 rounded text-[10px] font-medium text-[#ff99d8]">
+              viața-i grea (fă-o mai grea, deschide-ți agenția)
+            </div>
+          </div>
+          <div class="p-4 bg-white border-t border-primary/10">
+            <h3 class="text-lg font-heading font-bold text-primary">Branding</h3>
+          </div>
+        </div>
+        <!-- Social Media Card -->
+        <div class="rounded-lg overflow-hidden border border-primary/30">
+          <div class="aspect-[3/4] bg-white relative">
+            <img
+              src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&q=80"
+              alt="Social Media — Social media management"
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute bottom-3 left-3 px-3 py-1 bg-white/90 rounded text-[10px] font-medium text-[#ff99d8]">
+              vs firme noi, design în stradă vs reclame luminoase
+            </div>
+          </div>
+          <div class="p-4 bg-white border-t border-primary/10">
+            <h3 class="text-lg font-heading font-bold text-primary">Social Media</h3>
+          </div>
+        </div>
+        <!-- Continut Foto-Video Card -->
+        <div class="rounded-lg overflow-hidden border border-primary/30">
+          <div class="aspect-[3/4] bg-white relative">
+            <img
+              src="https://images.unsplash.com/photo-1561071397-586787dd5340?w=600&q=80"
+              alt="Continut Foto-Video — Content creation"
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute bottom-3 left-3 px-3 py-1 bg-white/90 rounded text-[10px] font-medium text-[#ff99d8]">
+              Ce s-a câștigat și ce
+            </div>
+          </div>
+          <div class="p-4 bg-white border-t border-primary/10">
+            <h3 class="text-lg font-heading font-bold text-primary">Continut Foto-Video</h3>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Small descriptive text -->
+      <p class="text-xs text-neutral-500 mt-6 leading-relaxed">
+        Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
+      </p>
+    </div>
+  </section>
+
+  <!-- Oferte Si Oferte Section — White cards with doodle accents -->
+  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-20 bg-cream">
+    <!-- Orange scribble doodle -->
+    <div class="absolute top-20 right-8 w-20 h-20 pointer-events-none">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M10 80 Q30 20 50 40 Q70 10 90 50 Q70 80 50 60 Q30 90 10 80Z" stroke="#f97316" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+        <path d="M20 70 Q40 30 60 50 Q80 20 90 40" stroke="#f97316" stroke-width="3" stroke-linecap="round" opacity="0.3"/>
+      </svg>
+    </div>
+    
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-heading font-bold text-[#ff99d8] uppercase tracking-widest mb-10 text-center">OFERTE SI OFERTE</h2>
+      
+      <div class="space-y-6">
+        <!-- Oferta #1 — Text on left, image on right with doodle -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-0 bg-white rounded-lg overflow-hidden relative">
+          <div class="p-8 space-y-4">
+            <h3 class="text-2xl font-heading font-bold text-primary">Oferta #1</h3>
+            <p class="text-neutral-700 leading-relaxed text-sm">
+              Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
+            </p>
+            <p class="text-neutral-700 leading-relaxed text-sm">
+              magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
+            </p>
+            <a href="#" class="inline-flex items-center gap-1 px-4 py-2 border border-primary/30 text-sm font-medium text-primary hover:bg-primary hover:text-white transition-colors rounded">
+              Află mai multe
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          </div>
+          <div class="relative">
+            <!-- Orange doodle decoration -->
+            <div class="absolute top-0 right-0 w-full h-full pointer-events-none">
+              <svg viewBox="0 0 400 300" fill="none" class="w-full h-full">
+                <path d="M200 10 Q220 60 260 40 Q300 20 320 60 Q340 100 300 120 Q260 140 240 100 Q220 140 180 120 Q140 100 160 60 Q180 20 200 10Z" fill="#f97316" opacity="0.15"/>
+                <path d="M150 50 Q200 20 280 50 Q320 100 280 150 Q240 180 200 140" stroke="#f97316" stroke-width="6" stroke-linecap="round" opacity="0.2"/>
+                <path d="M180 80 Q220 50 260 80 Q290 110 260 140 Q230 160 200 130" stroke="#f97316" stroke-width="4" stroke-linecap="round" opacity="0.15"/>
+              </svg>
+            </div>
+            <img
+              src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&q=80"
+              alt="Oferta 1"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- Oferta #2 — Text on left, image on right -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-0 bg-white rounded-lg overflow-hidden">
+          <div class="p-8">
+            <h3 class="text-2xl font-heading font-bold text-primary">Oferta #2</h3>
+          </div>
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80"
+              alt="Oferta 2"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- Oferta #3 — Text on left, image on right -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-0 bg-white rounded-lg overflow-hidden">
+          <div class="p-8">
+            <h3 class="text-2xl font-heading font-bold text-primary">Oferta #3</h3>
+          </div>
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80"
+              alt="Oferta 3"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner — Pink pill with arrow, over image -->
+  <section class="relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="relative">
+        <img
+          src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1000&q=80"
+          alt="CTA — Zi-ne care-i treaba"
+          class="w-full aspect-[16/9] object-cover rounded-2xl"
+        />
+        <!-- Pink pill CTA centered at bottom -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2">
+          <a href="/contact" class="inline-flex items-center gap-3 bg-[#ff99d8] rounded-full px-10 md:px-14 py-4 flex-shrink-0">
+            <span class="text-2xl md:text-3xl font-heading font-bold text-primary tracking-wider">ZI-NE CARE-I TREABA?</span>
+            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>

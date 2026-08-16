@@ -1,5 +1,6 @@
 ---
-// Section divider
+// Section divider — matches Figma: subtle primary/10 border-top style
+// Also supports solid color dividers for section separation
 
 interface Props {
   class?: string;
@@ -9,8 +10,8 @@ interface Props {
 
 const {
   class: customClass = '',
-  color = 'bg-neutral-200',
-  thickness = 'medium',
+  color = 'border-primary/10',
+  thickness = 'thin',
 } = Astro.props;
 
 const thicknessClasses = {

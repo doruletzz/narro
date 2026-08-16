@@ -1,6 +1,7 @@
 ---
 // Cookie Consent Banner Component
 // Implements localStorage-based consent tracking with smooth animation
+// Matches Figma design tokens (cream, primary, accent)
 
 interface Props {
   acceptText?: string;
@@ -11,8 +12,8 @@ interface Props {
 
 const {
   acceptText = 'Accept',
-  declineText = 'Decline',
-  message = 'We use cookies to improve your experience. By continuing, you agree to our cookie policy.',
+  declineText = 'Refuz',
+  message = 'Folosim cookie-uri pentru a îmbunătăți experiența ta. Continui, și de acord cu politica noastră de cookie-uri.',
   policyLink = '/politica-cookies',
 } = Astro.props;
 ---
@@ -25,10 +26,10 @@ const {
   aria-live="polite"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 mb-4">
-    <div class="bg-neutral-900 text-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+    <div class="bg-[#2200d8] text-white rounded-lg shadow-lg p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
       <p class="flex-1 text-sm text-white/80">
         {message}
-        <a href={policyLink} class="text-accent hover:text-accent-dark underline transition-colors ml-1">
+        <a href={policyLink} class="text-[#ff99d8] hover:text-white underline transition-colors ml-1">
           Cookie Policy
         </a>
       </p>
@@ -36,14 +37,14 @@ const {
         <button
           type="button"
           id="cookie-decline"
-          class="px-4 py-2 text-sm font-medium text-white bg-transparent border border-white/30 rounded-md hover:bg-white/10 hover:border-white/50 transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-neutral-900"
+          class="px-4 py-2 text-sm font-medium text-white bg-transparent border border-white/30 rounded-md hover:bg-white/10 hover:border-white/50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff99d8] focus:ring-offset-2 focus:ring-offset-[#2200d8]"
         >
           {declineText}
         </button>
         <button
           type="button"
           id="cookie-accept"
-          class="px-4 py-2 text-sm font-medium text-neutral-900 bg-accent rounded-md hover:bg-accent-dark transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-neutral-900"
+          class="px-4 py-2 text-sm font-medium text-primary bg-[#ff99d8] rounded-md hover:bg-[#ff88c8] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff99d8] focus:ring-offset-2 focus:ring-offset-[#2200d8]"
         >
           {acceptText}
         </button>

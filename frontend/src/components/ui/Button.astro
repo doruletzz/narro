@@ -1,46 +1,66 @@
 ---
-// Button component with primary, secondary, and outline variants
+// Button component — matches Figma:
+// - Primary: solid bg, white text
+// - Outline: solid border, text bg on hover
+// - Pill: rounded-full variant
+
+type Variant = 'primary' | 'outline' | 'ghost';
+type Size = 'sm' | 'md' | 'lg';
 
 interface Props {
-  variant?: 'primary' | 'secondary' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: Variant;
+  size?: Size;
+  pill?: boolean;
+  block?: boolean;
+  arrow?: boolean;
   href?: string;
-  disabled?: boolean;
-  fullWidth?: boolean;
-  type?: 'button' | 'submit' | 'reset';
 }
 
 const {
   variant = 'primary',
   size = 'md',
+  pill = false,
+  block = false,
+  arrow = false,
   href,
-  disabled = false,
-  fullWidth = false,
-  type = 'button',
 } = Astro.props;
 
-const variantClasses = {
-  primary: 'bg-accent text-neutral-900 hover:bg-accent-dark border border-transparent',
-  secondary: 'bg-primary text-white hover:bg-primary-dark border border-transparent',
-  outline: 'bg-transparent text-primary border border-primary hover:bg-primary hover:text-white',
+const variantClasses: Record<Variant, string> = {
+  primary: 'bg-[#2200d8] text-white hover:bg-[#110088]',
+  outline: 'border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white',
+  ghost: 'text-primary hover:text-accent',
 };
 
-const sizeClasses = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-5 py-2.5 text-base',
-  lg: 'px-6 py-3 text-lg',
+const sizeClasses: Record<Size, string> = {
+  sm: 'text-xs px-3 py-1.5',
+  md: 'text-sm px-5 py-2',
+  lg: 'text-base px-6 py-3',
 };
 
-const fullWidthClass = fullWidth ? 'w-full' : '';
-const disabledClass = disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : '';
-const baseClass = `inline-flex items-center justify-center font-semibold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ${sizeClasses[size]} ${fullWidthClass} ${disabledClass}`;
-
-const Element = href ? 'a' : 'button';
-const elementProps = href
-  ? { href, ...(disabled ? { 'aria-disabled': 'true', tabindex: -1 } : {}) }
-  : { type, disabled };
+const classes = `${variantClasses[variant]} ${sizeClasses[size]} ${pill ? 'rounded-full' : 'rounded'} ${block ? 'w-full' : ''} inline-flex items-center justify-center font-medium transition-colors tracking-wide`;
 ---
 
-<Element class={`${baseClass} ${variantClasses[variant]}`} {...elementProps}>
-  <slot />
-</Element>
+{#if href}
+  <a
+    href={href}
+    class={classes}
+  >
+    <slot />
+    {#if arrow}
+      <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10" />
+      </svg>
+    {/if}
+  </a>
+{:else}
+  <button
+    class={classes}
+  >
+    <slot />
+    {#if arrow}
+      <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10" />
+      </svg>
+    {/if}
+  </button>
+{/if}

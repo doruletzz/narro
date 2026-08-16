@@ -1,0 +1,153 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Story Time — Narro" description="Povestea din spatele Narro. De la founding story la proiecte și evenimente.">
+
+  <!-- Story Time Hero -->
+  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-20">
+    <!-- Doodle star -->
+    <div class="absolute top-8 left-12 w-10 h-10 pointer-events-none">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 5 L60 35 L95 35 L67 55 L77 85 L50 68 L23 85 L33 55 L5 35 L40 35Z" stroke="#facc15" stroke-width="3" opacity="0.5"/>
+      </svg>
+    </div>
+    <!-- Doodle eye -->
+    <div class="absolute top-16 right-16 w-12 h-10 pointer-events-none">
+      <svg viewBox="0 0 100 80" fill="none">
+        <ellipse cx="50" cy="40" rx="45" ry="25" stroke="#2200d8" stroke-width="3"/>
+        <circle cx="50" cy="40" r="10" fill="#2200d8" opacity="0.5"/>
+      </svg>
+    </div>
+    
+    <div class="max-w-7xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-heading font-bold text-[#ff99d8] uppercase tracking-widest">STORY TIME</h1>
+      <p class="mt-6 text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+        Povestea din spatele Narro. De la prima idee la fiecare proiect care ne-a format.
+      </p>
+    </div>
+  </section>
+
+  <!-- Story Cards Section -->
+  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Scribble decoration -->
+    <div class="absolute bottom-10 left-8 w-20 h-20 pointer-events-none">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M10 90 Q30 50 50 60 Q70 30 90 50" stroke="#2200d8" stroke-width="4" stroke-linecap="round" opacity="0.15"/>
+      </svg>
+    </div>
+    
+    <div class="max-w-7xl mx-auto space-y-24">
+      <!-- Story 1 -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="relative">
+          <div class="aspect-square bg-cream rounded-lg overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=700&q=80"
+              alt="Cum a început Narro"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <!-- Small crown doodle -->
+          <div class="absolute -top-3 -right-3 w-8 h-8 pointer-events-none">
+            <svg viewBox="0 0 100 100" fill="none">
+              <path d="M20 80 L30 40 L50 60 L70 40 L80 80 Z" fill="#facc15" opacity="0.5" stroke="#2200d8" stroke-width="3"/>
+            </svg>
+          </div>
+        </div>
+        <div class="space-y-6">
+          <time class="text-sm text-neutral-500">Martie 2024</time>
+          <h2 class="text-2xl font-heading font-bold text-primary">Cum a început Narro</h2>
+          <p class="text-neutral-700 leading-relaxed text-sm">
+            Povestea noastră a început cu o pasiune pentru design și o credință că fiecare brand are o poveste de spus. Am creat Narro pentru a transforma ideile în identități vizuale memorabile.
+          </p>
+          <p class="text-neutral-700 leading-relaxed text-sm">
+            De la prima întâlnire cu primii clienți până la echipa pe care o formăm astăzi, fiecare pas a fost o lecție și o oportunitate de a crea ceva special.
+          </p>
+        </div>
+      </div>
+
+      <!-- Story 2 — Alternating layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="order-2 lg:order-1 space-y-6">
+          <time class="text-sm text-neutral-500">Iunie 2024</time>
+          <h2 class="text-2xl font-heading font-bold text-primary">Programul Social Narro</h2>
+          <p class="text-neutral-700 leading-relaxed text-sm">
+            Am lansat Programul Social pentru a susține organizațiile nonprofit cu branding de calitate la preț accesibil. Credem că fiecare organizație socială merită să fie vizibilă.
+          </p>
+          <p class="text-neutral-700 leading-relaxed text-sm">
+            Prin acest program, colaborăm cu ONG-uri și asociații care fac diferența în comunitățile lor, oferindu-le instrumentele de comunicare de care au nevoie.
+          </p>
+        </div>
+        <div class="relative order-1 lg:order-2">
+          <div class="aspect-square bg-cream rounded-lg overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=700&q=80"
+              alt="Programul Social Narro"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <!-- Pink scribble -->
+          <div class="absolute -bottom-4 -left-4 w-16 h-16 pointer-events-none">
+            <svg viewBox="0 0 100 100" fill="none">
+              <path d="M20 80 Q40 30 60 50 Q80 20 90 40" stroke="#ff99d8" stroke-width="4" stroke-linecap="round" opacity="0.3"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story 3 -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="relative">
+          <div class="aspect-square bg-cream rounded-lg overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=80"
+              alt="50 de proiecte completate"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <!-- Star doodle -->
+          <div class="absolute -top-2 -left-2 w-8 h-8 pointer-events-none">
+            <svg viewBox="0 0 100 100" fill="none">
+              <path d="M50 5 L60 35 L95 35 L67 55 L77 85 L50 68 L23 85 L33 55 L5 35 L40 35Z" stroke="#4ade80" stroke-width="3" opacity="0.4"/>
+            </svg>
+          </div>
+        </div>
+        <div class="space-y-6">
+          <time class="text-sm text-neutral-500">Septembrie 2024</time>
+          <h2 class="text-2xl font-heading font-bold text-primary">50 de proiecte completate</h2>
+          <p class="text-neutral-700 leading-relaxed text-sm">
+            Am atins un milestone important — 50 de proiecte de branding și design livrate pentru clienți din diverse industrii. De la startup-uri la organizații mari.
+          </p>
+          <p class="text-neutral-700 leading-relaxed text-sm">
+            Fiecare proiect ne-a învățat ceva nou și ne-a făcut mai buni în ceea ce facem. Suntem mândri de ceea ce am creat împreună cu clienții noștri.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner — Pink pill with arrow -->
+  <section class="relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="relative">
+        <img
+          src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1000&q=80"
+          alt="CTA — Zi-ne care-i treaba"
+          class="w-full aspect-[16/9] object-cover rounded-2xl"
+        />
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2">
+          <a href="/contact" class="inline-flex items-center gap-3 bg-[#ff99d8] rounded-full px-10 md:px-14 py-4 flex-shrink-0">
+            <span class="text-2xl md:text-3xl font-heading font-bold text-primary tracking-wider">ZI-NE CARE-I TREABA?</span>
+            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>

@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Design tokens will be extracted from Figma
+        // Design tokens from Figma
         primary: {
           DEFAULT: '#2200d8',
           light: '#4433e8',
@@ -27,9 +27,13 @@ export default {
           800: '#343a40',
           900: '#212529',
         },
+        // Cream background from Figma
+        cream: {
+          DEFAULT: '#f5f0eb',
+          light: '#faf7f4',
+        },
       },
       fontFamily: {
-        // Font families will be extracted from Figma
         heading: ['Bristol', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
       },
