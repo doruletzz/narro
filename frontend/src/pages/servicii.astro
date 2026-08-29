@@ -4,170 +4,214 @@ import PageLayout from '../layouts/PageLayout.astro';
 
 <PageLayout title="Servicii — Narro" description="Cele 3 direcții: Branding, Social Media, Continut Foto-Video. Oferim soluții complete de branding și comunicare.">
 
-  <!-- Cele 3 Directii Section — 3 vertical image cards -->
-  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-20 bg-cream">
-    <!-- Doodle accents -->
-    <div class="absolute top-8 left-8 w-12 h-12 pointer-events-none">
-      <svg viewBox="0 0 100 100" fill="none">
-        <path d="M50 5 L60 35 L95 35 L67 55 L77 85 L50 68 L23 85 L33 55 L5 35 L40 35Z" stroke="#facc15" stroke-width="3" opacity="0.5"/>
-      </svg>
+  <style is:global>
+    .doodle-scribble {
+      opacity: 0.7;
+    }
+    .doodle-scribble path,
+    .doodle-scribble ellipse,
+    .doodle-scribble circle {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  </style>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.doodle-scribble').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+
+  <!-- ===== CELE 3 DIRECTII Section ===== -->
+  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24" style="background-color: #f5f0eb;">
+    <!-- Sketch doodle decorations -->
+    <div class="absolute top-4 left-2 sm:left-6 w-72 pointer-events-none doodle-scribble">
+      <img src="/sketches/sketch-1.svg" />
     </div>
-    
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl font-heading font-bold text-[#ff99d8] uppercase tracking-widest mb-10">CELE 3 DIRECTII</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="absolute bottom-8 right-4 sm:right-12 w-72 pointer-events-none doodle-scribble">
+      <img src="/sketches/sketch-3.svg" />
+    </div>
+
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-xl sm:text-2xl font-heading font-bold uppercase tracking-[0.2em] mb-8 sm:mb-10" style="color: #ff99d8;">CELE 3 DIRECTII</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
         <!-- Branding Card -->
-        <div class="rounded-lg overflow-hidden border border-primary/30">
-          <div class="aspect-[3/4] bg-white relative">
+        <div class="rounded overflow-hidden border-2" style="border-color: #2200d8;">
+          <div class="aspect-[3/4]">
+            <!-- TODO: Replace with Figma asset — blue fish illustrations with pink fish -->
             <img
               src="https://images.unsplash.com/photo-1558618666-fcd25c85f32e?w=600&q=80"
               alt="Branding — Identitate vizuală"
               class="w-full h-full object-cover"
             />
-            <!-- Subtle tag on image -->
-            <div class="absolute bottom-3 left-3 px-3 py-1 bg-white/90 rounded text-[10px] font-medium text-[#ff99d8]">
-              viața-i grea (fă-o mai grea, deschide-ți agenția)
-            </div>
-          </div>
-          <div class="p-4 bg-white border-t border-primary/10">
-            <h3 class="text-lg font-heading font-bold text-primary">Branding</h3>
           </div>
         </div>
         <!-- Social Media Card -->
-        <div class="rounded-lg overflow-hidden border border-primary/30">
-          <div class="aspect-[3/4] bg-white relative">
+        <div class="rounded overflow-hidden border-2" style="border-color: #2200d8;">
+          <div class="aspect-[3/4]">
+            <!-- TODO: Replace with Figma asset — orange abstract with woman's eye -->
             <img
               src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&q=80"
               alt="Social Media — Social media management"
               class="w-full h-full object-cover"
             />
-            <div class="absolute bottom-3 left-3 px-3 py-1 bg-white/90 rounded text-[10px] font-medium text-[#ff99d8]">
-              vs firme noi, design în stradă vs reclame luminoase
-            </div>
-          </div>
-          <div class="p-4 bg-white border-t border-primary/10">
-            <h3 class="text-lg font-heading font-bold text-primary">Social Media</h3>
           </div>
         </div>
         <!-- Continut Foto-Video Card -->
-        <div class="rounded-lg overflow-hidden border border-primary/30">
-          <div class="aspect-[3/4] bg-white relative">
+        <div class="rounded overflow-hidden border-2" style="border-color: #2200d8;">
+          <div class="aspect-[3/4]">
+            <!-- TODO: Replace with Figma asset — purple/pink abstract with "Take what you need" -->
             <img
               src="https://images.unsplash.com/photo-1561071397-586787dd5340?w=600&q=80"
               alt="Continut Foto-Video — Content creation"
               class="w-full h-full object-cover"
             />
-            <div class="absolute bottom-3 left-3 px-3 py-1 bg-white/90 rounded text-[10px] font-medium text-[#ff99d8]">
-              Ce s-a câștigat și ce
-            </div>
-          </div>
-          <div class="p-4 bg-white border-t border-primary/10">
-            <h3 class="text-lg font-heading font-bold text-primary">Continut Foto-Video</h3>
           </div>
         </div>
       </div>
-      
-      <!-- Small descriptive text -->
-      <p class="text-xs text-neutral-500 mt-6 leading-relaxed">
-        Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
-      </p>
+
+      <!-- Headings and descriptions below cards — matching Figma layout -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mt-3 sm:mt-4">
+        <div>
+          <h3 class="text-base sm:text-lg font-heading font-bold mb-1 sm:mb-2" style="color: #2200d8;">Branding</h3>
+        </div>
+        <div>
+          <h3 class="text-base sm:text-lg font-heading font-bold mb-1 sm:mb-2" style="color: #2200d8;">Social Media</h3>
+          <p class="text-[10px] sm:text-xs text-neutral-600 leading-relaxed max-w-xs">
+            Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-base sm:text-lg font-heading font-bold mb-1 sm:mb-2" style="color: #2200d8;">Continut Foto-Video</h3>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Oferte Si Oferte Section — White cards with doodle accents -->
-  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-20 bg-cream">
-    <!-- Orange scribble doodle -->
-    <div class="absolute top-20 right-8 w-20 h-20 pointer-events-none">
-      <svg viewBox="0 0 100 100" fill="none">
-        <path d="M10 80 Q30 20 50 40 Q70 10 90 50 Q70 80 50 60 Q30 90 10 80Z" stroke="#f97316" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
-        <path d="M20 70 Q40 30 60 50 Q80 20 90 40" stroke="#f97316" stroke-width="3" stroke-linecap="round" opacity="0.3"/>
-      </svg>
+  <!-- ===== OFERTE SI OFERTE Section ===== -->
+  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24" style="background-color: #f5f0eb;">
+    <!-- Sketch doodle decorations -->
+    <div class="absolute top-8 sm:top-12 right-2 sm:right-10 md:right-16 w-80 pointer-events-none doodle-scribble" style="transform: rotate(-5deg);">
+      <img src="/sketches/sketch-5.svg" />
     </div>
-    
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl font-heading font-bold text-[#ff99d8] uppercase tracking-widest mb-10 text-center">OFERTE SI OFERTE</h2>
-      
-      <div class="space-y-6">
-        <!-- Oferta #1 — Text on left, image on right with doodle -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-0 bg-white rounded-lg overflow-hidden relative">
-          <div class="p-8 space-y-4">
-            <h3 class="text-2xl font-heading font-bold text-primary">Oferta #1</h3>
-            <p class="text-neutral-700 leading-relaxed text-sm">
+    <div class="absolute bottom-12 left-4 sm:left-12 w-72 pointer-events-none doodle-scribble">
+      <img src="/sketches/sketch-2.svg" />
+    </div>
+
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-xl sm:text-2xl font-heading font-bold uppercase tracking-[0.2em] mb-8 sm:mb-10 text-center" style="color: #ff99d8;">OFERTE SI OFERTE</h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+        <!-- Left: 3 separate offer boxes stacked -->
+        <div class="space-y-3">
+          <!-- Oferta #1 -->
+          <div class="bg-white rounded p-6 sm:p-8 space-y-4">
+            <h3 class="text-xl sm:text-2xl font-heading font-bold" style="color: #2200d8;">Oferta #1</h3>
+            <p class="text-sm text-neutral-700 leading-relaxed">
               Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
             </p>
-            <p class="text-neutral-700 leading-relaxed text-sm">
+            <p class="text-sm text-neutral-700 leading-relaxed">
               magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
             </p>
-            <a href="#" class="inline-flex items-center gap-1 px-4 py-2 border border-primary/30 text-sm font-medium text-primary hover:bg-primary hover:text-white transition-colors rounded">
-              Află mai multe
+            <a href="#" class="inline-flex items-center gap-1 px-4 py-2 border text-sm font-medium transition-colors hover:bg-[#2200d8] hover:text-white rounded" style="border-color: #2200d8; color: #2200d8;">
+              Afla mai multe
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
               </svg>
             </a>
           </div>
-          <div class="relative">
-            <!-- Orange doodle decoration -->
-            <div class="absolute top-0 right-0 w-full h-full pointer-events-none">
-              <svg viewBox="0 0 400 300" fill="none" class="w-full h-full">
-                <path d="M200 10 Q220 60 260 40 Q300 20 320 60 Q340 100 300 120 Q260 140 240 100 Q220 140 180 120 Q140 100 160 60 Q180 20 200 10Z" fill="#f97316" opacity="0.15"/>
-                <path d="M150 50 Q200 20 280 50 Q320 100 280 150 Q240 180 200 140" stroke="#f97316" stroke-width="6" stroke-linecap="round" opacity="0.2"/>
-                <path d="M180 80 Q220 50 260 80 Q290 110 260 140 Q230 160 200 130" stroke="#f97316" stroke-width="4" stroke-linecap="round" opacity="0.15"/>
-              </svg>
-            </div>
-            <img
-              src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&q=80"
-              alt="Oferta 1"
-              class="w-full h-full object-cover"
-            />
+          <!-- Oferta #2 -->
+          <div class="bg-white rounded p-4 sm:p-6">
+            <h3 class="text-xl sm:text-2xl font-heading font-bold" style="color: #2200d8;">Oferta #2</h3>
+          </div>
+          <!-- Oferta #3 -->
+          <div class="bg-white rounded p-4 sm:p-6">
+            <h3 class="text-xl sm:text-2xl font-heading font-bold" style="color: #2200d8;">Oferta #3</h3>
           </div>
         </div>
 
-        <!-- Oferta #2 — Text on left, image on right -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-0 bg-white rounded-lg overflow-hidden">
-          <div class="p-8">
-            <h3 class="text-2xl font-heading font-bold text-primary">Oferta #2</h3>
-          </div>
-          <div class="relative">
-            <img
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80"
-              alt="Oferta 2"
-              class="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-
-        <!-- Oferta #3 — Text on left, image on right -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-0 bg-white rounded-lg overflow-hidden">
-          <div class="p-8">
-            <h3 class="text-2xl font-heading font-bold text-primary">Oferta #3</h3>
-          </div>
-          <div class="relative">
-            <img
-              src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80"
-              alt="Oferta 3"
-              class="w-full h-full object-cover"
-            />
-          </div>
+        <!-- Right: B&W photo with orange scribble -->
+        <div class="relative">
+          <!-- TODO: Replace with Figma asset — B&W photo of two women eating/drinking -->
+          <img
+            src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=80"
+            alt="Oferte"
+            class="w-full h-full object-cover rounded"
+            style="filter: grayscale(1);"
+          />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Banner — Pink pill with arrow, over image -->
-  <section class="relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
+  <!-- ===== CTA Banner ===== -->
+  <section class="relative overflow-hidden py-12 sm:py-16" style="background-color: #f5f0eb;">
+    <!-- Sketch doodle decorations -->
+    <div class="absolute top-4 left-6 w-72 pointer-events-none doodle-scribble">
+      <img src="/sketches/sketch-1.svg" />
+    </div>
+    <div class="absolute top-8 right-4 sm:right-12 w-72 pointer-events-none doodle-scribble">
+      <img src="/sketches/sketch-2.svg" />
+    </div>
+    <div class="absolute bottom-4 left-1/4 sm:left-[28%] w-72 pointer-events-none doodle-scribble">
+      <img src="/sketches/sketch-6.svg" />
+    </div>
+    <div class="absolute bottom-8 right-1/3 sm:right-[25%] w-72 pointer-events-none doodle-scribble">
+      <img src="/sketches/sketch-7.svg" />
+    </div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="relative">
-        <img
-          src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1000&q=80"
-          alt="CTA — Zi-ne care-i treaba"
-          class="w-full aspect-[16/9] object-cover rounded-2xl"
-        />
+        <!-- Pink scribble decorations -->
+        <div class="absolute inset-0 pointer-events-none doodle-scribble">
+          <!-- Left scribbles -->
+          <svg class="absolute top-8 left-0 sm:-left-4 w-24 sm:w-32" viewBox="0 0 120 100" fill="none" style="transform: rotate(-15deg);">
+            <path d="M10 50 Q25 20 50 40 Q75 60 100 30 Q110 20 115 40" stroke="#ff99d8" stroke-width="3" fill="none"/>
+            <path d="M5 65 Q20 35 45 55 Q70 75 95 45 Q105 35 118 55" stroke="#ff99d8" stroke-width="2" fill="none" opacity="0.5"/>
+          </svg>
+          <!-- Right scribbles -->
+          <svg class="absolute top-4 right-0 sm:-right-4 w-28 sm:w-40" viewBox="0 0 160 100" fill="none" style="transform: rotate(10deg);">
+            <path d="M10 50 Q30 20 60 40 Q90 60 120 30 Q140 15 155 40" stroke="#ff99d8" stroke-width="3" fill="none"/>
+            <path d="M5 65 Q25 35 55 55 Q85 75 115 45 Q135 30 158 55" stroke="#ff99d8" stroke-width="2" fill="none" opacity="0.5"/>
+            <path d="M15 80 Q35 50 65 70 Q95 90 125 60 Q145 45 158 70" stroke="#ff99d8" stroke-width="2" fill="none" opacity="0.3"/>
+          </svg>
+          <!-- Pink star -->
+          <svg class="absolute top-12 right-1/4 w-14 sm:w-16" viewBox="0 0 100 100" fill="none" style="transform: rotate(8deg);">
+            <path d="M50 5 L58 38 L92 38 L65 55 L75 88 L50 70 L25 88 L35 55 L8 38 L42 38Z" stroke="#ff99d8" stroke-width="3.5" fill="none"/>
+          </svg>
+          <!-- Bottom scribbles -->
+          <svg class="absolute bottom-8 left-1/4 w-24 sm:w-32" viewBox="0 0 120 80" fill="none" style="transform: rotate(-5deg);">
+            <path d="M5 40 Q25 15 50 30 Q75 45 100 25 Q115 15 118 35" stroke="#ff99d8" stroke-width="3" fill="none"/>
+          </svg>
+          <svg class="absolute bottom-4 right-1/3 w-20 sm:w-28" viewBox="0 0 100 60" fill="none" style="transform: rotate(12deg);">
+            <path d="M5 30 Q25 10 50 25 Q75 40 95 20" stroke="#ff99d8" stroke-width="3" fill="none"/>
+          </svg>
+        </div>
+        <!-- Image -->
+        <div class="relative rounded-2xl overflow-hidden">
+          <!-- TODO: Replace with Figma asset — two women in leopard print shopping -->
+          <img
+            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1000&q=80"
+            alt="CTA — Zi-ne care-i treaba"
+            class="w-full aspect-[16/9] object-cover"
+          />
+        </div>
         <!-- Pink pill CTA centered at bottom -->
-        <div class="absolute bottom-6 left-1/2 -translate-x-1/2">
-          <a href="/contact" class="inline-flex items-center gap-3 bg-[#ff99d8] rounded-full px-10 md:px-14 py-4 flex-shrink-0">
-            <span class="text-2xl md:text-3xl font-heading font-bold text-primary tracking-wider">ZI-NE CARE-I TREABA?</span>
-            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2">
+          <a href="/contact" class="inline-flex items-center gap-2 sm:gap-3 bg-[#ff99d8] rounded-full px-6 sm:px-8 md:px-12 py-3 sm:py-4 flex-shrink-0">
+            <span class="text-lg sm:text-xl md:text-2xl font-heading font-bold uppercase tracking-wider" style="color: #2200d8;">ZI-NE CARE-I TREABA?</span>
+            <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: #2200d8;">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="#ffffff" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
               </svg>
             </div>

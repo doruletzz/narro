@@ -7,7 +7,7 @@ export const studiiDetaliate = collection({
   slugField: 'slug',
   schema: {
     slug: fields.slug({
-      label: 'Slug',
+      name: { label: 'Slug' },
     }),
     title: fields.text({
       label: 'Title',
@@ -37,23 +37,23 @@ export const studiiDetaliate = collection({
       label: 'Solution',
       multiline: true,
     }),
-    results: fields.array({
-      label: 'Results',
-      item: fields.object({
-        label: 'Result',
-        schema: {
-          metric: fields.text({
-            label: 'Metric (e.g. 95%)',
-          }),
-          description: fields.text({
-            label: 'Description',
-          }),
-        },
+    results: fields.array(
+      fields.object({
+        metric: fields.text({
+          label: 'Metric (e.g. 95%)',
+        }),
+        description: fields.text({
+          label: 'Description',
+        }),
       }),
-    }),
-    content: fields.document({
+      {
+        label: 'Results',
+        itemLabel: () => 'Result',
+      }
+    ),
+    content: fields.mdx({
       label: 'Content',
-      format: 'mdx',
+      extension: 'mdx',
     }),
   },
 });

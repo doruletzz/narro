@@ -35,7 +35,7 @@ export default {
       },
       fontFamily: {
         heading: ['Bristol', 'sans-serif'],
-        body: ['Inter', 'system-ui', 'sans-serif'],
+        body: ['League Spartan', 'system-ui', 'sans-serif'],
       },
     },
   },

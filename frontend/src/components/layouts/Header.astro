@@ -2,15 +2,12 @@
 // Header component — matches Figma: white bg, purple text, narro logo, contact pill button
 ---
 
-<header class="bg-[#f5f0eb] sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<header class="bg-[#f5f0eb] sticky top-0 z-50 transition-[shadow,transform] duration-[700ms] ease-in-out" id="site-header">
+  <div class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
       <a href="/" class="flex-shrink-0">
-        <svg width="64" height="32" viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <text x="0" y="26" font-family="'Bristol', sans-serif" font-weight="700" font-size="28" fill="#2200d8">narro.</text>
-          <text x="2" y="31" font-family="'Inter', sans-serif" font-weight="400" font-size="7" fill="#ff99d8">ERGO SUM</text>
-        </svg>
+        <img src="/logo.svg" width="64" height="32" alt="Narro" />
       </a>
 
       <!-- Desktop Navigation -->
@@ -21,14 +18,14 @@
         <a href="/story-time" class="text-sm font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Story Time</a>
       </nav>
 
-      <!-- Contact Button -->
+      <!-- Contact Button (desktop) -->
       <div class="hidden lg:block">
         <a
           href="/contact"
-          class="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-neutral-900 border border-neutral-900 rounded-full hover:bg-neutral-900 hover:text-white transition-colors tracking-wide"
+          class="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-neutral-900 border border-[#FF66C4] rounded-full hover:border-[#2200d8] hover:bg-[#2200d8] hover:text-white transition-colors tracking-wide group/cta"
         >
           CONTACT
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 group-hover/cta:rotate-45 transition-transform duration-150" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10" />
           </svg>
         </a>
@@ -37,15 +34,16 @@
       <!-- Mobile menu button -->
       <button
         type="button"
-        class="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-primary hover:text-accent hover:bg-primary/10 focus:outline-none"
+        class="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-primary hover:bg-primary/5 focus:outline-none"
         aria-expanded="false"
+        aria-controls="mobile-menu"
         id="mobile-menu-button"
       >
         <span class="sr-only">Open main menu</span>
-        <svg class="w-6 h-6 block" id="menu-icon-open" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 block" id="menu-icon-open" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
-        <svg class="w-6 h-6 hidden" id="menu-icon-close" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 hidden" id="menu-icon-close" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
@@ -56,8 +54,9 @@
   <div
     class="lg:hidden hidden bg-[#f5f0eb] border-t border-primary/10"
     id="mobile-menu"
+    aria-hidden="true"
   >
-    <div class="px-4 py-6 space-y-3">
+    <nav class="px-4 py-6 space-y-3" aria-label="Mobile navigation">
       <a href="/servicii" class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">Servicii</a>
       <a href="/studii-de-caz" class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">Portofoliu</a>
       <a href="/program-social" class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">Program Social</a>
@@ -65,31 +64,88 @@
       <div class="pt-4">
         <a
           href="/contact"
-          class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-neutral-900 border border-neutral-900 rounded-full hover:bg-neutral-900 hover:text-white transition-colors"
+          class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-neutral-900 border border-[#FF66C4] rounded-full hover:border-[#2200d8] hover:bg-[#2200d8] hover:text-white transition-colors"
         >
           CONTACT
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10" />
           </svg>
         </a>
       </div>
-    </div>
+    </nav>
   </div>
 
   <script>
+    const header = document.getElementById('site-header');
     const button = document.getElementById('mobile-menu-button');
     const menu = document.getElementById('mobile-menu');
     const iconOpen = document.getElementById('menu-icon-open');
     const iconClose = document.getElementById('menu-icon-close');
 
+    function openMenu() {
+      button?.setAttribute('aria-expanded', 'true');
+      menu?.setAttribute('aria-hidden', 'false');
+      menu?.classList.remove('hidden');
+      iconOpen?.classList.add('hidden');
+      iconClose?.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeMenu() {
+      button?.setAttribute('aria-expanded', 'false');
+      menu?.setAttribute('aria-hidden', 'true');
+      menu?.classList.add('hidden');
+      iconOpen?.classList.remove('hidden');
+      iconClose?.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+
     button?.addEventListener('click', () => {
       const isExpanded = button.getAttribute('aria-expanded') === 'true';
-      button.setAttribute('aria-expanded', String(!isExpanded));
-      menu?.classList.toggle('hidden');
-      iconOpen?.classList.toggle('hidden');
-      iconOpen?.classList.toggle('block');
-      iconClose?.classList.toggle('hidden');
-      iconClose?.classList.toggle('block');
+      isExpanded ? closeMenu() : openMenu();
     });
+
+    menu?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', (e) => {
+      const target = e.target as Node;
+      const isOpen = button?.getAttribute('aria-expanded') === 'true';
+      if (isOpen && !menu?.contains(target) && !button?.contains(target)) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && button?.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+        button?.focus();
+      }
+    });
+
+    let lastScrollY = window.scrollY;
+
+    const updateHeader = () => {
+      const scrollY = window.scrollY;
+      const pastThreshold = scrollY > (1.3 * window.innerHeight);
+
+      if (!pastThreshold) {
+        header?.classList.remove('-translate-y-full');
+      } else if (scrollY > lastScrollY) {
+        header?.classList.add('-translate-y-full');
+      } else {
+        header?.classList.remove('-translate-y-full');
+      }
+
+      if (header?.classList.contains('-translate-y-full') && button?.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+      }
+
+      lastScrollY = scrollY;
+    };
+
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
   </script>
 </header>

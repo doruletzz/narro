@@ -11,25 +11,25 @@ export const programSocial = singleton({
       label: 'Program Description',
       multiline: true,
     }),
-    benefits: fields.array({
-      label: 'Benefits / Features',
-      item: fields.object({
-        label: 'Benefit',
-        schema: {
-          icon: fields.image({
-            label: 'Icon (optional)',
-          }),
-          title: fields.text({
-            label: 'Title',
-            validation: { isRequired: true },
-          }),
-          description: fields.text({
-            label: 'Description',
-            multiline: true,
-          }),
-        },
+    benefits: fields.array(
+      fields.object({
+        icon: fields.image({
+          label: 'Icon (optional)',
+        }),
+        title: fields.text({
+          label: 'Title',
+          validation: { isRequired: true },
+        }),
+        description: fields.text({
+          label: 'Description',
+          multiline: true,
+        }),
       }),
-    }),
+      {
+        label: 'Benefits / Features',
+        itemLabel: () => 'Benefit',
+      }
+    ),
     ctaHeading: fields.text({
       label: 'CTA Heading',
       defaultValue: 'APLICA ACUM',
