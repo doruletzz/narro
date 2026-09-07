@@ -4,7 +4,7 @@ hero:
   ctaHref: "/contact"
 manifesto:
   label: "MANIFESTO"
-  image: manifesto.png
+  image: /manifesto.png
   imageAlt: "Echipa Narro — Branding manifest"
   paragraphs:
     - "**Branding** wears many faces. We peel them back like bad wallpaper. We find the heartbeat and let it set the pace."
@@ -16,19 +16,19 @@ directia:
     - eyebrow: "viața-i grea"
       title: "Branding"
       description: "Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus."
-      image: branding.jpg
+      image: /branding.jpg
       imageAlt: "Branding — Identitate vizuală"
       href: "/portofolio"
     - eyebrow: "Ce s-a câștigat și ce"
       title: "Social Media"
       description: "Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus."
-      image: social-media.jpg
+      image: /social-media.jpg
       imageAlt: "Social Media — Social media management"
       href: "/portofolio"
     - eyebrow: "Take what you need de la"
       title: "Continut Foto-Video"
       description: "Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus."
-      image: foto-video.jpg
+      image: /foto-video.jpg
       imageAlt: "Continut Foto-Video — Content creation"
       href: "/portofolio"
 teaser:
@@ -43,13 +43,13 @@ studiiDeCaz:
   items:
     - title: "STUDIU DE CAZ #1"
       description: "Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus."
-      image: studiu-1.jpg
+      image: /studiu-1.jpg
       imageAlt: "Studiu de caz 1"
       ctaLabel: "Află mai multe"
       href: "/contact"
     - title: "STUDIU DE CAZ #2"
       description: "Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus."
-      image: studiu-2.jpg
+      image: /studiu-2.jpg
       imageAlt: "Studiu de caz 2"
       ctaLabel: "Află mai multe"
       href: "/contact"

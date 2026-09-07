@@ -1,25 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 @font-face {
   font-family: 'Bristol';
   font-style: normal;
-  font-weight: 400 700;
+  font-weight: 700;
   font-display: swap;
-  src: url('https://fonts.googleapis.com/css2?family=Bristol:wght@400;700&display=swap');
+  src: url('/fonts/Bristol-Bold.ttf') format('opentype');
 }
+
+/* Inter — body font */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Base body styling — cream background from Figma */
+/* Base body styling — matches Figma: white page background */
 body {
-  background-color: #f5f0eb;
+  background-color: #ffffff;
   color: #212529;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -34,4 +37,13 @@ body {
 /* Smooth scroll */
 html {
   scroll-behavior: smooth;
+}
+
+/* Hide horizontal scrollbar on card scrollers (visual only) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

@@ -16,7 +16,8 @@ const {
   className = '',
 } = Astro.props;
 
-const tag = `h${level}`;
+// Capitalized variable name enables Astro dynamic tag rendering
+const Tag = `h${level}` as any;
 
 const variantClasses: Record<string, string> = {
   'section-label': 'text-xs font-semibold uppercase tracking-wider text-[#ff99d8]',
@@ -27,6 +28,6 @@ const variantClasses: Record<string, string> = {
 const classes = `${variantClasses[variant]} ${className}`;
 ---
 
-<{tag} class={classes}>
+<Tag class={classes}>
   <slot />
-</{tag}>
+</Tag>

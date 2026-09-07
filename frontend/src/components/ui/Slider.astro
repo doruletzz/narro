@@ -1,0 +1,53 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+/**
+ * Horizontal, scroll-snapping card track shared by the "Cele 3 direcții"
+ * (Servicii, fixed set of 3 cards) and "Studii de caz" (overflowing,
+ * bleeds past the content edge) sections. It only owns scroll/snap/bleed
+ * behaviour — card markup and styling stay in the page that uses it.
+ *
+ * @prop id     - forwarded to the wrapper, e.g. for the servicii hover script.
+ * @prop bleed  - when true, the track keeps its mobile bleed margins at every
+ *                breakpoint so cards can overflow past the container edge.
+ *                When false, it resets to a contained row on md+.
+ * @prop snap   - toggles scroll-snap on the track (default: true).
+ * @prop class  - extra classes merged onto the wrapper (e.g. `md:overflow-visible`).
+ *
+ * Any other attribute (e.g. `data-default-active`) is forwarded to the
+ * wrapper as-is, so pages can hang extra hooks for their own scripts.
+ */
+interface Props extends HTMLAttributes<'div'> {
+  bleed?: boolean;
+  snap?: boolean;
+}
+
+const { id, bleed = false, snap = true, class: className = '', ...rest } = Astro.props;
+---
+
+<div
+  id={id}
+  class:list={[
+    'slider flex flex-nowrap gap-4 md:gap-6 overflow-x-auto scroll-smooth no-scrollbar pb-6 pt-2 -mx-4 px-4',
+    !bleed && 'md:mx-0 md:px-0',
+    snap && 'snap-x snap-mandatory',
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</div>
+
+<style>
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Snap applies to whatever card component the caller puts inside. */
+  .slider > :global(*) {
+    scroll-snap-align: center;
+  }
+</style>

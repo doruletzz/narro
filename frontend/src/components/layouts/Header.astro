@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 // Header component — matches Figma: white bg, purple text, narro logo, contact pill button
 ---
 
@@ -7,7 +9,7 @@
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
       <a href="/" class="flex-shrink-0">
-        <img src="/logo.svg" width="64" height="32" alt="Narro" />
+        <Image src="/logo.svg" width="64" height="32" alt="Narro" />
       </a>
 
       <!-- Desktop Navigation -->
@@ -19,7 +21,7 @@
       </nav>
 
       <!-- Contact Button (desktop) -->
-      <div class="hidden lg:block">
+      <div class=" lg:ml-0 ml-auto mx-2">
         <a
           href="/contact"
           class="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-neutral-900 border border-[#FF66C4] rounded-full hover:border-[#2200d8] hover:bg-[#2200d8] hover:text-white transition-colors tracking-wide group/cta"

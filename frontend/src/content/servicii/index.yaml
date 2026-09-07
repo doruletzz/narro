@@ -1,0 +1,37 @@
+cele3Directii:
+  label: "CELE 3 DIRECTII"
+  cards:
+    - title: "Branding"
+      description: "Soluții strategice de identitate vizuală și poziționare pe piață."
+      image: /branding.jpg
+      imageAlt: "Branding — Identitate vizuală"
+    - title: "Social Media"
+      description: "Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam."
+      image: /social-media.jpg
+      imageAlt: "Social Media — Social media management"
+    - title: "Continut Foto-Video"
+      description: "Producție foto-video profesională pentru campanii de impact."
+      image: /foto-video.jpg
+      imageAlt: "Continut Foto-Video — Content creation"
+oferte:
+  label: "OFERTE SI OFERTE"
+  items:
+    - title: "Oferta #1"
+      paragraphs:
+        - "Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus."
+        - "magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus."
+      image: /oferta-1.jpg
+      ctaLabel: "Afla mai multe"
+      ctaHref: "/contact"
+    - title: "Oferta #2"
+      paragraphs:
+        - "Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus."
+      image: /oferta-2.jpg
+      ctaLabel: "Afla mai multe"
+      ctaHref: "/contact"
+    - title: "Oferta #3"
+      paragraphs:
+        - "Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus."
+      image: /oferta-3.jpg
+      ctaLabel: "Afla mai multe"
+      ctaHref: "/contact"
