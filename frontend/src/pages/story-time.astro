@@ -2,31 +2,16 @@
 import CtaBanner from '@/components/sections/CtaBanner.astro';
 import PageLayout from '../layouts/PageLayout.astro';
 import Header from '@/components/layouts/Header.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const home = await reader.singletons.homepage.read();
+const { ctaBanner } = home || {};
 ---
 
 <PageLayout title="Story Time — Narro" description="Povestea din spatele Narro. De la founding story la proiecte și evenimente.">
   <Header />
-
-  <!-- Story Time Hero -->
-  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-20">
-    <!-- Sketch doodle decorations -->
-    <div class="absolute top-4 left-6 sm:left-12 w-72 pointer-events-none">
-      <img src="/sketches/sketch-1.svg" />
-    </div>
-    <div class="absolute top-10 right-8 sm:right-16 w-72 pointer-events-none">
-      <img src="/sketches/sketch-2.svg" />
-    </div>
-    <div class="absolute bottom-6 left-1/3 sm:left-[35%] w-72 pointer-events-none">
-      <img src="/sketches/sketch-3.svg" />
-    </div>
-    
-    <div class="max-w-7xl mx-auto text-center">
-      <h1 class="text-4xl md:text-5xl font-heading font-bold text-[#ff99d8] uppercase tracking-widest">STORY TIME</h1>
-      <p class="mt-6 text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
-        Povestea din spatele Narro. De la prima idee la fiecare proiect care ne-a format.
-      </p>
-    </div>
-  </section>
 
   <!-- Story Cards Section -->
   <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-12">
@@ -55,12 +40,11 @@ import Header from '@/components/layouts/Header.astro';
           </div>
         </div>
         <div class="space-y-6">
-          <time class="text-sm text-neutral-500">Martie 2024</time>
           <h2 class="text-2xl font-heading font-bold text-primary">Cum a început Narro</h2>
-          <p class="text-neutral-700 leading-relaxed text-sm">
+          <p class="text-neutral-700 leading-relaxed text-lg">
             Povestea noastră a început cu o pasiune pentru design și o credință că fiecare brand are o poveste de spus. Am creat Narro pentru a transforma ideile în identități vizuale memorabile.
           </p>
-          <p class="text-neutral-700 leading-relaxed text-sm">
+          <p class="text-neutral-700 leading-relaxed text-lg">
             De la prima întâlnire cu primii clienți până la echipa pe care o formăm astăzi, fiecare pas a fost o lecție și o oportunitate de a crea ceva special.
           </p>
         </div>
@@ -69,12 +53,11 @@ import Header from '@/components/layouts/Header.astro';
       <!-- Story 2 — Alternating layout -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div class="order-2 lg:order-1 space-y-6">
-          <time class="text-sm text-neutral-500">Iunie 2024</time>
           <h2 class="text-2xl font-heading font-bold text-primary">Programul Social Narro</h2>
-          <p class="text-neutral-700 leading-relaxed text-sm">
+          <p class="text-neutral-700 leading-relaxed text-lg">
             Am lansat Programul Social pentru a susține organizațiile nonprofit cu branding de calitate la preț accesibil. Credem că fiecare organizație socială merită să fie vizibilă.
           </p>
-          <p class="text-neutral-700 leading-relaxed text-sm">
+          <p class="text-neutral-700 leading-relaxed text-lg">
             Prin acest program, colaborăm cu ONG-uri și asociații care fac diferența în comunitățile lor, oferindu-le instrumentele de comunicare de care au nevoie.
           </p>
         </div>
@@ -109,12 +92,11 @@ import Header from '@/components/layouts/Header.astro';
           </div>
         </div>
         <div class="space-y-6">
-          <time class="text-sm text-neutral-500">Septembrie 2024</time>
           <h2 class="text-2xl font-heading font-bold text-primary">50 de proiecte completate</h2>
-          <p class="text-neutral-700 leading-relaxed text-sm">
+          <p class="text-neutral-700 leading-relaxed text-lg">
             Am atins un milestone important — 50 de proiecte de branding și design livrate pentru clienți din diverse industrii. De la startup-uri la organizații mari.
           </p>
-          <p class="text-neutral-700 leading-relaxed text-sm">
+          <p class="text-neutral-700 leading-relaxed text-lg">
             Fiecare proiect ne-a învățat ceva nou și ne-a făcut mai buni în ceea ce facem. Suntem mândri de ceea ce am creat împreună cu clienții noștri.
           </p>
         </div>
@@ -123,6 +105,5 @@ import Header from '@/components/layouts/Header.astro';
   </section>
 
   <!-- CTA Banner — Pink pill with arrow -->
-  <CtaBanner />
-
+  {ctaBanner && <CtaBanner ctaBanner={ctaBanner} />}
 </PageLayout>

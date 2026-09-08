@@ -1,33 +1,55 @@
 ---
-// Card component — matches Figma:
-// - Rounded corners (rounded-lg)
-// - White bg with subtle border
-// - Image on top, text below
+import type { HTMLAttributes } from 'astro/types';
 
-interface Props {
+/**
+ *
+ * @prop href            - if set, the card renders as a link.
+ * @prop image           - image src. Omit entirely for a text-only card.
+ * @prop imageAlt         - alt text for the image.
+ * @prop imgWrapperClass - classes for the image box: aspect ratio, border,
+ *                          rounding, height, etc. e.g. `aspect-[4/3] rounded-xl
+ *                          border border-[#2200d8]`.
+ * @prop imgClass        - extra classes on the <img> itself, rarely needed
+ *                          since it defaults to a full-bleed cover fit.
+ * @prop loading         - forwarded to the <img>, defaults to 'lazy'.
+ * @prop class           - classes for the outer card element (padding,
+ *                          hover background, transitions, active states…).
+ * @prop bodyClass       - classes for the wrapper around the default slot.
+ */
+interface Props extends Omit<HTMLAttributes<'a'>, 'class'> {
+  href?: string;
   image?: string;
-  alt?: string;
-  aspectRatio?: string;
+  imageAlt?: string;
+  imgWrapperClass?: string;
+  imgClass?: string;
+  loading?: 'eager' | 'lazy';
+  class?: string;
+  bodyClass?: string;
 }
 
 const {
+  href,
   image,
-  alt = 'Card image',
-  aspectRatio = 'aspect-[4/3]',
+  imageAlt = '',
+  imgWrapperClass = 'aspect-[4/3] rounded-xl',
+  imgClass = '',
+  loading = 'lazy',
+  class: className = '',
+  bodyClass = 'mt-2',
+  ...rest
 } = Astro.props;
+
+const Tag = href ? 'a' : 'div';
 ---
 
-<div class="rounded-lg overflow-hidden border border-primary/20">
-  {#if image}
-    <div class={`${aspectRatio} bg-white`}>
-      <img
-        src={image}
-        alt={alt}
-        class="w-full h-full object-cover"
-      />
+<Tag href={href} class:list={['card group/card block p-3 hover:bg-white rounded-xl transition-colors', className]} {...rest}>
+  {image && (
+    <div class:list={['card-img-wrapper relative overflow-hidden bg-white w-full', imgWrapperClass]}>
+      <img src={image} alt={imageAlt} loading={loading} decoding="async" class:list={['w-full h-full object-cover', imgClass]} />
+      <slot name="image-overlay" />
     </div>
-  {/if}
-  <div class="p-5 bg-white border-t border-primary/10">
+  )}
+  <div class:list={['card-body', bodyClass]}>
     <slot />
   </div>
-</div>
+</Tag>

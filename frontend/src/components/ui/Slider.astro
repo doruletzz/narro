@@ -1,36 +1,53 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-/**
- * Horizontal, scroll-snapping card track shared by the "Cele 3 direcții"
- * (Servicii, fixed set of 3 cards) and "Studii de caz" (overflowing,
- * bleeds past the content edge) sections. It only owns scroll/snap/bleed
- * behaviour — card markup and styling stay in the page that uses it.
- *
- * @prop id     - forwarded to the wrapper, e.g. for the servicii hover script.
- * @prop bleed  - when true, the track keeps its mobile bleed margins at every
- *                breakpoint so cards can overflow past the container edge.
- *                When false, it resets to a contained row on md+.
- * @prop snap   - toggles scroll-snap on the track (default: true).
- * @prop class  - extra classes merged onto the wrapper (e.g. `md:overflow-visible`).
- *
- * Any other attribute (e.g. `data-default-active`) is forwarded to the
- * wrapper as-is, so pages can hang extra hooks for their own scripts.
- */
 interface Props extends HTMLAttributes<'div'> {
+  /**
+   * Keep the mobile edge-to-edge layout at all breakpoints.
+   * When false, the track becomes contained from md upwards.
+   */
   bleed?: boolean;
+
+  /**
+   * Enable scroll snapping.
+   * Defaults to true.
+   */
   snap?: boolean;
+
+  /**
+   * Desktop overflow behaviour:
+   * - scroll: horizontally scrollable track
+   * - visible: wrapping flex layout with no scrolling
+   */
+  desktopOverflow?: 'scroll' | 'visible';
 }
 
-const { id, bleed = false, snap = true, class: className = '', ...rest } = Astro.props;
+const {
+  id,
+  bleed = false,
+  snap = true,
+  desktopOverflow = 'scroll',
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const isVisibleDesktop = desktopOverflow === 'visible';
 ---
 
 <div
   id={id}
+  data-slider
+  data-desktop-overflow={desktopOverflow}
   class:list={[
-    'slider flex flex-nowrap gap-4 md:gap-6 overflow-x-auto scroll-smooth no-scrollbar pb-6 pt-2 -mx-4 px-4',
+    'slider relative flex flex-nowrap gap-4 md:gap-6',
+    'overflow-x-auto scroll-smooth no-scrollbar',
+    'select-none pb-6 pt-2 -mx-4 px-4',
     !bleed && 'md:mx-0 md:px-0',
     snap && 'snap-x snap-mandatory',
+    isVisibleDesktop && [
+      'md:flex-wrap md:overflow-visible',
+      'md:snap-none md:cursor-auto md:pb-0',
+    ],
     className,
   ]}
   {...rest}
@@ -39,15 +56,162 @@ const { id, bleed = false, snap = true, class: className = '', ...rest } = Astro
 </div>
 
 <style>
+  .slider {
+    /*
+     * Touch/pointer scrolling remains native on touch devices.
+     * `pan-y` allows the page to continue scrolling vertically while
+     * horizontal gestures are handled by the track.
+     */
+    touch-action: pan-y;
+  }
+
   .no-scrollbar {
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  /* Snap applies to whatever card component the caller puts inside. */
+
   .slider > :global(*) {
     scroll-snap-align: center;
   }
+
+  /*
+   * Only show the grab cursor when the track actually overflows.
+   */
+  .slider[data-draggable] {
+    cursor: grab;
+  }
+
+  .slider[data-dragging] {
+    cursor: grabbing;
+    scroll-snap-type: none;
+  }
+
+  /*
+   * Don't let a browser-generated drag interfere with our pointer drag.
+   */
+  .slider[data-dragging] :global(a),
+  .slider[data-dragging] :global(button) {
+    pointer-events: none;
+  }
 </style>
+
+<script>
+  const DRAG_THRESHOLD = 4;
+
+  function initSlider(track: HTMLElement) {
+    // Avoid initializing the same element more than once.
+    if (track.dataset.sliderInitialized !== undefined) return;
+    track.dataset.sliderInitialized = '';
+
+    let pointerId: number | null = null;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let didDrag = false;
+
+    const isScrollable = () =>
+      track.dataset.desktopOverflow !== 'visible' &&
+      track.scrollWidth > track.clientWidth + 1;
+
+    const updateDraggable = () => {
+      track.toggleAttribute('data-draggable', isScrollable());
+    };
+
+    const endDrag = () => {
+      if (pointerId === null) return;
+
+      track.removeAttribute('data-dragging');
+
+      if (track.hasPointerCapture(pointerId)) {
+        track.releasePointerCapture(pointerId);
+      }
+
+      pointerId = null;
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (
+        event.pointerType === 'touch' ||
+        !isScrollable()
+      ) {
+        return;
+      }
+
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      startScrollLeft = track.scrollLeft;
+      didDrag = false;
+
+      track.setPointerCapture(event.pointerId);
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      if (event.pointerId !== pointerId) return;
+
+      const deltaX = event.clientX - startX;
+
+      if (!didDrag && Math.abs(deltaX) > DRAG_THRESHOLD) {
+        didDrag = true;
+        track.setAttribute('data-dragging', '');
+      }
+
+      if (didDrag) {
+        track.scrollLeft = startScrollLeft - deltaX;
+      }
+    };
+
+    const handlePointerEnd = (event: PointerEvent) => {
+      if (event.pointerId !== pointerId) return;
+      endDrag();
+    };
+
+    const handleClick = (event: MouseEvent) => {
+      if (!didDrag) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      didDrag = false;
+    };
+
+    track.addEventListener('pointerdown', handlePointerDown);
+    track.addEventListener('pointermove', handlePointerMove);
+    track.addEventListener('pointerup', handlePointerEnd);
+    track.addEventListener('pointercancel', handlePointerEnd);
+    track.addEventListener('click', handleClick, true);
+
+    const resizeObserver = new ResizeObserver(updateDraggable);
+
+    resizeObserver.observe(track);
+
+    // Initial state.
+    updateDraggable();
+
+    return () => {
+      resizeObserver.disconnect();
+
+      track.removeEventListener('pointerdown', handlePointerDown);
+      track.removeEventListener('pointermove', handlePointerMove);
+      track.removeEventListener('pointerup', handlePointerEnd);
+      track.removeEventListener('pointercancel', handlePointerEnd);
+      track.removeEventListener('click', handleClick, true);
+    };
+  }
+
+  function initAllSliders() {
+    document
+      .querySelectorAll<HTMLElement>('[data-slider]')
+      .forEach(initSlider);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllSliders, {
+      once: true,
+    });
+  } else {
+    initAllSliders();
+  }
+</script>

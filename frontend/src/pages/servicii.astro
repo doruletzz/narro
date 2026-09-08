@@ -3,8 +3,10 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import Header from '@/components/layouts/Header.astro';
 import CtaBanner from '@/components/sections/CtaBanner.astro';
 import Slider from '@/components/ui/Slider.astro';
+import Card from '@/components/ui/Card.astro';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
+import ArrowIcon from '@/components/icons/ArrowIcon.astro';
 
 // NOTE: Keystatic stores uploads in public/ (root-relative paths), and
 // Astro's <Image> component can't process public/ assets — only imported
@@ -12,12 +14,14 @@ import keystaticConfig from '../../keystatic.config';
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const page = await reader.singletons.servicii.read();
+const home = await reader.singletons.homepage.read();
 
 if (!page) {
   throw new Error('Servicii content not found — fill it in at /keystatic');
 }
 
 const { cele3Directii, oferte } = page;
+const { ctaBanner } = home || {};
 const DEFAULT_DIRECTIE_INDEX = 1; // Middle card stays open/centered by default.
 ---
 
@@ -212,20 +216,23 @@ const DEFAULT_DIRECTIE_INDEX = 1; // Middle card stays open/centered by default.
 
     <div class="max-w-6xl mx-auto relative z-10">
       <h2 class="text-xl sm:text-2xl font-heading font-bold uppercase tracking-[0.2em] mb-8 sm:mb-10 text-center sm:text-left" style="color: #ff99d8;">
-        {cele3Directii.label}
       </h2>
+      <h2 class="active text-4xl font-heading font-bold uppercase tracking-[0.2em] mb-4" style="color: #ff99d8;">{
+        cele3Directii.label
+        }</h2>
 
-      <Slider id="directii-wrapper" data-default-active={DEFAULT_DIRECTIE_INDEX} class="md:overflow-visible" snap={false}>
+
+      <Slider id="directii-wrapper" data-default-active={DEFAULT_DIRECTIE_INDEX} desktopOverflow="visible" snap={false}>
         {cele3Directii.cards.map((directie, index) => (
-          <div class:list={['directii-card flex flex-col cursor-pointer p-2 hover:bg-white rounded-xl transition-colors', index === DEFAULT_DIRECTIE_INDEX && 'is-active']}>
-            <div class="card-img-wrapper h-[24rem] rounded-lg overflow-hidden border-2 bg-white w-full" style="border-color: #2200d8;">
-              <img src={directie.image} alt={directie.imageAlt} loading="lazy" decoding="async" class="w-full h-full object-cover" />
-            </div>
-            <div class="mt-4">
-              <h3 class="text-lg font-heading font-bold mb-1" style="color: #2200d8;">{directie.title}</h3>
-              <p class="text-xs text-neutral-600 leading-relaxed max-w-xs">{directie.description}</p>
-            </div>
-          </div>
+          <Card
+            image={directie.image}
+            imageAlt={directie.imageAlt}
+            imgWrapperClass="h-[20rem] rounded-lg border-2 border-[#2200d8]"
+            class:list={['directii-card cursor-pointer p-2 hover:bg-white duration-50 rounded-xl transition-colors', index === DEFAULT_DIRECTIE_INDEX && 'is-active']}
+          >
+            <h3 class="text-2xl font-heading font-bold mb-1" style="color: #2200d8;">{directie.title}</h3>
+            <p class="text-xs text-neutral-600 leading-relaxed max-w-xs">{directie.description}</p>
+          </Card>
         ))}
       </Slider>
     </div>
@@ -241,15 +248,15 @@ const DEFAULT_DIRECTIE_INDEX = 1; // Middle card stays open/centered by default.
     </div>
 
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-xl sm:text-2xl font-heading font-bold uppercase tracking-[0.2em] mb-8 sm:mb-10 text-center" style="color: #ff99d8;">{oferte.label}</h2>
+      <h2 class="active text-4xl font-heading font-bold text-center mb-12 uppercase tracking-[0.2em]" style="color: #ff99d8;">{oferte.label}</h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
         <!-- Left: expandable offer accordion -->
         <div id="oferte-wrapper" class="oferte-wrapper flex flex-col gap-3">
           {oferte.items.map((oferta, index) => (
-            <div class:list={['oferta-card bg-white rounded p-6 sm:p-8', index === 0 && 'is-active']}>
+            <div class:list={['oferta-card bg-white rounded-2xl p-6 sm:p-8', index === 0 && 'is-active']}>
               <div class="flex items-center justify-between gap-4">
-                <h3 class="text-xl sm:text-2xl font-heading font-bold" style="color: #2200d8;">{oferta.title}</h3>
+                <h3 class="text-2xl font-heading font-bold" style="color: #2200d8;">{oferta.title}</h3>
                 <svg class="oferta-icon w-5 h-5 flex-shrink-0" fill="none" stroke="#2200d8" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-width="2" d="M12 5v14M5 12h14" />
                 </svg>
@@ -260,11 +267,13 @@ const DEFAULT_DIRECTIE_INDEX = 1; // Middle card stays open/centered by default.
                     {oferta.paragraphs.map((paragraph) => (
                       <p class="text-sm text-neutral-700 leading-relaxed">{paragraph}</p>
                     ))}
-                    <a href={oferta.ctaHref} class="inline-flex items-center gap-1 px-4 py-2 border text-sm font-medium transition-colors hover:bg-[#2200d8] hover:text-white rounded" style="border-color: #2200d8; color: #2200d8;">
+                    
+                    <a
+                      href={oferta.ctaHref}
+                      class="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-neutral-900 border border-neutral-900 rounded-full group/button hover:border-[#2200d8] hover:bg-[#2200d8] hover:text-white transition-colors tracking-wide"
+                    >
                       {oferta.ctaLabel}
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
+                      <ArrowIcon class="w-4 h-4 group-hover/button:rotate-45 transition-transform duration-150" />
                     </a>
                   </div>
                 </div>
@@ -289,5 +298,5 @@ const DEFAULT_DIRECTIE_INDEX = 1; // Middle card stays open/centered by default.
     </div>
   </section>
 
-  <CtaBanner />
+  {ctaBanner && <CtaBanner ctaBanner={ctaBanner} />}
 </PageLayout>

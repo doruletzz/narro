@@ -218,22 +218,55 @@ export default config({
         }),
         form: fields.object(
           {
-            nameLabel: fields.text({ label: 'Etichetă Nume', defaultValue: 'Nume*' }),
-            emailLabel: fields.text({ label: 'Etichetă E-mail', defaultValue: 'E-mail*' }),
-            businessLabel: fields.text({ label: 'Etichetă Business', defaultValue: 'Business*' }),
-            budgetLabel: fields.text({ label: 'Etichetă Buget', defaultValue: 'Buget' }),
-            budgetOptions: fields.array(
+            submitLabel: fields.text({ label: 'Text buton', defaultValue: 'Trimite' }),
+            fields: fields.array(
               fields.object({
-                label: fields.text({ label: 'Text opțiune' }),
-                value: fields.text({ label: 'Valoare' }),
+                id: fields.text({
+                  label: 'ID / name (ex: nume, email)',
+                  description: 'Folosit pentru id și name-ul elementului HTML',
+                }),
+                label: fields.text({
+                  label: 'Etichetă',
+                  description: 'Folosită ca placeholder și text vizibil pentru select',
+                }),
+                type: fields.select({
+                  label: 'Tip câmp',
+                  options: [
+                    { label: 'Input', value: 'input' },
+                    { label: 'Select', value: 'select' },
+                    { label: 'Textarea', value: 'textarea' },
+                  ],
+                  defaultValue: 'input',
+                }),
+                inputType: fields.select({
+                  label: 'Tip input (pentru câmpuri input)',
+                  options: [
+                    { label: 'text', value: 'text' },
+                    { label: 'email', value: 'email' },
+                    { label: 'number', value: 'number' },
+                    { label: 'tel', value: 'tel' },
+                    { label: 'url', value: 'url' },
+                    { label: 'date', value: 'date' },
+                  ],
+                  defaultValue: 'text',
+                }),
+                required: fields.checkbox({ label: 'Obligatoriu', defaultValue: false }),
+                options: fields.array(
+                  fields.object({
+                    label: fields.text({ label: 'Text opțiune' }),
+                    value: fields.text({ label: 'Valoare' }),
+                  }),
+                  {
+                    label: 'Opțiuni (pentru select)',
+                    itemLabel: (props) => props.fields.label.value || 'Opțiune',
+                  }
+                ),
               }),
               {
-                label: 'Opțiuni Buget',
-                itemLabel: (props) => props.fields.label.value || 'Opțiune',
+                label: 'Câmpuri formular',
+                itemLabel: (props) => props.fields.label.value || 'Câmp nou',
               }
             ),
-            messageLabel: fields.text({ label: 'Etichetă Mesaj', defaultValue: 'Care-i treaba?' }),
-            submitLabel: fields.text({ label: 'Text buton', defaultValue: 'Trimite' }),
           },
           { label: 'Formular' }
         ),
