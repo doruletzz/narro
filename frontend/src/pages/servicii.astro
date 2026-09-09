@@ -46,7 +46,7 @@ const DEFAULT_DIRECTIE_INDEX = 1; // Middle card stays open/centered by default.
       }
 
       .directii-card.is-active {
-        flex: 1.8 1 0%;
+        flex: 1.5 1 0%;
         transform: scale(1.05);
       }
 
@@ -200,11 +200,21 @@ const DEFAULT_DIRECTIE_INDEX = 1; // Middle card stays open/centered by default.
 
   <!-- ===== CELE 3 DIRECTII Section ===== -->
   <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24" style="background-color: #f5f0eb;">
-    <div class="absolute top-4 left-2 sm:left-6 w-72 pointer-events-none doodle-scribble z-0">
-      <img src="/sketches/sketch-1.svg" alt="" loading="lazy" decoding="async" />
+    <!-- Sketch doodle decorations — scattered, fade-in -->
+    <div class="absolute -top-4 left-0 sm:left-8 w-72 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(12deg);">
+      <img src="/sketches/sketch-2.svg" alt="" loading="lazy" decoding="async" />
     </div>
-    <div class="absolute bottom-8 right-4 sm:right-12 w-72 pointer-events-none doodle-scribble z-0">
-      <img src="/sketches/sketch-3.svg" alt="" loading="lazy" decoding="async" />
+    <div class="absolute top-20 right-0 sm:right-1/4 w-96 pointer-events-none doodle-scribble fade-in fade-delay-4 sm:block hidden" style="transform: rotate(-10deg);">
+      <img src="/sketches/sketch-5.svg" alt="" loading="lazy" decoding="async" class="hue-rotate-[80deg] contrast-150 scale-150" />
+    </div>
+    <div class="absolute bottom-1/4 left-2 sm:-left-32 w-80 pointer-events-none doodle-scribble fade-in fade-delay-6">
+      <img src="/sketches/sketch-7.svg" alt="" loading="lazy" decoding="async"  style="transform: rotate(-28deg);" />
+    </div>
+    <div class="absolute top-12 right-2 sm:-right-12 w-80 pointer-events-none doodle-scribble fade-in fade-delay-5 sm:block hidden" style="transform: rotate(-15deg);">
+      <img src="/sketches/sketch-8.svg" alt="" loading="lazy" decoding="async" class="hue-rotate-[210deg] contrast-150 brightness-120 scale-x-[-1]" />
+    </div>
+    <div class="absolute bottom-4 sm:right-32 w-64 pointer-events-none doodle-scribble fade-in fade-delay-3" style="transform: rotate(20deg);">
+      <img src="/sketches/sketch-4.svg" alt="" loading="lazy" decoding="async" />
     </div>
 
     <div class="max-w-6xl mx-auto relative z-10">
@@ -222,7 +232,7 @@ const DEFAULT_DIRECTIE_INDEX = 1; // Middle card stays open/centered by default.
                 class:list={['directii-card fade-in cursor-pointer p-2 hover:bg-white duration-50 rounded-xl transition-colors', index === DEFAULT_DIRECTIE_INDEX && 'is-active', `fade-delay-${index * 2 + 2}`]}
               >
                 <h3 class="text-2xl font-heading font-bold mb-1" style="color: #2200d8;">{directie.title}</h3>
-                <p class="text-md text-neutral-600 leading-relaxed max-w-xl">{directie.description}</p>
+                <p class="text-md text-neutral-600 leading-relaxed max-w-xl h-20 text-ellipsis">{directie.description}</p>
               </Card>
           ))}
         </Slider>
@@ -233,11 +243,21 @@ const DEFAULT_DIRECTIE_INDEX = 1; // Middle card stays open/centered by default.
 
   <!-- ===== OFERTE SI OFERTE Section ===== -->
   <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24" style="background-color: #f5f0eb;">
-    <div class="absolute top-8 sm:top-12 right-2 sm:right-10 md:right-16 w-80 pointer-events-none doodle-scribble" style="transform: rotate(-5deg);">
-      <img src="/sketches/sketch-5.svg" alt="" loading="lazy" decoding="async" />
+    <!-- Sketch doodle decorations — scattered, fade-in -->
+    <div class="absolute top-6 left-0 sm:-left-12 w-64 pointer-events-none doodle-scribble fade-in fade-delay-3" style="transform: rotate(-12deg);">
+      <img src="/sketches/sketch-6.svg" alt="" loading="lazy" decoding="async" />
     </div>
-    <div class="absolute bottom-12 left-4 sm:left-12 w-72 pointer-events-none doodle-scribble">
+    <div class="absolute top-16 right-0 sm:right-32 w-72 pointer-events-none doodle-scribble fade-in fade-delay-5 sm:block hidden" style="transform: rotate(15deg);">
+      <img src="/sketches/sketch-3.svg" alt="" loading="lazy" decoding="async" class="hue-rotate-[190deg] contrast-150 brightness-110" />
+    </div>
+    <div class="absolute -bottom-10 left-2 sm:left-1/2 w-96 pointer-events-none doodle-scribble fade-in fade-delay-7" style="transform: rotate(10deg);">
+      <img src="/sketches/sketch-1.svg" alt="" loading="lazy" decoding="async" class="hue-rotate-[230deg] contrast-150 brightness-120 scale-x-[-1] opacity-50" />
+    </div>
+    <div class="absolute bottom-1/4 right-4 sm:right-20 w-48 pointer-events-none doodle-scribble fade-in fade-delay-4" style="transform: rotate(-8deg);">
       <img src="/sketches/sketch-2.svg" alt="" loading="lazy" decoding="async" />
+    </div>
+    <div class="absolute top-1/2 mt-32 left-4 sm:left-10 w-80 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(18deg);">
+      <img src="/sketches/sketch-8.svg" alt="" loading="lazy" decoding="async" />
     </div>
 
     <div class="max-w-6xl mx-auto">
