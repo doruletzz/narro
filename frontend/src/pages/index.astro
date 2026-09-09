@@ -20,137 +20,100 @@ if (!page) {
 }
 
 const { hero, manifesto, directia, teaser, studiiDeCaz } = page;
+const heroWords = hero.title ? hero.title.split(' ') : [];
 ---
 
 <PageLayout title="Narro — Branding și Comunicare Vizuală" description="Dăm viață brandului tău. Branding, design vizual și comunicare pentru business-uri și organizații sociale.">
 
-  <style is:global>
-    /* Hand-drawn doodle styles matching Figma */
-    .doodle-scribble {
-      opacity: 0.7;
-    }
-    .doodle-scribble path,
-    .doodle-scribble ellipse,
-    .doodle-scribble circle {
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    /* ===== Jitter Animation System ===== */
-    @keyframes jitter {
-      0% { opacity:0; filter: blur(8px); transform: translate(0, 0) rotate(0deg); }
-      20%      { transform: blur(2px) translate(2px, -2px) rotate(1deg); }
-      40%      { transform: translate(-1px, 1px) rotate(-0.5deg); }
-      60%      { filter: blur(0px); transform: translate(1px, -1px) rotate(0.5deg); }
-      80%      { transform: translate(-2px, 0px) rotate(-1deg); }
-      100%     { opacity: 1; transform: translate(0, 0) rotate(0deg); }
-    }
-
-    @keyframes jitter-intense {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      15%      { transform: translate(3px, -3px) rotate(1.5deg); }
-      30%      { transform: translate(-2px, 2px) rotate(-1deg); }
-      50%      { transform: translate(2px, -1px) rotate(0.8deg); }
-      70%      { transform: translate(-3px, 1px) rotate(-1.2deg); }
-      85%      { transform: translate(1px, -2px) rotate(0.5deg); }
-    }
-
-    .jitter-scroll { opacity:0; animation: none; }
-    .jitter-scroll.active { opacity:0; animation: jitter 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
-
-    .jitter-both { opacity:0; animation: none; }
-    .jitter-both.active { opacity:0; animation: jitter 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
-
-    .jitter-card { opacity:0; transition: transform 0.3s ease; }
-    .jitter-card.active { opacity:0; animation: jitter 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
-
-    .jitter-delay-1 { animation-delay: 0ms !important; }
-    .jitter-delay-2 { animation-delay: 200ms !important; }
-    .jitter-delay-3 { animation-delay: 400ms !important; }
-    .jitter-delay-4 { animation-delay: 600ms !important; }
-    .jitter-delay-5 { animation-delay: -200ms !important; }
-    .jitter-delay-6 { animation-delay: -400ms !important; }
-    .jitter-delay-7 { animation-delay: -600ms !important; }
-  </style>
 
   <!-- ===== Hero Section ===== -->
-  <section class="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-2 sm:px-6 lg:px-8 min-h-[92vh] flex items-center bg-[#f5f0eb] ">
+  <section class="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-2 sm:px-6 lg:px-8 min-h-[92vh] flex items-center bg-[#f5f0eb]">
     <!-- Doodle decorations matching Figma style — colorful scattered scribbles -->
-    <div class="absolute -top-36 -left-24 sm:left-16 md:left-80 w-64 pointer-events-none doodle-scribble jitter-both jitter-delay-6" style="transform: rotate(-12deg);">
+    <div class="absolute -top-36 -left-24 sm:left-16 md:left-80 w-64 pointer-events-none doodle-scribble fade-in fade-delay-6" style="transform: rotate(-12deg);">
       <img src="/sketches/sketch-1.svg" alt="" />
     </div>
-    <div class="absolute top-12 left-8 sm:block hidden sm:left-16 md:-left-20 w-64 pointer-events-none doodle-scribble jitter-both jitter-delay-1" style="transform: rotate(-12deg);">
+    <div class="absolute top-12 left-8 sm:block hidden sm:left-16 md:-left-20 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1" style="transform: rotate(-12deg);">
       <img src="/sketches/sketch-8.svg" alt="" />
     </div>
-    <div class="absolute top-1/4 left-3/4 md:left-1/3 w-72 pointer-events-none doodle-scribble jitter-both jitter-delay-2" style="transform: rotate(15deg);">
+    <div class="absolute top-1/4 left-3/4 md:left-1/3 w-72 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(15deg);">
       <img src="/sketches/sketch-2.svg" alt="" />
     </div>
-    <div class="absolute -top-20 -right-8 sm:right-20  w-64 pointer-events-none doodle-scribble jitter-both jitter-delay-3" style="transform: rotate(-25deg);">
-      <img src="/sketches/sketch-6.svg" alt="" class=" hue-rotate-[220deg] contrast-150" />
+    <div class="absolute -top-20 -right-8 sm:right-20 w-64 pointer-events-none doodle-scribble fade-in fade-delay-3" style="transform: rotate(-25deg);">
+      <img src="/sketches/sketch-6.svg" alt="" class="hue-rotate-[220deg] contrast-150" />
     </div>
-    <div class="absolute top-52 sm:-top-12 -left-12 sm:left-1/2 w-48 pointer-events-none doodle-scribble jitter-both jitter-delay-4">
+    <div class="absolute top-52 sm:-top-12 -left-12 sm:left-1/2 w-48 pointer-events-none doodle-scribble fade-in fade-delay-4">
       <img src="/sketches/sketch-4.svg" alt="" />
     </div>
-    <div class="absolute top-44 sm:top-32   sm:block hidden right-4 sm:right-1/4 w-64 pointer-events-none doodle-scribble jitter-both jitter-delay-1" style="transform: rotate(20deg);">
-      <img src="/sketches/sketch-8.svg" alt="" class=" hue-rotate-[80deg] ml-20 contrast-150 brightness-90"  />
+    <div class="absolute top-44 sm:top-32 sm:block hidden right-4 sm:right-1/4 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1" style="transform: rotate(20deg);">
+      <img src="/sketches/sketch-8.svg" alt="" class="hue-rotate-[80deg] ml-20 contrast-150 brightness-90" />
     </div>
-    <div class="absolute top-44 sm:top-64 sm:block hidden right-4 sm:right-40 w-32 pointer-events-none doodle-scribble jitter-both jitter-delay-5" style="transform: rotate(20deg);">
-      <img src="/sketches/sketch-2.svg" alt="" class=" hue-rotate-[80deg] ml-20 contrast-150 brightness-90 scale-x-[-1]"  />
+    <div class="absolute top-44 sm:top-64 sm:block hidden right-4 sm:right-40 w-32 pointer-events-none doodle-scribble fade-in fade-delay-5" style="transform: rotate(20deg);">
+      <img src="/sketches/sketch-2.svg" alt="" class="hue-rotate-[80deg] ml-20 contrast-150 brightness-90 scale-x-[-1]" />
     </div>
-    <div class="absolute bottom-48 sm:bottom-1/3 left-1/4 sm:-left-20 w-96 pointer-events-none doodle-scribble jitter-both jitter-delay-2" style="transform: rotate(8deg);">
-      <img src="/sketches/sketch-1.svg" alt="" class=" hue-rotate-[250deg] ml-20 contrast-150 brightness-120 scale-x-[-1] opacity-50" />
+    <div class="absolute bottom-48 sm:bottom-1/3 left-1/4 sm:-left-20 w-96 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(8deg);">
+      <img src="/sketches/sketch-1.svg" alt="" class="hue-rotate-[250deg] ml-20 contrast-150 brightness-120 scale-x-[-1] opacity-50" />
     </div>
-    <div class="absolute bottom-12 sm:bottom-12 -left-4 sm:left-36 w-48 pointer-events-none doodle-scribble jitter-both jitter-delay-6" style="transform: rotate(8deg);">
+    <div class="absolute bottom-12 sm:bottom-12 -left-4 sm:left-36 w-48 pointer-events-none doodle-scribble fade-in fade-delay-6" style="transform: rotate(8deg);">
       <img src="/sketches/sketch-3.svg" alt="" />
     </div>
-    <div class="absolute bottom-12 sm:bottom-0 left-4 sm:block hidden sm:left-1/3 w-80 pointer-events-none doodle-scribble jitter-both jitter-delay-4" style="transform: rotate(8deg);">
+    <div class="absolute bottom-12 sm:bottom-0 left-4 sm:block hidden sm:left-1/3 w-80 pointer-events-none doodle-scribble fade-in fade-delay-4" style="transform: rotate(8deg);">
       <img src="/sketches/sketch-6.svg" alt="" />
     </div>
 
-    <div class="absolute -bottom-32 sm:-bottom-36 -right-64 sm:-right-32 w-96 h-60 pointer-events-none doodle-scribble jitter-both jitter-delay-7" style="transform: rotate(-15deg);">
-      <img src="/sketches/sketch-7.svg" alt="" class=" rotate-[30deg] scale-x-[-1]"/>
+    <div class="absolute -bottom-32 sm:-bottom-36 -right-64 sm:-right-32 w-96 h-60 pointer-events-none doodle-scribble fade-in fade-delay-7" style="transform: rotate(-15deg);">
+      <img src="/sketches/sketch-7.svg" alt="" class="rotate-[30deg] scale-x-[-1]"/>
     </div>
 
-    <div class="absolute bottom-8 sm:bottom-24 sm:block hidden right-4 sm:right-48 w-96 h-60 pointer-events-none doodle-scribble jitter-both jitter-delay-4" style="transform: rotate(-15deg);">
-      <img src="/sketches/sketch-4.svg" alt="" class=" hue-rotate-[280deg] ml-10 contrast-150 brightness-100 scale-x-[-1]"/>
+    <div class="absolute bottom-8 sm:bottom-24 sm:block hidden right-4 sm:right-48 w-96 h-60 pointer-events-none doodle-scribble fade-in fade-delay-4" style="transform: rotate(-15deg);">
+      <img src="/sketches/sketch-4.svg" alt="" class="hue-rotate-[280deg] ml-10 contrast-150 brightness-100 scale-x-[-1]"/>
     </div>
-
 
     <div class="max-w-7xl mx-auto relative z-10">
       <div class="text-center flex flex-col gap-4 md:gap-8 items-center">
-        <h1 class=" jitter-delay-1 active text-5xl sm:text-6xl md:max-w-3xl md:text-7xl xl:text-9xl xl:max-w-7xl font-heading font-extrabold leading-[1.1] md:tracking-tighter tracking-tight" style="color: #2200d8;">
-          {hero.title}
+        <!-- Headline split word-by-word with progressive animation delay -->
+        <h1 class="text-5xl sm:text-6xl md:max-w-3xl md:text-7xl xl:text-9xl xl:max-w-7xl font-heading font-extrabold lg:!leading-[0.85] md:tracking-tight tracking-tighter" style="color: #2200d8;">
+          {heroWords.map((word, index) => (
+            <span 
+              class="inline-block fade-in" 
+              style={`animation-delay: ${-210 + index * 110}ms;`}
+            >
+              {word}&nbsp;
+            </span>
+          ))}
         </h1>
 
         <!-- CTA badge — pink pill -->
-        <a href={hero.ctaHref} class="jitter-delay-2 active w-fit inline-flex items-center gap-2 px-5 py-2 text-sm md:text-lg font-semibold uppercase tracking-wider transition-[transform,_background] duration-150 hover:-translate-y-0.5 text-white rounded-full mb-8 bg-[#FF66C4] hover:border-[#2200d8] hover:bg-[#2200d8]  group/cta">
+        <a 
+          href={hero.ctaHref} 
+          class="fade-in w-fit inline-flex items-center gap-2 px-5 py-2 text-sm md:text-lg font-semibold uppercase tracking-wider transition-[transform,_background] duration-150 hover:-translate-y-0.5 text-white rounded-full mb-8 bg-[#FF66C4] hover:border-[#2200d8] hover:bg-[#2200d8] group/cta"
+          style={`animation-delay: ${heroWords.length * 110 + 100}ms;`}
+        >
           {hero.ctaLabel}
-          <ArrowIcon class="w-4 h-4 group-hover/cta:rotate-45 transition-transform duration-150" />
+          <ArrowIcon class="size-6 group-hover/cta:rotate-45 transition-transform duration-150" />
         </a>
       </div>
     </div>
   </section>
   <Header />
 
-
   <!-- ===== Manifesto Section ===== -->
   <section class="relative overflow-hidden px-4 py-20 lg:py-32 bg-white">
-    <!-- Sketch doodle decorations -->
-    <div class="absolute -left-full -right-full -bottom-full top-1/2 mt-20 bg-[#f5f0eb] -rotate-6" />
+    <!-- Background shape -->
+    <div class="absolute -left-full -right-full -bottom-full top-1/2 mt-20 bg-[#f5f0eb] -rotate-6"></div>
+    
     <!-- Text-side sketch decorations -->
-    <div class="absolute -top-20 right-6 sm:right-10 w-72 pointer-events-none doodle-scribble jitter-both jitter-delay-3">
+    <div class="absolute -top-20 right-6 sm:right-10 w-72 pointer-events-none doodle-scribble fade-in fade-delay-3">
       <img src="/sketches/sketch-6.svg" alt="" loading="lazy" decoding="async" />
     </div>
-    <div class="absolute top-1/3 mt-32 sm:right-[16%] w-96 pointer-events-none doodle-scribble jitter-both jitter-delay-5 rotate-12">
+    <div class="absolute top-1/3 mt-32 sm:right-[16%] w-96 pointer-events-none doodle-scribble fade-in fade-delay-5 rotate-12">
       <img src="/sketches/sketch-7.svg" alt="" width={1200} loading="lazy" decoding="async" class="rotate-[-45deg] scale-[-1] -hue-rotate-90 brightness-110" />
     </div>
 
     <div class="max-w-8xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         <!-- Image -->
-        <div class="">
+        <div class="fade-in fade-delay-3">
           <div class="relative aspect-[4/3] md:mx-0 -mx-20 pr-16">
-            <!-- TODO: Replace with Figma asset — 3 women on rocket image -->
             <img
               src={manifesto.image}
               alt={manifesto.imageAlt}
@@ -161,39 +124,42 @@ const { hero, manifesto, directia, teaser, studiiDeCaz } = page;
           </div>
         </div>
         <!-- Text -->
-        <div class="space-y-5 pt-2 lg:pt-4 jitter-delay-2 max-w-xl">
-          <h2 class="text-4xl font-heading font-bold uppercase tracking-[0.2em]" style="color: #ff99d8;">MANIFESTO</h2>
+        <div class="space-y-5 pt-2 lg:pt-4 max-w-xl">
+          <h2 class="text-4xl font-heading font-bold fade-in fade-delay-2  uppercase tracking-[0.2em]" style="color: #ff99d8;">MANIFESTO</h2>
           <div class="space-y-4 text-neutral-800 leading-relaxed text-2xl">
-            {manifesto.paragraphs.map((paragraph) => (
-              <p set:html={paragraph} />
+            {manifesto.paragraphs.map((paragraph, index) => (
+              <p set:html={paragraph} class={`fade-in fade-delay-${index + 3}`} />
             ))}
           </div>
         </div>
       </div>
     </div>
 
-
     <!-- Sketch doodle decorations -->
-    <div class="absolute bottom-1/4 mb-16 -left-16 w-72 pointer-events-none doodle-scribble jitter-scroll jitter-delay-1">
+    <div class="absolute bottom-1/4 mb-16 -left-16 w-72 pointer-events-none doodle-scribble fade-in fade-delay-1">
       <img src="/sketches/sketch-4.svg" alt="" loading="lazy" decoding="async" />
     </div>
-    <div class="absolute -bottom-20 right-2 sm:right-8 w-80 pointer-events-none doodle-scribble jitter-scroll jitter-delay-2">
+    <div class="absolute -bottom-20 right-2 sm:right-8 w-80 pointer-events-none doodle-scribble fade-in fade-delay-2">
       <img src="/sketches/sketch-5.svg" alt="" width={800} loading="lazy" decoding="async" />
     </div>
 
     <!-- ===== Directia Section ===== -->
     <div class="max-w-7xl mx-auto mt-48 relative">
-      <h2 class=" active text-4xl font-heading font-bold uppercase tracking-[0.2em] mb-8" style="color: #ff99d8;">DIRECTIA</h2>
+      <h2 class="fade-in text-4xl font-heading font-bold uppercase tracking-[0.2em] mb-8" style="color: #ff99d8;">DIRECTIA</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 -mx-4">
-        {directia.cards.map((card) => (
-          <a href={card.href} class="p-4 hover:bg-white rounded-2xl group/card hover:scale-105 transition-[transform,_background] duration-300">
+        {directia.cards.map((card, index) => (
+          <a 
+            href={card.href} 
+            class={`p-4 hover:scale-[102%] hover:bg-white rounded-2xl group/card transition-[transform,_background] duration-300`}
+          >
+          <div class={`fade-in fade-delay-${(index % 3)*2 + 2} `}>
             <div class="relative aspect-[4/3] rounded-xl border border-[#2200d8] overflow-hidden">
               <img src={card.image} alt={card.imageAlt} loading="lazy" decoding="async" class="w-full h-full object-cover" />
               <div
                 class="group-hover/card:opacity-100 opacity-0 transition-all duration-150 h-auto aspect-square absolute border border-white/50 right-4 bottom-4 rounded-full flex items-center justify-center flex-shrink-0"
                 style="background-color: #2200d8;"
               >
-                <ArrowIcon class="group-hover/card:rotate-0 -rotate-12 transition-transform duration-150 size-8 fill-white text-white" />
+                <ArrowIcon class="group-hover/card:rotate-0 -rotate-[30deg] transition-transform duration-150 size-8 fill-white text-white" />
               </div>
             </div>
             <div class="py-4">
@@ -201,22 +167,24 @@ const { hero, manifesto, directia, teaser, studiiDeCaz } = page;
               <h3 class="text-3xl font-heading font-bold" style="color: #2200d8;">{card.title}</h3>
               <p class="text-md text-neutral-700 mt-2 leading-relaxed">{card.description}</p>
             </div>
+          </div>
+
           </a>
         ))}
+
       </div>
     </div>
   </section>
 
   <!-- ===== Teaser Section ===== -->
   <section class="relative overflow-hidden py-12" style="background-color: #2200d8;">
-
     <!-- Heading bar -->
     <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-12">
-      <h2 class="active text-4xl font-heading font-bold text-center uppercase tracking-[0.2em]" style="color: #ff99d8;">TEASER</h2>
+      <h2 class="fade-in text-4xl font-heading font-bold text-center uppercase tracking-[0.2em]" style="color: #ff99d8;">TEASER</h2>
     </div>
 
     <!-- Full-width video -->
-    <div class="px-0 sm:px-4 md:px-8 lg:px-16">
+    <div class="fade-in fade-delay-3 px-0 sm:px-4 md:px-8 lg:px-16">
       <div class="relative w-full aspect-[9/12] lg:aspect-video group/video">
         <iframe
           id="teaser-video"
@@ -230,12 +198,12 @@ const { hero, manifesto, directia, teaser, studiiDeCaz } = page;
       </div>
     </div>
 
-    <!-- Text below image -->
+    <!-- Text below video -->
     <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 text-center">
-      <p class="text-white/80 max-w-2xl mx-auto text-lg leading-relaxed">{teaser.description}</p>
+      <p class="text-white/80 fade-in fade-delay-2  max-w-2xl mx-auto text-lg leading-relaxed">{teaser.description}</p>
       <a
         href={teaser.ctaHref}
-        class="inline-flex mt-4 items-center gap-2 px-5 py-2 text-sm font-medium text-neutral-100 border border-pink-500 rounded-full hover:bg-neutral-100 hover:border-neutral-100 hover:text-black transition-colors tracking-wide group/button"
+        class="inline-flex fade-in fade-delay-3 mt-4 items-center gap-2 px-5 py-2 text-sm font-medium text-neutral-100 border border-pink-500 rounded-full hover:bg-neutral-100 hover:border-neutral-100 hover:text-black transition-colors tracking-wide group/button"
       >
         {teaser.ctaLabel}
         <ArrowIcon class="w-4 h-4 transition-transform duration-150 group-hover/button:rotate-45" />
@@ -246,34 +214,34 @@ const { hero, manifesto, directia, teaser, studiiDeCaz } = page;
   <!-- ===== Studii de Caz Section ===== -->
   <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24" style="background-color: #f5f0eb;">
     <!-- Sketch doodle decorations -->
-    <div class="absolute top-2 sm:top-36 right-2 md:block hidden sm:right-12 w-64 pointer-events-none doodle-scribble jitter-scroll jitter-delay-1">
+    <div class="absolute top-2 sm:top-36 right-2 md:block hidden sm:right-12 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1">
       <img src="/sketches/sketch-8.svg" alt="" width={220} loading="lazy" decoding="async" />
     </div>
-    <div class="absolute top-2 sm:-top-16 right-2 md:block hidden sm:right-1/4 w-64 pointer-events-none doodle-scribble jitter-scroll jitter-delay-1">
+    <div class="absolute top-2 sm:-top-16 right-2 md:block hidden sm:right-1/4 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1">
       <img src="/sketches/sketch-1.svg" alt="" width={320} loading="lazy" decoding="async" />
     </div>
-    <div class="absolute top-2 sm:top-1/3 mt-8 right-2 sm:right-1/3 w-64 pointer-events-none doodle-scribble jitter-scroll jitter-delay-1">
+    <div class="absolute top-2 sm:top-1/3 mt-8 right-2 sm:right-1/3 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1">
       <img src="/sketches/sketch-5.svg" alt="" width={320} loading="lazy" decoding="async" />
     </div>
-    <div class="absolute top-1/3 lef-12 w-72 md:block hidden pointer-events-none doodle-scribble jitter-scroll jitter-delay-2">
+    <div class="absolute top-1/3 left-12 w-72 md:block hidden pointer-events-none doodle-scribble fade-in fade-delay-2">
       <img src="/sketches/sketch-2.svg" alt="" loading="lazy" decoding="async" />
     </div>
-    <div class="absolute bottom-10 sm:bottom-18 -left-1/4 sm:left-12 w-80 pointer-events-none doodle-scribble jitter-scroll jitter-delay-3">
+    <div class="absolute bottom-10 sm:bottom-18 -left-1/4 sm:left-12 w-80 pointer-events-none doodle-scribble fade-in fade-delay-3">
       <img src="/sketches/sketch-3.svg" alt="" loading="lazy" decoding="async" />
     </div>
-    <div class="absolute bottom-10 sm:bottom-1/4 md:block hidden left-1/4 sm:left-1/3 w-80 pointer-events-none doodle-scribble jitter-scroll jitter-delay-3">
+    <div class="absolute bottom-10 sm:bottom-1/4 md:block hidden left-1/4 sm:left-1/3 w-80 pointer-events-none doodle-scribble fade-in fade-delay-3">
       <img src="/sketches/sketch-4.svg" alt="" loading="lazy" decoding="async" />
     </div>
-    <div class="absolute bottom-10 sm:bottom-32 md:block hidden right-2 sm:right-4 w-80 pointer-events-none doodle-scribble jitter-scroll jitter-delay-3">
+    <div class="absolute bottom-10 sm:bottom-32 md:block hidden right-2 sm:right-4 w-80 pointer-events-none doodle-scribble fade-in fade-delay-3">
       <img src="/sketches/sketch-6.svg" alt="" loading="lazy" decoding="async" />
     </div>
 
     <div class="max-w-7xl mx-auto relative z-10">
-      <h2 class="active text-4xl font-heading font-bold uppercase tracking-[0.2em] mb-4" style="color: #ff99d8;">{studiiDeCaz.label}</h2>
-      <p class="text-lg text-neutral-700 mt-2 leading-relaxed max-w-3xl mb-8">{studiiDeCaz.description}</p>
+      <h2 class="fade-in  fade-delay-1 text-4xl font-heading font-bold uppercase tracking-[0.2em] mb-4" style="color: #ff99d8;">{studiiDeCaz.label}</h2>
+      <p class="fade-in fade-delay-2 text-lg text-neutral-700 mt-2 leading-relaxed max-w-3xl mb-8">{studiiDeCaz.description}</p>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {studiiDeCaz.items.map((item, index) => (
-          <div class={index % 2 === 1 ? 'md:mt-[30rem]' : ''}>
+          <div class={`fade-in fade-delay-${(index % 2) * 2 + 2} ${index % 2 === 1 ? 'md:mt-[30rem]' : ''}`}>
             <div class="aspect-[4/3] overflow-hidden mb-4 rounded-xl border border-[#2200d8]">
               <img src={item.image} alt={item.imageAlt} loading="lazy" decoding="async" class="w-full h-full object-cover" />
             </div>
@@ -298,7 +266,7 @@ const { hero, manifesto, directia, teaser, studiiDeCaz } = page;
 </PageLayout>
 
 <script is:inline>
-  /* ===== Jitter Animation System ===== */
+  /* ===== Smooth Fade-In Scroll Observer ===== */
   document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -307,10 +275,12 @@ const { hero, manifesto, directia, teaser, studiiDeCaz } = page;
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { 
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
 
-    // Observe all scroll-trigger elements (not already active ones)
-    document.querySelectorAll('.jitter-scroll, .jitter-both:not(.active), .jitter-card').forEach(el => {
+    document.querySelectorAll('.fade-in').forEach(el => {
       observer.observe(el);
     });
   });

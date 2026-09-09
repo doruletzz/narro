@@ -1,13 +1,30 @@
 ---
 import Header from '@/components/layouts/Header.astro';
 import PageLayout from '../layouts/PageLayout.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+
+// NOTE: Keystatic stores uploads in public/ (root-relative paths), and
+// Astro's <Image> component can't process public/ assets — only imported
+// images or remote URLs. So these CMS images stay as plain <img> tags.
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const page = await reader.singletons.programSocial.read();
+
+if (!page) {
+  throw new Error('Program Social content not found — fill it in at /keystatic');
+}
+
+const { title, description, proBono, aplicAcum } = page;
+const formFields = aplicAcum.form?.fields ?? [];
+const submitLabel = aplicAcum.form?.submitLabel ?? 'Trimite';
 ---
 
-<PageLayout title="Program Social — Narro" description="Servicii de branding și comunicare vizuală accesibile pentru ONG-uri și organizații sociale.">
+<PageLayout title={title} description={description}>
   <Header />
 
   <!-- Pro Bono Section — Image left with sketch, text right -->
-  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-20">
+  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-24">
     <!-- Sketch doodle decorations -->
     <div class="absolute top-6 left-6 w-72 pointer-events-none">
       <img src="/sketches/sketch-1.svg" />
@@ -15,14 +32,14 @@ import PageLayout from '../layouts/PageLayout.astro';
     <div class="absolute bottom-8 right-4 sm:right-12 w-72 pointer-events-none">
       <img src="/sketches/sketch-3.svg" />
     </div>
-    <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2  gap-12 items-start">
         <!-- Image with sketch decorations -->
         <div class="relative">
-          <div class="aspect-[4/3] bg-cream rounded-lg overflow-hidden">
+          <div class="aspect-[2/2] fade-in fade-delay-4 rounded-lg overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80"
-              alt="Pro Bono — Echipa Narro la voluntariat"
+              src={proBono.image}
+              alt={proBono.imageAlt}
               class="w-full h-full object-cover"
             />
           </div>
@@ -32,17 +49,13 @@ import PageLayout from '../layouts/PageLayout.astro';
           </div>
         </div>
         <!-- Text -->
-        <div class="space-y-6 pt-4">
-          <h2 class="text-3xl font-heading font-bold text-[#ff99d8] uppercase tracking-widest">PRO BONO</h2>
-          <p class="text-neutral-700 leading-relaxed text-sm">
-            Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
-          </p>
-          <p class="text-neutral-700 leading-relaxed text-sm">
-            Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
-          </p>
-          <p class="text-neutral-700 leading-relaxed text-sm">
-            Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
-          </p>
+        <div class="space-y-6 my-auto">
+          <h2 class="text-4xl fade-in font-heading font-bold text-[#ff99d8] uppercase tracking-widest">{proBono.heading}</h2>
+          {proBono.paragraphs.map((paragraph, index) => (
+            <p class={`text-neutral-700 leading-relaxed text-lg fade-in fade-delay-${index * 2 + 2}`}>
+              {paragraph}
+            </p>
+          ))}
         </div>
       </div>
     </div>
@@ -57,74 +70,66 @@ import PageLayout from '../layouts/PageLayout.astro';
     <div class="absolute bottom-12 right-8 sm:right-16 w-72 pointer-events-none">
       <img src="/sketches/sketch-4.svg" />
     </div>
-    
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl font-heading font-bold text-[#ff99d8] uppercase tracking-widest mb-12 text-center">APLICA ACUM</h2>
+
+    <div class="max-w-7xl mx-auto mt-8">
+      <h2 class="fade-in text-4xl font-heading font-bold text-[#ff99d8] uppercase tracking-widest mb-12 text-center">{aplicAcum.heading}</h2>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-        <!-- Form — White box -->
-        <div class="bg-white rounded-lg p-8 md:p-10">
-          <p class="text-neutral-700 leading-relaxed text-sm mb-8">
-            Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.
+        <!-- Form — White box with clean thin borders -->
+        <div class="bg-white p-6 md:p-10 rounded-2xl z-10">
+          <p class="fade-in text-neutral-800 leading-relaxed mb-4 md:mb-8 md:text-lg fade-in">
+            {aplicAcum.intro}
           </p>
           <form class="space-y-4" aria-label="Formular de aplicare program pro bono">
-            <div>
-              <label for="form-name" class="sr-only">Nume*</label>
-              <input
-                id="form-name"
-                type="text"
-                placeholder="Nume*"
-                required
-                class="w-full px-4 py-3 border border-neutral-400 rounded bg-white text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-primary transition-colors text-sm"
-              />
-            </div>
-            <div>
-              <label for="form-email" class="sr-only">E-mail*</label>
-              <input
-                id="form-email"
-                type="email"
-                placeholder="E-mail*"
-                required
-                class="w-full px-4 py-3 border border-neutral-400 rounded bg-white text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-primary transition-colors text-sm"
-              />
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label for="form-business" class="sr-only">Business</label>
-                <input
-                  id="form-business"
-                  type="text"
-                  placeholder="Business"
-                  class="w-full px-4 py-3 border border-neutral-400 rounded bg-white text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-primary transition-colors text-sm"
-                />
+            {formFields.map((field, index) => (
+              <div class={`fade-in fade-delay-${index + 2}`}>
+                {field.type === 'select' ? (
+                  <>
+                    <label for={`program-social-${field.id}`} class="sr-only">{field.label}</label>
+                    <select
+                      id={`program-social-${field.id}`}
+                      name={field.id}
+                      required={field.required || undefined}
+                      class="w-full px-5 py-3 border border-neutral-900 rounded-none bg-white valid:text-neutral-900 text-neutral-900/75 focus:outline-none focus:border-primary transition-colors appearance-none text-md"
+                    >
+                      <option value="" disabled selected>{field.label}</option>
+                      {(field.options ?? []).map((option) => (
+                        <option value={option.value}>{option.label}</option>
+                      ))}
+                    </select>
+                  </>
+                ) : field.type === 'textarea' ? (
+                  <>
+                    <label for={`program-social-${field.id}`} class="sr-only">{field.label}</label>
+                    <textarea
+                      id={`program-social-${field.id}`}
+                      name={field.id}
+                      placeholder={field.label}
+                      rows={5}
+                      required={field.required || undefined}
+                      class="w-full px-5 py-3 border border-neutral-900 rounded-none bg-white text-neutral-900 placeholder-neutral-900/75 focus:outline-none focus:border-primary transition-colors resize-none text-md"
+                    ></textarea>
+                  </>
+                ) : (
+                  <>
+                    <label for={`program-social-${field.id}`} class="sr-only">{field.label}</label>
+                    <input
+                      id={`program-social-${field.id}`}
+                      name={field.id}
+                      type={field.inputType || 'text'}
+                      placeholder={field.label}
+                      required={field.required || undefined}
+                      class="w-full px-5 py-3 border border-neutral-900 rounded-none bg-white text-neutral-900 placeholder-neutral-900/75 focus:outline-none focus:border-primary transition-colors text-md"
+                    />
+                  </>
+                )}
               </div>
-              <div>
-                <label for="form-budget" class="sr-only">Buget</label>
-                <select
-                  id="form-budget"
-                  class="w-full px-4 py-3 border border-neutral-400 rounded bg-white text-neutral-900 focus:outline-none focus:border-primary transition-colors appearance-none text-sm"
-                >
-                  <option value="" disabled selected>Buget</option>
-                  <option value="<5000">Sub 5.000 EUR</option>
-                  <option value="5000-10000">5.000 - 10.000 EUR</option>
-                  <option value="10000-20000">10.000 - 20.000 EUR</option>
-                  <option value=">20000">Peste 20.000 EUR</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <label for="form-message" class="sr-only">Care-i treaba?</label>
-              <textarea
-                id="form-message"
-                placeholder="Care-i treaba?"
-                rows={4}
-                class="w-full px-4 py-3 border border-neutral-400 rounded bg-white text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-primary transition-colors resize-none text-sm"
-              ></textarea>
-            </div>
+            ))}
+            <!-- Submit -->
             <button
               type="submit"
-              class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-400 text-neutral-900 font-medium hover:bg-neutral-900 hover:text-white transition-colors rounded text-sm"
+              class={`inline-flex items-center gap-2 px-6 py-3 border border-neutral-900 text-neutral-900 font-medium hover:bg-neutral-900 hover:text-white transition-colors rounded-none text-md fade-in fade-delay-${formFields.length + 2}`}
             >
-              Trimite
+              {submitLabel}
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
               </svg>
@@ -135,8 +140,8 @@ import PageLayout from '../layouts/PageLayout.astro';
         <div class="relative">
           <div class="aspect-[4/3] bg-cream rounded-lg overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1558618666-fcd25c85f32e?w=700&q=80"
-              alt="Aplica acum — Contact Narro"
+              src={aplicAcum.image}
+              alt={aplicAcum.imageAlt}
               class="w-full h-full object-cover"
             />
           </div>

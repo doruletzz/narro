@@ -32,6 +32,60 @@ const {
     {ogUrl && <meta property="og:url" content={ogUrl} />}
     {twitterImage && <meta name="twitter:image" content={twitterImage} />}
   </slot>
+
+  <style is:global>
+    /* Hand-drawn doodle styles matching Figma */
+    .doodle-scribble {
+      opacity: 0.7;
+    }
+    .doodle-scribble path,
+    .doodle-scribble ellipse,
+    .doodle-scribble circle {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ===== Smooth Fade-In Animation System ===== */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(24px);
+        filter: blur(4px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0px);
+      }
+    }
+
+    /* Base hidden state */
+    .fade-in {
+      opacity: 0;
+      will-change: opacity, transform, filter;
+    }
+
+    /* Triggered state */
+    .fade-in.active {
+      animation: fadeInUp 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Stagger Delays */
+    .fade-delay-1 { animation-delay: 0ms !important; }
+    .fade-delay-2 { animation-delay: 150ms !important; }
+    .fade-delay-3 { animation-delay: 300ms !important; }
+    .fade-delay-4 { animation-delay: 450ms !important; }
+    .fade-delay-5 { animation-delay: 600ms !important; }
+    .fade-delay-6 { animation-delay: 750ms !important; }
+    .fade-delay-7 { animation-delay: 900ms !important; }
+
+    /* Internal navigation (same tab/session): the header shows instantly,
+       without the fade-in. Set on <html> by the script below. */
+    .internal-nav #site-header .fade-in {
+      opacity: 1;
+      animation: none !important;
+    }
+  </style>
   
   <!-- Skip to content link for accessibility -->
   <a
@@ -46,4 +100,41 @@ const {
   </main>
   <Footer />
   <CookieConsent />
+
+  <script is:inline>
+    /* ===== Smooth Fade-In Scroll Observer ===== */
+    document.addEventListener('DOMContentLoaded', () => {
+      /* Header fade-in only on the first visit of a tab session (new tab or
+         arrival from outside). On internal navigation the header shows
+         instantly. We use a sessionStorage flag instead of document.referrer,
+         which is unreliable (stripped by privacy settings / referrer policies
+         and never changes on client-side navigation). */
+      let isInternalNav = false;
+      try {
+        isInternalNav = sessionStorage.getItem('narro:internal-nav') === '1';
+        if (!isInternalNav) sessionStorage.setItem('narro:internal-nav', '1');
+      } catch (e) {
+        isInternalNav = false; // sessionStorage unavailable (e.g. blocked storage)
+      }
+      if (isInternalNav) {
+        document.documentElement.classList.add('internal-nav');
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
 </BaseLayout>

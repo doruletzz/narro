@@ -39,11 +39,11 @@ const isVisibleDesktop = desktopOverflow === 'visible';
   data-slider
   data-desktop-overflow={desktopOverflow}
   class:list={[
-    'slider relative flex flex-nowrap gap-4 md:gap-6',
+    'slider relative flex flex-nowrap gap-1 md:gap-2',
     'overflow-x-auto scroll-smooth no-scrollbar',
     'select-none pb-6 pt-2 -mx-4 px-4',
     !bleed && 'md:mx-0 md:px-0',
-    snap && 'snap-x snap-mandatory',
+    snap && 'snap-x snap-mandatory snap-start',
     isVisibleDesktop && [
       'md:flex-wrap md:overflow-visible',
       'md:snap-none md:cursor-auto md:pb-0',
@@ -58,11 +58,10 @@ const isVisibleDesktop = desktopOverflow === 'visible';
 <style>
   .slider {
     /*
-     * Touch/pointer scrolling remains native on touch devices.
-     * `pan-y` allows the page to continue scrolling vertically while
-     * horizontal gestures are handled by the track.
+     * Allow native touch panning in both directions on touch devices —
+     * we only handle pointer-drag (mouse/pen) ourselves in JS.
      */
-    touch-action: pan-y;
+    touch-action: pan-x pan-y;
   }
 
   .no-scrollbar {
@@ -145,7 +144,11 @@ const isVisibleDesktop = desktopOverflow === 'visible';
       startScrollLeft = track.scrollLeft;
       didDrag = false;
 
-      track.setPointerCapture(event.pointerId);
+      // Note: pointer capture is intentionally NOT set here. Capturing
+      // immediately would retarget the eventual `click` event to `track`
+      // instead of whatever was actually clicked (e.g. a link/button
+      // inside a slide), silently breaking plain clicks. We only capture
+      // once we've confirmed the user is actually dragging.
     };
 
     const handlePointerMove = (event: PointerEvent) => {
@@ -156,6 +159,7 @@ const isVisibleDesktop = desktopOverflow === 'visible';
       if (!didDrag && Math.abs(deltaX) > DRAG_THRESHOLD) {
         didDrag = true;
         track.setAttribute('data-dragging', '');
+        track.setPointerCapture(pointerId);
       }
 
       if (didDrag) {

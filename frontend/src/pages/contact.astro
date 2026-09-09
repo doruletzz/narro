@@ -4,6 +4,7 @@ import Header from '../components/layouts/Header.astro';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 import { Image } from 'astro:assets';
+import ArrowIcon from '@/components/icons/ArrowIcon.astro';
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const page = await reader.singletons.contact.read();
@@ -54,17 +55,17 @@ const submitLabel = page.form?.submitLabel ?? 'Trimite';
 
     <div class="max-w-7xl mx-auto z-10">
       <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-12">
-        <h2 class="active text-4xl font-heading font-bold text-center uppercase tracking-[0.2em]" style="color: #ff99d8;">{heading}</h2>
+        <h2 class="active fade-in text-4xl font-heading font-bold text-center uppercase tracking-[0.2em]" style="color: #ff99d8;">{heading}</h2>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <!-- Form — White box with clean thin borders -->
         <div class="bg-white p-6 md:p-10 rounded-2xl z-10">
-          <p class="text-neutral-800 leading-relaxed mb-4 md:mb-8 md:text-lg">
+          <p class="text-neutral-800 leading-relaxed mb-4 md:mb-8 md:text-lg fade-in">
             {intro}
           </p>
           <form class="space-y-4" aria-label="Formular de contact">
-            {formFields.map((field) => (
-              <div>
+            {formFields.map((field, index) => (
+              <div class={`fade-in fade-delay-${index + 2}`}>
                 {/* {field.id} */}
                 {field.type === 'select' ? (
                   <>
@@ -111,17 +112,15 @@ const submitLabel = page.form?.submitLabel ?? 'Trimite';
             <!-- Submit -->
             <button
               type="submit"
-              class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-900 text-neutral-900 font-medium hover:bg-neutral-900 hover:text-white transition-colors rounded-none text-md"
+              class={`inline-flex items-center gap-2 px-6 py-3 border border-neutral-900 text-neutral-900 font-medium hover:bg-neutral-900 hover:text-white transition-colors rounded-none text-md fade-in fade-delay-${formFields.length + 2}`}
             >
               {submitLabel}
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-              </svg>
+              <ArrowIcon />
             </button>
           </form>
         </div>
         <!-- Image — Old phones with sketch decorations -->
-        <div class="relative bg-cream rounded-lg overflow-hidden">
+        <div class="relative fade-in fade-delay-4 overflow-hidden">
           <Image
             src={image || ''}
             width={1920}
@@ -129,13 +128,6 @@ const submitLabel = page.form?.submitLabel ?? 'Trimite';
             alt={imageAlt}
             class="w-full h-full object-cover"
           />
-          <!-- Sketch doodle decorations -->
-          <div class="absolute top-6 right-6 w-72 h-72 pointer-events-none">
-            <img src="/sketches/sketch-4.svg" />
-          </div>
-          <div class="absolute bottom-6 left-6 w-72 h-72 pointer-events-none">
-            <img src="/sketches/sketch-6.svg" />
-          </div>
         </div>
       </div>
     </div>

@@ -8,23 +8,23 @@ import { Image } from "astro:assets";
   <div class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
-      <a href="/" class="flex-shrink-0">
+      <a href="/" class="flex-shrink-0 fade-in">
         <Image src="/logo.svg" width="64" height="32" alt="Narro" />
       </a>
 
       <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center space-x-6" aria-label="Main navigation">
-        <a href="/servicii" class="text-sm font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Servicii</a>
-        <a href="/studii-de-caz" class="text-sm font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Portofoliu</a>
-        <a href="/program-social" class="text-sm font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Program Social</a>
-        <a href="/story-time" class="text-sm font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Story Time</a>
+        <a href="/servicii" class="text-sm fade-in fade-delay-1 font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Servicii</a>
+        <a href="/studii-de-caz" class="text-sm  fade-in fade-delay-2 font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Portofoliu</a>
+        <a href="/program-social" class="text-sm  fade-in fade-delay-3 font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Program Social</a>
+        <a href="/story-time" class="text-sm  fade-in fade-delay-4 font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Story Time</a>
       </nav>
 
       <!-- Contact Button (desktop) -->
       <div class=" lg:ml-0 ml-auto mx-2">
         <a
           href="/contact"
-          class="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-neutral-900 border border-[#FF66C4] rounded-full hover:border-[#2200d8] hover:bg-[#2200d8] hover:text-white transition-colors tracking-wide group/cta"
+          class="inline-flex items-center fade-in fade-delay-1 gap-2 px-5 py-2 text-sm font-medium text-neutral-900 border border-[#FF66C4] rounded-full hover:border-[#2200d8] hover:bg-[#2200d8] hover:text-white transition-colors tracking-wide group/cta"
         >
           CONTACT
           <svg class="w-4 h-4 group-hover/cta:rotate-45 transition-transform duration-150" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">

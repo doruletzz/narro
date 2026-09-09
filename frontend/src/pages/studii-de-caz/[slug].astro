@@ -1,0 +1,145 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Header from '@/components/layouts/Header.astro';
+import CtaBanner from '@/components/sections/CtaBanner.astro';
+import { getCollection, render } from 'astro:content';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
+
+// Detail entries are markdown files managed by Keystatic
+// (see `studiiDeCaz` collection in keystatic.config.ts).
+export async function getStaticPaths() {
+  const entries = await getCollection('studii-de-caz');
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const entries = await getCollection('studii-de-caz');
+const entry = entries.find((e) => e.slug === slug);
+
+if (!entry) {
+  return Astro.redirect('/studii-de-caz');
+}
+
+const { Content } = await render(entry);
+const { title, bannerImage, bannerImageAlt } = entry.data;
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const home = await reader.singletons.homepage.read();
+const { ctaBanner } = home || {};
+
+---
+
+<PageLayout title={`${title} — Studiu de Caz — Narro`} description={`Studiu de caz ${title} — Narro branding și comunicare vizuală.`}>
+  <style>
+    /* Markdown content styling (no typography plugin in this project) */
+    .studiu-markdown {
+      color: #37352f;
+      line-height: 1.75;
+      font-size: 1.0625rem;
+    }
+    .studiu-markdown > :first-child {
+      margin-top: 0;
+    }
+    .studiu-markdown h1,
+    .studiu-markdown h2,
+    .studiu-markdown h3 {
+      font-family: var(--font-heading, inherit);
+      font-weight: 700;
+      color: #2200d8;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+    .studiu-markdown h1 {
+      font-size: 2.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .studiu-markdown h2 {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #ff99d8;
+    }
+    .studiu-markdown h3 {
+      font-size: 1.25rem;
+    }
+    .studiu-markdown p {
+      margin-bottom: 1.25rem;
+    }
+    .studiu-markdown ul,
+    .studiu-markdown ol {
+      margin: 0 0 1.25rem 1.5rem;
+    }
+    .studiu-markdown ul {
+      list-style: disc;
+    }
+    .studiu-markdown ol {
+      list-style: decimal;
+    }
+    .studiu-markdown li {
+      margin-bottom: 0.5rem;
+    }
+    .studiu-markdown a {
+      color: #2200d8;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .studiu-markdown a:hover {
+      color: #ff99d8;
+    }
+    .studiu-markdown strong {
+      font-weight: 700;
+      color: #171614;
+    }
+    .studiu-markdown blockquote {
+      border-left: 3px solid #ff99d8;
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      color: #525252;
+      font-style: italic;
+    }
+    .studiu-markdown img {
+      border-radius: 0.75rem;
+      margin: 1.5rem 0;
+    }
+  </style>
+
+  <Header />
+
+  <!-- Banner — full screen wide, 40rem tall -->
+  <section class="w-full overflow-hidden">
+    <img
+      src={bannerImage}
+      alt={bannerImageAlt}
+      loading="eager"
+      decoding="async"
+      class="w-full h-[40rem] object-cover"
+    />
+  </section>
+
+  <!-- Markdown content -->
+  <section class="px-4 sm:px-6 lg:px-8 py-16">
+    <div class="max-w-3xl mx-auto">
+      <div class="studiu-markdown">
+        <Content />
+      </div>
+
+      <!-- Back link -->
+      <div class="mt-16">
+        <a href="/studii-de-caz" class="inline-flex items-center gap-2 text-primary hover:text-accent transition-colors text-sm font-medium">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Înapoi la Studii de Caz
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  {ctaBanner && <CtaBanner ctaBanner={ctaBanner} />}
+</PageLayout>

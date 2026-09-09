@@ -1,0 +1,21 @@
+title: "Story Time — Narro"
+description: "Povestea din spatele Narro. De la founding story la proiecte și evenimente."
+stories:
+  - title: "Cum am început"
+    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=700&q=80"
+    imageAlt: "Cum a început Narro"
+    paragraphs:
+      - "Încă din cele mai vechi timpuri (Miru, this one's for you), Bianca le-a avut cu latina. Așadar, după lupte seculare ce au durat 2 zile, draga de ea a venit cu numele \"narro\", care, obviously, vine din latină și înseamnă \"a nara, a povești\"" 
+      - "De la prima întâlnire cu primii clienți până la echipa pe care o formăm astăzi, fiecare pas a fost o lecție și o oportunitate de a crea ceva special."
+  - title: "Programul Social Narro"
+    image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=700&q=80"
+    imageAlt: "Programul Social Narro"
+    paragraphs:
+      - "Am lansat Programul Social pentru a susține organizațiile nonprofit cu branding de calitate la preț accesibil. Credem că fiecare organizație socială merită să fie vizibilă."
+      - "Prin acest program, colaborăm cu ONG-uri și asociații care fac diferența în comunitățile lor, oferindu-le instrumentele de comunicare de care au nevoie."
+  - title: "Principii"
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=80"
+    imageAlt: "Principii"
+    paragraphs:
+      - "Am atins un milestone important — 50 de proiecte de branding și design livrate pentru clienți din diverse industrii. De la startup-uri la organizații mari."
+      - "Fiecare proiect ne-a învățat ceva nou și ne-a făcut mai buni în ceea ce facem. Suntem mândri de ceea ce am creat împreună cu clienții noștri."

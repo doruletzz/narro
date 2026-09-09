@@ -1,4 +1,4 @@
-import { config, fields, singleton } from '@keystatic/core';
+import { collection, config, fields, singleton } from '@keystatic/core';
 
  
 export const servicii = singleton({
@@ -67,6 +67,10 @@ export const studiiDeCazPage = singleton({
     items: fields.array(
       fields.object({
         title: fields.text({ label: 'Titlu' }),
+        slug: fields.text({
+          label: 'Slug (link detaliat)',
+          description: 'Adresa paginii de detaliu: /studii-de-caz/<slug>',
+        }),
         tag: fields.text({ label: 'Etichetă suprapusă pe imagine' }),
         image: fields.image({
           label: 'Imagine',
@@ -85,6 +89,25 @@ export const studiiDeCazPage = singleton({
 
 export default config({
   storage: { kind: 'local' },
+
+  collections: {
+    studiiDeCaz: collection({
+      label: 'Studii de Caz (detaliat)',
+      path: 'src/content/studii-de-caz/*',
+      slugField: 'slug',
+      schema: {
+        slug: fields.slug({ name: { label: 'Slug' } }),
+        title: fields.text({ label: 'Titlu' }),
+        bannerImage: fields.image({
+          label: 'Imagine banner',
+          directory: 'public',
+          publicPath: '/',
+        }),
+        bannerImageAlt: fields.text({ label: 'Text alternativ imagine' }),
+        content: fields.mdx({ label: 'Conținut', extension: 'md' }),
+      },
+    }),
+  },
 
   singletons: {
     homepage: singleton({
@@ -278,7 +301,142 @@ export default config({
       },
     }),
     servicii,
-    studiiDeCazPage
+    studiiDeCazPage,
+
+    programSocial: singleton({
+      label: 'Program Social',
+      path: 'src/content/program-social/index',
+      format: { data: 'yaml' },
+      schema: {
+        title: fields.text({ label: 'Titlu pagină', defaultValue: 'Program Social — Narro' }),
+        description: fields.text({
+          label: 'Meta descriere',
+          multiline: true,
+          defaultValue:
+            'Servicii de branding și comunicare vizuală accesibile pentru ONG-uri și organizații sociale.',
+        }),
+        proBono: fields.object(
+          {
+            heading: fields.text({ label: 'Titlu secțiune', defaultValue: 'PRO BONO' }),
+            image: fields.url({
+              label: 'Imagine (URL)',
+              defaultValue: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80',
+            }),
+            imageAlt: fields.text({
+              label: 'Text alternativ imagine',
+              defaultValue: 'Pro Bono — Echipa Narro la voluntariat',
+            }),
+            paragraphs: fields.array(fields.text({ label: 'Paragraf', multiline: true }), {
+              label: 'Paragrafe',
+              itemLabel: (props) => props.value?.slice(0, 50) || 'Paragraf',
+            }),
+          },
+          { label: 'Secțiunea Pro Bono' }
+        ),
+        aplicAcum: fields.object(
+          {
+            heading: fields.text({ label: 'Titlu secțiune', defaultValue: 'APLICA ACUM' }),
+            intro: fields.text({
+              label: 'Text introducere',
+              multiline: true,
+              defaultValue:
+                'Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.',
+            }),
+            form: fields.object(
+              {
+                submitLabel: fields.text({ label: 'Text buton', defaultValue: 'Trimite' }),
+                fields: fields.array(
+                  fields.object({
+                    id: fields.text({
+                      label: 'ID / name (ex: nume, email)',
+                      description: 'Folosit pentru id și name-ul elementului HTML',
+                    }),
+                    label: fields.text({
+                      label: 'Etichetă',
+                      description: 'Folosită ca placeholder și text vizibil pentru select',
+                    }),
+                    type: fields.select({
+                      label: 'Tip câmp',
+                      options: [
+                        { label: 'Input', value: 'input' },
+                        { label: 'Select', value: 'select' },
+                        { label: 'Textarea', value: 'textarea' },
+                      ],
+                      defaultValue: 'input',
+                    }),
+                    inputType: fields.select({
+                      label: 'Tip input (pentru câmpuri input)',
+                      options: [
+                        { label: 'text', value: 'text' },
+                        { label: 'email', value: 'email' },
+                        { label: 'number', value: 'number' },
+                        { label: 'tel', value: 'tel' },
+                        { label: 'url', value: 'url' },
+                        { label: 'date', value: 'date' },
+                      ],
+                      defaultValue: 'text',
+                    }),
+                    required: fields.checkbox({ label: 'Obligatoriu', defaultValue: false }),
+                    options: fields.array(
+                      fields.object({
+                        label: fields.text({ label: 'Text opțiune' }),
+                        value: fields.text({ label: 'Valoare' }),
+                      }),
+                      {
+                        label: 'Opțiuni (pentru select)',
+                        itemLabel: (props) => props.fields.label.value || 'Opțiune',
+                      }
+                    ),
+                  }),
+                  {
+                    label: 'Câmpuri formular',
+                    itemLabel: (props) => props.fields.label.value || 'Câmp nou',
+                  }
+                ),
+              },
+              { label: 'Formular' }
+            ),
+            image: fields.url({
+              label: 'Imagine (URL)',
+              defaultValue: 'https://images.unsplash.com/photo-1558618666-fcd25c85f32e?w=700&q=80',
+            }),
+            imageAlt: fields.text({
+              label: 'Text alternativ imagine',
+              defaultValue: 'Aplica acum — Contact Narro',
+            }),
+          },
+          { label: 'Secțiunea Aplica Acum' }
+        ),
+      },
+    }),
+
+    storyTime: singleton({
+      label: 'Story Time',
+      path: 'src/content/story-time/index',
+      format: { data: 'yaml' },
+      schema: {
+        title: fields.text({ label: 'Titlu pagină', defaultValue: 'Story Time — Narro' }),
+        description: fields.text({
+          label: 'Meta descriere',
+          multiline: true,
+          defaultValue: 'Povestea din spatele Narro. De la founding story la proiecte și evenimente.',
+        }),
+        stories: fields.array(
+          fields.object({
+            title: fields.text({ label: 'Titlu' }),
+            image: fields.url({ label: 'Imagine (URL)' }),
+            imageAlt: fields.text({ label: 'Text alternativ imagine' }),
+            paragraphs: fields.array(fields.text({ label: 'Paragraf', multiline: true }), {
+              label: 'Paragrafe',
+              itemLabel: (props) => props.value?.slice(0, 50) || 'Paragraf',
+            }),
+          }),
+          {
+            label: 'Povești',
+            itemLabel: (props) => props.fields.title.value || 'Poveste nouă',
+          }
+        ),
+      },
+    }),
   },
-  
 });
