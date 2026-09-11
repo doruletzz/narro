@@ -24,7 +24,7 @@ const submitLabel = page.form?.submitLabel ?? 'Trimite';
   <section class="px-4 sm:px-6 lg:px-8 py-12 relative min-h-screen">
     <!-- Sketch doodle decorations — scattered, fade-in -->
     <div class="absolute -top-40 -left-32 w-72 pointer-events-none doodle-scribble fade-in fade-delay-3" style="transform: rotate(-15deg);">
-      <img src="/sketches/sketch-3.svg" alt="" loading="lazy" decoding="async" />
+      <img src="/sketches/sketch-5.svg" alt="" loading="lazy" decoding="async" />
     </div>
     <div class="absolute top-8 sm:block hidden left-12 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1" style="transform: rotate(10deg);">
       <img src="/sketches/sketch-1.svg" alt="" loading="lazy" decoding="async" class="hue-rotate-[200deg] contrast-150" />
@@ -35,29 +35,20 @@ const submitLabel = page.form?.submitLabel ?? 'Trimite';
     <div class="absolute top-1/3 left-8 sm:left-16 w-48 pointer-events-none doodle-scribble fade-in fade-delay-4" style="transform: rotate(12deg);">
       <img src="/sketches/sketch-4.svg" alt="" loading="lazy" decoding="async" />
     </div>
-    <div class="absolute top-1/3 right-4 sm:right-12 w-80 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(-18deg);">
-      <img src="/sketches/sketch-2.svg" alt="" loading="lazy" decoding="async" class="hue-rotate-[90deg] contrast-150 brightness-110" />
-    </div>
     <div class="absolute bottom-60 left-4 sm:left-12 w-64 pointer-events-none doodle-scribble fade-in fade-delay-6" style="transform: rotate(6deg);">
       <img src="/sketches/sketch-7.svg" alt="" loading="lazy" decoding="async" />
-    </div>
-    <div class="absolute bottom-24 right-4 sm:right-16 md:right-20 w-96 pointer-events-none doodle-scribble fade-in fade-delay-7" style="transform: rotate(-20deg);">
-      <img src="/sketches/sketch-5.svg" alt="" loading="lazy" decoding="async" class="hue-rotate-[240deg] contrast-150 brightness-120 scale-x-[-1] opacity-60" />
     </div>
     <div class="absolute bottom-8 sm:bottom-0 left-8 sm:left-24 w-64 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(14deg);">
       <img src="/sketches/sketch-8.svg" alt="" loading="lazy" decoding="async" />
     </div>
-    <div class="absolute bottom-16 right-8 sm:right-24 w-72 pointer-events-none doodle-scribble fade-in fade-delay-4" style="transform: rotate(-10deg);">
-      <img src="/sketches/sketch-1.svg" alt="" loading="lazy" decoding="async" class="hue-rotate-[260deg] ml-16 contrast-150 brightness-110 scale-x-[-1]" />
-    </div>
 
     <div class="max-w-7xl mx-auto z-10">
-      <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-12">
+      <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-12 md:mt-0 mt-10">
         <h2 class="active fade-in text-4xl font-heading font-bold text-center uppercase tracking-[0.2em]" style="color: #ff99d8;">{heading}</h2>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <!-- Form — White box with clean thin borders -->
-        <div class="bg-white p-6 md:p-10 rounded-2xl z-10 max-h-[48rem]">
+        <div class="md:order-1 order-2 bg-white p-6 md:p-10 rounded-2xl z-10 max-h-[48rem]">
           <p class="text-neutral-800 leading-relaxed mb-4 md:mb-8 md:text-lg fade-in">
             {intro}
           </p>
@@ -124,13 +115,13 @@ const submitLabel = page.form?.submitLabel ?? 'Trimite';
           </form>
         </div>
         <!-- Image — Old phones with sketch decorations -->
-        <div class="relative fade-in fade-delay-4 overflow-hidden max-h-[48rem] bg-white/30 rounded-xl">
+        <div class="md:order-2 order-1 relative fade-in fade-delay-4 overflow-hidden max-h-[48rem] bg-white/30 rounded-xl -my-[26rem] md:mb-0 md:mx-0 -mx-12 md:z-0 -z-10">
           <Image
             src={image || ''}
             width={1920}
             height={1080}
             alt={imageAlt}
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover  md:opacity-100 opacity-20"
           />
         </div>
       </div>

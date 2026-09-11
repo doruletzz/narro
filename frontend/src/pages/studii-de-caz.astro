@@ -47,7 +47,7 @@ const DEFAULT_STUDII_INDEX = -1;
 
   <section class="relative py-16 sm:py-20 lg:pt-24 overflow-x-hidden" style="background-color: #f5f0eb;">
     <!-- Sketch doodle decorations — scattered, fade-in -->
-    <div class="absolute top-12 left-0 sm:left-8 w-72 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(-12deg);">
+    <div class="absolute md:top-12 -top-14 -left-4 sm:left-8 w-72 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(-12deg);">
       <img src="/sketches/sketch-2.svg" alt="" loading="lazy" decoding="async" />
     </div>
     <div class="absolute -top-4 right-0 sm:right-1/4 w-64 pointer-events-none doodle-scribble fade-in fade-delay-4 sm:block hidden" style="transform: rotate(10deg);">
@@ -60,10 +60,10 @@ const DEFAULT_STUDII_INDEX = -1;
       <img src="/sketches/sketch-4.svg" alt="" loading="lazy" decoding="async" />
     </div>
     <div class="mx-auto relative z-10 -mb-12">
-      <h2 class="fade-in fade-delay-4 lg:pl-72 -ml-8 text-4xl font-heading font-bold uppercase tracking-[0.2em] mb-8 sm:mb-10 text-center sm:text-left" style="color: #ff99d8;">
+      <h2 class="fade-in fade-delay-4 lg:pl-72 -ml-8 text-4xl font-heading font-bold uppercase tracking-[0.2em] mb-2 sm:mb-10 text-center sm:text-left" style="color: #ff99d8;">
         {label}
       </h2>
-
+      
       <Slider class="md:px-72 px-32 md:-ml-12 " id="studii-wrapper" data-default-active={DEFAULT_STUDII_INDEX} bleed={true} snap={true}>
         {items.map((item, index) => (
           <Card

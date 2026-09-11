@@ -1,9 +1,13 @@
 @font-face {
   font-family: 'Bristol';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400 700;
   font-display: swap;
   src: url('/fonts/Bristol-Bold.ttf') format('opentype');
+}
+
+:root {
+  --font-heading: 'Bristol', sans-serif;
 }
 
 /* Inter — body font

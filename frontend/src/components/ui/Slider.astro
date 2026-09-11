@@ -53,14 +53,22 @@ const isVisibleDesktop = desktopOverflow === 'visible';
   {...rest}
 >
   <slot />
+
+  {/* Arrow buttons — absolutely positioned inside track */}
+  <button class="slider-arrow slider-arrow-prev" data-arrow="prev" type="button" aria-label="Previous card">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+    </svg>
+  </button>
+  <button class="slider-arrow slider-arrow-next" data-arrow="next" type="button" aria-label="Next card">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+    </svg>
+  </button>
 </div>
 
 <style>
   .slider {
-    /*
-     * Allow native touch panning in both directions on touch devices —
-     * we only handle pointer-drag (mouse/pen) ourselves in JS.
-     */
     touch-action: pan-x pan-y;
   }
 
@@ -77,9 +85,6 @@ const isVisibleDesktop = desktopOverflow === 'visible';
     scroll-snap-align: center;
   }
 
-  /*
-   * Only show the grab cursor when the track actually overflows.
-   */
   .slider[data-draggable] {
     cursor: grab;
   }
@@ -89,12 +94,51 @@ const isVisibleDesktop = desktopOverflow === 'visible';
     scroll-snap-type: none;
   }
 
-  /*
-   * Don't let a browser-generated drag interfere with our pointer drag.
-   */
   .slider[data-dragging] :global(a),
   .slider[data-dragging] :global(button) {
     pointer-events: none;
+  }
+
+  /* ── Arrow buttons ────────────────────────────────── */
+  .slider-arrow {
+    --arrow-size: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    border-radius: 50%;
+    border: 2px solid #2200d8;
+    background: #f5f0eb;
+    color: #2200d8;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .slider-arrow:hover {
+    background: #2200d8;
+    color: #fff;
+  }
+
+  /* Position left arrow at the far-left edge of the visible track area */
+  .slider-arrow-prev {
+    left: 0;
+  }
+
+  /* Position right arrow at the far-right edge of the visible track area */
+  .slider-arrow-next {
+    right: 0;
+  }
+
+  /* Hide on mobile */
+  @media (max-width: 767px) {
+    .slider-arrow {
+      display: none !important;
+    }
   }
 </style>
 
@@ -102,7 +146,6 @@ const isVisibleDesktop = desktopOverflow === 'visible';
   const DRAG_THRESHOLD = 4;
 
   function initSlider(track: HTMLElement) {
-    // Avoid initializing the same element more than once.
     if (track.dataset.sliderInitialized !== undefined) return;
     track.dataset.sliderInitialized = '';
 
@@ -112,7 +155,6 @@ const isVisibleDesktop = desktopOverflow === 'visible';
     let didDrag = false;
 
     const isScrollable = () =>
-      track.dataset.desktopOverflow !== 'visible' &&
       track.scrollWidth > track.clientWidth + 1;
 
     const updateDraggable = () => {
@@ -121,63 +163,40 @@ const isVisibleDesktop = desktopOverflow === 'visible';
 
     const endDrag = () => {
       if (pointerId === null) return;
-
       track.removeAttribute('data-dragging');
-
       if (track.hasPointerCapture(pointerId)) {
         track.releasePointerCapture(pointerId);
       }
-
       pointerId = null;
     };
 
     const handlePointerDown = (event: PointerEvent) => {
-      if (
-        event.pointerType === 'touch' ||
-        !isScrollable()
-      ) {
-        return;
-      }
-
+      if (event.pointerType === 'touch' || !isScrollable()) return;
       pointerId = event.pointerId;
       startX = event.clientX;
       startScrollLeft = track.scrollLeft;
       didDrag = false;
-
-      // Note: pointer capture is intentionally NOT set here. Capturing
-      // immediately would retarget the eventual `click` event to `track`
-      // instead of whatever was actually clicked (e.g. a link/button
-      // inside a slide), silently breaking plain clicks. We only capture
-      // once we've confirmed the user is actually dragging.
     };
 
     const handlePointerMove = (event: PointerEvent) => {
       if (event.pointerId !== pointerId) return;
-
       const deltaX = event.clientX - startX;
-
       if (!didDrag && Math.abs(deltaX) > DRAG_THRESHOLD) {
         didDrag = true;
         track.setAttribute('data-dragging', '');
         track.setPointerCapture(pointerId);
       }
-
       if (didDrag) {
         track.scrollLeft = startScrollLeft - deltaX;
       }
     };
 
-    const handlePointerEnd = (event: PointerEvent) => {
-      if (event.pointerId !== pointerId) return;
-      endDrag();
-    };
+    const handlePointerEnd = () => endDrag();
 
     const handleClick = (event: MouseEvent) => {
       if (!didDrag) return;
-
       event.preventDefault();
       event.stopPropagation();
-
       didDrag = false;
     };
 
@@ -188,15 +207,53 @@ const isVisibleDesktop = desktopOverflow === 'visible';
     track.addEventListener('click', handleClick, true);
 
     const resizeObserver = new ResizeObserver(updateDraggable);
-
     resizeObserver.observe(track);
-
-    // Initial state.
     updateDraggable();
+
+    /* ── Arrow buttons ────────────────────────────── */
+    const prevBtn = track.querySelector('[data-arrow="prev"]') as HTMLButtonElement | null;
+    const nextBtn = track.querySelector('[data-arrow="next"]') as HTMLButtonElement | null;
+
+    const updateArrows = () => {
+      if (!prevBtn || !nextBtn) return;
+      if (!isScrollable()) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        return;
+      }
+
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      const atStart = track.scrollLeft <= 2;
+      const atEnd   = track.scrollLeft >= maxScroll - 2;
+
+      // Right arrow: visible when nothing is scrolled yet (at start)
+      nextBtn.style.display = atStart ? 'flex' : 'none';
+      // Left arrow: visible once we've scrolled past start, hidden when at end
+      prevBtn.style.display = (atStart || atEnd) ? 'none' : 'flex';
+    };
+
+    const goPrev = () => {
+      track.scrollBy({ left: -320, behavior: 'smooth' });
+    };
+
+    const goNext = () => {
+      track.scrollBy({ left: 320, behavior: 'smooth' });
+    };
+
+    if (prevBtn) prevBtn.addEventListener('click', goPrev);
+    if (nextBtn) nextBtn.addEventListener('click', goNext);
+    track.addEventListener('scroll', updateArrows, { passive: true });
+
+    // Run once after a short delay to let layout settle
+    requestAnimationFrame(() => {
+      requestAnimationFrame(updateArrows);
+    });
 
     return () => {
       resizeObserver.disconnect();
-
+      if (prevBtn) prevBtn.removeEventListener('click', goPrev);
+      if (nextBtn) nextBtn.removeEventListener('click', goNext);
+      track.removeEventListener('scroll', updateArrows);
       track.removeEventListener('pointerdown', handlePointerDown);
       track.removeEventListener('pointermove', handlePointerMove);
       track.removeEventListener('pointerup', handlePointerEnd);
@@ -206,15 +263,11 @@ const isVisibleDesktop = desktopOverflow === 'visible';
   }
 
   function initAllSliders() {
-    document
-      .querySelectorAll<HTMLElement>('[data-slider]')
-      .forEach(initSlider);
+    document.querySelectorAll<HTMLElement>('[data-slider]').forEach(initSlider);
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAllSliders, {
-      once: true,
-    });
+    document.addEventListener('DOMContentLoaded', initAllSliders, { once: true });
   } else {
     initAllSliders();
   }

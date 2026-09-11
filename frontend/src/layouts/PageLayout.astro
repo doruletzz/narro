@@ -123,6 +123,7 @@ const {
         document.documentElement.classList.add('internal-nav');
       }
 
+      const isMobile = window.innerWidth < 768;
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -131,7 +132,7 @@ const {
           }
         });
       }, { 
-        threshold: 0.1,
+        threshold: isMobile ? 0.03 : 0.1,
         rootMargin: '0px 0px -40px 0px'
       });
 
