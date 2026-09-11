@@ -47,7 +47,7 @@ const headlineWords = heroWords.map((word, index) => {
 
 
   <!-- ===== Hero Section ===== -->
-  <section class="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-2 sm:px-6 lg:px-8 min-h-[92vh] flex items-center bg-[#f5f0eb]">
+  <section class="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-2 sm:px-6 lg:px-8 min-h-[92vh] md:min-h-[93vh] flex items-center bg-[#f5f0eb]">
     <!-- Doodle decorations matching Figma style — colorful scattered scribbles -->
     <div class="absolute -top-36 -left-24 sm:left-16 md:left-80 w-64 pointer-events-none doodle-scribble fade-in fade-delay-6" style="transform: rotate(-12deg);">
       <img src="/sketches/sketch-1.svg" alt="" />
@@ -96,7 +96,7 @@ const headlineWords = heroWords.map((word, index) => {
             <span class="inline md:w-fit flex-col items-center fade-in mr-1" style={`animation-delay: ${-210 + item.index * 110}ms;`}>
               {item?.animatedWords.map((w) => (
                 <span
-                  class="inline-block font-heading font-extrabold md:mr-6 -mb-5"
+                  class="inline-block font-heading font-extrabold md:mr-6 mr-2 -mb-5"
                   style={`color: #2200d8; animation-delay: ${-210 + item.index * 110}ms;`}
                 >{w}</span>
               ))}
@@ -142,17 +142,19 @@ const headlineWords = heroWords.map((word, index) => {
     <div class="max-w-8xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         <!-- Image -->
-        <div class="fade-in fade-delay-3 md:mb-0 -m-40">
-          <div class="relative aspect-[4/3] md:mx-0 -mx-20 pr-16">
-            <img
-              src={manifesto.image}
-              alt={manifesto.imageAlt}
-              loading="lazy"
-              decoding="async"
-              class="w-full h-full object-contain"
-            />
+        {manifesto.image && (
+          <div class="fade-in fade-delay-3 md:mb-0 -m-40">
+            <div class="relative aspect-[4/3] md:mx-0 -mx-20 pr-16">
+              <img
+                src={manifesto.image}
+                alt={manifesto.imageAlt}
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-contain"
+              />
+            </div>
           </div>
-        </div>
+        )}
         <!-- Text -->
         <div class="space-y-5 lg:pt-4 max-w-xl bg-white z-10 p-6 rounded-xl">
           <h2 class="text-4xl font-heading font-bold fade-in fade-delay-2  uppercase tracking-[0.2em]" style="color: #ff99d8;">MANIFESTO</h2>
@@ -183,15 +185,17 @@ const headlineWords = heroWords.map((word, index) => {
             class={`p-4 hover:scale-[102%] hover:bg-white rounded-2xl group/card transition-[transform,_background] duration-300`}
           >
           <div class={`fade-in fade-delay-${(index % 3)*2 + 2} `}>
-            <div class="relative aspect-[4/3] rounded-xl border border-[#2200d8] overflow-hidden">
-              <img src={card.image} alt={card.imageAlt} loading="lazy" decoding="async" class="w-full h-full object-cover" />
-              <div
-                class="group-hover/card:opacity-100 opacity-0 transition-all duration-150 h-auto aspect-square absolute border border-white/50 right-4 bottom-4 rounded-full flex items-center justify-center flex-shrink-0"
-                style="background-color: #2200d8;"
-              >
-                <ArrowIcon class="group-hover/card:rotate-0 -rotate-[30deg] transition-transform duration-150 size-8 fill-white text-white" />
+            {card.image && (
+              <div class="relative aspect-[4/3] rounded-xl border border-[#2200d8] overflow-hidden mb-4">
+                <img src={card.image} alt={card.imageAlt} loading="lazy" decoding="async" class="w-full h-full object-cover" />
+                <div
+                  class="group-hover/card:opacity-100 opacity-0 transition-all duration-150 h-auto aspect-square absolute border border-white/50 right-4 bottom-4 rounded-full flex items-center justify-center flex-shrink-0"
+                  style="background-color: #2200d8;"
+                >
+                  <ArrowIcon class="group-hover/card:rotate-0 -rotate-[30deg] transition-transform duration-150 size-8 fill-white text-white" />
+                </div>
               </div>
-            </div>
+            )}
             <div class="py-4">
               <p class="text-[10px] sm:text-xs uppercase tracking-wide mb-1" style="color: #2200d8; opacity: 0.5;">{card.eyebrow}</p>
               <h3 class="text-3xl font-heading font-bold" style="color: #2200d8;">{card.title}</h3>
@@ -272,9 +276,11 @@ const headlineWords = heroWords.map((word, index) => {
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {studiiDeCaz.items.map((item, index) => (
           <div class={`fade-in fade-delay-${(index % 2) * 2 + 2} ${index % 2 === 1 ? 'md:mt-[30rem]' : ''}`}>
-            <div class="aspect-[4/3] overflow-hidden mb-4 rounded-xl border border-[#2200d8]">
-              <img src={item.image} alt={item.imageAlt} loading="lazy" decoding="async" class="w-full h-full object-cover" />
-            </div>
+            {item.image && (
+              <div class="aspect-[4/3] overflow-hidden mb-4 rounded-xl border border-[#2200d8]">
+                <img src={item.image} alt={item.imageAlt} loading="lazy" decoding="async" class="w-full h-full object-cover" />
+              </div>
+            )}
             <h3 class="text-2xl font-heading font-bold mb-2" style="color: #2200d8;">{item.title}</h3>
             <p class="text-lg text-neutral-700 leading-relaxed mb-3">{item.description}</p>
             <a

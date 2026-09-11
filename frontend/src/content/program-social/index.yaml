@@ -66,4 +66,5 @@ aplicAcum:
         inputType: text
         required: false
         options: []
+  image: /images/program-social/aplica-acum/aplicAcum/image.png
   imageAlt: Aplica acum — Contact Narro

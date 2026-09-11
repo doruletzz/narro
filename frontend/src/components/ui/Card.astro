@@ -34,8 +34,8 @@ const {
   href,
   image,
   imageAlt = '',
-  width = 1920,
-  height = 1080,
+  width = 100,
+  height = 100,
   imgWrapperClass = 'aspect-[4/3] rounded-xl',
   imgClass = '',
   loading = 'lazy',
@@ -50,7 +50,7 @@ const Tag = href ? 'a' : 'div';
 <Tag href={href} class:list={['card group/card block p-3 hover:bg-white rounded-xl transition-colors', className]} {...rest}>
   {image && (
     <div class:list={['card-img-wrapper relative overflow-hidden bg-white w-full', imgWrapperClass]}>
-      <Image width={width} height={height} src={image} alt={imageAlt} loading={loading} decoding="async" class:list={['w-full h-full object-cover', imgClass]} />
+      <img width={width} height={height} src={image} alt={imageAlt} loading={loading} decoding="async" class:list={['w-full h-full object-cover', imgClass]} />
       <slot name="image-overlay" />
     </div>
   )}

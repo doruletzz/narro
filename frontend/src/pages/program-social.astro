@@ -79,7 +79,7 @@ const submitLabel = aplicAcum.form?.submitLabel ?? 'Trimite';
       <h2 class="fade-in text-4xl font-heading font-bold text-[#ff99d8] uppercase tracking-widest mb-12 text-center">{aplicAcum.heading}</h2>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <!-- Form — White box with clean thin borders -->
-        <div class="bg-white p-6 md:p-10 rounded-2xl z-10">
+        <div class="bg-white p-6 md:p-10 rounded-2xl z-10 max-h-[44rem] h-full">
           <p class="fade-in text-neutral-800 leading-relaxed mb-4 md:mb-8 md:text-lg fade-in">
             {aplicAcum.intro}
           </p>
@@ -147,17 +147,13 @@ const submitLabel = aplicAcum.form?.submitLabel ?? 'Trimite';
           </form>
         </div>
         <!-- Image with sketch decorations -->
-        <div class="relative">
-          <div class="aspect-[4/3] bg-cream rounded-lg overflow-hidden">
+        <div class=" h-full">
+          <div class="bg-cream rounded-lg overflow-hidden h-full max-h-[44rem]">
             <img
               src={aplicAcum.image}
               alt={aplicAcum.imageAlt}
               class="w-full h-full object-cover"
             />
-          </div>
-          <!-- Sketch doodle decoration -->
-          <div class="absolute -top-4 -left-4 w-72 h-72 pointer-events-none">
-            <img src="/sketches/sketch-6.svg" />
           </div>
         </div>
       </div>
