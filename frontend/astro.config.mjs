@@ -8,6 +8,6 @@ import keystatic from '@keystatic/astro';
 // Content is managed by editing YAML files in src/content/ and committing.
 // (Keystatic admin removed: it requires a server. Editorial changes go through Git.)
 export default defineConfig({
-  integrations: [tailwind(), react(), keystatic()],
+  integrations: [tailwind(), react()],
   output: 'static',
 });
