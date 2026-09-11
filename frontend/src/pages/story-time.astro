@@ -4,6 +4,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 import Header from '@/components/layouts/Header.astro';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
+import { parseMarkdown } from '@/lib/markdown-utils';
 
 // NOTE: Keystatic stores uploads in public/ (root-relative paths), and
 // Astro's <Image> component can't process public/ assets — only imported
@@ -71,9 +72,7 @@ const { ctaBanner } = home || {};
                 story.title
                 }</h2>
                 {story.paragraphs.map((paragraph, index) => (
-                  <p class={`leading-relaxed text-xl max-w-lg fade-in fade-delay-${index * 2 + 2}`}>
-                    {paragraph}
-                  </p>
+                  <p set:html={parseMarkdown(paragraph)} class={`leading-relaxed text-xl max-w-lg fade-in fade-delay-${index * 2 + 2}`} />
                 ))}
             </div>
           </div>

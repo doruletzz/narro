@@ -5,6 +5,7 @@ import CtaBanner from '@/components/sections/CtaBanner.astro';
 import ArrowIcon from '@/components/ui/ArrowIcon.astro';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
+import { parseMarkdown } from '@/lib/markdown-utils';
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const page = await reader.singletons.homepage.read();
@@ -14,7 +15,32 @@ if (!page) {
 }
 
 const { hero, manifesto, directia, teaser, studiiDeCaz } = page;
-const heroWords = hero.title ? hero.title.split(' ') : [];
+
+const heroWords = (hero.title || '').split(' ');
+
+// Parse words into structured data objects inside frontmatter
+const headlineWords = heroWords.map((word, index) => {
+  const match = word.match(/^(.*)__(.*)__(.*)$/);
+  if (match) {
+    const [_, prefix, underlinedWord, suffix] = match;
+    const fullWord = underlinedWord;
+    const animatedWords = [prefix, fullWord, suffix].filter(Boolean);
+    return {
+      isUnderlined: true,
+      prefix,
+      underlinedWord,
+      suffix,
+      fullWord,
+      animatedWords,
+      index,
+    };
+  }
+  return {
+    isUnderlined: false,
+    word,
+    index,
+  };
+});
 ---
 
 <PageLayout title="Narro — Branding și Comunicare Vizuală" description="Dăm viață brandului tău. Branding, design vizual și comunicare pentru business-uri și organizații sociale.">
@@ -65,26 +91,36 @@ const heroWords = hero.title ? hero.title.split(' ') : [];
     <div class="max-w-7xl mx-auto relative z-10">
       <div class="text-center flex flex-col gap-4 md:gap-8 items-center">
         <!-- Headline split word-by-word with progressive animation delay -->
-        <h1 class="text-5xl sm:text-6xl md:max-w-3xl md:text-7xl xl:text-9xl xl:max-w-7xl font-heading font-extrabold lg:!leading-[0.85] md:tracking-tight tracking-tighter" style="color: #2200d8;">
-          {heroWords.map((word, index) => (
-            <span 
-              class="inline-block fade-in" 
-              style={`animation-delay: ${-210 + index * 110}ms;`}
-            >
-              {word}&nbsp;
+        <h1 class="text-5xl flex flex-wrap justify-center sm:text-6xl md:max-w-3xl md:text-7xl xl:text-9xl xl:max-w-7xl font-heading font-extrabold lg:!leading-[0.85] md:tracking-tight tracking-tighter">
+          {headlineWords.map((item) => item.isUnderlined ? (
+            <span class="inline md:w-fit flex-col items-center fade-in mr-1" style={`animation-delay: ${-210 + item.index * 110}ms;`}>
+              {item?.animatedWords.map((w) => (
+                <span
+                  class="inline-block font-heading font-extrabold md:mr-6 -mb-5"
+                  style={`color: #2200d8; animation-delay: ${-210 + item.index * 110}ms;`}
+                >{w}</span>
+              ))}
+
+              <img src="/squiggle.svg" class="md:w-full w-32 -mt-2 md:mt-0"/>
             </span>
+          ) : (
+            <span
+              class="inline-block fade-in"
+              style={`color: #2200d8; animation-delay: ${-210 + item.index * 110}ms;`}
+            >{item.word}&nbsp;</span>
           ))}
         </h1>
 
-        <!-- CTA badge — pink pill -->
-        <a 
-          href={hero.ctaHref} 
-          class="fade-in w-fit inline-flex items-center gap-2 md:px-5 px-4 md:py-2 py-1 text-md md:text-lg font-semibold uppercase tracking-wider transition-[transform,_background] duration-150 md:pt-2.5 pt-1.5 hover:-translate-y-0.5 text-white rounded-full mb-8 bg-[#FF66C4] hover:border-[#2200d8] hover:bg-[#2200d8] group/cta"
-          style={`animation-delay: ${heroWords.length * 110 + 100}ms;`}
-        >
-          {hero.ctaLabel}
-          <ArrowIcon class="size-6 mb-0.5 group-hover/cta:rotate-45 transition-transform duration-150" />
-        </a>
+        <!-- CTA badge — pink pill with sketchy underline -->
+        <div class="fade-in relative flex flex-col items-center" style={`animation-delay: ${heroWords.length * 110 + 100}ms;`}>
+          <a 
+            href={hero.ctaHref} 
+            class="inline-flex items-center gap-2 md:px-5 px-4 md:py-2 py-1 text-md md:text-lg font-semibold uppercase tracking-wider transition-[transform,_background] duration-150 md:pt-2.5 pt-1.5 hover:-translate-y-0.5 text-white rounded-full mb-3 bg-[#FF66C4] hover:border-[#2200d8] hover:bg-[#2200d8] group/cta"
+          >
+            {hero.ctaLabel}
+            <ArrowIcon class="size-6 mb-0.5 group-hover/cta:rotate-45 transition-transform duration-150" />
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -122,7 +158,7 @@ const heroWords = hero.title ? hero.title.split(' ') : [];
           <h2 class="text-4xl font-heading font-bold fade-in fade-delay-2  uppercase tracking-[0.2em]" style="color: #ff99d8;">MANIFESTO</h2>
           <div class="space-y-4 text-neutral-800 leading-relaxed text-2xl">
             {manifesto.paragraphs.map((paragraph, index) => (
-              <p set:html={paragraph} class={`fade-in fade-delay-${index + 3}`} />
+              <p set:html={parseMarkdown(paragraph)} class={`fade-in fade-delay-${index + 3}`} />
             ))}
           </div>
         </div>

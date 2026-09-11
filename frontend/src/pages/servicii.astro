@@ -7,6 +7,7 @@ import Card from '@/components/ui/Card.astro';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 import ArrowIcon from '@/components/icons/ArrowIcon.astro';
+import { parseMarkdown } from '@/lib/markdown-utils';
 
 // NOTE: Keystatic stores uploads in public/ (root-relative paths), and
 // Astro's <Image> component can't process public/ assets — only imported
@@ -232,7 +233,7 @@ const DEFAULT_DIRECTIE_INDEX = 1; // Middle card stays open/centered by default.
                 class:list={['directii-card fade-in cursor-pointer p-2 hover:bg-white duration-50 rounded-xl transition-colors', index === DEFAULT_DIRECTIE_INDEX && 'is-active', `fade-delay-${index * 2}`]}
               >
                 <h3 class="text-2xl font-heading font-bold mb-1" style="color: #2200d8;">{directie.title}</h3>
-                <p class="text-md text-neutral-600 leading-relaxed max-w-xl h-20 text-ellipsis">{directie.description}</p>
+                <p set:html={parseMarkdown(directie.description)} class="text-md text-neutral-600 leading-relaxed max-w-xl h-20 text-ellipsis" />
               </Card>
           ))}
         </Slider>
@@ -278,7 +279,7 @@ const DEFAULT_DIRECTIE_INDEX = 1; // Middle card stays open/centered by default.
                 <div class="oferta-body-inner">
                   <div class="space-y-4 pt-4">
                     {oferta.paragraphs.map((paragraph) => (
-                      <p class="text-sm text-neutral-700 leading-relaxed">{paragraph}</p>
+                      <p set:html={parseMarkdown(paragraph)} class="text-sm text-neutral-700 leading-relaxed" />
                     ))}
                     
                     <a

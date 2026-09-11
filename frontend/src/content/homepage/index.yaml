@@ -1,5 +1,5 @@
 hero:
-  title: "Titlu lung cu bucata de text de subliniat."
+  title: "Titlu lung cu __bucata__ de text de subliniat."
   ctaLabel: "ZI-NE CARE-I TREABA"
   ctaHref: "/contact"
 manifesto:
@@ -9,7 +9,7 @@ manifesto:
   paragraphs:
     - "**Branding** wears many faces. We peel them back like bad wallpaper. We find the heartbeat and let it set the pace."
     - "**The result:** a logo that bites, a palette that sings, a font that winks back. All of them alive. All of them trouble."
-    - "You will recognize it by its constant motion. It fidgets. It interrupts. It leaves the room then comes back with better stories."
+    - "**You** will recognize it by its constant motion. It fidgets. It interrupts. It leaves the room then comes back with better stories."
 directia:
   label: "DIRECTIA"
   cards:

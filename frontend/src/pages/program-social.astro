@@ -3,6 +3,7 @@ import Header from '@/components/layouts/Header.astro';
 import PageLayout from '../layouts/PageLayout.astro';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
+import { parseMarkdown } from '@/lib/markdown-utils';
 
 // NOTE: Keystatic stores uploads in public/ (root-relative paths), and
 // Astro's <Image> component can't process public/ assets — only imported
@@ -51,9 +52,7 @@ const submitLabel = aplicAcum.form?.submitLabel ?? 'Trimite';
         <div class="space-y-6 my-auto">
           <h2 class="text-4xl fade-in font-heading font-bold text-[#ff99d8] uppercase tracking-widest">{proBono.heading}</h2>
           {proBono.paragraphs.map((paragraph, index) => (
-            <p class={`text-neutral-700 leading-relaxed text-lg fade-in fade-delay-${index * 2 + 2}`}>
-              {paragraph}
-            </p>
+            <p set:html={parseMarkdown(paragraph)} class={`text-neutral-700 leading-relaxed text-lg fade-in fade-delay-${index * 2 + 2}`} />
           ))}
         </div>
       </div>
