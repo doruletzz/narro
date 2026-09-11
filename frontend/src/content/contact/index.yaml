@@ -1,41 +1,52 @@
-title: "Contact — Narro"
-description: "Contactează-ne pentru proiecte de branding, design și comunicare vizuală. Da-ne un beep!"
-heading: "DA-NE UN BEEP"
-intro: "Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus."
+title: Contact — Narro
+description: >-
+  Contactează-ne pentru proiecte de branding, design și comunicare vizuală.
+  Da-ne un beep!
+heading: DA-NE UN BEEP
+intro: >-
+  Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna
+  etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum
+  risus.
 form:
-  submitLabel: "Trimite"
+  submitLabel: Trimite
   fields:
-    - id: "name"
-      label: "Nume*"
-      type: "input"
-      inputType: "text"
+    - id: nume
+      label: Nume*
+      type: input
+      inputType: text
       required: true
-    - id: "email"
-      label: "E-mail*"
-      type: "input"
-      inputType: "email"
+      options: []
+    - id: email
+      label: E-mail*
+      type: input
+      inputType: email
       required: true
-    - id: "business"
-      label: "Business*"
-      type: "input"
-      inputType: "text"
+      options: []
+    - id: business
+      label: Business*
+      type: input
+      inputType: text
+      required: true
+      options: []
+    - id: budget
+      label: Buget
+      type: select
+      inputType: text
       required: false
-    - id: "budget"
-      label: "Buget"
-      type: "select"
-      required: true
       options:
-        - label: "Sub 5.000 EUR"
-          value: "<5000"
-        - label: "5.000 - 10.000 EUR"
-          value: "5000-10000"
-        - label: "10.000 - 20.000 EUR"
-          value: "10000-20000"
-        - label: "Peste 20.000 EUR"
-          value: ">20000"
-    - id: "message"
-      label: "Care-i treaba?"
-      type: "textarea"
+        - label: Sub 5.000 EUR
+          value: <5000
+        - label: 5.000 - 10.000 EUR
+          value: 5000-10000
+        - label: 10.000 - 20.000 EUR
+          value: 10000-20000
+        - label: Peste 20.000 EUR
+          value: '>20000'
+    - id: mesaj
+      label: Care-i treaba?
+      type: textarea
+      inputType: text
       required: false
-image: "https://images.unsplash.com/photo-1558618666-fcd25c85f32e?w=700&q=80"
-imageAlt: "Contact — Da-ne un beep"
+      options: []
+image: /images/contact/image.png
+imageAlt: Contact — Da-ne un beep

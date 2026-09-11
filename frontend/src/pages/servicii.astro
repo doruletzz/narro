@@ -229,7 +229,7 @@ const DEFAULT_DIRECTIE_INDEX = 1; // Middle card stays open/centered by default.
                 image={directie.image}
                 imageAlt={directie.imageAlt}
                 imgWrapperClass="h-[20rem] rounded-lg border-2 border-[#2200d8]"
-                class:list={['directii-card fade-in cursor-pointer p-2 hover:bg-white duration-50 rounded-xl transition-colors', index === DEFAULT_DIRECTIE_INDEX && 'is-active', `fade-delay-${index * 2 + 2}`]}
+                class:list={['directii-card fade-in cursor-pointer p-2 hover:bg-white duration-50 rounded-xl transition-colors', index === DEFAULT_DIRECTIE_INDEX && 'is-active', `fade-delay-${index * 2}`]}
               >
                 <h3 class="text-2xl font-heading font-bold mb-1" style="color: #2200d8;">{directie.title}</h3>
                 <p class="text-md text-neutral-600 leading-relaxed max-w-xl h-20 text-ellipsis">{directie.description}</p>

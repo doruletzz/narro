@@ -2,7 +2,7 @@ title: "Program Social — Narro"
 description: "Servicii de branding și comunicare vizuală accesibile pentru ONG-uri și organizații sociale."
 proBono:
   heading: "PRO BONO"
-  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80"
+  image: ""
   imageAlt: "Pro Bono — Echipa Narro la voluntariat"
   paragraphs:
     - "Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus."
@@ -46,5 +46,5 @@ aplicAcum:
         label: "Care-i treaba?"
         type: "textarea"
         required: false
-  image: "https://images.unsplash.com/photo-1558618666-fcd25c85f32e?w=700&q=80"
+  image: ""
   imageAlt: "Aplica acum — Contact Narro"

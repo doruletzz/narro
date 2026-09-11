@@ -11,13 +11,29 @@ import '../styles/global.css';
     <meta name="generator" content="{Astro.generator}" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
-    <!-- Default Open Graph tags -->
+    <!-- Preconnect to external domains for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    
+    <!-- Google Fonts — loaded via <link> instead of @import for better FCP -->
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet" />
+    
+    <!-- Canonical URL — auto-derived from current page path -->
+    <link rel="canonical" href={`https://narro.ro${Astro.url.pathname}`} />
+    
+    <!-- Default OG tags -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ro_RO" />
     <meta property="og:site_name" content="Narro — Branding și Comunicare Vizuală" />
+    <meta property="og:title" content="Narro — Branding și Comunicare Vizuală" />
+    <meta property="og:description" content="Dăm viață brandului tău. Branding, design vizual și comunicare pentru business-uri și organizații sociale." />
+    <meta property="og:image" content="/og-default.jpg" />
     
-    <!-- Default Twitter Card tags -->
+    <!-- Twitter Card defaults -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Narro — Branding și Comunicare Vizuală" />
+    <meta name="twitter:description" content="Dăm viață brandului tău. Branding, design vizual și comunicare pentru business-uri și organizații sociale." />
     
     <slot name="head" />
   </head>

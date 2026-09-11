@@ -293,9 +293,10 @@ export default config({
           },
           { label: 'Formular' }
         ),
-        image: fields.url({
-          label: 'Imagine (URL)',
-          defaultValue: 'https://images.unsplash.com/photo-1558618666-fcd25c85f32e?w=700&q=80',
+        image: fields.image({
+          label: 'Imagine',
+          directory: 'public/images/contact',
+          publicPath: '/images/contact/',
         }),
         imageAlt: fields.text({ label: 'Text alternativ imagine', defaultValue: 'Contact — Da-ne un beep' }),
       },
@@ -318,9 +319,10 @@ export default config({
         proBono: fields.object(
           {
             heading: fields.text({ label: 'Titlu secțiune', defaultValue: 'PRO BONO' }),
-            image: fields.url({
-              label: 'Imagine (URL)',
-              defaultValue: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80',
+            image: fields.image({
+              label: 'Imagine',
+              directory: 'public/images/program-social/pro-bono',
+              publicPath: '/images/program-social/pro-bono/',
             }),
             imageAlt: fields.text({
               label: 'Text alternativ imagine',
@@ -396,9 +398,10 @@ export default config({
               },
               { label: 'Formular' }
             ),
-            image: fields.url({
-              label: 'Imagine (URL)',
-              defaultValue: 'https://images.unsplash.com/photo-1558618666-fcd25c85f32e?w=700&q=80',
+            image: fields.image({
+              label: 'Imagine',
+              directory: 'public/images/program-social/aplica-acum',
+              publicPath: '/images/program-social/aplica-acum/',
             }),
             imageAlt: fields.text({
               label: 'Text alternativ imagine',
@@ -424,7 +427,11 @@ export default config({
         stories: fields.array(
           fields.object({
             title: fields.text({ label: 'Titlu' }),
-            image: fields.url({ label: 'Imagine (URL)' }),
+            image: fields.image({
+              label: 'Imagine',
+              directory: 'public/images/story-time',
+              publicPath: '/images/story-time/',
+            }),
             imageAlt: fields.text({ label: 'Text alternativ imagine' }),
             paragraphs: fields.array(fields.text({ label: 'Paragraf', multiline: true }), {
               label: 'Paragrafe',

@@ -1,0 +1,30 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Header from '@/components/layouts/Header.astro';
+---
+
+<PageLayout title="404 — Pagina nu a fost găsită" description="Pagina căutată nu există. Reîntoarce-te la homepage.">
+  <style>
+    .not-found {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+
+  <Header />
+  <section class="not-found">
+    <div class="text-center">
+      <h1 class="text-6xl font-heading font-bold mb-4" style="color: #2200d8;">404</h1>
+      <p class="text-lg text-neutral-700 mb-2">Pagina căutată nu există.</p>
+      <p class="text-sm text-neutral-500 mb-8">Se pare că ai introdus greșit adresa sau pagina a fost mutată.</p>
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-900 text-neutral-900 font-medium hover:bg-neutral-900 hover:text-white transition-colors rounded-none text-md"
+      >
+        Înapoi la homepage
+      </a>
+    </div>
+  </section>
+</PageLayout>

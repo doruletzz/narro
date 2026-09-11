@@ -64,14 +64,14 @@ const DEFAULT_STUDII_INDEX = -1;
         {label}
       </h2>
 
-      <Slider class=" px-72 -ml-12 " id="studii-wrapper" data-default-active={DEFAULT_STUDII_INDEX} bleed={true} snap={true}>
+      <Slider class="md:px-72 px-32 md:-ml-12 " id="studii-wrapper" data-default-active={DEFAULT_STUDII_INDEX} bleed={true} snap={true}>
         {items.map((item, index) => (
           <Card
             href={`/studii-de-caz/${item.slug}`}
             image={item.image}
             imageAlt={item.imageAlt}
             imgWrapperClass="h-[22rem] w-[30rem] rounded-lg border-2 border-[#2200d8]"
-            class:list={['studii-card fade-in cursor-pointer scroll-pl-32 p-4 hover:bg-white duration-50 rounded-xl transition-colors', index === DEFAULT_STUDII_INDEX && 'is-active bg-white', `fade-delay-${index * 2 + 1}`]}
+            class:list={['studii-card opacity-0 fade-in cursor-pointer md:scroll-pl-32 p-4 hover:bg-white duration-50 rounded-xl transition-colors', index === DEFAULT_STUDII_INDEX && 'is-active bg-white', `fade-delay-${index * 2}`]}
           >
             <h3 class="text-2xl font-heading font-bold mb-1" style="color: #2200d8;">{item.title}</h3>
             <p class="text-md leading-relaxed max-w-xs">{item.tag}</p>

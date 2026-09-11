@@ -61,7 +61,13 @@ const submitLabel = page.form?.submitLabel ?? 'Trimite';
           <p class="text-neutral-800 leading-relaxed mb-4 md:mb-8 md:text-lg fade-in">
             {intro}
           </p>
-          <form class="space-y-4" aria-label="Formular de contact">
+          {/* Web3Forms — action: https://web3forms.com */}
+          <form action="https://web3forms.com/submit" method="POST" class="space-y-4" aria-label="Formular de contact">
+            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+            <input type="hidden" name="redirect" value="/contact?sent=success" />
+            <input type="hidden" name="subject" value="Narro — Contact form" />
+            {/* Honeypot — hidden spam protection. Bots fill this, humans don't see it. */}
+            <input type="text" name="name" style="display:none" tabindex="-1" autocomplete="off" />
             {formFields.map((field, index) => (
               <div class={`fade-in fade-delay-${index + 2}`}>
                 {/* {field.id} */}

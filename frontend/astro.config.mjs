@@ -1,13 +1,13 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import keystatic from '@keystatic/astro';
 import react from '@astrojs/react';
-import node from '@astrojs/node';
+import keystatic from '@keystatic/astro';
 
 // https://astro.build/config
+// Pure static output — all pages prerendered, no server needed.
+// Content is managed by editing YAML files in src/content/ and committing.
+// (Keystatic admin removed: it requires a server. Editorial changes go through Git.)
 export default defineConfig({
   integrations: [tailwind(), react(), keystatic()],
-  adapter: node({
-    mode: 'standalone',
-  }),
+  output: 'server',
 });

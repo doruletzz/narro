@@ -52,18 +52,26 @@ import { Image } from "astro:assets";
     </div>
   </div>
 
-  <!-- Mobile menu -->
+    <!-- Mobile menu backdrop -->
   <div
-    class="lg:hidden hidden bg-[#f5f0eb] border-t border-primary/10"
+    class="lg:hidden fixed inset-0 z-40 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out"
+    id="mobile-menu-backdrop"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Mobile menu panel (slides in from right) -->
+  <div
+    class="lg:hidden fixed inset-y-0 right-0 z-50 w-[80vw] max-w-sm bg-[#f5f0eb] shadow-2xl translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto"
     id="mobile-menu"
     aria-hidden="true"
   >
-    <nav class="px-4 py-6 space-y-3" aria-label="Mobile navigation">
+    <nav class="flex flex-col h-full px-6 py-8 space-y-3" aria-label="Mobile navigation">
       <a href="/servicii" class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">Servicii</a>
       <a href="/studii-de-caz" class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">Portofoliu</a>
       <a href="/program-social" class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">Program Social</a>
       <a href="/story-time" class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">Story Time</a>
-      <div class="pt-4">
+
+      <div class="">
         <a
           href="/contact"
           class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-neutral-900 border border-[#FF66C4] rounded-full hover:border-[#2200d8] hover:bg-[#2200d8] hover:text-white transition-colors"
@@ -74,20 +82,35 @@ import { Image } from "astro:assets";
           </svg>
         </a>
       </div>
+
+      <!-- Explicit close button, pinned to bottom of panel -->
+      <button
+        type="button"
+        id="mobile-menu-close"
+        class="absolute right-4 top-2"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
     </nav>
   </div>
 
-  <script>
+    <script>
     const header = document.getElementById('site-header');
     const button = document.getElementById('mobile-menu-button');
     const menu = document.getElementById('mobile-menu');
+    const backdrop = document.getElementById('mobile-menu-backdrop');
+    const closeButton = document.getElementById('mobile-menu-close');
     const iconOpen = document.getElementById('menu-icon-open');
     const iconClose = document.getElementById('menu-icon-close');
 
     function openMenu() {
       button?.setAttribute('aria-expanded', 'true');
       menu?.setAttribute('aria-hidden', 'false');
-      menu?.classList.remove('hidden');
+      menu?.classList.remove('translate-x-full');
+      backdrop?.classList.remove('opacity-0', 'pointer-events-none');
+      backdrop?.classList.add('opacity-100');
       iconOpen?.classList.add('hidden');
       iconClose?.classList.remove('hidden');
       document.body.classList.add('overflow-hidden');
@@ -96,7 +119,9 @@ import { Image } from "astro:assets";
     function closeMenu() {
       button?.setAttribute('aria-expanded', 'false');
       menu?.setAttribute('aria-hidden', 'true');
-      menu?.classList.add('hidden');
+      menu?.classList.add('translate-x-full');
+      backdrop?.classList.add('opacity-0', 'pointer-events-none');
+      backdrop?.classList.remove('opacity-100');
       iconOpen?.classList.remove('hidden');
       iconClose?.classList.add('hidden');
       document.body.classList.remove('overflow-hidden');
@@ -106,6 +131,9 @@ import { Image } from "astro:assets";
       const isExpanded = button.getAttribute('aria-expanded') === 'true';
       isExpanded ? closeMenu() : openMenu();
     });
+
+    closeButton?.addEventListener('click', closeMenu);
+    backdrop?.addEventListener('click', closeMenu);
 
     menu?.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', closeMenu);
