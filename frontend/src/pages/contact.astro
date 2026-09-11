@@ -57,7 +57,7 @@ const submitLabel = page.form?.submitLabel ?? 'Trimite';
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <!-- Form — White box with clean thin borders -->
-        <div class="bg-white p-6 md:p-10 rounded-2xl z-10">
+        <div class="bg-white p-6 md:p-10 rounded-2xl z-10 max-h-[48rem]">
           <p class="text-neutral-800 leading-relaxed mb-4 md:mb-8 md:text-lg fade-in">
             {intro}
           </p>
@@ -124,7 +124,7 @@ const submitLabel = page.form?.submitLabel ?? 'Trimite';
           </form>
         </div>
         <!-- Image — Old phones with sketch decorations -->
-        <div class="relative fade-in fade-delay-4 overflow-hidden">
+        <div class="relative fade-in fade-delay-4 overflow-hidden max-h-[48rem] bg-white/30 rounded-xl">
           <Image
             src={image || ''}
             width={1920}

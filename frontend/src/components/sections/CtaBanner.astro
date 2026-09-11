@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 interface CtaBannerData {
   image: string;
   imageAlt: string;
@@ -24,5 +26,5 @@ const { ctaBanner }: Props = Astro.props;
       </div>
     </a>
   </div>
-  <img src={ctaBanner.image} width="1980" alt={ctaBanner.imageAlt} class="w-[112rem]  object-cover overflow-hidden mx-auto transition-transform duration-500 ease-out peer-hover/cta:!scale-[98%] " />
+  <Image src={ctaBanner.image} width={1980} height={1080} alt={ctaBanner.imageAlt} class="w-[112rem]  object-cover overflow-hidden mx-auto transition-transform duration-500 ease-out peer-hover/cta:!scale-[98%] " />
 </section>

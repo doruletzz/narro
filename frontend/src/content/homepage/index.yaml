@@ -54,7 +54,7 @@ studiiDeCaz:
       ctaLabel: "Află mai multe"
       href: "/contact"
 ctaBanner:
-  image: cta-banner.png
+  image: /cta-banner.png
   imageAlt: "CTA — Zi-ne care-i treaba"
   text: "ZI-NE CARE-I \nTREABA"
   href: "/contact"

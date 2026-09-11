@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import { Image } from 'astro:assets';
 
 /**
  *
@@ -22,6 +23,8 @@ interface Props extends Omit<HTMLAttributes<'a'>, 'class'> {
   imageAlt?: string;
   imgWrapperClass?: string;
   imgClass?: string;
+  width?: number;
+  height?: number;
   loading?: 'eager' | 'lazy';
   class?: string;
   bodyClass?: string;
@@ -31,6 +34,8 @@ const {
   href,
   image,
   imageAlt = '',
+  width = 1920,
+  height = 1080,
   imgWrapperClass = 'aspect-[4/3] rounded-xl',
   imgClass = '',
   loading = 'lazy',
@@ -45,7 +50,7 @@ const Tag = href ? 'a' : 'div';
 <Tag href={href} class:list={['card group/card block p-3 hover:bg-white rounded-xl transition-colors', className]} {...rest}>
   {image && (
     <div class:list={['card-img-wrapper relative overflow-hidden bg-white w-full', imgWrapperClass]}>
-      <img src={image} alt={imageAlt} loading={loading} decoding="async" class:list={['w-full h-full object-cover', imgClass]} />
+      <Image width={width} height={height} src={image} alt={imageAlt} loading={loading} decoding="async" class:list={['w-full h-full object-cover', imgClass]} />
       <slot name="image-overlay" />
     </div>
   )}
