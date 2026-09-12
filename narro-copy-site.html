@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NARRO — Copy site</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#2200D8;
+    --pink:#FFB6E8;
+    --orange:#FF8F3D;
+    --yellow:#FFD84D;
+    --off:#F4F2EE;
+    --ink:#1a1a1a;
+    --rail:220px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--off);
+    color:var(--ink);
+    font-family:"Work Sans",system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+  /* ---------- masthead ---------- */
+  header.mast{background:var(--blue);color:#fff;padding:72px 0 60px}
+  .mast h1{
+    font-family:Archivo,sans-serif;font-weight:800;
+    font-size:clamp(2.6rem,8vw,5.6rem);line-height:.92;
+    letter-spacing:-.03em;margin:0 0 22px;
+  }
+  .mast h1 em{font-style:normal;color:var(--pink)}
+  .mast p{max-width:52ch;font-size:1.05rem;margin:0 0 8px;color:#d8d0ff}
+  .mast .meta{margin-top:30px;font-size:.85rem;color:#a99cff}
+
+  /* ---------- toc ---------- */
+  nav.toc{background:var(--yellow);padding:22px 0}
+  nav.toc ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px}
+  nav.toc a{
+    color:var(--blue);text-decoration:none;font-weight:600;font-size:.9rem;
+    border-bottom:2px solid transparent;padding-bottom:2px;
+  }
+  nav.toc a:hover,nav.toc a:focus-visible{border-bottom-color:var(--blue)}
+
+  /* ---------- sections ---------- */
+  section.page{border-top:1px solid #ddd8cf;padding:64px 0 8px}
+  section.page:first-of-type{border-top:none}
+  .page-head{margin-bottom:38px}
+  .page-head h2{
+    font-family:Archivo,sans-serif;font-weight:800;
+    font-size:clamp(1.9rem,4.5vw,3rem);line-height:1;
+    letter-spacing:-.02em;color:var(--blue);margin:0 0 10px;
+  }
+  .page-head .where{font-size:.92rem;color:#6b6357;max-width:60ch;margin:0}
+
+  .block{
+    display:grid;grid-template-columns:var(--rail) 1fr;gap:28px;
+    padding:26px 0;border-top:1px dashed #d5cfc4;align-items:start;
+  }
+  .rail .slot{
+    font-family:Archivo,sans-serif;font-weight:600;font-size:.78rem;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--blue);
+    margin:0 0 6px;
+  }
+  .rail .hint{font-size:.8rem;color:#7a7266;margin:0;line-height:1.45}
+
+  /* copy card */
+  .copy{
+    position:relative;background:#fff;border:1px solid #e4dfd6;
+    border-left:5px solid var(--blue);padding:22px 24px;
+  }
+  .copy > *:first-child{margin-top:0}
+  .copy > *:last-child{margin-bottom:0}
+  .copy p{margin:0 0 .95em;max-width:70ch}
+  .copy ul{margin:0 0 .95em;padding-left:1.15em;max-width:70ch}
+  .copy li{margin-bottom:.3em}
+  .copy .lead{font-weight:600}
+  .copy .h{
+    font-family:Archivo,sans-serif;font-weight:800;
+    font-size:clamp(1.35rem,3vw,2rem);line-height:1.06;
+    letter-spacing:-.02em;color:var(--blue);margin:0 0 .5em;max-width:22ch;
+  }
+  .copy .sub{font-family:Archivo,sans-serif;font-weight:600;font-size:1.1rem;margin:0 0 .6em}
+  .copy .kicker{font-weight:600;color:var(--orange);margin:0 0 .8em}
+  .copy .price{
+    display:inline-block;margin-top:6px;background:var(--pink);
+    font-weight:600;padding:5px 12px;font-size:.95rem;
+  }
+
+  /* buttons / labels */
+  .btn{
+    display:inline-block;border:2px solid var(--blue);color:var(--blue);
+    font-weight:600;font-size:.9rem;padding:8px 16px;border-radius:999px;
+  }
+  .fields{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;padding:0;list-style:none}
+  .fields li{background:var(--off);border:1px solid #ddd8cf;padding:6px 12px;font-size:.9rem}
+  .fields li b{font-weight:600}
+
+  /* dev note */
+  .note{
+    background:var(--yellow);border:none;border-left:5px solid var(--orange);
+    padding:18px 22px;margin:14px 0 0;font-size:.94rem;
+  }
+  .note p{margin:0 0 .7em;max-width:70ch}
+  .note p:last-child{margin-bottom:0}
+  .note strong{font-weight:600}
+
+  .fine .copy{font-size:.88rem;color:#4a4540}
+
+  /* copy-to-clipboard */
+  .cbtn{
+    position:absolute;top:10px;right:10px;
+    font-family:"Work Sans",sans-serif;font-size:.72rem;font-weight:600;
+    background:var(--off);color:var(--blue);border:1px solid #ddd8cf;
+    padding:4px 10px;cursor:pointer;border-radius:999px;
+  }
+  .cbtn:hover{background:var(--pink);border-color:var(--pink)}
+  .cbtn:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+
+  footer.end{background:var(--blue);color:#fff;margin-top:70px;padding:52px 0}
+  footer.end p{margin:0 0 6px;color:#cfc6ff}
+  footer.end .sig{
+    font-family:Archivo,sans-serif;font-weight:800;font-size:1.5rem;
+    color:#fff;margin-bottom:14px;
+  }
+
+  a:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+
+  @media (max-width:760px){
+    :root{--rail:100%}
+    .block{grid-template-columns:1fr;gap:12px;padding:22px 0}
+    .rail{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}
+  }
+  @media print{
+    nav.toc,.cbtn{display:none}
+    body{background:#fff}
+    .block{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <h1>Copy site<br><em>narro.co</em></h1>
+    <p>Textul final pentru fiecare secțiune a site-ului. Blocurile albe sunt text care intră în pagină, exact așa cum e scris.</p>
+    <p>Blocurile galbene sunt instrucțiuni pentru implementare — nu se publică.</p>
+    <p class="meta">Versiunea 1 · 11 septembrie 2026 · narro.branding@gmail.com</p>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <ul>
+      <li><a href="#home">Homepage</a></li>
+      <li><a href="#servicii">Servicii</a></li>
+      <li><a href="#story">Story Time</a></li>
+      <li><a href="#social">Program Social</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#global">Footer &amp; 404</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ HOMEPAGE ============ -->
+<section class="page" id="home">
+  <div class="page-head">
+    <h2>Homepage</h2>
+    <p class="where">Ordinea secțiunilor de sus în jos: hero, cele 3 direcții, „Bine, bine…", bandă CTA.</p>
+  </div>
+
+  <div class="block">
+    <div class="rail">
+      <p class="slot">Hero</p>
+      <p class="hint">Titlu pe două rânduri. Al doilea rând poartă sublinierea desenată.</p>
+    </div>
+    <div class="copy">
+      <p class="h">Știi perfect de ce ești altfel.<br>Doar că-ți iese „calitate și profesionalism".</p>
+      <p>Noi traducem.</p>
+      <p><span class="btn">ZI-NE CARE-I TREABA ↗</span></p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail">
+      <p class="slot">Cele 3 direcții — supratitlu</p>
+    </div>
+    <div class="copy">
+      <p class="sub">Sunt mai multe treburi. Le luăm pe rând.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail">
+      <p class="slot">Card 1</p>
+      <p class="hint">Link către Servicii, ancoră pe zona de branding.</p>
+    </div>
+    <div class="copy">
+      <p class="sub">Branding</p>
+      <p>Aici intră tot ce face ca businessul tău să fie recunoscut înainte să-și spună numele. Pornim de la business, de la ce faci, pentru cine, în ce categorie joci, ce te diferențiază de ceilalți care fac același lucru pe aceeași stradă. De acolo ies poziționarea, mesajele, tonul, și abia la final logo-ul, culorile și fonturile.</p>
+      <p>Diferența dintre un brand făcut așa și unul făcut invers se vede peste doi ani. Unul rezistă și se extinde, celălalt trebuie refăcut de fiecare dată când apare un material nou.</p>
+      <p>Practic, asta înseamnă că nu mai iei aceleași zece decizii mărunte în fiecare marți. Culoarea e deja aleasă. Tonul e deja stabilit. De aici totul alunecă mai ușor.</p>
+      <p><span class="btn">Vezi ce intră ↗</span></p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail">
+      <p class="slot">Card 2</p>
+    </div>
+    <div class="copy">
+      <p class="sub">Conținut</p>
+      <p>Scriem textele, facem vizualurile și venim la tine cu aparatul. Lunar, primești materialele gata de publicat și un calendar editorial care spune ce urcă și când. Tu îți ții conturile și publici când vrei.</p>
+      <p>E varianta pentru cine are deja mâna pe comunicare și îi place așa, dar a rămas fără ce să pună. Sau pentru cine a încercat să facă singur și a descoperit că trei postări pe săptămână înseamnă, de fapt, o slujbă.</p>
+      <p>Textele sună a om. Pozele sunt poze adevărate și nu le mai are nimeni.</p>
+      <p><span class="btn">Vezi ce intră ↗</span></p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail">
+      <p class="slot">Card 3</p>
+    </div>
+    <div class="copy">
+      <p class="sub">Social Media</p>
+      <p>Preluăm conturile de tot. Planificăm, scriem, publicăm, răspundem la mesaje și comentarii, măsurăm ce s-a întâmplat. La sfârșit de lună primești un raport pe care chiar îl citește cineva înainte să ți-l trimită.</p>
+      <p>Vine în trei praguri, în funcție de câte platforme ții și cât de des publici.</p>
+      <p><span class="btn">Vezi ce intră ↗</span></p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail">
+      <p class="slot">Secțiune text</p>
+      <p class="hint">Titlul e parte din copy, nu supratitlu decorativ.</p>
+    </div>
+    <div class="copy">
+      <p class="h">Bine, bine, dar cu ce mă ajută asta pe mine?</p>
+      <p>Cel mai des, oamenii vin la noi obosiți. De decizii mărunte și muncă. Ce pun azi pe Instagram. De ce ultima poză a mers și asta nu. Dacă noul meniu ar trebui să arate ca cel vechi sau nu. Fiecare e o nimica toată. Puse cap la cap, îți mănâncă săptămâna.</p>
+      <p>Ce se schimbă e că întrebările astea nu mai ajung la tine. Pentru că, odată ce e clar ce ești și cum arăți, majoritatea se răspund singure. Culoarea e deja aleasă. Tonul e deja stabilit. Rămâne execuția, care e ușoară.</p>
+      <p>Practic, asta arată așa: cineva se ocupă de identitate — nume, logo, culori, reguli. Altcineva de ce se vede lunar — postări, texte, fotografii. Uneori de amândouă, uneori doar de una. Depinde unde ești.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail">
+      <p class="slot">Bandă CTA</p>
+      <p class="hint">Bandă pe lățime completă, fundal colorat. Butonul duce la formular, precompletat pe Radiografia dacă se poate.</p>
+    </div>
+    <div class="copy">
+      <p>Nu știi de unde să începi? Începe cu Radiografia. 900 lei, cinci zile lucrătoare, și se scade integral din orice proiect contractat în următoarele 30.</p>
+      <p><span class="btn">VREAU RADIOGRAFIA ↗</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICII ============ -->
+<section class="page" id="servicii">
+  <div class="page-head">
+    <h2>Servicii</h2>
+    <p class="where">Grupate pe patru categorii: Strategie, Identitate, Comunicare, Conținut. Proiectul de Brand stă primul, singur, deasupra categoriilor.</p>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Intro pagină</p></div>
+    <div class="copy">
+      <p class="lead">Facem branding. Lucrăm la strategie, identitate, comunicare și conținut.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail">
+      <p class="slot">Proiectul de Brand</p>
+      <p class="hint">Serviciul principal. Tratament vizual mai amplu decât restul.</p>
+    </div>
+    <div class="copy">
+      <p class="sub">Proiectul de Brand</p>
+      <p class="lead">Construim brandul de la strategie până la implementare.</p>
+      <p>Începem cu businessul: ce face, pentru cine, în ce categorie joacă, ce îl diferențiază și ce vrea să construiască mai departe. Definim poziționarea, publicul și direcția strategică.</p>
+      <p class="lead">Primești:</p>
+      <ul>
+        <li>Strategie de brand, poziționare, public țintă și profiluri de audiență</li>
+        <li>Arhitectura mesajelor, diferențiator și teritorii de comunicare</li>
+        <li>Ton of voice, mesaje-cheie și exemple de formulări</li>
+        <li>Concept vizual, logo + variante, paletă, tipografie</li>
+        <li>Elemente grafice, iconografie, direcție de fotografie</li>
+        <li>Sistem de template-uri pentru comunicare</li>
+        <li>Manual de brand</li>
+        <li>Aplicarea identității în materialele stabilite la începutul proiectului</li>
+      </ul>
+      <p>La final, reunim toate deciziile într-un sistem de brand și îl aplicăm în materialele de care businessul are nevoie.</p>
+      <p><span class="price">9.000 – 14.000 lei · 8–12 săptămâni</span></p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Categoria: Strategie</p></div>
+    <div class="copy">
+      <p class="sub">Radiografia</p>
+      <p class="lead">Analizăm brandul, comunicarea și prezența lui actuală.</p>
+      <p>Ne uităm la poziționare, identitate, ton, mesaje, conținut și prezența online. Identificăm ce funcționează, ce nu și unde există spațiu de lucru.</p>
+      <p class="lead">Primești:</p>
+      <ul>
+        <li>Analiză scrisă</li>
+        <li>3 direcții de lucru prioritizate</li>
+        <li>Discuție de o oră</li>
+      </ul>
+      <p><span class="price">900 lei · 5 zile lucrătoare</span></p>
+      <p>Se scade integral din orice proiect contractat în următoarele 30 de zile.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Categoria: Identitate</p></div>
+    <div class="copy">
+      <p class="sub">Identitate Vizuală</p>
+      <p class="lead">Construim sistemul vizual complet al brandului.</p>
+      <p>Definim direcția vizuală și construim logo-ul, paleta, tipografia, elementele grafice și regulile de folosire. Le organizăm într-un sistem care poate fi aplicat pe toate materialele brandului, acum și mai târziu.</p>
+      <p class="lead">Primești:</p>
+      <ul>
+        <li>Concept vizual</li>
+        <li>Logo + variante complete</li>
+        <li>Paletă de culori</li>
+        <li>Tipografie</li>
+        <li>Iconografie și elemente grafice</li>
+        <li>Sistem complet de template-uri</li>
+        <li>Manual vizual</li>
+      </ul>
+      <p><span class="price">5.000 – 7.000 lei · 4–6 săptămâni</span></p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Identitate (2)</p></div>
+    <div class="copy">
+      <p class="sub">Kit de Pornire</p>
+      <p class="lead">Construim baza vizuală și primele materiale pentru un brand nou.</p>
+      <p>Pachet de implementare rapidă pentru un business care pornește. Stabilim o bază vizuală simplă și o aplicăm direct în materialele de care ai nevoie în prima fază.</p>
+      <p class="lead">Primești:</p>
+      <ul>
+        <li>Logo + variante</li>
+        <li>Paletă de culori</li>
+        <li>1–2 fonturi</li>
+        <li>Mini-ghid vizual</li>
+        <li>Set de template-uri de bază pentru social media</li>
+        <li>3 materiale de lansare</li>
+      </ul>
+      <p><span class="price">3.900 lei · 3 săptămâni</span></p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail">
+      <p class="slot">Notă comparativă</p>
+      <p class="hint">Se pune între cele două carduri de mai sus, vizibil diferit de descrierile de servicii.</p>
+    </div>
+    <div class="copy">
+      <p>Kitul de Pornire te scoate rapid în piață. Identitatea Vizuală construiește sistemul pe care brandul îl folosește ani întregi. Dacă businessul există deja și are volum de comunicare, mergi pe Identitate Vizuală.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Identitate (3)</p></div>
+    <div class="copy">
+      <p class="sub">Design Grafic</p>
+      <p class="lead">Realizăm materiale grafice punctuale, pentru digital sau print.</p>
+      <p>Lucrăm pe piese individuale sau seturi: meniuri, prezentări, afișe, materiale de campanie, social media și altele. Adaptate identității existente a brandului.</p>
+      <p>Primești: piesa sau setul solicitat, în formatele necesare.</p>
+      <p><span class="price">De la 350 lei/piesă</span></p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Categoria: Comunicare</p></div>
+    <div class="copy">
+      <p class="sub">Ton of Voice</p>
+      <p class="lead">Definim felul în care comunică brandul.</p>
+      <p>Stabilim tonul, vocabularul, structura mesajelor, formulările potrivite și cele de evitat. Documentăm regulile și le exemplificăm prin texte concrete.</p>
+      <p class="lead">Primești:</p>
+      <ul>
+        <li>Ghid de ton</li>
+        <li>Reguli de scriere</li>
+        <li>Exemple bun/greșit</li>
+        <li>Texte-model</li>
+      </ul>
+      <p><span class="price">1.800 lei</span></p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail">
+      <p class="slot">Categoria: Conținut — intro</p>
+      <p class="hint">Important: stă deasupra ambelor servicii, nu în interiorul unuia. Diferența dintre ele trebuie citită înainte de prețuri.</p>
+    </div>
+    <div class="copy">
+      <p>Ai nevoie de conținut sau vrei să preluăm noi tot canalul. Content Production produce conținutul. Social Media preia administrarea conturilor.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Conținut (1)</p></div>
+    <div class="copy">
+      <p class="sub">Content Production</p>
+      <p class="lead">Producem conținut pentru canalele de comunicare ale brandului. Tu îți administrezi conturile.</p>
+      <p>Stabilim temele și formatele, dezvoltăm ideile, scriem textele și producem materialele vizuale. Organizăm totul într-un calendar editorial.</p>
+      <p class="lead">Primești lunar:</p>
+      <ul>
+        <li>12 materiale: copy + design pentru static, carousel sau video scurt (maxim 4 formate video)</li>
+        <li>1 ședință foto-video la locație, cu echipa NARRO</li>
+        <li>Calendar editorial</li>
+      </ul>
+      <p><span class="price">2.500 lei/lună</span></p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail">
+      <p class="slot">Conținut (2)</p>
+      <p class="hint">Cele trei praguri se afișează ca trei coloane sau trei carduri.</p>
+    </div>
+    <div class="copy">
+      <p class="sub">Social Media</p>
+      <p class="lead">Gestionăm comunicarea brandului pe social media. Preluăm administrarea conturilor.</p>
+      <p>Planificăm conținutul, pregătim și publicăm postările, gestionăm interacțiunile și urmărim rezultatele lunare.</p>
+      <p><span class="price">Foundation — 1.800 lei/lună</span><br>1 platformă · 8 postări/lună · community management · raport lunar</p>
+      <p><span class="price">Momentum — 2.400 lei/lună</span><br>2 platforme · 12 postări/lună + 1 reel · community management · raport lunar</p>
+      <p><span class="price">Signature — 3.600 lei/lună</span><br>3 platforme · 16 postări/lună + 4 reels · community management · raport lunar · 1 ședință foto-video la locație · consultanță lunară</p>
+      <p>Ședință foto-video suplimentară: 700 lei</p>
+    </div>
+  </div>
+
+  <div class="block fine">
+    <div class="rail">
+      <p class="slot">Ședințele foto-video</p>
+      <p class="hint">Text mic, la baza paginii.</p>
+    </div>
+    <div class="copy">
+      <ul>
+        <li>1 ședință pe lună, maximum 4 ore</li>
+        <li>La sediul clientului sau într-o locație stabilită de comun acord, în Cluj-Napoca și pe o rază de 30 km</li>
+        <li>Peste această rază, deplasarea se facturează separat</li>
+        <li>Ședința neconsumată într-o lună nu se reportează în luna următoare</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="block fine">
+    <div class="rail"><p class="slot">Ce se cotează separat</p></div>
+    <div class="copy">
+      <ul>
+        <li>Producții video complexe, filmări cu scenariu, echipă extinsă sau studio</li>
+        <li>Materiale tipărite și costurile de producție</li>
+        <li>Materiale peste volumul lunar inclus</li>
+        <li>Licențe foto, video, fonturi sau muzică</li>
+        <li>Bugete de promovare plătită</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="block fine">
+    <div class="rail"><p class="slot">Condiții</p></div>
+    <div class="copy">
+      <p><b>Prețuri</b> — sumele sunt exprimate în lei, cu TVA.</p>
+      <p><b>Revizii</b> — fiecare proiect include 2 runde de revizii. Rundele suplimentare se tarifează separat.</p>
+      <p><b>Plată</b> — 50% avans la începerea proiectului, 50% la livrare. Serviciile lunare se facturează la începutul fiecărei luni.</p>
+      <p><b>Durată</b> — Radiografia 5 zile lucrătoare · Kit de Pornire 3 săptămâni · Identitate Vizuală 4–6 săptămâni · Proiectul de Brand 8–12 săptămâni.</p>
+      <p><b>Valabilitate</b> — oferta este valabilă 30 de zile de la data transmiterii.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">CTA final pagină</p></div>
+    <div class="copy">
+      <p>Nu știi de unde să începi? Începe cu Radiografia. De acolo stabilim ce merită făcut și în ce ordine.</p>
+      <p><span class="btn">VREAU RADIOGRAFIA ↗</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY TIME ============ -->
+<section class="page" id="story">
+  <div class="page-head">
+    <h2>Story Time</h2>
+    <p class="where">Două texte, în ordinea de mai jos.</p>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Text 1</p></div>
+    <div class="copy">
+      <p class="h">Cum am început</p>
+      <p>Bianca le-a avut dintotdeauna cu latina. Așa că, după lupte seculare care au durat două zile, a ieșit „narro" — care, obviously, vine din latină și înseamnă „a nara, a povesti".</p>
+      <p>Dar n-a fost de ajuns, așa că a dat-o filozofic, inspirată de o expresie cunoscută (tot latină): <i>Cogito, ergo sum</i>. Sooooo — „Narro, ergo sum" înseamnă „povestesc, deci exist".</p>
+      <p>De aici s-a făcut echipă cu Geo, care are talent la povești, la vorbe de duh și la chestii legate de artă, muzică și limbi străine (nu prea e modestă).</p>
+      <p>Ideea e că ne pricepem să vă povestim brandul. Suntem mai mult decât o agen... whatever the hell that means. Nu băgăm GPT nici în povești, nici în design.</p>
+      <p>Pupi!</p>
+      <div class="note">
+        <p><strong>Pentru dev:</strong> „Narro, ergo sum" înseamnă „povestesc, deci exist" se evidențiază cromatic, ca în prototip.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Text 2</p></div>
+    <div class="copy">
+      <p class="h">Bine, bine, dar ce faceți voi aici?</p>
+      <p>Ne-am ocupat cu verbe, cu nume, cu firme pictate cu mâna și cu ce nu ne place la feedback. Foarte frumos. Dar dacă cineva ne-ar opri pe stradă și ne-ar întreba, ce zicem?</p>
+      <p>Zicem „branding și social media" și omul dă din cap, și amândoi ne prefacem că s-a înțeles ceva.</p>
+      <p>Hai altfel. Concret, astea sunt lucrurile care ne trec prin mână: găsim nume. Alegem culori și fonturi, și pe urmă le apărăm de toată lumea, inclusiv de noi. Scriem texte care sună a om. Fotografiem. Punem ordine într-un cont de Instagram care arată ca un sertar. Facem meniuri, etichete, semne, tot ce ajunge să fie văzut.</p>
+      <p>Dar dacă ne întrebi ce facem <i>de fapt</i>, e un singur lucru.</p>
+      <p>Luăm ceva ce știi despre tine, dar nu poți explica, și îl facem explicabil. Aia e toată treaba. Ai un local, un atelier, un cabinet, și știi perfect de ce e altfel decât celelalte. Simți asta în fiecare zi. Doar că, atunci când trebuie s-o spui în trei secunde, pe un ecran de telefon, unui om care nu te cunoaște, se transformă în „calitate și profesionalism".</p>
+      <p>Noi stăm între ce știi tu și ce înțelege el.</p>
+      <p>Uneori asta iese ca un logo. Alteori ca o propoziție de opt cuvinte pe care o pui în bio și gata. Depinde. Dar niciodată nu începe cu desenul.</p>
+      <p>Over and out.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROGRAM SOCIAL ============ -->
+<section class="page" id="social">
+  <div class="page-head">
+    <h2>Program Social</h2>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Text integral</p></div>
+    <div class="copy">
+      <p class="h">NARRO e întreprindere socială.</p>
+      <p>În traducere: o parte din profit se întoarce în comunitate, iar o parte din timpul nostru merge la organizații care fac ceva util și au buget pentru absolut orice, mai puțin pentru branding. Sau nu musai.</p>
+      <p>Alegem câteva pe an și lucrăm cu ele exact cum lucrăm cu oricine altcineva. Aceleași întrebări la început, același proces la mijloc, aceeași grijă la fonturi. Singura diferență e că nu iese factură la final.</p>
+      <p>O facem pentru că munca asta contează mai mult acolo. Un ONG care arată bine e luat în serios de finanțatori, de voluntari și de oamenii pe care încearcă să-i ajute. Diferența dintre un afiș făcut în Word și unul făcut cum trebuie se vede direct în câți oameni vin.</p>
+      <p>Dacă ești o organizație sau o inițiativă care se încadrează, zi-ne ce faci și de ce.</p>
+      <p><span class="btn">ZI-NE CE FACI ↗</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="page" id="contact">
+  <div class="page-head">
+    <h2>Contact — Da-ne un beep</h2>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Intro formular</p></div>
+    <div class="copy">
+      <p>Scrie-ne ce faci și ce te doare. Răspundem în două zile lucrătoare, cu un om, nu cu un formular automat.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail">
+      <p class="slot">Câmpuri</p>
+      <p class="hint">Ordinea contează.</p>
+    </div>
+    <div class="copy">
+      <ul class="fields">
+        <li><b>Nume*</b></li>
+        <li><b>E-mail*</b></li>
+        <li><b>Business*</b></li>
+        <li><b>Care-i treaba?</b></li>
+        <li><b>Buget</b></li>
+      </ul>
+      <p class="lead">Opțiuni pentru Buget:</p>
+      <ul>
+        <li>Încă nu știu</li>
+        <li>Sub 2.000 lei</li>
+        <li>2.000 – 5.000 lei</li>
+        <li>5.000 – 10.000 lei</li>
+        <li>Peste 10.000 lei</li>
+        <li>Caut ceva lunar</li>
+      </ul>
+      <p>Buton: <span class="btn">TRIMITE ↗</span></p>
+      <div class="note">
+        <p><strong>Modificare față de prototip:</strong> în design, Buget vine înaintea câmpului „Care-i treaba?". Se inversează. Omul trebuie să apuce să spună ce vrea înainte să declare bani, altfel abandonează formularul.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Confirmare după trimitere</p></div>
+    <div class="copy">
+      <p>Ne-a ajuns. Îți răspundem în două zile lucrătoare. Dacă între timp îți mai vine ceva în minte, dă reply pe mail.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GLOBAL ============ -->
+<section class="page" id="global">
+  <div class="page-head">
+    <h2>Footer &amp; 404</h2>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Footer</p></div>
+    <div class="copy">
+      <p>narro, ergo sum — povestesc, deci exist.</p>
+      <p>Cluj-Napoca · narro.branding@gmail.com · @narro.co_</p>
+      <p>Întreprindere socială.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Pagina 404</p></div>
+    <div class="copy">
+      <p class="h">Aici nu e nimic.</p>
+      <p>Se mai întâmplă. Hai înapoi.</p>
+      <p><span class="btn">ACASĂ ↗</span></p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="rail"><p class="slot">Meniu</p></div>
+    <div class="copy">
+      <p>Servicii · Portofoliu · Program Social · Story Time · Contact</p>
+      <div class="note">
+        <p><strong>De clarificat:</strong> „Portofoliu" e în meniu, dar nu există încă text sau studii de caz pentru el. Până apar, fie se scoate din meniu, fie se decide ce conține.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="end">
+  <div class="wrap">
+    <p class="sig">narro, ergo sum</p>
+    <p>Toate textele din blocurile albe sunt finale și se preiau ca atare.</p>
+    <p>Întrebări pe text: narro.branding@gmail.com</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.querySelectorAll('.copy').forEach(function(card){
+    var b = document.createElement('button');
+    b.className = 'cbtn';
+    b.type = 'button';
+    b.textContent = 'copiază';
+    b.addEventListener('click', function(){
+      var clone = card.cloneNode(true);
+      clone.querySelectorAll('.cbtn, .note').forEach(function(n){ n.remove(); });
+      var txt = clone.innerText.replace(/\n{3,}/g, '\n\n').trim();
+      navigator.clipboard.writeText(txt).then(function(){
+        b.textContent = 'copiat';
+        setTimeout(function(){ b.textContent = 'copiază'; }, 1600);
+      }).catch(function(){
+        b.textContent = 'nu a mers';
+        setTimeout(function(){ b.textContent = 'copiază'; }, 1600);
+      });
+    });
+    card.appendChild(b);
+  });
+})();
+</script>
+
+</body>
+</html>
