@@ -4,6 +4,6 @@ import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 
 export default defineConfig({
-  integrations: [tailwind(), react(), keystatic()],
-  output: 'server',
+  integrations: [tailwind(), react()],
+  output: 'static',
 });
