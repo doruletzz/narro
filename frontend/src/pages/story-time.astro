@@ -25,6 +25,14 @@ const { ctaBanner } = home || {};
 <PageLayout title={title} description={description}>
   <Header />
 
+  <style>
+    /* Pink highlight for **bold** text — per dev note */
+    .story-text strong {
+      color: #ff66c4;
+      font-weight: 700;
+    }
+  </style>
+
   <!-- Story Cards Section -->
   <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-12">
     <!-- Sketch doodle decorations — scattered, fade-in -->
@@ -53,31 +61,19 @@ const { ctaBanner } = home || {};
       <img src="/sketches/sketch-6.svg" alt="" loading="lazy" decoding="async" />
     </div>
 
-    <div class="max-w-7xl mx-auto space-y-48">
-      {stories.map((story, index) => {
-        const flipped = index % 2 === 1;
-        return (
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div class:list={['relative', flipped && 'lg:order-2 order-1']}>
-              <div class="aspect-square bg-cream rounded-lg overflow-hidden fade-in fade-delay-4">
-                <img
-                  src={story.image}
-                  alt={story.imageAlt}
-                  class="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            <div class:list={['space-y-6', flipped && 'lg:order-1 order-2']}>
-              <h2 class="active fade-in text-4xl font-heading font-bold uppercase tracking-[0.2em] mb-4" style="color: #ff99d8;">{
-                story.title
-                }</h2>
-                {story.paragraphs.map((paragraph, index) => (
-                  <p set:html={parseMarkdown(paragraph)} class={`leading-relaxed text-xl max-w-lg fade-in fade-delay-${index * 2 + 2}`} />
-                ))}
-            </div>
+    <div class="max-w-3xl mx-auto space-y-48">
+      {stories.map((story, index) => (
+        <div class="fade-in fade-delay-2">
+          <h2 class="active fade-in text-3xl md:text-4xl font-heading font-bold uppercase tracking-[0.2em] mb-6" style="color: #ff99d8;">{
+            story.title
+          }</h2>
+          <div class="story-text space-y-4">
+            {story.paragraphs.map((paragraph, pIndex) => (
+              <p set:html={parseMarkdown(paragraph)} class={`leading-relaxed text-lg text-neutral-800 fade-in fade-delay-${pIndex * 2 + 3}`} />
+            ))}
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
   </section>
 
