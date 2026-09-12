@@ -6,54 +6,111 @@ export const servicii = singleton({
   path: 'src/content/servicii/index',
   format: { data: 'yaml' },
   schema: {
-    cele3Directii: fields.object(
+    intro: fields.text({ label: 'Intro pagină', multiline: true }),
+    proiectDeBrand: fields.object(
       {
-        label: fields.text({ label: 'Titlu secțiune', defaultValue: 'CELE 3 DIRECTII' }),
-        cards: fields.array(
-          fields.object({
-            title: fields.text({ label: 'Titlu' }),
-            description: fields.text({ label: 'Descriere', multiline: true }),
-            image: fields.image({
-              label: 'Imagine',
-              directory: 'public',
-              publicPath: '/',
-            }),
-            imageAlt: fields.text({ label: 'Text alternativ imagine' }),
-          }),
+        title: fields.text({ label: 'Titlu' }),
+        lead: fields.text({ label: 'Lead', multiline: true }),
+        paragraphs: fields.array(
+          fields.text({ label: 'Paragraf', multiline: true }),
           {
-            label: 'Carduri (exact 3)',
-            itemLabel: (props) => props.fields.title.value || 'Card nou',
-            validation: { length: { min: 3, max: 3 } },
+            label: 'Paragafe',
+            itemLabel: (props) => (props.value || '').slice(0, 50) || 'Paragraf nou',
           }
         ),
+        primestiLabel: fields.text({ label: 'Etichetă listă', defaultValue: 'Primești:' }),
+        primesti: fields.array(fields.text({ label: 'Element' }), {
+          label: 'Primești (listă)',
+          itemLabel: (props) => (props.value || '').slice(0, 50) || 'Element nou',
+        }),
+        closing: fields.text({ label: 'Paragraf final', multiline: true }),
+        price: fields.text({ label: 'Preț' }),
       },
-      { label: 'Cele 3 direcții' }
+      { label: 'Proiectul de Brand (serviciul principal)' }
     ),
-    oferte: fields.object(
-      {
-        label: fields.text({ label: 'Titlu secțiune', defaultValue: 'OFERTE SI OFERTE' }),
-        items: fields.array(
+    categories: fields.array(
+      fields.object({
+        name: fields.text({ label: 'Nume categorie' }),
+        intro: fields.text({ label: 'Intro categorie (opțional)', multiline: true }),
+        services: fields.array(
           fields.object({
             title: fields.text({ label: 'Titlu' }),
-            paragraphs: fields.array(fields.text({ label: 'Paragraf', multiline: true }), {
-              label: 'Paragrafe',
-              itemLabel: (props) => (props.value || '').slice(0, 50) || 'Paragraf nou',
+            lead: fields.text({ label: 'Lead', multiline: true }),
+            paragraphs: fields.array(
+              fields.text({ label: 'Paragraf', multiline: true }),
+              {
+                label: 'Paragafe',
+                itemLabel: (props) => (props.value || '').slice(0, 50) || 'Paragraf nou',
+              }
+            ),
+            primestiLabel: fields.text({ label: 'Etichetă listă', defaultValue: 'Primești:' }),
+            primesti: fields.array(fields.text({ label: 'Element' }), {
+              label: 'Primești (listă)',
+              itemLabel: (props) => (props.value || '').slice(0, 50) || 'Element nou',
             }),
-            image: fields.image({
-              label: 'Imagine',
-              directory: 'public',
-              publicPath: '/',
+            primestiInline: fields.text({ label: 'Primești (text, în loc de listă)', multiline: true }),
+            price: fields.text({ label: 'Preț' }),
+            note: fields.text({ label: 'Notă (sub preț)', multiline: true }),
+            noteHighlight: fields.checkbox({
+              label: 'Notă evidențiată (fundal galben)',
+              defaultValue: false,
             }),
-            ctaLabel: fields.text({ label: 'Text buton', defaultValue: 'Afla mai multe' }),
-            ctaHref: fields.text({ label: 'Link buton', defaultValue: '/contact' }),
+            tiers: fields.array(
+              fields.object({
+                name: fields.text({ label: 'Nume prag' }),
+                price: fields.text({ label: 'Preț' }),
+                details: fields.text({ label: 'Detalii', multiline: true }),
+              }),
+              {
+                label: 'Praguri (Social Media)',
+                itemLabel: (props) => props.fields.name.value || 'Prag nou',
+              }
+            ),
           }),
           {
-            label: 'Oferte',
-            itemLabel: (props) => props.fields.title.value || 'Ofertă nouă',
+            label: 'Servicii',
+            itemLabel: (props) => props.fields.title.value || 'Serviciu nou',
           }
         ),
+      }),
+      {
+        label: 'Categorii',
+        itemLabel: (props) => props.fields.name.value || 'Categorie nouă',
+      }
+    ),
+    finePrint: fields.object(
+      {
+        sedinte: fields.object(
+          {
+            label: fields.text({ label: 'Titlu' }),
+            items: fields.array(fields.text({ label: 'Element' }), { label: 'Elemente' }),
+          },
+          { label: 'Ședințele foto-video' }
+        ),
+        separat: fields.object(
+          {
+            label: fields.text({ label: 'Titlu' }),
+            items: fields.array(fields.text({ label: 'Element' }), { label: 'Elemente' }),
+          },
+          { label: 'Ce se cotează separat' }
+        ),
+        conditii: fields.object(
+          {
+            label: fields.text({ label: 'Titlu' }),
+            items: fields.array(fields.text({ label: 'Element', multiline: true }), { label: 'Elemente' }),
+          },
+          { label: 'Condiții' }
+        ),
       },
-      { label: 'Oferte' }
+      { label: 'Informații suplimentare (text mic)' }
+    ),
+    cta: fields.object(
+      {
+        description: fields.text({ label: 'Text deasupra butonului', multiline: true }),
+        text: fields.text({ label: 'Text buton' }),
+        href: fields.text({ label: 'Link buton' }),
+      },
+      { label: 'CTA final pagină' }
     ),
   },
 });
