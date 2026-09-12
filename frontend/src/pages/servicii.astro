@@ -36,12 +36,13 @@ const introWords = (intro || '').split(' ').filter(Boolean);
     .service-card {
       opacity: 0;
       cursor: pointer;
+      transition: flex 1.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .service-body {
       display: grid;
       grid-template-rows: 0fr;
-      transition: grid-template-rows 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: grid-template-rows 2.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .service-card.is-active .service-body {
@@ -121,6 +122,7 @@ const introWords = (intro || '').split(' ').filter(Boolean);
         servicesWrapper.addEventListener('mouseleave', () => {
           if (window.innerWidth >= 768) setActiveService(DEFAULT_ACTIVE_INDEX);
         });
+        setActiveService(DEFAULT_ACTIVE_INDEX);
       });
 
       // Category hover: show its image on the right
@@ -217,10 +219,8 @@ const introWords = (intro || '').split(' ').filter(Boolean);
       <img src="/sketches/sketch-2.svg" alt="" loading="lazy" decoding="async" />
     </div>
 
-    <div class="max-w-6xl mx-auto">
-      <h2 class="active fade-in text-4xl font-heading font-bold text-center mb-4 md:mb-8 uppercase tracking-[0.2em]" style="color: #ff99d8;">Categorii</h2>
-
-      <div id="categories-stack-wrapper" class="categories-stack-wrapper flex flex-col gap-6">
+    <div class="max-w-6xl mx-auto py-24">
+      <div id="categories-stack-wrapper" class="categories-stack-wrapper flex flex-col gap-24">
         {categories?.map((cat, catIndex) => {
           const firstService = cat.services?.[0];
           const hasImage = firstService?.image;
@@ -229,28 +229,25 @@ const introWords = (intro || '').split(' ').filter(Boolean);
           const fadeDelay = catIndex * 2 + 2;
 
           return (
-            <div class:list={['cat-card-row flex flex-col lg:flex-row gap-6 lg:gap-8 bg-white rounded-2xl p-6 sm:p-8 fade-in', 'fade-delay-' + fadeDelay]}>
-              <!-- Left: category title + services accordion -->
-              <div class="flex-1">
-                <!-- Category title -->
-                <h3 class="text-2xl font-heading font-bold mb-4" style="color: #2200d8;">{cat.name}</h3>
-
-                <!-- Category intro -->
-                {cat.intro && (
-                  <p class="text-neutral-700 leading-relaxed mb-4">{cat.intro}</p>
-                )}
-
+            <div class:list={['fade-in', 'fade-delay-' + fadeDelay]}>
+              <h2 class="fade-in text-3xl md:text-4xl font-heading items-stretch font-bold uppercase tracking-[0.2em] mb-4" style="color: #ff99d8;">{cat.name}</h2>
+      
+              <!-- Category intro -->
+              {cat.intro && (
+                <p class="text-neutral-700 leading-relaxed mb-4 max-w-lg">{cat.intro}</p>
+              )}
+              <div class={`flex gap-4 ${catIndex % 2 === 0 ? "flex-row" : "flex-row-reverse "}`}>
                 <!-- Services accordion -->
-                <div id="services-accordion-wrapper" class="services-accordion-wrapper flex flex-col gap-3">
+                <div id="services-accordion-wrapper" class="services-accordion-wrapper flex flex-col gap-3 min-h-[32rem]">
                   {cat.services?.map((service, sIndex) => (
-                    <div class:list={['service-card fade-in bg-[#f5f0eb] rounded-xl p-5', singleService && 'is-active', 'fade-delay-' + (catIndex * 2 + sIndex + 3)]}>
+                    <div class:list={['service-card fade-in bg-white rounded-xl p-5 overflow-hidden [&.is-active]:flex-1 flex-grow-0', singleService && 'is-active', 'fade-delay-' + (catIndex * 2 + sIndex + 3)]}>
                       <div class="flex items-center justify-between gap-4">
                         <h4 class="text-lg font-heading font-semibold" style="color: #2200d8;">{service.title}</h4>
                         <svg class="service-icon w-5 h-5 flex-shrink-0" fill="none" stroke="#2200d8" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-width="2" d="M12 5v14M5 12h14" />
                         </svg>
                       </div>
-                      <div class="service-body">
+                      <div class="service-body h-full">
                         <div class="service-body-inner">
                           <div class="space-y-3 pt-3">
                             {service.lead && (
@@ -295,12 +292,11 @@ const introWords = (intro || '').split(' ').filter(Boolean);
                     </div>
                   ))}
                 </div>
-              </div>
 
               <!-- Right: category image (appears on hover) -->
               {hasImage && (
-                <div class="lg:w-80 lg:flex-shrink-0">
-                  <div class="relative h-full min-h-[20rem] overflow-hidden rounded">
+                <div class="w-full">
+                  <div class="relative h-full min-h-[32rem] overflow-hidden rounded-xl">
                     <img
                       src={firstService.image}
                       alt={firstService.imageAlt || cat.name}
@@ -311,6 +307,8 @@ const introWords = (intro || '').split(' ').filter(Boolean);
                   </div>
                 </div>
               )}
+              </div>
+
             </div>
           );
         })}
