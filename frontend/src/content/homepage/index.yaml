@@ -1,51 +1,77 @@
 hero:
-  title: Titlu lung cu __bucata__ de text de subliniat.
+  title: 'Știi perfect de ce ești altfel. Doar că-ți iese __„calitate și profesionalism"__'
+  subtitle: Noi traducem.
   ctaLabel: ZI-NE CARE-I TREABA
   ctaHref: /contact
 manifesto:
-  label: MANIFESTO
+  label: Bine, bine, dar cu ce mă ajută asta pe mine?
   image: /images/manifesto/manifesto/image.png
   imageAlt: Echipa Narro — Branding manifest
   paragraphs:
     - >-
-      **Branding** wears many faces. We peel them back like bad wallpaper. We
-      find the heartbeat and let it set the pace.
+      Cel mai des, oamenii vin la noi obosiți. De decizii mărunte și muncă.
+      Ce pun azi pe Instagram. De ce ultima poză a mers și asta nu. Dacă
+      noul meniu ar trebui să arate ca cel vechi sau nu. Fiecare e o nimica
+      toată. Puse cap la cap, îți mănâncă săptămâna.
     - >-
-      **The result:** a logo that bites, a palette that sings, a font that winks
-      back. All of them alive. All of them trouble.
+      Ce se schimbă e că întrebările astea nu mai ajung la tine. Pentru că,
+      odată ce e clar ce ești și cum arăți, majoritatea se răspund singure.
+      Culoarea e deja aleasă. Tonul e deja stabilit. Rămâne execuția, care e
+      ușoară.
     - >-
-      **You** will recognize it by its constant motion. It fidgets. It
-      interrupts. It leaves the room then comes back with better stories.
+      Practic, asta arată așa: cineva se ocupă de identitate — nume, logo,
+      culori, reguli. Altcineva de ce se vede lunar — postări, texte,
+      fotografii. Uneori de amândouă, uneori doar de una. Depinde unde ești.
 directia:
-  label: DIRECTIA
+  label: Sunt mai multe treburi. Le luăm pe rând.
   cards:
-    - eyebrow: viața-i grea
-      title: Branding
+    - title: Branding
       description: >-
-        Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis
-        magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
-        bibendum risus.
+        Aici intră tot ce face ca businessul tău să fie recunoscut înainte
+        să-și spună numele. Pornim de la business, de la ce faci, pentru
+        cine, în ce categorie joci, ce te diferențiază de ceilalți care fac
+        același lucru pe aceeași stradă. De acolo ies poziționarea, mesajele,
+        tonul, și abia la final logo-ul, culorile și fonturile.
+
+        Diferența dintre un brand făcut așa și unul făcut invers se vede
+        peste doi ani. Unul rezistă și se extinde, celălalt trebuie refăcut
+        de fiecare dată când apare un material nou.
+
+        Practic, asta înseamnă că nu mai iei aceleași zece decizii mărunte în
+        fiecare marți. Culoarea e deja aleasă. Tonul e deja stabilit. De aici
+        totul alunecă mai ușor.
       image: /images/directia/directia/cards/0/image.png
       imageAlt: Branding — Identitate vizuală
-      href: /portofolio
-    - eyebrow: Ce s-a câștigat și ce
-      title: Social Media
+      href: /servicii#branding
+    - title: Conținut
       description: >-
-        Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis
-        magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
-        bibendum risus.
+        Scriem textele, facem vizualurile și venim la tine cu aparatul.
+        Lunar, primești materialele gata de publicat și un calendar editorial
+        care spune ce urcă și când. Tu îți ții conturile și publici când
+        vrei.
+
+        E varianta pentru cine are deja mâna pe comunicare și îi place așa,
+        dar a rămas fără ce să pună. Sau pentru cine a încercat să facă
+        singur și a descoperit că trei postări pe săptămână înseamnă, de
+        fapt, o slujbă.
+
+        Textele sună a om. Pozele sunt poze adevărate și nu le mai are
+        nimeni.
+      image: /images/directia/directia/cards/2/image.png
+      imageAlt: Conținut — Content creation
+      href: /servicii#continut
+    - title: Social Media
+      description: >-
+        Preluăm conturile de tot. Planificăm, scriem, publicăm, răspundem la
+        mesaje și comentarii, măsurăm ce s-a întâmplat. La sfârșit de lună
+        primești un raport pe care chiar îl citește cineva înainte să ți-l
+        trimită.
+
+        Vine în trei praguri, în funcție de câte platforme ții și cât de des
+        publici.
       image: /images/directia/directia/cards/1/image.png
       imageAlt: Social Media — Social media management
-      href: /portofolio
-    - eyebrow: Take what you need de la
-      title: Continut Foto-Video
-      description: >-
-        Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis
-        magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
-        bibendum risus.
-      image: /images/directia/directia/cards/2/image.png
-      imageAlt: Continut Foto-Video — Content creation
-      href: /portofolio
+      href: /servicii#social-media
 teaser:
   label: TEASER
   youtubeId: dQw4w9WgXcQ
@@ -58,14 +84,14 @@ studiiDeCaz:
   label: STUDII DE CAZ
   description: >-
     Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna
-    etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum
-    risus.
+    etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
+    bibendum risus.
   items:
     - title: 'STUDIU DE CAZ #1'
       description: >-
         Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis
-        magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
-        bibendum risus.
+        magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis
+        amet bibendum risus.
       image: /images/studii-de-caz/studiiDeCaz/items/0/image.png
       imageAlt: Studiu de caz 1
       ctaLabel: Află mai multe
@@ -73,16 +99,18 @@ studiiDeCaz:
     - title: 'STUDIU DE CAZ #2'
       description: >-
         Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis
-        magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
-        bibendum risus.
+        magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis
+        amet bibendum risus.
       image: /images/studii-de-caz/studiiDeCaz/items/1/image.png
       imageAlt: Studiu de caz 2
       ctaLabel: Află mai multe
       href: /contact
 ctaBanner:
   image: /images/cta-banner/ctaBanner/image.png
-  imageAlt: CTA — Zi-ne care-i treaba
-  text: |-
-    ZI-NE CARE-I 
-    TREABA
-  href: /contact
+  imageAlt: CTA — Vreau radiografia
+  description: >-
+    Nu știi de unde să începi? Începe cu Radiografia. 900 lei, cinci zile
+    lucrătoare, și se scade integral din orice proiect contractat în
+    următoarele 30.
+  text: VREAU RADIOGRAFIA
+  href: /contact?serviciu=Radiografia

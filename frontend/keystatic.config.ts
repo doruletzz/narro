@@ -118,6 +118,7 @@ export default config({
         hero: fields.object(
           {
             title: fields.text({ label: 'Titlu Hero', multiline: true }),
+            subtitle: fields.text({ label: 'Subtitlu (sub titlu)', defaultValue: 'Noi traducem.' }),
             ctaLabel: fields.text({ label: 'Text buton CTA', defaultValue: 'ZI-NE CARE-I TREABA' }),
             ctaHref: fields.text({ label: 'Link buton CTA', defaultValue: '/contact' }),
           },
@@ -214,6 +215,7 @@ export default config({
               publicPath: '/images/cta-banner/',
             }),
             imageAlt: fields.text({ label: 'Text alternativ imagine' }),
+            description: fields.text({ label: 'Text deasupra butonului', multiline: true }),
             text: fields.text({ label: 'Text CTA', multiline: true, defaultValue: 'ZI-NE CARE-I TREABA' }),
             href: fields.text({ label: 'Link', defaultValue: '/contact' }),
           },
