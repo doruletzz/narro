@@ -101,6 +101,7 @@ categories:
         primestiInline: 'Primești: piesa sau setul solicitat, în formatele necesare.'
         price: De la 350 lei/piesă
         noteHighlight: false
+        image: /categories/1/services/2/image.png
         tiers: []
   - name: Comunicare
     services:
