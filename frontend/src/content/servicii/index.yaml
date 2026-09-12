@@ -64,6 +64,7 @@ categories:
           - Manual vizual
         price: 5.000 – 7.000 lei · 4–6 săptămâni
         noteHighlight: false
+        image: /categories/1/services/0/image.png
         tiers: []
       - title: Kit de Pornire
         lead: Construim baza vizuală și primele materiale pentru un brand nou.
@@ -87,6 +88,7 @@ categories:
           businessul există deja și are volum de comunicare, mergi pe Identitate
           Vizuală.
         noteHighlight: true
+        image: /categories/1/services/1/image.png
         tiers: []
       - title: Design Grafic
         lead: Realizăm materiale grafice punctuale, pentru digital sau print.

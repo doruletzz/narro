@@ -91,16 +91,20 @@ const introWords = (intro || '').split(' ').filter(Boolean);
 
       document.querySelectorAll('.doodle-scribble').forEach((el) => observer.observe(el));
 
-      // Service accordion logic (mirrors previous oferte behavior)
+      // Service accordion + image swap logic (mirrors previous oferte behavior)
       const servicesWrappers = document.querySelectorAll('.services-accordion-wrapper');
-      let DEFAULT_ACTIVE_INDEX = 0;
       servicesWrappers.forEach((servicesWrapper) => {
         const serviceCards = servicesWrapper.querySelectorAll('.service-card');
         if (serviceCards.length === 0) return;
 
+        // Find images in the SAME category row (parent of servicesWrapper)
+        const catFlexRow = servicesWrapper.closest('.flex.gap-4');
+        const catImgs = catFlexRow ? catFlexRow.querySelectorAll('.cat-img') : [];
+
         // Single service: auto-open
         if (serviceCards.length === 1) {
           serviceCards[0].classList.add('is-active');
+          if (catImgs.length > 0) catImgs[0].classList.add('is-active');
           return;
         }
 
@@ -108,6 +112,7 @@ const introWords = (intro || '').split(' ').filter(Boolean);
 
         const setActiveService = (index) => {
           serviceCards.forEach((card, i) => card.classList.toggle('is-active', i === index));
+          catImgs.forEach((img, i) => img.classList.toggle('is-active', i === index));
         };
 
         serviceCards.forEach((card, index) => {
@@ -122,30 +127,7 @@ const introWords = (intro || '').split(' ').filter(Boolean);
         servicesWrapper.addEventListener('mouseleave', () => {
           if (window.innerWidth >= 768) setActiveService(DEFAULT_ACTIVE_INDEX);
         });
-        setActiveService(DEFAULT_ACTIVE_INDEX);
       });
-
-      // Category hover: show its image on the right
-      const catWrapper = document.getElementById('categories-stack-wrapper');
-      if (catWrapper) {
-        const catCards = catWrapper.querySelectorAll('.cat-card-row');
-        const catImgs = document.querySelectorAll('.cat-img');
-        const hasImgs = catImgs.length > 0;
-
-        const setActiveCat = (index) => {
-          catImgs.forEach((img, i) => img.classList.toggle('is-active', i === index));
-        };
-
-        catCards.forEach((card, index) => {
-          card.addEventListener('mouseenter', () => {
-            if (window.innerWidth >= 768 && hasImgs) setActiveCat(index);
-          });
-        });
-
-        catWrapper.addEventListener('mouseleave', () => {
-          if (window.innerWidth >= 768 && hasImgs) setActiveCat(DEFAULT_ACTIVE_INDEX);
-        });
-      }
     });
   </script>
 
@@ -293,20 +275,20 @@ const introWords = (intro || '').split(' ').filter(Boolean);
                   ))}
                 </div>
 
-              <!-- Right: category image (appears on hover) -->
-              {hasImage && (
+              <!-- Right: category images (one per service, swaps on hover) -->
+              {cat.services?.filter(s => s.image).map((service, imgIndex) => (
                 <div class="w-full">
                   <div class="relative h-full min-h-[32rem] overflow-hidden rounded-xl">
                     <img
-                      src={firstService.image}
-                      alt={firstService.imageAlt || cat.name}
-                      loading={catIndex === 0 ? 'eager' : 'lazy'}
+                      src={service.image}
+                      alt={service.imageAlt || service.title || cat.name}
+                      loading={imgIndex === 0 ? 'eager' : 'lazy'}
                       decoding="async"
                       class:list={['cat-img', singleService && 'is-active']}
                     />
                   </div>
                 </div>
-              )}
+              ))}
               </div>
 
             </div>
