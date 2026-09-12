@@ -25,6 +25,11 @@ export const servicii = singleton({
         }),
         closing: fields.text({ label: 'Paragraf final', multiline: true }),
         price: fields.text({ label: 'Preț' }),
+        image: fields.image({
+          label: 'Imagine (pentru viitor)',
+          directory: 'public',
+          publicPath: '/',
+        }),
       },
       { label: 'Proiectul de Brand (serviciul principal)' }
     ),
@@ -55,6 +60,12 @@ export const servicii = singleton({
               label: 'Notă evidențiată (fundal galben)',
               defaultValue: false,
             }),
+            image: fields.image({
+              label: 'Imagine',
+              directory: 'public',
+              publicPath: '/',
+            }),
+            imageAlt: fields.text({ label: 'Text alternativ imagine' }),
             tiers: fields.array(
               fields.object({
                 name: fields.text({ label: 'Nume prag' }),
