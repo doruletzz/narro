@@ -28,40 +28,35 @@ const slugify = (text: string) =>
 
 // Split the intro text into words with staggered animation delays
 const introWords = (intro || '').split(' ').filter(Boolean);
-const totalIntroWords = introWords.length;
-
-// Determine how many categories we have (for accordion behavior)
-const numCategories = categories?.length ?? 0;
-const singleCategory = numCategories <= 1;
 ---
 
 <PageLayout title="Servicii — Narro" description={intro}>
   <style>
-    /* Accordion animation */
-    .cat-card {
+    /* Service accordion (inside categories) */
+    .service-card {
       opacity: 0;
       cursor: pointer;
     }
 
-    .cat-body {
+    .service-body {
       display: grid;
       grid-template-rows: 0fr;
       transition: grid-template-rows 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .cat-card.is-active .cat-body {
+    .service-card.is-active .service-body {
       grid-template-rows: 1fr;
     }
 
-    .cat-body-inner {
+    .service-body-inner {
       overflow: hidden;
     }
 
-    .cat-icon {
+    .service-icon {
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .cat-card.is-active .cat-icon {
+    .service-card.is-active .service-icon {
       transform: rotate(45deg);
     }
 
@@ -77,21 +72,6 @@ const singleCategory = numCategories <= 1;
     }
 
     .cat-img.is-active {
-      opacity: 1;
-    }
-
-    /* Categories: hover image appearance */
-    .categories-image-col {
-      position: relative;
-      transition: opacity 0.5s ease;
-    }
-
-    .categories-image-col img {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .categories-image-col.has-image img {
       opacity: 1;
     }
   </style>
@@ -110,34 +90,52 @@ const singleCategory = numCategories <= 1;
 
       document.querySelectorAll('.doodle-scribble').forEach((el) => observer.observe(el));
 
-      // Accordion logic (mirrors previous oferte behavior)
-      const catWrapper = document.getElementById('categories-accordion-wrapper');
+      // Category hover: show its image on the right
+      const catWrapper = document.getElementById('categories-stack-wrapper');
       if (catWrapper) {
-        const catCards = catWrapper.querySelectorAll('.cat-card');
+        const catCards = catWrapper.querySelectorAll('.cat-card-row');
         const catImgs = document.querySelectorAll('.cat-img');
-        const numCats = catCards.length;
-        const DEFAULT_ACTIVE_INDEX = singleCategory ? 0 : -1;
 
         const setActiveCat = (index) => {
-          catCards.forEach((card, i) => card.classList.toggle('is-active', i === index));
           catImgs.forEach((img, i) => img.classList.toggle('is-active', i === index));
         };
 
         catCards.forEach((card, index) => {
-          // Desktop hover: activate hovered card
           card.addEventListener('mouseenter', () => {
-            if (window.innerWidth >= 768) setActiveCat(index);
-          });
-
-          // Mobile click: toggle active
-          card.addEventListener('click', (e) => {
-            if (window.innerWidth >= 768) return;
             setActiveCat(index);
           });
         });
 
         catWrapper.addEventListener('mouseleave', () => {
-          if (window.innerWidth >= 768) setActiveCat(DEFAULT_ACTIVE_INDEX);
+          if (window.innerWidth >= 768) {
+            // Reset to first with image
+            const firstWithImg = Array.from(catImgs).findIndex(img => img.classList.contains('is-active'));
+            if (firstWithImg === -1) setActiveCat(0);
+          }
+        });
+      }
+
+      // Service accordion logic (mirrors previous oferte behavior)
+      const servicesWrapper = document.getElementById('services-accordion-wrapper');
+      if (servicesWrapper) {
+        const serviceCards = servicesWrapper.querySelectorAll('.service-card');
+        const DEFAULT_ACTIVE_INDEX = 0;
+
+        const setActiveService = (index) => {
+          serviceCards.forEach((card, i) => card.classList.toggle('is-active', i === index));
+        };
+
+        serviceCards.forEach((card, index) => {
+          card.addEventListener('mouseenter', () => {
+            if (window.innerWidth >= 768) setActiveService(index);
+          });
+          card.addEventListener('click', (e) => {
+            if (window.innerWidth >= 768 || e.target.closest('a')) return;
+            setActiveService(index);
+          });
+        });
+        servicesWrapper.addEventListener('mouseleave', () => {
+          if (window.innerWidth >= 768) setActiveService(DEFAULT_ACTIVE_INDEX);
         });
       }
     });
@@ -197,9 +195,9 @@ const singleCategory = numCategories <= 1;
     </div>
   </section>
 
-  <!-- ===== Categories Accordion (replaces previous "oferte si oferte") ===== -->
-  <section id={categories && categories.length > 0 ? slugify(categories[0].name) : 'categorii'} class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24 bg-[#f5f0eb] scroll-mt-24">
-    <!-- Sketch doodle decorations — scattered, fade-in -->
+  <!-- ===== Categories Stack (each category with title + image, services accordion inside) ===== -->
+  <section id="categorii" class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24 bg-[#f5f0eb] scroll-mt-24">
+    <!-- Sketch doodle decorations -->
     <div class="absolute top-6 left-full sm:-left-12 w-64 pointer-events-none doodle-scribble fade-in fade-delay-3" style="transform: rotate(-12deg);">
       <img src="/sketches/sketch-6.svg" alt="" loading="lazy" decoding="async" />
     </div>
@@ -214,94 +212,102 @@ const singleCategory = numCategories <= 1;
     </div>
 
     <div class="max-w-6xl mx-auto">
-      <h2 class="active fade-in text-4xl font-heading font-bold text-center mb-4 md:mb-8 uppercase tracking-[0.2em]" style="color: #ff99d8;">{categories?.[0]?.name || 'Categorii'}</h2>
+      <h2 class="active fade-in text-4xl font-heading font-bold text-center mb-4 md:mb-8 uppercase tracking-[0.2em]" style="color: #ff99d8;">Categorii</h2>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-        <!-- Left: expandable accordion -->
-        <div id="categories-accordion-wrapper" class="categories-accordion-wrapper flex flex-col gap-3">
-          {categories?.map((cat, index) => (
-            <div class:list={['cat-card fade-in bg-white rounded-2xl p-6 sm:p-8', singleCategory && 'is-active', `fade-delay-${index + 2}`]}>
-              <div class="flex items-center justify-between gap-4">
-                <h3 class="text-2xl font-heading font-bold" style="color: #2200d8;">{cat.name}</h3>
-                <svg class="cat-icon w-5 h-5 flex-shrink-0" fill="none" stroke="#2200d8" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-width="2" d="M12 5v14M5 12h14" />
-                </svg>
-              </div>
-              <div class="cat-body">
-                <div class="cat-body-inner">
-                  <div class="space-y-4 pt-4">
-                    {cat.intro && (
-                      <p set:html={parseMarkdown(cat.intro)} class="text-sm text-neutral-700 leading-relaxed" />
-                    )}
-                    {cat.services?.map((service) => (
-                      <div class="border-t border-neutral-200 pt-3 mt-2 first:border-t-0 first:pt-0 first:mt-0">
-                        <h4 class="font-semibold text-neutral-900 mb-1">{service.title}</h4>
-                        {service.lead && (
-                          <p class="text-sm text-neutral-600 mb-1">{service.lead}</p>
-                        )}
-                        {service.paragraphs?.map((p) => (
-                          <p set:html={parseMarkdown(p)} class="text-sm text-neutral-700 leading-relaxed" />
-                        ))}
-                        {service.primestiLabel && service.primesti && service.primesti.length > 0 && (
-                          <>
-                            <p class="font-semibold text-neutral-900 mt-3 mb-1">{service.primestiLabel}</p>
-                            <ul class="list-disc pl-5 space-y-0.5 text-sm text-neutral-700">
-                              {service.primesti.map((item) => (
-                                <li>{item}</li>
-                              ))}
-                            </ul>
-                          </>
-                        )}
-                        {service.primestiInline && (
-                          <p class="text-sm text-neutral-700 mt-2">{service.primestiInline}</p>
-                        )}
-                        {service.price && (
-                          <span class="inline-block bg-[#ffb6e8] text-neutral-900 font-semibold px-3 py-1 text-xs md:text-sm rounded-full mt-2">{service.price}</span>
-                        )}
-                        {service.note && (
-                          <p class="mt-2 text-xs text-neutral-500">{service.note}</p>
-                        )}
-                        {service.tiers && service.tiers.length > 0 && (
-                          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
-                            {service.tiers.map((tier) => (
-                              <div class="bg-[#f5f0eb] rounded-lg p-3">
-                                <p class="font-heading font-bold text-sm" style="color: #2200d8;">{tier.name}</p>
-                                <p class="font-semibold mt-1 text-xs">{tier.price}</p>
-                                <p class="text-xs text-neutral-600 mt-1 leading-relaxed">{tier.details}</p>
-                              </div>
-                            ))}
-                          </div>
-                        )}
+      <div id="categories-stack-wrapper" class="categories-stack-wrapper flex flex-col gap-6">
+        {categories?.map((cat, catIndex) => {
+          const firstService = cat.services?.[0];
+          const hasImage = firstService?.image;
+          const numServices = cat.services?.length ?? 0;
+          const singleService = numServices < 2;
+          const fadeDelay = catIndex * 2 + 2;
+
+          return (
+            <div class:list={['cat-card-row flex flex-col lg:flex-row gap-6 lg:gap-8 bg-white rounded-2xl p-6 sm:p-8 fade-in', 'fade-delay-' + fadeDelay]}>
+              <!-- Left: category title + services accordion -->
+              <div class="flex-1">
+                <!-- Category title -->
+                <h3 class="text-2xl font-heading font-bold mb-4" style="color: #2200d8;">{cat.name}</h3>
+
+                <!-- Category intro -->
+                {cat.intro && (
+                  <p class="text-neutral-700 leading-relaxed mb-4">{cat.intro}</p>
+                )}
+
+                <!-- Services accordion -->
+                <div id="services-accordion-wrapper" class="services-accordion-wrapper flex flex-col gap-3">
+                  {cat.services?.map((service, sIndex) => (
+                    <div class:list={['service-card fade-in bg-[#f5f0eb] rounded-xl p-5', singleService && 'is-active', 'fade-delay-' + (catIndex * 2 + sIndex + 3)]}>
+                      <div class="flex items-center justify-between gap-4">
+                        <h4 class="text-lg font-heading font-semibold" style="color: #2200d8;">{service.title}</h4>
+                        <svg class="service-icon w-5 h-5 flex-shrink-0" fill="none" stroke="#2200d8" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-width="2" d="M12 5v14M5 12h14" />
+                        </svg>
                       </div>
-                    ))}
-                  </div>
+                      <div class="service-body">
+                        <div class="service-body-inner">
+                          <div class="space-y-3 pt-3">
+                            {service.lead && (
+                              <p class="text-sm font-semibold text-neutral-900">{service.lead}</p>
+                            )}
+                            {service.paragraphs?.map((p) => (
+                              <p set:html={parseMarkdown(p)} class="text-sm text-neutral-700 leading-relaxed" />
+                            ))}
+                            {service.primestiLabel && service.primesti && service.primesti.length > 0 && (
+                              <>
+                                <p class="font-semibold text-neutral-900 mt-2 mb-1">{service.primestiLabel}</p>
+                                <ul class="list-disc pl-5 space-y-0.5 text-sm text-neutral-700">
+                                  {service.primesti.map((item) => (
+                                    <li>{item}</li>
+                                  ))}
+                                </ul>
+                              </>
+                            )}
+                            {service.primestiInline && (
+                              <p class="text-sm text-neutral-700">{service.primestiInline}</p>
+                            )}
+                            {service.price && (
+                              <span class="inline-block bg-[#ffb6e8] text-neutral-900 font-semibold px-3 py-1 text-xs md:text-sm rounded-full mt-1">{service.price}</span>
+                            )}
+                            {service.note && (
+                              <p class="mt-2 text-xs text-neutral-500">{service.note}</p>
+                            )}
+                            {service.tiers && service.tiers.length > 0 && (
+                              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+                                {service.tiers.map((tier) => (
+                                  <div class="bg-white rounded-lg p-3 border border-neutral-200">
+                                    <p class="font-heading font-bold text-sm" style="color: #2200d8;">{tier.name}</p>
+                                    <p class="font-semibold mt-1 text-xs">{tier.price}</p>
+                                    <p class="text-xs text-neutral-600 mt-1 leading-relaxed">{tier.details}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
 
-        <!-- Right: image that swaps per active category -->
-        <div class="relative h-full min-h-[20rem] overflow-hidden rounded">
-          {categories?.map((cat, index) => {
-            const hasImage = cat.services?.[0]?.image;
-            if (!hasImage) return null;
-            return (
-              <img
-                src={cat.services[0].image}
-                alt={cat.services[0].imageAlt || cat.name}
-                loading={index === 0 ? 'eager' : 'lazy'}
-                decoding="async"
-                class:list={['cat-img', singleCategory && 'is-active']}
-              />
-            );
-          })}
-          {numCategories === 0 && (
-            <div class="w-full h-full bg-neutral-200 rounded flex items-center justify-center text-neutral-500">
-              Niciun serviciu
+              <!-- Right: category image (appears on hover) -->
+              {hasImage && (
+                <div class="lg:w-80 lg:flex-shrink-0">
+                  <div class="relative h-full min-h-[20rem] overflow-hidden rounded">
+                    <img
+                      src={firstService.image}
+                      alt={firstService.imageAlt || cat.name}
+                      loading={catIndex === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      class:list={['cat-img', singleService && 'is-active']}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
+          );
+        })}
       </div>
     </div>
   </section>
