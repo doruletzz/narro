@@ -90,35 +90,19 @@ const introWords = (intro || '').split(' ').filter(Boolean);
 
       document.querySelectorAll('.doodle-scribble').forEach((el) => observer.observe(el));
 
-      // Category hover: show its image on the right
-      const catWrapper = document.getElementById('categories-stack-wrapper');
-      if (catWrapper) {
-        const catCards = catWrapper.querySelectorAll('.cat-card-row');
-        const catImgs = document.querySelectorAll('.cat-img');
-
-        const setActiveCat = (index) => {
-          catImgs.forEach((img, i) => img.classList.toggle('is-active', i === index));
-        };
-
-        catCards.forEach((card, index) => {
-          card.addEventListener('mouseenter', () => {
-            setActiveCat(index);
-          });
-        });
-
-        catWrapper.addEventListener('mouseleave', () => {
-          if (window.innerWidth >= 768) {
-            // Reset to first with image
-            const firstWithImg = Array.from(catImgs).findIndex(img => img.classList.contains('is-active'));
-            if (firstWithImg === -1) setActiveCat(0);
-          }
-        });
-      }
-
       // Service accordion logic (mirrors previous oferte behavior)
-      const servicesWrapper = document.getElementById('services-accordion-wrapper');
-      if (servicesWrapper) {
+      const servicesWrappers = document.querySelectorAll('.services-accordion-wrapper');
+      let DEFAULT_ACTIVE_INDEX = 0;
+      servicesWrappers.forEach((servicesWrapper) => {
         const serviceCards = servicesWrapper.querySelectorAll('.service-card');
+        if (serviceCards.length === 0) return;
+
+        // Single service: auto-open
+        if (serviceCards.length === 1) {
+          serviceCards[0].classList.add('is-active');
+          return;
+        }
+
         const DEFAULT_ACTIVE_INDEX = 0;
 
         const setActiveService = (index) => {
@@ -136,6 +120,28 @@ const introWords = (intro || '').split(' ').filter(Boolean);
         });
         servicesWrapper.addEventListener('mouseleave', () => {
           if (window.innerWidth >= 768) setActiveService(DEFAULT_ACTIVE_INDEX);
+        });
+      });
+
+      // Category hover: show its image on the right
+      const catWrapper = document.getElementById('categories-stack-wrapper');
+      if (catWrapper) {
+        const catCards = catWrapper.querySelectorAll('.cat-card-row');
+        const catImgs = document.querySelectorAll('.cat-img');
+        const hasImgs = catImgs.length > 0;
+
+        const setActiveCat = (index) => {
+          catImgs.forEach((img, i) => img.classList.toggle('is-active', i === index));
+        };
+
+        catCards.forEach((card, index) => {
+          card.addEventListener('mouseenter', () => {
+            if (window.innerWidth >= 768 && hasImgs) setActiveCat(index);
+          });
+        });
+
+        catWrapper.addEventListener('mouseleave', () => {
+          if (window.innerWidth >= 768 && hasImgs) setActiveCat(DEFAULT_ACTIVE_INDEX);
         });
       }
     });
