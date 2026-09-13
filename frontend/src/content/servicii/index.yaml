@@ -120,6 +120,7 @@ categories:
           - Texte-model
         price: 1.800 lei
         noteHighlight: false
+        image: /categories/2/services/0/image.png
         tiers: []
   - name: Conținut
     intro: >-
@@ -145,6 +146,7 @@ categories:
           - Calendar editorial
         price: 2.500 lei/lună
         noteHighlight: false
+        image: /categories/3/services/0/image.png
         tiers: []
       - title: Social Media
         lead: >-
@@ -157,6 +159,7 @@ categories:
         primesti: []
         note: 'Ședință foto-video suplimentară: 700 lei'
         noteHighlight: false
+        image: /categories/3/services/1/image.png
         tiers:
           - name: Foundation
             price: 1.800 lei/lună
