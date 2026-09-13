@@ -8,13 +8,16 @@ import '../styles/global.css';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content="{Astro.generator}" />
+    <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
     <!-- Preconnect to external domains for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://images.unsplash.com" />
+
+    <!-- Preload the heading font so it isn't chained behind the CSS -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/Bristol-Bold.woff2" />
     
     <!-- Google Fonts — loaded via <link> instead of @import for better FCP -->
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet" />

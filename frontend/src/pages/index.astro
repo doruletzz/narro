@@ -49,42 +49,42 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
   <section class="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-2 sm:px-6 lg:px-8 min-h-[92vh] md:min-h-[93vh] flex items-center bg-[#f5f0eb]">
     <!-- Doodle decorations matching Figma style — colorful scattered scribbles -->
     <div class="absolute -top-36 -left-24 sm:left-16 md:left-80 w-64 pointer-events-none doodle-scribble fade-in fade-delay-6" style="transform: rotate(-12deg);">
-      <img src="/sketches/sketch-1.svg" alt="" />
+      <img src="/sketches/sketch-1.svg" alt="" fetchpriority="high" />
     </div>
     <div class="absolute top-12 left-8 lg:block hidden sm:left-16 md:-left-20 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1" style="transform: rotate(-12deg);">
-      <img src="/sketches/sketch-8.svg" alt="" />
+      <img src="/sketches/sketch-8.svg" alt="" fetchpriority="high" />
     </div>
     <div class="absolute top-1/4 left-3/4 lg:left-1/3 w-72 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(15deg);">
-      <img src="/sketches/sketch-2.svg" alt="" />
+      <img src="/sketches/sketch-2.svg" alt="" fetchpriority="high" />
     </div>
     <div class="absolute -top-20 -right-8 lg:right-20 w-64 pointer-events-none doodle-scribble fade-in fade-delay-3" style="transform: rotate(-25deg);">
-      <img src="/sketches/sketch-6.svg" alt="" class="hue-rotate-[220deg] contrast-150" />
+      <img src="/sketches/sketch-6.svg" alt="" class="hue-rotate-[220deg] contrast-150" fetchpriority="high" />
     </div>
     <div class="absolute top-52 lg:-top-12 -left-12 lg:left-1/2 w-48 pointer-events-none doodle-scribble fade-in fade-delay-4">
-      <img src="/sketches/sketch-4.svg" alt="" />
+      <img src="/sketches/sketch-4.svg" alt="" fetchpriority="high" />
     </div>
     <div class="absolute top-44 sm:top-32 lg:block hidden right-4 lg:right-1/4 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1" style="transform: rotate(20deg);">
-      <img src="/sketches/sketch-8.svg" alt="" class="hue-rotate-[80deg] ml-20 contrast-150 brightness-90" />
+      <img src="/sketches/sketch-8.svg" alt="" class="hue-rotate-[80deg] ml-20 contrast-150 brightness-90" fetchpriority="high" />
     </div>
     <div class="absolute top-44 sm:top-64 lg:block hidden right-4 lg:right-40 w-32 pointer-events-none doodle-scribble fade-in fade-delay-5" style="transform: rotate(20deg);">
-      <img src="/sketches/sketch-2.svg" alt="" class="hue-rotate-[80deg] ml-20 contrast-150 brightness-90 scale-x-[-1]" />
+      <img src="/sketches/sketch-2.svg" alt="" class="hue-rotate-[80deg] ml-20 contrast-150 brightness-90 scale-x-[-1]" fetchpriority="high" />
     </div>
     <div class="absolute bottom-48 sm:bottom-1/3 left-1/4 lg:-left-20 w-96 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(8deg);">
-      <img src="/sketches/sketch-1.svg" alt="" class="hue-rotate-[250deg] ml-20 contrast-150 brightness-120 scale-x-[-1] opacity-50" />
+      <img src="/sketches/sketch-1.svg" alt="" class="hue-rotate-[250deg] ml-20 contrast-150 brightness-120 scale-x-[-1] opacity-50" fetchpriority="high" />
     </div>
     <div class="absolute bottom-12 sm:bottom-12 -left-4 lg:left-36 w-48 pointer-events-none doodle-scribble fade-in fade-delay-6" style="transform: rotate(8deg);">
-      <img src="/sketches/sketch-3.svg" alt="" />
+      <img src="/sketches/sketch-3.svg" alt="" fetchpriority="high" />
     </div>
     <div class="absolute bottom-12 sm:bottom-0 left-4 lg:block hidden sm:left-1/3 w-80 pointer-events-none doodle-scribble fade-in fade-delay-4" style="transform: rotate(8deg);">
-      <img src="/sketches/sketch-6.svg" alt="" />
+      <img src="/sketches/sketch-6.svg" alt="" fetchpriority="high" />
     </div>
 
     <div class="absolute -bottom-32 sm:-bottom-36 -right-64 lg:-right-32 w-96 h-60 pointer-events-none doodle-scribble fade-in fade-delay-7" style="transform: rotate(-15deg);">
-      <img src="/sketches/sketch-7.svg" alt="" class="rotate-[30deg] scale-x-[-1]"/>
+      <img src="/sketches/sketch-7.svg" alt="" class="rotate-[30deg] scale-x-[-1]" fetchpriority="high"/>
     </div>
 
     <div class="absolute bottom-8 sm:bottom-24 lg:block hidden right-4 lg:right-48 w-96 h-60 pointer-events-none doodle-scribble fade-in fade-delay-4" style="transform: rotate(-15deg);">
-      <img src="/sketches/sketch-4.svg" alt="" class="hue-rotate-[280deg] ml-10 contrast-150 brightness-100 scale-x-[-1]"/>
+      <img src="/sketches/sketch-4.svg" alt="" class="hue-rotate-[280deg] ml-10 contrast-150 brightness-100 scale-x-[-1]" fetchpriority="high"/>
     </div>
 
     <div class="max-w-full mx-auto relative z-10">
@@ -141,7 +141,7 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
         <div class="fade-in relative flex flex-col items-center" style={`animation-delay: ${totalHeroWords * 110 + 200}ms;`}>
           <a 
             href={hero.ctaHref} 
-            class="inline-flex items-center gap-2 md:px-5 px-4 md:py-2 py-1 text-md md:text-lg font-semibold uppercase tracking-wider transition-[transform,_background] duration-150 md:pt-2.5 pt-1.5 hover:-translate-y-0.5 text-white rounded-full mb-3 bg-[#FF66C4] hover:border-[#2200d8] hover:bg-[#2200d8] group/cta"
+            class="inline-flex items-center gap-2 md:px-5 px-4 md:py-2 py-1 text-md md:text-lg font-semibold uppercase tracking-wider transition-[transform,_background] duration-150 md:pt-2.5 pt-1.5 hover:-translate-y-0.5 text-black rounded-full mb-3 bg-[#FF66C4] hover:border-[#2200d8] hover:bg-[#2200d8] hover:text-white group/cta"
           >
             {hero.ctaLabel}
             <ArrowIcon class="size-6 mb-0.5 group-hover/cta:rotate-45 transition-transform duration-150" />
@@ -255,20 +255,66 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
       <h2 class="fade-in text-4xl font-heading font-bold text-center uppercase tracking-[0.2em]" style="color: #ff99d8;">TEASER</h2>
     </div>
 
-    <!-- Full-width video -->
+    <!-- Full-width video — lazy-loaded: the iframe (and all of YouTube's JS,
+         video stream and third-party cookies) is only injected once the
+         section scrolls into view. Until then a thumbnail with a play button
+         is shown. -->
     <div class="fade-in fade-delay-3 px-0 sm:px-4 md:px-8 lg:px-16">
-      <div class="relative w-full aspect-[9/12] lg:aspect-video group/video">
-        <iframe
-          id="teaser-video"
-          class="w-full h-full"
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=1&rel=0&modestbranding=1"
-          title="Teaser video"
-          frameborder="0"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+      <div id="teaser-video-slot" class="relative w-full aspect-[9/12] lg:aspect-video group/video">
+        <button
+          type="button"
+          id="teaser-video-placeholder"
+          class="absolute inset-0 w-full h-full cursor-pointer"
+          aria-label="Redă teaserul video"
+        >
+          <img
+            src="https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
+            alt=""
+            width="480"
+            height="360"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
+          <span class="absolute inset-0 flex items-center justify-center bg-black/20">
+            <span class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 shadow-lg transition-transform duration-150 hover:scale-105">
+              <svg class="w-8 h-8 md:w-10 md:h-10 ml-1" fill="#2200d8" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </span>
+          </span>
+        </button>
       </div>
     </div>
+
+    <script>
+      // Inject the real (autoplay/muted/loop) YouTube iframe only when the
+      // teaser section is about to enter the viewport. Keeps the page free of
+      // YouTube's JS/video/cookies on initial load.
+      const teaserSlot = document.getElementById('teaser-video-slot');
+      if (teaserSlot) {
+        const loadTeaserVideo = () => {
+          if (teaserSlot.querySelector('iframe')) return;
+          const iframe = document.createElement('iframe');
+          iframe.id = 'teaser-video';
+          iframe.className = 'w-full h-full';
+          iframe.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=1&rel=0&modestbranding=1';
+          iframe.title = 'Teaser video';
+          iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+          iframe.setAttribute('allowfullscreen', '');
+          teaserSlot.replaceChildren(iframe);
+        };
+        const teaserObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              loadTeaserVideo();
+              teaserObserver.disconnect();
+            }
+          });
+        }, { rootMargin: '300px' });
+        teaserObserver.observe(teaserSlot);
+      }
+    </script>
 
     <!-- Text below video -->
     <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 text-center">

@@ -64,6 +64,7 @@ import { Image } from "astro:assets";
     class="lg:hidden fixed inset-y-0 right-0 z-50 w-[80vw] max-w-sm bg-[#f5f0eb] shadow-2xl translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto"
     id="mobile-menu"
     aria-hidden="true"
+    inert
   >
     <nav class="flex flex-col h-full px-6 py-8 space-y-3" aria-label="Mobile navigation">
       <a href="/servicii" class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">Servicii</a>
@@ -108,6 +109,7 @@ import { Image } from "astro:assets";
     function openMenu() {
       button?.setAttribute('aria-expanded', 'true');
       menu?.setAttribute('aria-hidden', 'false');
+      menu?.removeAttribute('inert');
       menu?.classList.remove('translate-x-full');
       backdrop?.classList.remove('opacity-0', 'pointer-events-none');
       backdrop?.classList.add('opacity-100');
@@ -119,6 +121,7 @@ import { Image } from "astro:assets";
     function closeMenu() {
       button?.setAttribute('aria-expanded', 'false');
       menu?.setAttribute('aria-hidden', 'true');
+      menu?.setAttribute('inert', '');
       menu?.classList.add('translate-x-full');
       backdrop?.classList.add('opacity-0', 'pointer-events-none');
       backdrop?.classList.remove('opacity-100');

@@ -5,7 +5,7 @@ hero:
   ctaHref: /contact
 manifesto:
   label: Bine, bine, dar cu ce mă ajută asta pe mine?
-  image: /images/manifesto/manifesto/image.png
+  image: /images/manifesto/manifesto/image.webp
   imageAlt: Echipa Narro — Branding manifest
   paragraphs:
     - >-
@@ -40,7 +40,7 @@ directia:
         Practic, asta înseamnă că nu mai iei aceleași zece decizii mărunte în
         fiecare marți. Culoarea e deja aleasă. Tonul e deja stabilit. De aici
         totul alunecă mai ușor.
-      image: /images/directia/directia/cards/0/image.png
+      image: /images/directia/directia/cards/0/image.webp
       imageAlt: Branding — Identitate vizuală
       href: /servicii#branding
     - title: Conținut
@@ -57,7 +57,7 @@ directia:
 
         Textele sună a om. Pozele sunt poze adevărate și nu le mai are
         nimeni.
-      image: /images/directia/directia/cards/2/image.png
+      image: /images/directia/directia/cards/2/image.webp
       imageAlt: Conținut — Content creation
       href: /servicii#continut
     - title: Social Media
@@ -69,7 +69,7 @@ directia:
 
         Vine în trei praguri, în funcție de câte platforme ții și cât de des
         publici.
-      image: /images/directia/directia/cards/1/image.png
+      image: /images/directia/directia/cards/1/image.webp
       imageAlt: Social Media — Social media management
       href: /servicii#social-media
 teaser:
@@ -92,7 +92,7 @@ studiiDeCaz:
         Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis
         magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis
         amet bibendum risus.
-      image: /images/studii-de-caz/studiiDeCaz/items/0/image.png
+      image: /images/studii-de-caz/studiiDeCaz/items/0/image.webp
       imageAlt: Studiu de caz 1
       ctaLabel: Află mai multe
       href: /contact
@@ -101,12 +101,12 @@ studiiDeCaz:
         Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis
         magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis
         amet bibendum risus.
-      image: /images/studii-de-caz/studiiDeCaz/items/1/image.png
+      image: /images/studii-de-caz/studiiDeCaz/items/1/image.webp
       imageAlt: Studiu de caz 2
       ctaLabel: Află mai multe
       href: /contact
 ctaBanner:
-  image: /images/cta-banner/ctaBanner/image.png
+  image: /images/cta-banner/ctaBanner/image.webp
   imageAlt: CTA — Vreau radiografia
   description: >-
     Nu știi de unde să începi? Începe cu Radiografia. 900 lei, cinci zile

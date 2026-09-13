@@ -26,15 +26,17 @@ const {
 ---
 
 <BaseLayout>
-  <slot name="head">
-    {title && <title>{title}</title>}
-    {description && <meta name="description" content={description} />}
-    {ogImage && <meta property="og:image" content={ogImage} />}
-    {ogTitle && <meta property="og:title" content={ogTitle} />}
-    {ogDescription && <meta property="og:description" content={ogDescription} />}
-    {ogUrl && <meta property="og:url" content={ogUrl} />}
-    {twitterImage && <meta name="twitter:image" content={twitterImage} />}
-  </slot>
+  <Fragment slot="head">
+    <slot name="head">
+      {title && <title>{title}</title>}
+      {description && <meta name="description" content={description} />}
+      {ogImage && <meta property="og:image" content={ogImage} />}
+      {ogTitle && <meta property="og:title" content={ogTitle} />}
+      {ogDescription && <meta property="og:description" content={ogDescription} />}
+      {ogUrl && <meta property="og:url" content={ogUrl} />}
+      {twitterImage && <meta name="twitter:image" content={twitterImage} />}
+    </slot>
+  </Fragment>
 
   <style is:global>
     /* Hand-drawn doodle styles matching Figma */
@@ -66,6 +68,14 @@ const {
     .fade-in {
       opacity: 0;
       will-change: opacity, transform, filter;
+    }
+
+    /* Doodles start at a hair of opacity (0.0001) instead of fully invisible.
+       Visually identical to fading from 0, but the browser paints them from
+       the first frame, so the hero doodle (the LCP element) registers as
+       painted as soon as its SVG loads instead of waiting for JS. */
+    .doodle-scribble.fade-in {
+      opacity: 0.0001;
     }
 
     /* Triggered state */
