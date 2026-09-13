@@ -90,7 +90,7 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
     <div class="max-w-full mx-auto relative z-10">
       <div class="text-center flex flex-col gap-4 md:gap-8 items-center">
         <!-- Headline: segments with progressive animation; __...__ phrases get the drawn squiggle -->
-        <h1 class="text-5xl flex flex-wrap justify-center sm:text-6xl md:max-w-3xl md:text-7xl xl:text-7xl xl:max-w-full font-heading font-extrabold lg:!leading-[0.95] md:tracking-tight tracking-tighter">
+        <h1 class="text-4xl flex flex-wrap justify-center sm:text-6xl md:max-w-3xl md:text-7xl xl:text-7xl xl:max-w-full font-heading font-extrabold lg:!leading-[0.95] md:tracking-tight tracking-tighter">
           {heroSegments.map((segment) => segment.underlined ? (
             <span class="relative inline-block fade-in" style={`animation-delay: ${-210 + segment.start * 110}ms;`}>
               {segment.words.map((word, i) => {
@@ -132,7 +132,7 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
 
         <!-- Subtitle -->
         {hero.subtitle && (
-          <p class="fade-in text-xl md:text-2xl lg:text-5xl font-bold text-black/80" style={`animation-delay: ${totalHeroWords * 110 - 20}ms;`}>
+          <p class="fade-in text-3xl md:text-2xl lg:text-4xl font-bold text-black/80" style={`animation-delay: ${totalHeroWords * 110 - 20}ms;`}>
             {hero.subtitle}
           </p>
         )}
@@ -158,7 +158,7 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
     <div class="absolute -left-full -right-full -bottom-full top-1/2 mt-20 bg-[#f5f0eb] -rotate-6"></div>
 
     <!-- Sketch decorations -->
-    <div class="absolute -top-20 right-6 sm:right-10 w-72 pointer-events-none doodle-scribble fade-in fade-delay-3">
+    <div class="absolute -top-20 -right-32 sm:right-10 w-72 pointer-events-none doodle-scribble fade-in fade-delay-3">
       <img src="/sketches/sketch-6.svg" alt="" loading="lazy" decoding="async" class="-hue-rotate-90" />
     </div>
     <div class="absolute top-1/3 mt-32 sm:right-[16%] w-96 pointer-events-none doodle-scribble fade-in fade-delay-5 rotate-12">
@@ -173,7 +173,7 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
             href={card.href} 
             class={`p-4 hover:scale-[102%] hover:bg-white rounded-2xl group/card transition-[transform,_background] duration-300`}
           >
-          <div class={`fade-in fade-delay-${(index % 3)*2 + 2} `}>
+          <div class={`h-full overflow-hidden flex flex-col fade-in fade-delay-${(index % 3)*2 + 2} `}>
             {card.image && (
               <div class="relative aspect-[4/3] rounded-xl border border-[#2200d8] overflow-hidden mb-4">
                 <img src={card.image} alt={card.imageAlt} loading="lazy" decoding="async" class="w-full h-full object-cover" />
@@ -185,17 +185,17 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
                 </div>
               </div>
             )}
-            <div class="py-4">
+            <div class="pb-2 flex-1 flex flex-col">
               {card.eyebrow && (
                 <p class="text-[10px] sm:text-xs uppercase tracking-wide mb-1" style="color: #2200d8; opacity: 0.5;">{card.eyebrow}</p>
               )}
               <h3 class="text-3xl font-heading font-bold" style="color: #2200d8;">{card.title}</h3>
-              <div class="mt-2 space-y-3">
+              <div class="mt-2 mb-8 space-y-3">
                 {String(card.description || '').split(/\n+/).map((paragraph) => (
                   <p class="text-md text-neutral-700 leading-relaxed">{paragraph.trim()}</p>
                 ))}
               </div>
-              <span class="mt-4 inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-[#2200d8] border-2 border-[#2200d8] rounded-full transition-colors group-hover/card:bg-[#2200d8] group-hover/card:text-white">
+              <span class=" mt-auto w-fit items-center gap-2 px-5 py-2 text-sm font-medium text-[#2200d8] border-2 border-[#2200d8] rounded-full transition-colors group-hover/card:bg-[#2200d8] hidden group-hover/card:flex group-hover/card:text-white">
                 Vezi ce intră
                 <ArrowIcon class="w-4 h-4 group-hover/card:rotate-45 transition-transform duration-150" />
               </span>

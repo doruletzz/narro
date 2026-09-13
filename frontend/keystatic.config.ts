@@ -414,60 +414,10 @@ export default config({
               defaultValue:
                 'Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum risus.',
             }),
-            form: fields.object(
-              {
-                submitLabel: fields.text({ label: 'Text buton', defaultValue: 'Trimite' }),
-                fields: fields.array(
-                  fields.object({
-                    id: fields.text({
-                      label: 'ID / name (ex: nume, email)',
-                      description: 'Folosit pentru id și name-ul elementului HTML',
-                    }),
-                    label: fields.text({
-                      label: 'Etichetă',
-                      description: 'Folosită ca placeholder și text vizibil pentru select',
-                    }),
-                    type: fields.select({
-                      label: 'Tip câmp',
-                      options: [
-                        { label: 'Input', value: 'input' },
-                        { label: 'Select', value: 'select' },
-                        { label: 'Textarea', value: 'textarea' },
-                      ],
-                      defaultValue: 'input',
-                    }),
-                    inputType: fields.select({
-                      label: 'Tip input (pentru câmpuri input)',
-                      options: [
-                        { label: 'text', value: 'text' },
-                        { label: 'email', value: 'email' },
-                        { label: 'number', value: 'number' },
-                        { label: 'tel', value: 'tel' },
-                        { label: 'url', value: 'url' },
-                        { label: 'date', value: 'date' },
-                      ],
-                      defaultValue: 'text',
-                    }),
-                    required: fields.checkbox({ label: 'Obligatoriu', defaultValue: false }),
-                    options: fields.array(
-                      fields.object({
-                        label: fields.text({ label: 'Text opțiune' }),
-                        value: fields.text({ label: 'Valoare' }),
-                      }),
-                      {
-                        label: 'Opțiuni (pentru select)',
-                        itemLabel: (props) => props.fields.label.value || 'Opțiune',
-                      }
-                    ),
-                  }),
-                  {
-                    label: 'Câmpuri formular',
-                    itemLabel: (props) => props.fields.label.value || 'Câmp nou',
-                  }
-                ),
-              },
-              { label: 'Formular' }
-            ),
+            button: fields.object({
+              label: fields.text({ label: 'Button Label' }),
+              link: fields.text({ label: 'Button Link' }),
+            }),
             image: fields.image({
               label: 'Imagine',
               directory: 'public/images/program-social/aplica-acum',

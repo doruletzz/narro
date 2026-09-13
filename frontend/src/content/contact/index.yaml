@@ -4,9 +4,7 @@ description: >-
   Da-ne un beep!
 heading: DA-NE UN BEEP
 intro: >-
-  Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna
-  etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum
-  risus.
+  Scrie-ne ce faci și ce te doare. Răspundem în două zile lucrătoare, cu un om, nu cu un formular automat.
 form:
   submitLabel: Trimite
   fields:
@@ -28,6 +26,30 @@ form:
       inputType: text
       required: true
       options: []
+    - id: serviciu
+      label: Serviciu
+      type: select
+      inputType: text
+      required: false
+      options:
+        - label: Proiectul de Brand
+          value: Proiectul de Brand
+        - label: Program Social
+          value: Program Social
+        - label: Radiografia
+          value: Radiografia
+        - label: Identitate Vizuală
+          value: Identitate Vizuală
+        - label: Kit de Pornire
+          value: Kit de Pornire
+        - label: Design Grafic
+          value: Design Grafic
+        - label: Ton of Voice
+          value: Ton of Voice
+        - label: Content Production
+          value: Content Production
+        - label: Social Media
+          value: Social Media
     - id: budget
       label: Buget
       type: select

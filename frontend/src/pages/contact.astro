@@ -115,7 +115,7 @@ const submitLabel = page.form?.submitLabel ?? 'Trimite';
           </form>
         </div>
         <!-- Image — Old phones with sketch decorations -->
-        <div class="md:order-2 order-1 relative fade-in fade-delay-4 overflow-hidden max-h-[48rem] bg-white/30 rounded-xl -my-[26rem] md:mb-0 md:mx-0 -mx-12 md:z-0 -z-10">
+        <div class="md:order-2 order-1 relative fade-in fade-delay-4 overflow-hidden max-h-[48rem] bg-white/30 rounded-xl md:my-0 -my-[26rem] md:mb-0 md:mx-0 -mx-12 md:z-0 -z-10">
           <Image
             src={image || ''}
             width={1920}
@@ -128,4 +128,17 @@ const submitLabel = page.form?.submitLabel ?? 'Trimite';
     </div>
   </section>
 
+  <!-- Prefill select fields from query params (e.g. /contact?serviciu=Radiografia) —
+       static build, so this must run client-side -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      document.querySelectorAll('form select').forEach((select) => {
+        const param = params.get(select.name);
+        if (!param) return;
+        const match = Array.from(select.options).find((o) => o.value === param);
+        if (match) select.value = param;
+      });
+    });
+  </script>
 </PageLayout>

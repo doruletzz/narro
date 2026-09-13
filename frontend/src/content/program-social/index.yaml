@@ -3,68 +3,22 @@ description: >-
   Servicii de branding și comunicare vizuală accesibile pentru ONG-uri și
   organizații sociale.
 proBono:
-  heading: PRO BONO
+  heading: NARRO e întreprindere socială. 
   image: /images/program-social/pro-bono/proBono/image.png
   imageAlt: Pro Bono — Echipa Narro la voluntariat
   paragraphs:
     - >-
-      Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna
-      etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
-      bibendum risus.
+      În traducere: o parte din profit se întoarce în comunitate, iar o parte din timpul nostru merge la organizații care fac ceva util și au buget pentru absolut orice, mai puțin pentru branding. Sau nu musai.
     - >-
-      Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna
-      etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
-      bibendum risus.
+      Alegem câteva pe an și lucrăm cu ele exact cum lucrăm cu oricine altcineva. Aceleași întrebări la început, același proces la mijloc, aceeași grijă la fonturi. Singura diferență e că nu iese factură la final.
     - >-
-      Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna
-      etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
-      bibendum risus.
+      O facem pentru că munca asta contează mai mult acolo. Un ONG care arată bine e luat în serios de finanțatori, de voluntari și de oamenii pe care încearcă să-i ajute. Diferența dintre un afiș făcut în Word și unul făcut cum trebuie se vede direct în câți oameni vin.
 aplicAcum:
-  heading: APLICA ACUM
+  heading: APLICĂ ACUM
   intro: >-
-    Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna
-    etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum
-    risus.
-  form:
-    submitLabel: Trimite
-    fields:
-      - id: nume
-        label: Nume*
-        type: input
-        inputType: text
-        required: true
-        options: []
-      - id: email
-        label: E-mail*
-        type: input
-        inputType: email
-        required: true
-        options: []
-      - id: business
-        label: Business
-        type: input
-        inputType: text
-        required: false
-        options: []
-      - id: buget
-        label: Buget
-        type: select
-        inputType: text
-        required: false
-        options:
-          - label: Sub 5.000 EUR
-            value: <5000
-          - label: 5.000 - 10.000 EUR
-            value: 5000-10000
-          - label: 10.000 - 20.000 EUR
-            value: 10000-20000
-          - label: Peste 20.000 EUR
-            value: '>20000'
-      - id: mesaj
-        label: Care-i treaba?
-        type: textarea
-        inputType: text
-        required: false
-        options: []
+    Dacă ești o organizație sau o inițiativă care se încadrează, zi-ne ce faci și de ce.
+  button:
+    label: ZI-NE CE FACI
+    link: /contact
   image: /images/program-social/aplica-acum/aplicAcum/image.png
   imageAlt: Aplica acum — Contact Narro
