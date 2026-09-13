@@ -157,7 +157,7 @@ const introWords = (intro || '').split(' ').filter(Boolean);
   <Header />
   <!-- ===== Intro Section ===== -->
   <section class="relative overflow-hidden px-4 py-24 lg:py-32 bg-[#f5f0eb]">
-    <div class="absolute -bottom-24 -left-12 sm:left-16 md:left-56 w-64 pointer-events-none doodle-scribble fade-in fade-delay-6" style="transform: rotate(-12deg);">
+    <div class="absolute -bottom-24 sm:block hidden -left-12 sm:left-16 md:left-56 w-64 pointer-events-none doodle-scribble fade-in fade-delay-6" style="transform: rotate(-12deg);">
       <img src="/sketches/sketch-1.svg" alt="" />
     </div>
     <div class="absolute top-12 left-8 sm:block hidden sm:left-16 md:-left-20 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1" style="transform: rotate(-12deg);">
@@ -169,7 +169,7 @@ const introWords = (intro || '').split(' ').filter(Boolean);
     <div class="absolute -top-12   left-1/4 md:left-1/4 w-96 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(15deg);">
       <img src="/sketches/sketch-5.svg" alt="" class="scale-125" />
     </div>
-    <div class="absolute -bottom-20 -right-8 sm:right-20 w-64 pointer-events-none doodle-scribble fade-in fade-delay-3" style="transform: rotate(-25deg);">
+    <div class="absolute -bottom-20 -right-8 sm:block hidden sm:right-20 w-64 pointer-events-none doodle-scribble fade-in fade-delay-3" style="transform: rotate(-25deg);">
       <img src="/sketches/sketch-6.svg" alt="" class="hue-rotate-[220deg] contrast-150" />
     </div>
     <div class="absolute bottom-52 sm:-top-12 -left-12 sm:left-1/2 w-48 pointer-events-none doodle-scribble fade-in fade-delay-4">
@@ -182,7 +182,7 @@ const introWords = (intro || '').split(' ').filter(Boolean);
       <img src="/sketches/sketch-2.svg" alt="" class="hue-rotate-[80deg] ml-20 contrast-150 brightness-90 scale-x-[-1]" />
     </div>
     <div class="max-w-7xl mx-auto relative z-10 min-h-[30vh] my-auto">
-      <h1 class="text-5xl flex flex-wrap justify-center sm:text-6xl md:max-w-3xl md:text-7xl xl:text-7xl xl:max-w-full font-heading font-extrabold lg:!leading-[1.05] md:tracking-tight tracking-tighter" style="color: #2200d8;">
+      <h1 class="md:text-5xl text-4xl flex flex-wrap justify-center sm:text-6xl md:max-w-3xl lg:text-7xl xl:text-7xl xl:max-w-full font-heading font-extrabold lg:!leading-[1.05] md:tracking-tight tracking-tighter" style="color: #2200d8;">
         {introWords.map((word, i) => (
           <span class="inline-block fade-in" style={`animation-delay: ${-210 + i * 110}ms;`}>{word}&nbsp;</span>
         ))}
