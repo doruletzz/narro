@@ -106,7 +106,7 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
                       >{displayWord}</span>
                     )}
                     {!isJustDot && ' '}
-                    {hasDot && <div class="basis-full h-0"></div>}
+                    {hasDot && <div class="basis-full md:block hidden h-0"></div>}
                   </>
                 );
               })}
@@ -124,7 +124,7 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
                     style={`color: #2200d8; animation-delay: ${-210 + (segment.start + i) * 110}ms;`}
                   >{displayWord}&nbsp;</span>
                 )}
-                {hasDot && <div class="basis-full h-0"></div>}
+                {hasDot && <div class="md:basis-full md:block hidden h-0"></div>}
               </>
             );
           }))}
