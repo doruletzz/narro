@@ -1,0 +1,148 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Header from '@/components/layouts/Header.astro';
+import ArrowIcon from '@/components/ui/ArrowIcon.astro';
+
+// Wording configuration
+const titleText = "__Merci beaucoup!__";
+const subtitleText = "Mesajul a fost inregistrat, revenim in cel mai scurt timp";
+const ctaLabel = "Înapoi";
+const ctaHref = "/";
+
+// Split the title into segments. Text wrapped in __...__ is underlined
+// with the hand-drawn squiggle (supports multi-word phrases).
+const buildHeroSegments = (text: string) => {
+  const segments: Array<{ words: string[]; underlined: boolean; start: number }> = [];
+  const re = /__(.+?)__/g;
+  let last = 0;
+  let match: RegExpExecArray | null;
+  let wordIndex = 0;
+  const pushSegment = (segmentText: string, underlined: boolean) => {
+    const words = segmentText.split(' ').filter(Boolean);
+    if (words.length > 0) segments.push({ words, underlined, start: wordIndex });
+    wordIndex += words.length;
+  };
+  while ((match = re.exec(text)) !== null) {
+    if (match.index > last) pushSegment(text.slice(last, match.index), false);
+    pushSegment(match[1], true);
+    last = match.index + match[0].length;
+  }
+  if (last < text.length) pushSegment(text.slice(last), false);
+  return segments;
+};
+
+const heroSegments = buildHeroSegments(titleText);
+const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.words.length, 0);
+---
+
+<PageLayout 
+  title="Mulțumim! — Narro" 
+  description="Mesajul tău a fost trimis cu succes. Îți vom răspunde în cel mai scurt timp."
+>
+  <Header />
+  <!-- ===== Hero Section ===== -->
+  <section class="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-2 sm:px-6 lg:px-8 min-h-[92vh] md:min-h-[93vh] flex items-center bg-[#f5f0eb]">
+    <!-- Doodle decorations matching Figma style — colorful scattered scribbles -->
+    <div class="absolute -top-36 -left-24 sm:left-16 md:left-80 w-64 pointer-events-none doodle-scribble fade-in fade-delay-6" style="transform: rotate(-12deg);">
+      <img src="/sketches/sketch-1.svg" alt="" />
+    </div>
+    <div class="absolute top-12 left-8 lg:block hidden sm:left-16 md:-left-20 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1" style="transform: rotate(-12deg);">
+      <img src="/sketches/sketch-8.svg" alt="" />
+    </div>
+    <div class="absolute top-1/4 left-3/4 lg:left-1/3 w-72 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(15deg);">
+      <img src="/sketches/sketch-2.svg" alt="" />
+    </div>
+    <div class="absolute -top-20 -right-8 lg:right-20 w-64 pointer-events-none doodle-scribble fade-in fade-delay-3" style="transform: rotate(-25deg);">
+      <img src="/sketches/sketch-6.svg" alt="" class="hue-rotate-[220deg] contrast-150" />
+    </div>
+    <div class="absolute top-52 lg:-top-12 -left-12 lg:left-1/2 w-48 pointer-events-none doodle-scribble fade-in fade-delay-4">
+      <img src="/sketches/sketch-4.svg" alt="" />
+    </div>
+    <div class="absolute top-44 sm:top-32 lg:block hidden right-4 lg:right-1/4 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1" style="transform: rotate(20deg);">
+      <img src="/sketches/sketch-8.svg" alt="" class="hue-rotate-[80deg] ml-20 contrast-150 brightness-90" />
+    </div>
+    <div class="absolute top-44 sm:top-64 lg:block hidden right-4 lg:right-40 w-32 pointer-events-none doodle-scribble fade-in fade-delay-5" style="transform: rotate(20deg);">
+      <img src="/sketches/sketch-2.svg" alt="" class="hue-rotate-[80deg] ml-20 contrast-150 brightness-90 scale-x-[-1]" />
+    </div>
+    <div class="absolute bottom-48 sm:bottom-1/3 left-1/4 lg:-left-20 w-96 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(8deg);">
+      <img src="/sketches/sketch-1.svg" alt="" class="hue-rotate-[250deg] ml-20 contrast-150 brightness-120 scale-x-[-1] opacity-50" />
+    </div>
+    <div class="absolute bottom-12 sm:bottom-12 -left-4 lg:left-36 w-48 pointer-events-none doodle-scribble fade-in fade-delay-6" style="transform: rotate(8deg);">
+      <img src="/sketches/sketch-3.svg" alt="" />
+    </div>
+    <div class="absolute bottom-12 sm:bottom-0 left-4 lg:block hidden sm:left-1/3 w-80 pointer-events-none doodle-scribble fade-in fade-delay-4" style="transform: rotate(8deg);">
+      <img src="/sketches/sketch-6.svg" alt="" />
+    </div>
+
+    <div class="absolute -bottom-32 sm:-bottom-36 -right-64 lg:-right-32 w-96 h-60 pointer-events-none doodle-scribble fade-in fade-delay-7" style="transform: rotate(-15deg);">
+      <img src="/sketches/sketch-7.svg" alt="" class="rotate-[30deg] scale-x-[-1]"/>
+    </div>
+
+    <div class="absolute bottom-8 sm:bottom-24 lg:block hidden right-4 lg:right-48 w-96 h-60 pointer-events-none doodle-scribble fade-in fade-delay-4" style="transform: rotate(-15deg);">
+      <img src="/sketches/sketch-4.svg" alt="" class="hue-rotate-[280deg] ml-10 contrast-150 brightness-100 scale-x-[-1]"/>
+    </div>
+
+    <div class="max-w-full mx-auto relative z-10">
+      <div class="text-center flex flex-col gap-4 md:gap-8 items-center">
+        <!-- Headline -->
+        <h1 class="text-4xl flex flex-wrap justify-center sm:text-6xl md:max-w-3xl md:text-7xl xl:text-7xl xl:max-w-full font-heading font-extrabold lg:!leading-[0.95] md:tracking-tight tracking-tighter">
+          {heroSegments.map((segment) => segment.underlined ? (
+            <span class="relative inline-block fade-in" style={`animation-delay: ${-210 + segment.start * 110}ms;`}>
+              {segment.words.map((word, i) => {
+                const isJustDot = word.trim() === '.';
+                const hasDot = word.endsWith('.');
+                const displayWord = isJustDot ? '' : word;
+                return (
+                  <>
+                    {!isJustDot && (
+                      <span
+                        class="inline-block font-heading font-extrabold"
+                        style={`color: #2200d8; animation-delay: ${-210 + (segment.start + i) * 110}ms;`}
+                      >{displayWord}</span>
+                    )}
+                    {!isJustDot && ' '}
+                    {hasDot && <div class="basis-full md:block hidden h-0"></div>}
+                  </>
+                );
+              })}
+              <img src="/squiggle.svg" class="absolute left-0 -bottom-2 md:-bottom-8 w-1/3 scale-x-[250%] translate-x-full" alt="" />
+            </span>
+          ) : segment.words.map((word, i) => {
+            const isJustDot = word.trim() === '.';
+            const hasDot = word.endsWith('.');
+            const displayWord = isJustDot ? '' : word;
+            return (
+              <>
+                {!isJustDot && (
+                  <span
+                    class="inline-block fade-in"
+                    style={`color: #2200d8; animation-delay: ${-210 + (segment.start + i) * 110}ms;`}
+                  >{displayWord}&nbsp;</span>
+                )}
+                {hasDot && <div class="md:basis-full md:block hidden h-0"></div>}
+              </>
+            );
+          }))}
+        </h1>
+
+        <!-- Subtitle -->
+        {subtitleText && (
+          <p class="fade-in text-3xl md:text-2xl lg:text-4xl font-bold text-black/80 max-w-2xl" style={`animation-delay: ${totalHeroWords * 110 - 20}ms;`}>
+            {subtitleText}
+          </p>
+        )}
+
+        <!-- CTA badge — pink pill pointing back home -->
+        <div class="fade-in relative flex flex-col items-center" style={`animation-delay: ${totalHeroWords * 110 + 200}ms;`}>
+            <a
+                href="/contact"
+                class="inline-flex items-center fade-in fade-delay-1 gap-2 px-5 py-2 pt-2.5 text-lg font-medium text-neutral-900 border border-[#FF66C4] rounded-full hover:border-[#2200d8] hover:bg-[#2200d8] hover:text-white transition-colors tracking-wide group/cta"
+            >
+            {ctaLabel}
+            <ArrowIcon class="size-6 mb-0.5 group-hover/cta:rotate-45 transition-transform duration-150" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
