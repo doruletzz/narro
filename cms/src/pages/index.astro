@@ -1,0 +1,19 @@
+---
+// Fallback landing page. In production the middleware redirects / → /keystatic
+// before this page is reached. If you see this page, the token-guard
+// middleware is not running.
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Narro CMS</title>
+  </head>
+  <body style="font-family: system-ui, sans-serif; display: grid; place-items: center; min-height: 100vh; margin: 0">
+    <div>
+      <h1>Narro CMS</h1>
+      <p>
+        The admin is at <a href="/keystatic">/keystatic</a>.
+      </p>
+    </div>
+  </body>
+</html>

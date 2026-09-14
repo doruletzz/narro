@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+.netlify/
+
+# Environment (local dev secrets — see ../.env.example)
+.env
+.env.local
+
+# OS
+.DS_Store

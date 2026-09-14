@@ -1,0 +1,24 @@
+# ──────────────────────────────────────────────────────────────────────────
+# Netlify — deploys ONLY the Keystatic admin (this directory) to
+# keystatic.narro.co. The static site (../frontend) goes to Cloudflare Pages.
+#
+# Netlify dashboard (one-time setup):
+#   1. New site → import doruletzz/narro
+#   2. Base directory:  cms        ← IMPORTANT (this file + the build output
+#                                     are found relative to it)
+#   3. Framework preset: Astro (build command & publish dir come from here)
+#   4. Environment variables (see ../.env.example):
+#        KEYSTATIC_GITHUB_CLIENT_ID, KEYSTATIC_GITHUB_CLIENT_SECRET,
+#        KEYSTATIC_SECRET, CMS_AUTH_TOKEN
+#   5. Domain Management → add custom domain: keystatic.narro.co
+#
+# The SSR function is emitted by @astrojs/netlify into .netlify/v1/functions
+# during `astro build` (Netlify Frameworks API) and picked up automatically.
+# ──────────────────────────────────────────────────────────────────────────
+
+[build]
+  command = "pnpm install --frozen-lockfile && pnpm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
