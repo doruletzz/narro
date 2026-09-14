@@ -18,4 +18,14 @@ export default defineConfig({
   output: 'server',
   adapter: netlify(),
   integrations: [react(), keystatic()],
+  vite: {
+    optimizeDeps: {
+      // Exclude @keystar packages from Vite pre-bundling 
+      // (prevents Vite from looking for a non-existent root "." entry point)
+      exclude: ['@keystar/ui'],
+    },
+    ssr: {
+      noExternal: ['@keystar/ui', '@keystatic/core'],
+    },
+  },
 });

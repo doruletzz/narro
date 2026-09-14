@@ -11,6 +11,9 @@ importers:
       '@astrojs/react':
         specifier: ^3.6.3
         version: 3.6.3(@types/node@26.5.1)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@keystar/ui':
+        specifier: ^0.10.0
+        version: 0.10.0(react-aria@3.50.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react-stately@3.48.0(react@19.3.0))(react@19.3.0)
       '@keystatic/astro':
         specifier: ^5.2.0
         version: 5.2.0(@keystatic/core@0.6.9(@keystar/ui@0.10.0(react-aria@3.50.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react-stately@3.48.0(react@19.3.0))(react@19.3.0))(react-aria@3.50.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react-stately@3.48.0(react@19.3.0))(react@19.3.0))(astro@5.18.2(@netlify/blobs@9.1.2)(@types/node@26.5.1)(idb-keyval@6.3.0)(rollup@4.63.2)(typescript@5.9.3))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)

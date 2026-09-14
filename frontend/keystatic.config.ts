@@ -156,18 +156,11 @@ export const studiiDeCazPage = singleton({
 });
 
 export default config({
-  // Git storage: the admin (cms/, hosted on Netlify at keystatic.narro.co)
-  // reads and writes these files in the doruletzz/narro repo.
-  // `pathPrefix` is needed because the Keystatic project lives in the
-  // `frontend/` subdirectory of the repo.
-  //
-  // Auth: Keystatic 0.6.x uses a GitHub OAuth App (not a PAT) — see CMS-SETUP.md.
-  // Required env vars: KEYSTATIC_GITHUB_CLIENT_ID, KEYSTATIC_GITHUB_CLIENT_SECRET,
-  // KEYSTATIC_SECRET.
   storage: {
-    kind: 'github',
-    repo: { owner: 'doruletzz', name: 'narro' },
-    pathPrefix: 'frontend',
+    kind: 'cloud',
+  },
+  cloud: {
+    project: 'narro/narro', // <--- REPLACE THIS WITH YOUR KEYSTATIC CLOUD PROJECT SLUG
   },
 
   collections: {
