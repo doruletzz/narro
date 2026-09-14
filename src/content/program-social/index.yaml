@@ -3,14 +3,28 @@ description: >-
   Servicii de branding și comunicare vizuală accesibile pentru ONG-uri și
   organizații sociale.
 proBono:
-  heading: PRO BONO
+  heading: NARRO e întreprindere socială.
   imageAlt: Pro Bono — Echipa Narro la voluntariat
-  paragraphs: []
+  paragraphs:
+    - >-
+      În traducere: o parte din profit se întoarce în comunitate, iar o parte
+      din timpul nostru merge la organizații care fac ceva util și au buget
+      pentru absolut orice, mai puțin pentru branding. Sau nu musai.
+    - >-
+      Alegem câteva pe an și lucrăm cu ele exact cum lucrăm cu oricine
+      altcineva. Aceleași întrebări la început, același proces la mijloc,
+      aceeași grijă la fonturi. Singura diferență e că nu iese factură la final.
+    - >-
+      O facem pentru că munca asta contează mai mult acolo. Un ONG care arată
+      bine e luat în serios de finanțatori, de voluntari și de oamenii pe care
+      încearcă să-i ajute. Diferența dintre un afiș făcut în Word și unul făcut
+      cum trebuie se vede direct în câți oameni vin.
 aplicAcum:
-  heading: APLICA ACUM
+  heading: APLICĂ ACUM
   intro: >-
-    Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna
-    etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum
-    risus.
-  button: {}
+    Dacă ești o organizație sau o inițiativă care se încadrează, zi-ne ce faci
+    și de ce.
+  button:
+    label: ZI-NE CE FACI
+    link: /contact
   imageAlt: Aplica acum — Contact Narro
