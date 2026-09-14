@@ -1,0 +1,21 @@
+hero:
+  subtitle: Noi traducem.
+  ctaLabel: ZI-NE CARE-I TREABA
+  ctaHref: /contact
+manifesto:
+  label: MANIFESTO
+  paragraphs: []
+directia:
+  label: DIRECTIA
+  cards: []
+teaser:
+  label: TEASER
+  youtubeId: dQw4w9WgXcQ
+  ctaLabel: Află mai multe
+  ctaHref: /contact
+studiiDeCaz:
+  label: STUDII DE CAZ
+  items: []
+ctaBanner:
+  text: ZI-NE CARE-I TREABA
+  href: /contact
