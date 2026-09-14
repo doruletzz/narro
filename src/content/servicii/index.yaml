@@ -1,13 +1,210 @@
+intro: Facem branding. Lucrăm la strategie, identitate, comunicare și conținut.
 proiectDeBrand:
-  paragraphs: []
+  title: Proiectul de Brand
+  lead: Construim brandul de la strategie până la implementare.
+  paragraphs:
+    - >-
+      Începem cu businessul: ce face, pentru cine, în ce categorie joacă, ce îl
+      diferențiază și ce vrea să construiască mai departe. Definim poziționarea,
+      publicul și direcția strategică.
   primestiLabel: 'Primești:'
-  primesti: []
-categories: []
+  primesti:
+    - Strategie de brand, poziționare, public țintă și profiluri de audiență
+    - Arhitectura mesajelor, diferențiator și teritorii de comunicare
+    - Ton of voice, mesaje-cheie și exemple de formulări
+    - Concept vizual, logo + variante, paletă, tipografie
+    - Elemente grafice, iconografie, direcție de fotografie
+    - Sistem de template-uri pentru comunicare
+    - Manual de brand
+    - Aplicarea identității în materialele stabilite la începutul proiectului
+  closing: >-
+    La final, reunim toate deciziile într-un sistem de brand și îl aplicăm în
+    materialele de care businessul are nevoie.
+  price: 9.000 – 14.000 lei · 8–12 săptămâni
+categories:
+  - name: Strategie
+    services:
+      - title: Radiografia
+        lead: Analizăm brandul, comunicarea și prezența lui actuală.
+        paragraphs:
+          - >-
+            Ne uităm la poziționare, identitate, ton, mesaje, conținut și
+            prezența online. Identificăm ce funcționează, ce nu și unde există
+            spațiu de lucru.
+        primestiLabel: 'Primești:'
+        primesti:
+          - Analiză scrisă
+          - 3 direcții de lucru prioritizate
+          - Discuție de o oră
+        price: 900 lei · 5 zile lucrătoare
+        note: >-
+          Se scade integral din orice proiect contractat în următoarele 30 de
+          zile.
+        noteHighlight: false
+        tiers: []
+  - name: Identitate
+    services:
+      - title: Identitate Vizuală
+        lead: Construim sistemul vizual complet al brandului.
+        paragraphs:
+          - >-
+            Definim direcția vizuală și construim logo-ul, paleta, tipografia,
+            elementele grafice și regulile de folosire. Le organizăm într-un
+            sistem care poate fi aplicat pe toate materialele brandului, acum și
+            mai târziu.
+        primestiLabel: 'Primești:'
+        primesti:
+          - Concept vizual
+          - Logo + variante complete
+          - Paletă de culori
+          - Tipografie
+          - Iconografie și elemente grafice
+          - Sistem complet de template-uri
+          - Manual vizual
+        price: 5.000 – 7.000 lei · 4–6 săptămâni
+        noteHighlight: false
+        tiers: []
+      - title: Kit de Pornire
+        lead: Construim baza vizuală și primele materiale pentru un brand nou.
+        paragraphs:
+          - >-
+            Pachet de implementare rapidă pentru un business care pornește.
+            Stabilim o bază vizuală simplă și o aplicăm direct în materialele de
+            care ai nevoie în prima fază.
+        primestiLabel: 'Primești:'
+        primesti:
+          - Logo + variante
+          - Paletă de culori
+          - 1–2 fonturi
+          - Mini-ghid vizual
+          - Set de template-uri de bază pentru social media
+          - 3 materiale de lansare
+        price: 3.900 lei · 3 săptămâni
+        note: >-
+          Kitul de Pornire te scoate rapid în piață. Identitatea Vizuală
+          construiește sistemul pe care brandul îl folosește ani întregi. Dacă
+          businessul există deja și are volum de comunicare, mergi pe Identitate
+          Vizuală.
+        noteHighlight: true
+        tiers: []
+      - title: Design Grafic
+        lead: Realizăm materiale grafice punctuale, pentru digital sau print.
+        paragraphs:
+          - >-
+            Lucrăm pe piese individuale sau seturi: meniuri, prezentări, afișe,
+            materiale de campanie, social media și altele. Adaptate identității
+            existente a brandului.
+        primesti: []
+        primestiInline: 'Primești: piesa sau setul solicitat, în formatele necesare.'
+        price: De la 350 lei/piesă
+        noteHighlight: false
+        tiers: []
+  - name: Comunicare
+    services:
+      - title: Ton of Voice
+        lead: Definim felul în care comunică brandul.
+        paragraphs:
+          - >-
+            Stabilim tonul, vocabularul, structura mesajelor, formulările
+            potrivite și cele de evitat. Documentăm regulile și le exemplificăm
+            prin texte concrete.
+        primestiLabel: 'Primești:'
+        primesti:
+          - Ghid de ton
+          - Reguli de scriere
+          - Exemple bun/greșit
+          - Texte-model
+        price: 1.800 lei
+        noteHighlight: false
+        tiers: []
+  - name: Conținut
+    intro: >-
+      Ai nevoie de conținut sau vrei să preluăm noi tot canalul. Content
+      Production produce conținutul. Social Media preia administrarea
+      conturilor.
+    services:
+      - title: Content Production
+        lead: >-
+          Producem conținut pentru canalele de comunicare ale brandului. Tu îți
+          administrezi conturile.
+        paragraphs:
+          - >-
+            Stabilim temele și formatele, dezvoltăm ideile, scriem textele și
+            producem materialele vizuale. Organizăm totul într-un calendar
+            editorial.
+        primestiLabel: 'Primești lunar:'
+        primesti:
+          - >-
+            12 materiale: copy + design pentru static, carousel sau video scurt
+            (maxim 4 formate video)
+          - 1 ședință foto-video la locație, cu echipa NARRO
+          - Calendar editorial
+        price: 2.500 lei/lună
+        noteHighlight: false
+        tiers: []
+      - title: Social Media
+        lead: >-
+          Gestionăm comunicarea brandului pe social media. Preluăm administrarea
+          conturilor.
+        paragraphs:
+          - >-
+            Planificăm conținutul, pregătim și publicăm postările, gestionăm
+            interacțiunile și urmărim rezultatele lunare.
+        primesti: []
+        note: 'Ședință foto-video suplimentară: 700 lei'
+        noteHighlight: false
+        tiers:
+          - name: Foundation
+            price: 1.800 lei/lună
+            details: 1 platformă · 8 postări/lună · community management · raport lunar
+          - name: Momentum
+            price: 2.400 lei/lună
+            details: >-
+              2 platforme · 12 postări/lună + 1 reel · community management ·
+              raport lunar
+          - name: Signature
+            price: 3.600 lei/lună
+            details: >-
+              3 platforme · 16 postări/lună + 4 reels · community management ·
+              raport lunar · 1 ședință foto-video la locație · consultanță
+              lunară
 finePrint:
   sedinte:
-    items: []
+    label: Ședințele foto-video
+    items:
+      - 1 ședință pe lună, maximum 4 ore
+      - >-
+        La sediul clientului sau într-o locație stabilită de comun acord, în
+        Cluj-Napoca și pe o rază de 30 km
+      - Peste această rază, deplasarea se facturează separat
+      - Ședința neconsumată într-o lună nu se reportează în luna următoare
   separat:
-    items: []
+    label: Ce se cotează separat
+    items:
+      - Producții video complexe, filmări cu scenariu, echipă extinsă sau studio
+      - Materiale tipărite și costurile de producție
+      - Materiale peste volumul lunar inclus
+      - Licențe foto, video, fonturi sau muzică
+      - Bugete de promovare plătită
   conditii:
-    items: []
-cta: {}
+    label: Condiții
+    items:
+      - '**Prețuri** — sumele sunt exprimate în lei, cu TVA.'
+      - >-
+        **Revizii** — fiecare proiect include 2 runde de revizii. Rundele
+        suplimentare se tarifează separat.
+      - >-
+        **Plată** — 50% avans la începerea proiectului, 50% la livrare.
+        Serviciile lunare se facturează la începutul fiecărei luni.
+      - >-
+        **Durată** — Radiografia 5 zile lucrătoare · Kit de Pornire 3 săptămâni
+        · Identitate Vizuală 4–6 săptămâni · Proiectul de Brand 8–12 săptămâni.
+      - >-
+        **Valabilitate** — oferta este valabilă 30 de zile de la data
+        transmiterii.
+cta:
+  description: >-
+    Nu știi de unde să începi? Începe cu Radiografia. De acolo stabilim ce
+    merită făcut și în ce ordine.
+  text: VREAU RADIOGRAFIA
+  href: /contact?serviciu=Radiografia
