@@ -11,16 +11,12 @@ import '../styles/global.css';
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
-    <!-- Preconnect to external domains for faster loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://images.unsplash.com" />
 
-    <!-- Preload the heading font so it isn't chained behind the CSS -->
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/Bristol-Bold.woff2" />
-    
-    <!-- Google Fonts — loaded via <link> instead of @import for better FCP -->
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet" />
+    <!-- Preload local fonts so they load in parallel, not chained behind CSS -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/Bristol-Bold.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/ttf" href="/fonts/LeagueSpartan-VariableFont_wght.ttf" crossorigin />
     
     <!-- Canonical URL — auto-derived from current page path -->
     <link rel="canonical" href={`https://narro.ro${Astro.url.pathname}`} />

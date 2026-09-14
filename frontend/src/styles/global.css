@@ -1,18 +1,24 @@
 @font-face {
   font-family: 'Bristol';
   font-style: normal;
-  font-weight: 400 700;
+  font-weight: 700 800;
   font-display: swap;
   src: url('/fonts/Bristol-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'League Spartan';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/LeagueSpartan-VariableFont_wght.ttf') format('truetype');
 }
 
 :root {
   --font-heading: 'Bristol', sans-serif;
 }
 
-/* Inter — body font
-   NOTE: Google Fonts is now loaded via <link> in BaseLayout.astro for better FCP.
-   The @import here would block CSS parsing. */
+
 
 @tailwind base;
 @tailwind components;
