@@ -1,2 +1,22 @@
 label: STUDII DE CAZ
-items: []
+items:
+  - title: Social Media
+    slug: social-media
+    tag: vs firme noi, design în stradă vs reclame luminoase
+    imageAlt: Social Media studiu de caz
+  - title: Branding
+    slug: branding
+    tag: viața-i grea (fă-o mai grea, deschide-ți agenția)
+    imageAlt: Branding studiu de caz
+  - title: Continut Foto-Video
+    slug: foto-video-1
+    tag: Take what you need de la
+    imageAlt: Continut Foto-Video studiu de caz
+  - title: Continut Foto-Video
+    slug: foto-video-2
+    tag: vs reviste vs carti
+    imageAlt: Continut Foto-Video studiu de caz
+  - title: Continut Foto-Video
+    slug: foto-video-3
+    tag: vs reviste vs carti
+    imageAlt: Continut Foto-Video studiu de caz
