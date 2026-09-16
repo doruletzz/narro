@@ -3,7 +3,7 @@ import { collection, config, fields, singleton } from '@keystatic/core';
  
 export const servicii = singleton({
   label: 'Servicii',
-  path: 'src/content/servicii/index',
+  path: '../frontend/src/content/servicii/index',
   format: { data: 'yaml' },
   schema: {
     intro: fields.text({ label: 'Intro pagină', multiline: true }),
@@ -128,7 +128,7 @@ export const servicii = singleton({
  
 export const studiiDeCazPage = singleton({
   label: 'Studii de Caz (pagină)',
-  path: 'src/content/studii-de-caz/index',
+  path: '../frontend/src/content/studii-de-caz/index',
   format: { data: 'yaml' },
   schema: {
     label: fields.text({ label: 'Titlu secțiune', defaultValue: 'STUDII DE CAZ' }),
@@ -166,7 +166,7 @@ export default config({
   collections: {
     studiiDeCaz: collection({
       label: 'Studii de Caz (detaliat)',
-      path: 'src/content/studii-de-caz/*',
+      path: '../frontend/src/content/studii-de-caz/*',
       slugField: 'slug',
       schema: {
         slug: fields.slug({ name: { label: 'Slug' } }),
@@ -185,7 +185,7 @@ export default config({
   singletons: {
     homepage: singleton({
       label: 'Homepage',
-      path: 'src/content/homepage/index',
+      path: '../frontend/src/content/homepage/index',
       format: { data: 'yaml' },
       schema: {
         hero: fields.object(
@@ -299,7 +299,7 @@ export default config({
 
     contact: singleton({
       label: 'Contact',
-      path: 'src/content/contact/index',
+      path: '../frontend/src/content/contact/index',
       format: { data: 'yaml' },
       schema: {
         title: fields.text({ label: 'Titlu pagină', defaultValue: 'Contact — Narro' }),
@@ -381,7 +381,7 @@ export default config({
 
     programSocial: singleton({
       label: 'Program Social',
-      path: 'src/content/program-social/index',
+      path: '../frontend/src/content/program-social/index',
       format: { data: 'yaml' },
       schema: {
         title: fields.text({ label: 'Titlu pagină', defaultValue: 'Program Social — Narro' }),
@@ -440,7 +440,7 @@ export default config({
 
     storyTime: singleton({
       label: 'Story Time',
-      path: 'src/content/story-time/index',
+      path: '../frontend/src/content/story-time/index',
       format: { data: 'yaml' },
       schema: {
         title: fields.text({ label: 'Titlu pagină', defaultValue: 'Story Time — Narro' }),
