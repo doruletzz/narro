@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import Header from '../components/layouts/Header.astro';
 import Footer from '../components/layouts/Footer.astro';
 import CookieConsent from '../components/layouts/CookieConsent.astro';
+import Gtm from '../components/analytics/Gtm.astro';
 
 interface Props {
   title?: string;
@@ -23,10 +24,17 @@ const {
   ogUrl,
   twitterImage,
 } = Astro.props;
+
+// Build-time environment variables (set via .env file or CI/CD)
+const GTM_ID = import.meta.env.GTM_ID;
+const GA_ID  = import.meta.env.GA_ID;
+// Skip the snippet entirely when no real container ID is configured (dev).
+const HAS_GTM = Boolean(GTM_ID && !GTM_ID.includes('XXXX'));
 ---
 
 <BaseLayout>
   <Fragment slot="head">
+    {HAS_GTM && <Gtm gtmId={GTM_ID} gaId={GA_ID} />}
     <slot name="head">
       {title && <title>{title}</title>}
       {description && <meta name="description" content={description} />}
@@ -108,7 +116,7 @@ const {
     Săriți peste conținut
   </a>
   
-  <main id="main-content" class="min-h-screen">
+  <main id="main-content" class="min-h-screen  max-w-[100vw] overflow-hidden">
     <slot />
   </main>
   <Footer />

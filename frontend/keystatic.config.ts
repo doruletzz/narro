@@ -470,5 +470,43 @@ export default config({
         ),
       },
     }),
+
+    politicaCookies: singleton({
+      label: 'Politica de Cookies',
+      path: 'src/content/politica-cookies/index',
+      format: { data: 'yaml' },
+      schema: {
+        title: fields.text({ label: 'Titlu pagină', defaultValue: 'Politica de Cookies — Narro' }),
+        description: fields.text({
+          label: 'Meta descriere',
+          multiline: true,
+          defaultValue: 'Politica de cookies a Narro. Află cum folosim cookies pentru o experiență mai bună.',
+        }),
+        content: fields.text({
+          label: 'Conținut',
+          multiline: true,
+          defaultValue: '# Politica de Cookies\n\n### Ce sunt cookies-urile\n\nCookies sunt fișiere mici de text care sunt stocate pe dispozitivul dumneavoastră atunci când vizitați un site web.',
+        }),
+      },
+    }),
+
+    termeniConditii: singleton({
+      label: 'Termeni și Condiții',
+      path: 'src/content/termeni-si-conditii/index',
+      format: { data: 'yaml' },
+      schema: {
+        title: fields.text({ label: 'Titlu pagină', defaultValue: 'Termeni și Condiții — Narro' }),
+        description: fields.text({
+          label: 'Meta descriere',
+          multiline: true,
+          defaultValue: 'Termeni și condiții Narro. Citește condițiile de utilizare ale site-ului și serviciilor.',
+        }),
+        content: fields.text({
+          label: 'Conținut',
+          multiline: true,
+          defaultValue: '# Termeni și Condiții\n\n**Last updated: ianuarie 2025**\n\n## 1. Introducere\n\nBine ați venit pe site-ul Narro.',
+        }),
+      },
+    }),
   },
 });

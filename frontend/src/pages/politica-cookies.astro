@@ -1,0 +1,120 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Header from '@/components/layouts/Header.astro';
+import { renderMarkdown } from '@/lib/markdown';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const page = await reader.singletons.politicaCookies.read();
+
+if (!page) {
+  return Astro.redirect('/');
+}
+
+const { title, description } = page;
+const content = await renderMarkdown(page.content || '');
+---
+
+<PageLayout title={`${title} — Narro`} description={description}>
+  <style is:global>
+    .studiu-markdown {
+      color: #37352f;
+      line-height: 1.75;
+      font-size: 1.0625rem;
+    }
+    .studiu-markdown > :first-child {
+      margin-top: 0;
+    }
+    .studiu-markdown h1,
+    .studiu-markdown h2,
+    .studiu-markdown h3 {
+      font-family: var(--font-heading, inherit);
+      font-weight: 700;
+      color: #2200d8;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+    .studiu-markdown h1 {
+      font-size: 2.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .studiu-markdown h2 {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #ff99d8;
+    }
+    .studiu-markdown h3 {
+      font-size: 1.25rem;
+    }
+    .studiu-markdown p {
+      margin-bottom: 1.25rem;
+    }
+    .studiu-markdown ul,
+    .studiu-markdown ol {
+      margin: 0 0 1.25rem 1.5rem;
+    }
+    .studiu-markdown ul {
+      list-style: disc;
+    }
+    .studiu-markdown ol {
+      list-style: decimal;
+    }
+    .studiu-markdown li {
+      margin-bottom: 0.5rem;
+    }
+    .studiu-markdown a {
+      color: #2200d8;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .studiu-markdown a:hover {
+      color: #ff99d8;
+    }
+    .studiu-markdown strong {
+      font-weight: 700;
+      color: #171614;
+    }
+    .studiu-markdown blockquote {
+      border-left: 3px solid #ff99d8;
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      color: #525252;
+      font-style: italic;
+    }
+    .studiu-markdown img {
+      border-radius: 0.75rem;
+      margin: 1.5rem 0;
+    }
+  </style>
+
+  <Header />
+
+  <section class="px-2 sm:px-6 lg:px-8 py-16 relative">
+    <!-- Sketch doodle decorations -->
+    <div class="absolute -top-28 left-0 sm:left-6 w-64 pointer-events-none doodle-scribble fade-in fade-delay-2" style="transform: rotate(10deg);">
+      <img src="/sketches/sketch-7.svg" alt="" loading="lazy" decoding="async" />
+    </div>
+    <div class="absolute -top-20 right-0 sm:right-8 w-72 pointer-events-none doodle-scribble fade-in fade-delay-4 sm:block hidden" style="transform: rotate(-12deg);">
+      <img src="/sketches/sketch-4.svg" alt="" loading="lazy" decoding="async" class="hue-rotate-[200deg] contrast-150 brightness-110" />
+    </div>
+    <div class="absolute top-1/4 left-2 sm:left-12 w-48 pointer-events-none doodle-scribble fade-in fade-delay-5" style="transform: rotate(18deg);">
+      <img src="/sketches/sketch-2.svg" alt="" loading="lazy" decoding="async" />
+    </div>
+    <div class="absolute bottom-1/4 right-2 sm:right-14 w-80 pointer-events-none doodle-scribble fade-in fade-delay-7 sm:block hidden" style="transform: rotate(-8deg);">
+      <img src="/sketches/sketch-6.svg" alt="" loading="lazy" decoding="async" class="hue-rotate-[230deg] contrast-150 brightness-120 scale-x-[-1] opacity-50" />
+    </div>
+    <div class="absolute bottom-8 left-4 sm:left-10 w-64 pointer-events-none doodle-scribble fade-in fade-delay-3" style="transform: rotate(14deg);">
+      <img src="/sketches/sketch-5.svg" alt="" loading="lazy" decoding="async" />
+    </div>
+    <div class="absolute bottom-16 right-4 sm:right-20 w-72 pointer-events-none doodle-scribble fade-in fade-delay-6" style="transform: rotate(-16deg);">
+      <img src="/sketches/sketch-3.svg" alt="" loading="lazy" decoding="async" class="hue-rotate-[260deg] contrast-150 brightness-110 scale-x-[-1]" />
+    </div>
+    <div class="max-w-3xl mx-auto">
+      <div class="studiu-markdown" set:html={content} />
+    </div>
+  </section>
+</PageLayout>
