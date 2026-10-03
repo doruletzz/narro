@@ -1,18 +1,10 @@
 {
   "name": "narro",
   "compatibility_date": "2025-01-01",
-  "assets": {
-    "directory": "./dist"
-  },
+  "pages_build_output_dir": "./dist",
   "kv_namespaces": [
     {
       "binding": "SESSION"
     }
-  ],
-  "vars": {
-    "KEYSTATIC_SECRET": "",
-    "CMS_AUTH_TOKEN": "",
-    "KEYSTATIC_GITHUB_CLIENT_ID": "",
-    "KEYSTATIC_GITHUB_CLIENT_SECRET": ""
-  }
+  ]
 }
