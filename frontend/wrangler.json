@@ -1,0 +1,22 @@
+{
+  "name": "narro",
+  "pages": {
+    "buildCommand": "astro build"
+  },
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "SESSION"
+    }
+  ],
+  "vars": {
+    "KEYSTATIC_SECRET": "",
+    "CMS_AUTH_TOKEN": "",
+    "KEYSTATIC_GITHUB_CLIENT_ID": "",
+    "KEYSTATIC_GITHUB_CLIENT_SECRET": ""
+  }
+}
