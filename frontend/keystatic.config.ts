@@ -157,10 +157,9 @@ export const studiiDeCazPage = singleton({
 
 export default config({
   storage: {
-    kind: 'cloud',
-  },
-  cloud: {
-    project: 'narro/narro', // <--- REPLACE THIS WITH YOUR KEYSTATIC CLOUD PROJECT SLUG
+    kind: 'github',
+    repo: 'doruletzz/narro',
+    branch: 'main',
   },
 
   collections: {

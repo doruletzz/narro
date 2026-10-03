@@ -1,11 +1,15 @@
 import { defineConfig } from 'astro/config';
+import cloudflare from '@astrojs/cloudflare';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
+import keystatic from '@keystatic/astro';
 
-// Static site only — deployed to Cloudflare Pages.
-// The Keystatic admin lives in ../cms (deployed to Netlify at keystatic.narro.co)
-// and shares this project's keystatic.config.ts (GitHub storage).
+// Single Cloudflare Pages deployment.
+// The Keystatic admin runs as a serverless route (/keystatic) inside
+// the same deployment as the static site — it's never shipped to visitors.
 export default defineConfig({
-  integrations: [tailwind(), react()],
-  output: 'static',
+  adapter: cloudflare({
+    // Cloudflare Pages automatically detects this.
+  }),
+  integrations: [tailwind(), react(), keystatic()],
 });
