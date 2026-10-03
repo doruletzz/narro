@@ -47,14 +47,6 @@ function isProtected(pathname: string): boolean {
 export const onRequest = defineMiddleware((context, next) => {
   const { url } = context;
 
-  // The whole site is the admin — send the root to it.
-  if (url.pathname === '/') {
-    return new Response(null, {
-      status: 302,
-      headers: { Location: '/keystatic' },
-    });
-  }
-
   if (!isProtected(url.pathname)) {
     return next();
   }
