@@ -248,137 +248,143 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
     </div>
   </section>
 
-  <!-- ===== Teaser Section ===== -->
-  <section class="relative overflow-hidden py-12" style="background-color: #2200d8;">
-    <!-- Heading bar -->
-    <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-12">
-      <h2 class="fade-in text-4xl font-heading font-bold text-center uppercase tracking-[0.2em]" style="color: #ff99d8;">TEASER</h2>
-    </div>
+  <!-- ===== Teaser Section — HIDDEN (TODO: activate when ready) ===== -->
+  <div hidden>
+    <section class="relative overflow-hidden py-12" style="background-color: #2200d8;">
+      <!-- Heading bar -->
+      <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-12">
+        <h2 class="fade-in text-4xl font-heading font-bold text-center uppercase tracking-[0.2em]" style="color: #ff99d8;">TEASER</h2>
+      </div>
 
-    <!-- Full-width video — lazy-loaded: the iframe (and all of YouTube's JS,
-         video stream and third-party cookies) is only injected once the
-         section scrolls into view. Until then a thumbnail with a play button
-         is shown. -->
-    <div class="fade-in fade-delay-3 px-0 sm:px-4 md:px-8 lg:px-16">
-      <div id="teaser-video-slot" class="relative w-full aspect-[9/12] lg:aspect-video group/video">
-        <button
-          type="button"
-          id="teaser-video-placeholder"
-          class="absolute inset-0 w-full h-full cursor-pointer"
-          aria-label="Redă teaserul video"
-        >
-          <img
-            src="https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
-            alt=""
-            width="480"
-            height="360"
-            loading="lazy"
-            decoding="async"
-            class="w-full h-full object-cover"
-          />
-          <span class="absolute inset-0 flex items-center justify-center bg-black/20">
-            <span class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 shadow-lg transition-transform duration-150 hover:scale-105">
-              <svg class="w-8 h-8 md:w-10 md:h-10 ml-1" fill="#2200d8" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M8 5v14l11-7z" />
-              </svg>
+      <!-- Full-width video — lazy-loaded: the iframe (and all of YouTube's JS,
+           video stream and third-party cookies) is only injected once the
+           section scrolls into view. Until then a thumbnail with a play button
+           is shown. -->
+      <div class="fade-in fade-delay-3 px-0 sm:px-4 md:px-8 lg:px-16">
+        <div id="teaser-video-slot" class="relative w-full aspect-[9/12] lg:aspect-video group/video">
+          <button
+            type="button"
+            id="teaser-video-placeholder"
+            class="absolute inset-0 w-full h-full cursor-pointer"
+            aria-label="Redă teaserul video"
+          >
+            <img
+              src="https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
+              alt=""
+              width="480"
+              height="360"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-cover"
+            />
+            <span class="absolute inset-0 flex items-center justify-center bg-black/20">
+              <span class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 shadow-lg transition-transform duration-150 hover:scale-105">
+                <svg class="w-8 h-8 md:w-10 md:h-10 ml-1" fill="#2200d8" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
             </span>
-          </span>
-        </button>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <script>
-      // Inject the real (autoplay/muted/loop) YouTube iframe only when the
-      // teaser section is about to enter the viewport. Keeps the page free of
-      // YouTube's JS/video/cookies on initial load.
-      const teaserSlot = document.getElementById('teaser-video-slot');
-      if (teaserSlot) {
-        const loadTeaserVideo = () => {
-          if (teaserSlot.querySelector('iframe')) return;
-          const iframe = document.createElement('iframe');
-          iframe.id = 'teaser-video';
-          iframe.className = 'w-full h-full';
-          iframe.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=1&rel=0&modestbranding=1';
-          iframe.title = 'Teaser video';
-          iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
-          iframe.setAttribute('allowfullscreen', '');
-          teaserSlot.replaceChildren(iframe);
-        };
-        const teaserObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              loadTeaserVideo();
-              teaserObserver.disconnect();
-            }
-          });
-        }, { rootMargin: '300px' });
-        teaserObserver.observe(teaserSlot);
-      }
-    </script>
+      <script>
+        // Inject the real (autoplay/muted/loop) YouTube iframe only when the
+        // teaser section is about to enter the viewport. Keeps the page free of
+        // YouTube's JS/video/cookies on initial load.
+        const teaserSlot = document.getElementById('teaser-video-slot');
+        if (teaserSlot) {
+          const loadTeaserVideo = () => {
+            if (teaserSlot.querySelector('iframe')) return;
+            const iframe = document.createElement('iframe');
+            iframe.id = 'teaser-video';
+            iframe.className = 'w-full h-full';
+            iframe.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=1&rel=0&modestbranding=1';
+            iframe.title = 'Teaser video';
+            iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', '');
+            teaserSlot.replaceChildren(iframe);
+          };
+          const teaserObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                loadTeaserVideo();
+                teaserObserver.disconnect();
+              }
+            });
+          }, { rootMargin: '300px' });
+          teaserObserver.observe(teaserSlot);
+        }
+      </script>
 
-    <!-- Text below video -->
-    <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 text-center">
-      <p class="text-white/80 fade-in fade-delay-2  max-w-2xl mx-auto text-lg leading-relaxed">{teaser.description}</p>
-      <a
-        href={teaser.ctaHref}
-        class="inline-flex fade-in fade-delay-3 mt-4 items-center gap-2 px-5 py-2 text-sm font-medium text-neutral-100 border border-pink-500 rounded-full hover:bg-neutral-100 hover:border-neutral-100 hover:text-black transition-colors tracking-wide group/button"
-      >
-        {teaser.ctaLabel}
-        <ArrowIcon class="w-4 h-4 transition-transform duration-150 group-hover/button:rotate-45" />
-      </a>
-    </div>
-  </section>
-
-  <!-- ===== Studii de Caz Section ===== -->
-  <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24" style="background-color: #f5f0eb;">
-    <!-- Sketch doodle decorations -->
-    <div class="absolute top-2 sm:top-36 right-2 md:block hidden sm:right-12 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1">
-      <img src="/sketches/sketch-8.svg" alt="" width={220} loading="lazy" decoding="async" />
-    </div>
-    <div class="absolute top-2 sm:-top-16 right-2 md:block hidden sm:right-1/4 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1">
-      <img src="/sketches/sketch-1.svg" alt="" width={320} loading="lazy" decoding="async" />
-    </div>
-    <div class="absolute top-2 sm:top-1/3 mt-8 right-2 sm:right-1/3 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1">
-      <img src="/sketches/sketch-5.svg" alt="" width={320} loading="lazy" decoding="async" />
-    </div>
-    <div class="absolute top-1/3 left-12 w-72 md:block hidden pointer-events-none doodle-scribble fade-in fade-delay-2">
-      <img src="/sketches/sketch-2.svg" alt="" loading="lazy" decoding="async" />
-    </div>
-    <div class="absolute bottom-10 sm:bottom-18 -left-1/4 sm:left-12 w-80 pointer-events-none doodle-scribble fade-in fade-delay-3">
-      <img src="/sketches/sketch-3.svg" alt="" loading="lazy" decoding="async" />
-    </div>
-    <div class="absolute bottom-10 sm:bottom-1/4 md:block hidden left-1/4 sm:left-1/3 w-80 pointer-events-none doodle-scribble fade-in fade-delay-3">
-      <img src="/sketches/sketch-4.svg" alt="" loading="lazy" decoding="async" />
-    </div>
-    <div class="absolute bottom-10 sm:bottom-32 md:block hidden right-2 sm:right-4 w-80 pointer-events-none doodle-scribble fade-in fade-delay-3">
-      <img src="/sketches/sketch-6.svg" alt="" loading="lazy" decoding="async" />
-    </div>
-
-    <div class="max-w-7xl mx-auto relative z-10">
-      <h2 class="fade-in  fade-delay-1 text-4xl font-heading font-bold uppercase tracking-[0.2em] mb-4" style="color: #ff99d8;">{studiiDeCaz.label}</h2>
-      <p class="fade-in fade-delay-2 text-lg text-neutral-700 mt-2 leading-relaxed max-w-3xl mb-8">{studiiDeCaz.description}</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {studiiDeCaz.items.map((item, index) => (
-          <div class={`fade-in fade-delay-${(index % 2) * 2 + 2} ${index % 2 === 1 ? 'md:mt-[30rem]' : ''}`}>
-            {item.image && (
-              <div class="aspect-[4/3] overflow-hidden mb-4 rounded-xl border border-[#2200d8]">
-                <img src={item.image} alt={item.imageAlt} loading="lazy" decoding="async" class="w-full h-full object-cover" />
-              </div>
-            )}
-            <h3 class="text-2xl font-heading font-bold mb-2" style="color: #2200d8;">{item.title}</h3>
-            <p class="text-lg text-neutral-700 leading-relaxed mb-3">{item.description}</p>
-            <a
-              href={item.href}
-              class="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-neutral-900 border border-neutral-900 rounded-full group/button hover:border-[#2200d8] hover:bg-[#2200d8] hover:text-white transition-colors tracking-wide"
-            >
-              {item.ctaLabel}
-              <ArrowIcon class="w-4 h-4 group-hover/button:rotate-45 transition-transform duration-150" />
-            </a>
-          </div>
-        ))}
+      <!-- Text below video -->
+      <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 text-center">
+        <p class="text-white/80 fade-in fade-delay-2  max-w-2xl mx-auto text-lg leading-relaxed">{teaser.description}</p>
+        <a
+          href={teaser.ctaHref}
+          class="inline-flex fade-in fade-delay-3 mt-4 items-center gap-2 px-5 py-2 text-sm font-medium text-neutral-100 border border-pink-500 rounded-full hover:bg-neutral-100 hover:border-neutral-100 hover:text-black transition-colors tracking-wide group/button"
+        >
+          {teaser.ctaLabel}
+          <ArrowIcon class="w-4 h-4 transition-transform duration-150 group-hover/button:rotate-45" />
+        </a>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
+  <!-- /Teaser Section — HIDDEN -->
+
+  <!-- ===== Studii de Caz Section — HIDDEN (TODO: activate when ready) ===== -->
+  <div hidden>
+    <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24" style="background-color: #f5f0eb;">
+      <!-- Sketch doodle decorations -->
+      <div class="absolute top-2 sm:top-36 right-2 md:block hidden sm:right-12 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1">
+        <img src="/sketches/sketch-8.svg" alt="" width={220} loading="lazy" decoding="async" />
+      </div>
+      <div class="absolute top-2 sm:-top-16 right-2 md:block hidden sm:right-1/4 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1">
+        <img src="/sketches/sketch-1.svg" alt="" width={320} loading="lazy" decoding="async" />
+      </div>
+      <div class="absolute top-2 sm:top-1/3 mt-8 right-2 sm:right-1/3 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1">
+        <img src="/sketches/sketch-5.svg" alt="" width={320} loading="lazy" decoding="async" />
+      </div>
+      <div class="absolute top-1/3 left-12 w-72 md:block hidden pointer-events-none doodle-scribble fade-in fade-delay-2">
+        <img src="/sketches/sketch-2.svg" alt="" loading="lazy" decoding="async" />
+      </div>
+      <div class="absolute bottom-10 sm:bottom-18 -left-1/4 sm:left-12 w-80 pointer-events-none doodle-scribble fade-in fade-delay-3">
+        <img src="/sketches/sketch-3.svg" alt="" loading="lazy" decoding="async" />
+      </div>
+      <div class="absolute bottom-10 sm:bottom-1/4 md:block hidden left-1/4 sm:left-1/3 w-80 pointer-events-none doodle-scribble fade-in fade-delay-3">
+        <img src="/sketches/sketch-4.svg" alt="" loading="lazy" decoding="async" />
+      </div>
+      <div class="absolute bottom-10 sm:bottom-32 md:block hidden right-2 sm:right-4 w-80 pointer-events-none doodle-scribble fade-in fade-delay-3">
+        <img src="/sketches/sketch-6.svg" alt="" loading="lazy" decoding="async" />
+      </div>
+
+      <div class="max-w-7xl mx-auto relative z-10">
+        <h2 class="fade-in  fade-delay-1 text-4xl font-heading font-bold uppercase tracking-[0.2em] mb-4" style="color: #ff99d8;">{studiiDeCaz.label}</h2>
+        <p class="fade-in fade-delay-2 text-lg text-neutral-700 mt-2 leading-relaxed max-w-3xl mb-8">{studiiDeCaz.description}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {studiiDeCaz.items.map((item, index) => (
+            <div class={`fade-in fade-delay-${(index % 2) * 2 + 2} ${index % 2 === 1 ? 'md:mt-[30rem]' : ''}`}>
+              {item.image && (
+                <div class="aspect-[4/3] overflow-hidden mb-4 rounded-xl border border-[#2200d8]">
+                  <img src={item.image} alt={item.imageAlt} loading="lazy" decoding="async" class="w-full h-full object-cover" />
+                </div>
+              )}
+              <h3 class="text-2xl font-heading font-bold mb-2" style="color: #2200d8;">{item.title}</h3>
+              <p class="text-lg text-neutral-700 leading-relaxed mb-3">{item.description}</p>
+              <a
+                href={item.href}
+                class="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-neutral-900 border border-neutral-900 rounded-full group/button hover:border-[#2200d8] hover:bg-[#2200d8] hover:text-white transition-colors tracking-wide"
+              >
+                {item.ctaLabel}
+                <ArrowIcon class="w-4 h-4 group-hover/button:rotate-45 transition-transform duration-150" />
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- /Studii de Caz Section — HIDDEN -->
 
   <!-- ===== CTA Banner ===== -->
   <CtaBanner ctaBanner={page.ctaBanner} />
