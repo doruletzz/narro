@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "cd frontend && npx astro dev",
-    "build": "node scripts/cms-to-frontend.mjs && cd frontend && npm install && npx astro build && cp -r dist/* ../ 2>/dev/null || true",
+    "build": "node scripts/cms-to-frontend.mjs && cd frontend && npm install && npx astro build",
     "cms": "cd cms && npm install && npx astro dev",
     "cms:sync": "node scripts/cms-to-frontend.mjs"
   }
