@@ -156,11 +156,10 @@ export const studiiDeCazPage = singleton({
 });
 
 export default config({
-  storage: {
-    kind: 'github',
-    repo: 'doruletzz/narro',
-    branch: 'main',
-  },
+  // The CMS (cms/) writes content to the repo.
+  // The frontend reads from local files at build time.
+  // No storage needed — `createReader(process.cwd(), config)` reads
+  // YAML/MD from `src/content/` relative to the working directory.
 
   collections: {
     studiiDeCaz: collection({
