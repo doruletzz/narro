@@ -1,6 +1,22 @@
+# Node
+node_modules/
+.pnp.*
+.next/
+
+# Build
+dist/
+.astro/
+
+# Env (keep the actual .env, ignore the example)
+.env
+!.env.example
+
 # OS
 .DS_Store
 
-# IDE
-.vscode/
-.idea/
+# CMS build artifacts
+.netlify/
+.wrangler/
+
+# Logs
+*.log

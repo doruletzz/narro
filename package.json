@@ -1,0 +1,10 @@
+{
+  "name": "narro",
+  "private": true,
+  "scripts": {
+    "dev": "cd frontend && astro dev",
+    "build": "npm run cms:sync && cd frontend && astro build",
+    "cms": "cd cms && npx keystatic",
+    "cms:sync": "node scripts/cms-to-frontend.mjs"
+  }
+}
