@@ -1,16 +1,11 @@
 import { collection, config, fields, singleton } from '@keystatic/core';
-import path from 'path';
 
 // All content paths resolve to the project root's frontend/src/content/ folder.
 // This is the single source of truth — the CMS writes content here,
 // and the frontend reads from the same location at build time.
-const projectRoot = path.resolve(__dirname, '..');
-const content = (...segments: string[]) => path.join(projectRoot, 'frontend', 'src', 'content', ...segments);
-const images = (dir: string) => path.join(projectRoot, 'public', 'images', dir);
-
 export const servicii = singleton({
   label: 'Servicii',
-  path: content('servicii', 'index'),
+  path: '../frontend/src/content/servicii/index',
   format: { data: 'yaml' },
   schema: {
     intro: fields.text({ label: 'Intro pagină', multiline: true }),
