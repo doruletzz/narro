@@ -18,7 +18,7 @@
 
 [build]
   command = "pnpm install --frozen-lockfile && pnpm run build"
-  publish = "dist"
+  publish = "cms/dist"
 
 [build.environment]
   NODE_VERSION = "20"
