@@ -1,6 +1,5 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import Header from '../components/layouts/Header.astro';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 import { Image } from 'astro:assets';
@@ -19,7 +18,6 @@ const submitLabel = page.form?.submitLabel ?? 'Trimite';
 ---
 
 <PageLayout title={title} description={description}>
-  <Header />
   <!-- Contact Form Section — White box, thin borders, image with pink doodle -->
   <section class="px-2 sm:px-6 lg:px-8 py-12 relative min-h-screen">
     <!-- Sketch doodle decorations — scattered, fade-in -->
