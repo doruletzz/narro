@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "cd frontend && npx astro dev",
     "build": "node scripts/cms-to-frontend.mjs && cd frontend && npm install && npx astro build",
-    "cms": "cd cms && npm install && npx astro dev",
+    "cms:dev": "cd cms && npx astro dev",
+    "cms:build": "cd cms && npx astro build",
     "cms:sync": "node scripts/cms-to-frontend.mjs"
   }
 }

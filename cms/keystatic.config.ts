@@ -1,9 +1,16 @@
 import { collection, config, fields, singleton } from '@keystatic/core';
+import path from 'path';
 
- 
+// All content paths resolve to the project root's frontend/src/content/ folder.
+// This is the single source of truth — the CMS writes content here,
+// and the frontend reads from the same location at build time.
+const projectRoot = path.resolve(__dirname, '..');
+const content = (...segments: string[]) => path.join(projectRoot, 'frontend', 'src', 'content', ...segments);
+const images = (dir: string) => path.join(projectRoot, 'public', 'images', dir);
+
 export const servicii = singleton({
   label: 'Servicii',
-  path: '../frontend/src/content/servicii/index',
+  path: content('servicii', 'index'),
   format: { data: 'yaml' },
   schema: {
     intro: fields.text({ label: 'Intro pagină', multiline: true }),
@@ -80,7 +87,7 @@ export const servicii = singleton({
           }),
           {
             label: 'Servicii',
-            itemLabel: (props) => props.fields.title.value || 'Serviciu nou',
+            itemLabel: (props) => props.fields.title.value || 'Serviu nou',
           }
         ),
       }),
@@ -125,10 +132,10 @@ export const servicii = singleton({
     ),
   },
 });
- 
+
 export const studiiDeCazPage = singleton({
   label: 'Studii de Caz (pagină)',
-  path: '../frontend/src/content/studii-de-caz/index',
+  path: content('studii-de-caz', 'index'),
   format: { data: 'yaml' },
   schema: {
     label: fields.text({ label: 'Titlu secțiune', defaultValue: 'STUDII DE CAZ' }),
@@ -166,7 +173,7 @@ export default config({
   collections: {
     studiiDeCaz: collection({
       label: 'Studii de Caz (detaliat)',
-      path: '../frontend/src/content/studii-de-caz/*',
+      path: content('studii-de-caz', '*'),
       slugField: 'slug',
       schema: {
         slug: fields.slug({ name: { label: 'Slug' } }),
@@ -185,7 +192,7 @@ export default config({
   singletons: {
     homepage: singleton({
       label: 'Homepage',
-      path: '../frontend/src/content/homepage/index',
+      path: content('homepage', 'index'),
       format: { data: 'yaml' },
       schema: {
         hero: fields.object(
@@ -203,7 +210,7 @@ export default config({
             label: fields.text({ label: 'Etichetă secțiune', defaultValue: 'MANIFESTO' }),
             image: fields.image({
               label: 'Imagine',
-              directory: 'public/images/manifesto',
+              directory: images('manifesto'),
               publicPath: '/images/manifesto/',
             }),
             imageAlt: fields.text({ label: 'Text alternativ imagine' }),
@@ -228,7 +235,7 @@ export default config({
                 description: fields.text({ label: 'Descriere', multiline: true }),
                 image: fields.image({
                   label: 'Imagine',
-                  directory: 'public/images/directia',
+                  directory: images('directia'),
                   publicPath: '/images/directia/',
                 }),
                 imageAlt: fields.text({ label: 'Text alternativ imagine' }),
@@ -264,7 +271,7 @@ export default config({
                 description: fields.text({ label: 'Descriere', multiline: true }),
                 image: fields.image({
                   label: 'Imagine',
-                  directory: 'public/images/studii-de-caz',
+                  directory: images('studii-de-caz'),
                   publicPath: '/images/studii-de-caz/',
                 }),
                 imageAlt: fields.text({ label: 'Text alternativ imagine' }),
@@ -284,7 +291,7 @@ export default config({
           {
             image: fields.image({
               label: 'Imagine fundal',
-              directory: 'public/images/cta-banner',
+              directory: images('cta-banner'),
               publicPath: '/images/cta-banner/',
             }),
             imageAlt: fields.text({ label: 'Text alternativ imagine' }),
@@ -299,7 +306,7 @@ export default config({
 
     contact: singleton({
       label: 'Contact',
-      path: '../frontend/src/content/contact/index',
+      path: content('contact', 'index'),
       format: { data: 'yaml' },
       schema: {
         title: fields.text({ label: 'Titlu pagină', defaultValue: 'Contact — Narro' }),
@@ -370,7 +377,7 @@ export default config({
         ),
         image: fields.image({
           label: 'Imagine',
-          directory: 'public/images/contact',
+          directory: images('contact'),
           publicPath: '/images/contact/',
         }),
         imageAlt: fields.text({ label: 'Text alternativ imagine', defaultValue: 'Contact — Da-ne un beep' }),
@@ -381,7 +388,7 @@ export default config({
 
     programSocial: singleton({
       label: 'Program Social',
-      path: '../frontend/src/content/program-social/index',
+      path: content('program-social', 'index'),
       format: { data: 'yaml' },
       schema: {
         title: fields.text({ label: 'Titlu pagină', defaultValue: 'Program Social — Narro' }),
@@ -396,7 +403,7 @@ export default config({
             heading: fields.text({ label: 'Titlu secțiune', defaultValue: 'PRO BONO' }),
             image: fields.image({
               label: 'Imagine',
-              directory: 'public/images/program-social/pro-bono',
+              directory: images('program-social/pro-bono'),
               publicPath: '/images/program-social/pro-bono/',
             }),
             imageAlt: fields.text({
@@ -425,7 +432,7 @@ export default config({
             }),
             image: fields.image({
               label: 'Imagine',
-              directory: 'public/images/program-social/aplica-acum',
+              directory: images('program-social/aplica-acum'),
               publicPath: '/images/program-social/aplica-acum/',
             }),
             imageAlt: fields.text({
@@ -440,7 +447,7 @@ export default config({
 
     storyTime: singleton({
       label: 'Story Time',
-      path: '../frontend/src/content/story-time/index',
+      path: content('story-time', 'index'),
       format: { data: 'yaml' },
       schema: {
         title: fields.text({ label: 'Titlu pagină', defaultValue: 'Story Time — Narro' }),
@@ -454,7 +461,7 @@ export default config({
             title: fields.text({ label: 'Titlu' }),
             image: fields.image({
               label: 'Imagine',
-              directory: 'public/images/story-time',
+              directory: images('story-time'),
               publicPath: '/images/story-time/',
             }),
             imageAlt: fields.text({ label: 'Text alternativ imagine' }),
@@ -468,6 +475,44 @@ export default config({
             itemLabel: (props) => props.fields.title.value || 'Poveste nouă',
           }
         ),
+      },
+    }),
+
+    politicaCookies: singleton({
+      label: 'Politica de Cookies',
+      path: content('politica-cookies', 'index'),
+      format: { data: 'yaml' },
+      schema: {
+        title: fields.text({ label: 'Titlu pagină', defaultValue: 'Politica de Cookies — Narro' }),
+        description: fields.text({
+          label: 'Meta descriere',
+          multiline: true,
+          defaultValue: 'Politica de cookies a Narro. Află cum folosim cookies pentru o experiență mai bună.',
+        }),
+        content: fields.text({
+          label: 'Conținut',
+          multiline: true,
+          defaultValue: '# Politica de Cookies\n\n### Ce sunt cookies-urile\n\nCookies sunt fișiere mici de text care sunt stocate pe dispozitivul dumneavoastră atunci când vizitați un site web.',
+        }),
+      },
+    }),
+
+    termeniConditii: singleton({
+      label: 'Termeni și Condiții',
+      path: content('termeni-si-conditii', 'index'),
+      format: { data: 'yaml' },
+      schema: {
+        title: fields.text({ label: 'Titlu pagină', defaultValue: 'Termeni și Condiții — Narro' }),
+        description: fields.text({
+          label: 'Meta descriere',
+          multiline: true,
+          defaultValue: 'Termeni și condiții Narro. Citește condițiile de utilizare ale site-ului și serviciilor.',
+        }),
+        content: fields.text({
+          label: 'Conținut',
+          multiline: true,
+          defaultValue: '# Termeni și Condiții\n\n**Last updated: ianuarie 2025**\n\n## 1. Introducere\n\nBine ați venit pe site-ul Narro.',
+        }),
       },
     }),
   },
