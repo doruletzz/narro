@@ -17,7 +17,7 @@
 # ──────────────────────────────────────────────────────────────────────────
 
 [build]
-  command = "pnpm install --frozen-lockfile && pnpm run build"
+  command = "pnpm install --frozen-lockfile && pnpm run cms:build"
   publish = "cms/dist"
 
 [build.environment]
