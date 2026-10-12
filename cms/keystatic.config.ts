@@ -1,28 +1,173 @@
 import { config, collection, fields, singleton } from '@keystatic/core';
 
-// Import schema definitions from the frontend config (shared source of truth).
-// Astro's config loader resolves .ts extensions, so we re-export at the module level
-// so the Astro integration finds them as top-level exports to render the admin UI.
-import {
-  servicii,
-  studiiDeCazPage,
-} from '../frontend/keystatic.config.ts';
+// ---------------------------------------------------------------------------
+// Schema definitions (inlined to avoid cross-package imports).
+// Keystatic Cloud (api.keystatic.cloud) pushes content to GitHub.
+// No local API routes needed — the cms package runs Keystatic on Netlify.
+// ---------------------------------------------------------------------------
 
-// Re-export at module level so the Astro/Keystatic integration can find them.
-export { servicii, studiiDeCazPage };
+export const servicii = singleton({
+  label: 'Servicii',
+  path: 'src/content/servicii/index',
+  format: { data: 'yaml' },
+  schema: {
+    intro: fields.text({ label: 'Intro pagină', multiline: true }),
+    proiectDeBrand: fields.object(
+      {
+        title: fields.text({ label: 'Titlu' }),
+        lead: fields.text({ label: 'Lead', multiline: true }),
+        paragraphs: fields.array(
+          fields.text({ label: 'Paragraf', multiline: true }),
+          {
+            label: 'Paragafe',
+            itemLabel: (props) => (props.value || '').slice(0, 50) || 'Paragraf nou',
+          }
+        ),
+        primestiLabel: fields.text({ label: 'Etichetă listă', defaultValue: 'Primești:' }),
+        primesti: fields.array(fields.text({ label: 'Element' }), {
+          label: 'Primești (listă)',
+          itemLabel: (props) => (props.value || '').slice(0, 50) || 'Element nou',
+        }),
+        closing: fields.text({ label: 'Paragraf final', multiline: true }),
+        price: fields.text({ label: 'Preț' }),
+        image: fields.image({
+          label: 'Imagine (pentru viitor)',
+          directory: 'public',
+          publicPath: '/',
+        }),
+      },
+      { label: 'Proiectul de Brand (serviciul principal)' }
+    ),
+    categories: fields.array(
+      fields.object({
+        name: fields.text({ label: 'Nume categorie' }),
+        intro: fields.text({ label: 'Intro categorie (opțional)', multiline: true }),
+        services: fields.array(
+          fields.object({
+            title: fields.text({ label: 'Titlu' }),
+            lead: fields.text({ label: 'Lead', multiline: true }),
+            paragraphs: fields.array(
+              fields.text({ label: 'Paragraf', multiline: true }),
+              {
+                label: 'Paragafe',
+                itemLabel: (props) => (props.value || '').slice(0, 50) || 'Paragraf nou',
+              }
+            ),
+            primestiLabel: fields.text({ label: 'Etichetă listă', defaultValue: 'Primești:' }),
+            primesti: fields.array(fields.text({ label: 'Element' }), {
+              label: 'Primești (listă)',
+              itemLabel: (props) => (props.value || '').slice(0, 50) || 'Element nou',
+            }),
+            primestiInline: fields.text({ label: 'Primești (text, în loc de listă)', multiline: true }),
+            price: fields.text({ label: 'Preț' }),
+            note: fields.text({ label: 'Notă (sub preț)', multiline: true }),
+            noteHighlight: fields.checkbox({
+              label: 'Notă evidențiată (fundal galben)',
+              defaultValue: false,
+            }),
+            image: fields.image({
+              label: 'Imagine',
+              directory: 'public',
+              publicPath: '/',
+            }),
+            imageAlt: fields.text({ label: 'Text alternativ imagine' }),
+            tiers: fields.array(
+              fields.object({
+                name: fields.text({ label: 'Nume prag' }),
+                price: fields.text({ label: 'Preț' }),
+                details: fields.text({ label: 'Detalii', multiline: true }),
+              }),
+              {
+                label: 'Praguri (Social Media)',
+                itemLabel: (props) => props.fields.name.value || 'Prag nou',
+              }
+            ),
+          }),
+          {
+            label: 'Servicii',
+            itemLabel: (props) => props.fields.title.value || 'Serviciu nou',
+          }
+        ),
+      }),
+      {
+        label: 'Categorii',
+        itemLabel: (props) => props.fields.name.value || 'Categorie nouă',
+      }
+    ),
+    finePrint: fields.object(
+      {
+        sedinte: fields.object(
+          {
+            label: fields.text({ label: 'Titlu' }),
+            items: fields.array(fields.text({ label: 'Element' }), { label: 'Elemente' }),
+          },
+          { label: 'Ședințele foto-video' }
+        ),
+        separat: fields.object(
+          {
+            label: fields.text({ label: 'Titlu' }),
+            items: fields.array(fields.text({ label: 'Element' }), { label: 'Elemente' }),
+          },
+          { label: 'Ce se cotează separat' }
+        ),
+        conditii: fields.object(
+          {
+            label: fields.text({ label: 'Titlu' }),
+            items: fields.array(fields.text({ label: 'Element', multiline: true }), { label: 'Elemente' }),
+          },
+          { label: 'Condiții' }
+        ),
+      },
+      { label: 'Informații suplimentare (text mic)' }
+    ),
+    cta: fields.object(
+      {
+        description: fields.text({ label: 'Text deasupra butonului', multiline: true }),
+        text: fields.text({ label: 'Text buton' }),
+        href: fields.text({ label: 'Link buton' }),
+      },
+      { label: 'CTA final pagină' }
+    ),
+  },
+});
 
-// Cloud mode: the CMS pushes content directly to GitHub via the Keystatic
-// Cloud SaaS (api.keystatic.cloud). No local API routes are needed.
-// pathPrefix: 'frontend' offsets all content paths so cloud writes land
-// at `frontend/...` inside the repository root.
+export const studiiDeCazPage = singleton({
+  label: 'Studii de Caz (pagină)',
+  path: 'src/content/studii-de-caz/index',
+  format: { data: 'yaml' },
+  schema: {
+    label: fields.text({ label: 'Titlu secțiune', defaultValue: 'STUDII DE CAZ' }),
+    items: fields.array(
+      fields.object({
+        title: fields.text({ label: 'Titlu' }),
+        slug: fields.text({
+          label: 'Slug (link detaliat)',
+          description: 'Adresa paginii de detaliu: /studii-de-caz/<slug>',
+        }),
+        tag: fields.text({ label: 'Etichetă suprapusă pe imagine' }),
+        image: fields.image({
+          label: 'Imagine',
+          directory: 'public',
+          publicPath: '/',
+        }),
+        imageAlt: fields.text({ label: 'Text alternativ imagine' }),
+      }),
+      {
+        label: 'Studii de caz',
+        itemLabel: (props) => props.fields.title.value || 'Studiu de caz nou',
+      }
+    ),
+  },
+});
 
-// NOTE: Replace 'doruletzz/narro' with your actual Cloud project slug
-// (found in the URL after creating the project at keystatic.cloud).
+// ---------------------------------------------------------------------------
+// Cloud storage config — pushes content directly to Keystatic Cloud.
+// pathPrefix: 'frontend' offsets paths so cloud writes land in `frontend/...`
+// ---------------------------------------------------------------------------
+
 export default config({
   storage: {
     kind: 'cloud',
-    // Offset all content paths by 'frontend' so cloud writes land inside
-    // the `frontend/` subdirectory of the repo (matching `pathPrefix`).
     pathPrefix: 'frontend',
   },
   cloud: {
@@ -76,7 +221,7 @@ export default config({
             paragraphs: fields.array(
               fields.text({ label: 'Paragraf', multiline: true }),
               {
-                label: 'Paragrafe',
+                label: 'Paragafe',
                 itemLabel: (props) => props.value?.slice(0, 50) || 'Paragraf',
               }
             ),
@@ -270,7 +415,7 @@ export default config({
               defaultValue: 'Pro Bono — Echipa Narro la voluntariat',
             }),
             paragraphs: fields.array(fields.text({ label: 'Paragraf', multiline: true }), {
-              label: 'Paragrafe',
+              label: 'Paragafe',
               itemLabel: (props) => props.value?.slice(0, 50) || 'Paragraf',
             }),
           },
@@ -325,7 +470,7 @@ export default config({
             }),
             imageAlt: fields.text({ label: 'Text alternativ imagine' }),
             paragraphs: fields.array(fields.text({ label: 'Paragraf', multiline: true }), {
-              label: 'Paragrafe',
+              label: 'Paragafe',
               itemLabel: (props) => props.value?.slice(0, 50) || 'Paragraf',
             }),
           }),

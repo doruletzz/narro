@@ -1,4 +1,0 @@
-# pnpm 10+ build-script policy (mirrors frontend/pnpm-workspace.yaml)
-allowBuilds:
-  esbuild: false
-  sharp: false

@@ -2,9 +2,15 @@
   "name": "narro",
   "private": true,
   "scripts": {
-    "dev": "cd frontend && npx astro dev",
-    "build": "cd frontend && npm install && npx astro build",
-    "cms:dev": "cd cms && npx astro dev",
-    "cms:build": "cd cms && npx astro build"
+    "dev": "cd frontend && pnpm dev",
+    "build": "cd frontend && pnpm build",
+    "cms:dev": "cd cms && pnpm dev",
+    "cms:build": "cd cms && pnpm build"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   }
 }
