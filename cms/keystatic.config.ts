@@ -1,182 +1,46 @@
-import { collection, config, fields, singleton } from '@keystatic/core';
+import { config, collection, fields, singleton } from '@keystatic/core';
 
-// All content paths resolve to the project root's frontend/src/content/ folder.
-// This is the single source of truth — the CMS writes content here,
-// and the frontend reads from the same location at build time.
-export const servicii = singleton({
-  label: 'Servicii',
-  path: '../frontend/src/content/servicii/index',
-  format: { data: 'yaml' },
-  schema: {
-    intro: fields.text({ label: 'Intro pagină', multiline: true }),
-    proiectDeBrand: fields.object(
-      {
-        title: fields.text({ label: 'Titlu' }),
-        lead: fields.text({ label: 'Lead', multiline: true }),
-        paragraphs: fields.array(
-          fields.text({ label: 'Paragraf', multiline: true }),
-          {
-            label: 'Paragafe',
-            itemLabel: (props) => (props.value || '').slice(0, 50) || 'Paragraf nou',
-          }
-        ),
-        primestiLabel: fields.text({ label: 'Etichetă listă', defaultValue: 'Primești:' }),
-        primesti: fields.array(fields.text({ label: 'Element' }), {
-          label: 'Primești (listă)',
-          itemLabel: (props) => (props.value || '').slice(0, 50) || 'Element nou',
-        }),
-        closing: fields.text({ label: 'Paragraf final', multiline: true }),
-        price: fields.text({ label: 'Preț' }),
-        image: fields.image({
-          label: 'Imagine (pentru viitor)',
-          directory: 'public',
-          publicPath: '/',
-        }),
-      },
-      { label: 'Proiectul de Brand (serviciul principal)' }
-    ),
-    categories: fields.array(
-      fields.object({
-        name: fields.text({ label: 'Nume categorie' }),
-        intro: fields.text({ label: 'Intro categorie (opțional)', multiline: true }),
-        services: fields.array(
-          fields.object({
-            title: fields.text({ label: 'Titlu' }),
-            lead: fields.text({ label: 'Lead', multiline: true }),
-            paragraphs: fields.array(
-              fields.text({ label: 'Paragraf', multiline: true }),
-              {
-                label: 'Paragafe',
-                itemLabel: (props) => (props.value || '').slice(0, 50) || 'Paragraf nou',
-              }
-            ),
-            primestiLabel: fields.text({ label: 'Etichetă listă', defaultValue: 'Primești:' }),
-            primesti: fields.array(fields.text({ label: 'Element' }), {
-              label: 'Primești (listă)',
-              itemLabel: (props) => (props.value || '').slice(0, 50) || 'Element nou',
-            }),
-            primestiInline: fields.text({ label: 'Primești (text, în loc de listă)', multiline: true }),
-            price: fields.text({ label: 'Preț' }),
-            note: fields.text({ label: 'Notă (sub preț)', multiline: true }),
-            noteHighlight: fields.checkbox({
-              label: 'Notă evidențiată (fundal galben)',
-              defaultValue: false,
-            }),
-            image: fields.image({
-              label: 'Imagine',
-              directory: 'public',
-              publicPath: '/',
-            }),
-            imageAlt: fields.text({ label: 'Text alternativ imagine' }),
-            tiers: fields.array(
-              fields.object({
-                name: fields.text({ label: 'Nume prag' }),
-                price: fields.text({ label: 'Preț' }),
-                details: fields.text({ label: 'Detalii', multiline: true }),
-              }),
-              {
-                label: 'Praguri (Social Media)',
-                itemLabel: (props) => props.fields.name.value || 'Prag nou',
-              }
-            ),
-          }),
-          {
-            label: 'Servicii',
-            itemLabel: (props) => props.fields.title.value || 'Serviu nou',
-          }
-        ),
-      }),
-      {
-        label: 'Categorii',
-        itemLabel: (props) => props.fields.name.value || 'Categorie nouă',
-      }
-    ),
-    finePrint: fields.object(
-      {
-        sedinte: fields.object(
-          {
-            label: fields.text({ label: 'Titlu' }),
-            items: fields.array(fields.text({ label: 'Element' }), { label: 'Elemente' }),
-          },
-          { label: 'Ședințele foto-video' }
-        ),
-        separat: fields.object(
-          {
-            label: fields.text({ label: 'Titlu' }),
-            items: fields.array(fields.text({ label: 'Element' }), { label: 'Elemente' }),
-          },
-          { label: 'Ce se cotează separat' }
-        ),
-        conditii: fields.object(
-          {
-            label: fields.text({ label: 'Titlu' }),
-            items: fields.array(fields.text({ label: 'Element', multiline: true }), { label: 'Elemente' }),
-          },
-          { label: 'Condiții' }
-        ),
-      },
-      { label: 'Informații suplimentare (text mic)' }
-    ),
-    cta: fields.object(
-      {
-        description: fields.text({ label: 'Text deasupra butonului', multiline: true }),
-        text: fields.text({ label: 'Text buton' }),
-        href: fields.text({ label: 'Link buton' }),
-      },
-      { label: 'CTA final pagină' }
-    ),
-  },
-});
+// Import schema definitions from the frontend config (shared source of truth).
+// Astro's config loader resolves .ts extensions, so we re-export at the module level
+// so the Astro integration finds them as top-level exports to render the admin UI.
+import {
+  servicii,
+  studiiDeCazPage,
+} from '../frontend/keystatic.config.ts';
 
-export const studiiDeCazPage = singleton({
-  label: 'Studii de Caz (pagină)',
-  path: content('studii-de-caz', 'index'),
-  format: { data: 'yaml' },
-  schema: {
-    label: fields.text({ label: 'Titlu secțiune', defaultValue: 'STUDII DE CAZ' }),
-    items: fields.array(
-      fields.object({
-        title: fields.text({ label: 'Titlu' }),
-        slug: fields.text({
-          label: 'Slug (link detaliat)',
-          description: 'Adresa paginii de detaliu: /studii-de-caz/<slug>',
-        }),
-        tag: fields.text({ label: 'Etichetă suprapusă pe imagine' }),
-        image: fields.image({
-          label: 'Imagine',
-          directory: 'public',
-          publicPath: '/',
-        }),
-        imageAlt: fields.text({ label: 'Text alternativ imagine' }),
-      }),
-      {
-        label: 'Studii de caz',
-        itemLabel: (props) => props.fields.title.value || 'Studiu de caz nou',
-      }
-    ),
-  },
-});
+// Re-export at module level so the Astro/Keystatic integration can find them.
+export { servicii, studiiDeCazPage };
 
+// Cloud mode: the CMS pushes content directly to GitHub via the Keystatic
+// Cloud SaaS (api.keystatic.cloud). No local API routes are needed.
+// pathPrefix: 'frontend' offsets all content paths so cloud writes land
+// at `frontend/...` inside the repository root.
+
+// NOTE: Replace 'doruletzz/narro' with your actual Cloud project slug
+// (found in the URL after creating the project at keystatic.cloud).
 export default config({
   storage: {
     kind: 'cloud',
+    // Offset all content paths by 'frontend' so cloud writes land inside
+    // the `frontend/` subdirectory of the repo (matching `pathPrefix`).
+    pathPrefix: 'frontend',
   },
   cloud: {
-    project: 'narro/narro', // <--- REPLACE THIS WITH YOUR KEYSTATIC CLOUD PROJECT SLUG
+    project: 'narro/narro', // <--- REPLACE with your Cloud project slug
   },
 
   collections: {
     studiiDeCaz: collection({
       label: 'Studii de Caz (detaliat)',
-      path: content('studii-de-caz', '*'),
+      path: 'src/content/studii-de-caz/*',
       slugField: 'slug',
       schema: {
         slug: fields.slug({ name: { label: 'Slug' } }),
         title: fields.text({ label: 'Titlu' }),
         bannerImage: fields.image({
           label: 'Imagine banner',
-          directory: 'public',
-          publicPath: '/',
+          directory: 'public/images/manifesto',
+          publicPath: '/images/manifesto/',
         }),
         bannerImageAlt: fields.text({ label: 'Text alternativ imagine' }),
         content: fields.mdx({ label: 'Conținut', extension: 'md' }),
@@ -187,7 +51,7 @@ export default config({
   singletons: {
     homepage: singleton({
       label: 'Homepage',
-      path: content('homepage', 'index'),
+      path: 'src/content/homepage/index',
       format: { data: 'yaml' },
       schema: {
         hero: fields.object(
@@ -205,7 +69,7 @@ export default config({
             label: fields.text({ label: 'Etichetă secțiune', defaultValue: 'MANIFESTO' }),
             image: fields.image({
               label: 'Imagine',
-              directory: images('manifesto'),
+              directory: 'public/images/manifesto',
               publicPath: '/images/manifesto/',
             }),
             imageAlt: fields.text({ label: 'Text alternativ imagine' }),
@@ -230,7 +94,7 @@ export default config({
                 description: fields.text({ label: 'Descriere', multiline: true }),
                 image: fields.image({
                   label: 'Imagine',
-                  directory: images('directia'),
+                  directory: 'public/images/directia',
                   publicPath: '/images/directia/',
                 }),
                 imageAlt: fields.text({ label: 'Text alternativ imagine' }),
@@ -266,7 +130,7 @@ export default config({
                 description: fields.text({ label: 'Descriere', multiline: true }),
                 image: fields.image({
                   label: 'Imagine',
-                  directory: images('studii-de-caz'),
+                  directory: 'public/images/studii-de-caz',
                   publicPath: '/images/studii-de-caz/',
                 }),
                 imageAlt: fields.text({ label: 'Text alternativ imagine' }),
@@ -286,7 +150,7 @@ export default config({
           {
             image: fields.image({
               label: 'Imagine fundal',
-              directory: images('cta-banner'),
+              directory: 'public/images/cta-banner',
               publicPath: '/images/cta-banner/',
             }),
             imageAlt: fields.text({ label: 'Text alternativ imagine' }),
@@ -301,7 +165,7 @@ export default config({
 
     contact: singleton({
       label: 'Contact',
-      path: content('contact', 'index'),
+      path: 'src/content/contact/index',
       format: { data: 'yaml' },
       schema: {
         title: fields.text({ label: 'Titlu pagină', defaultValue: 'Contact — Narro' }),
@@ -372,7 +236,7 @@ export default config({
         ),
         image: fields.image({
           label: 'Imagine',
-          directory: images('contact'),
+          directory: 'public/images/contact',
           publicPath: '/images/contact/',
         }),
         imageAlt: fields.text({ label: 'Text alternativ imagine', defaultValue: 'Contact — Da-ne un beep' }),
@@ -383,7 +247,7 @@ export default config({
 
     programSocial: singleton({
       label: 'Program Social',
-      path: content('program-social', 'index'),
+      path: 'src/content/program-social/index',
       format: { data: 'yaml' },
       schema: {
         title: fields.text({ label: 'Titlu pagină', defaultValue: 'Program Social — Narro' }),
@@ -398,7 +262,7 @@ export default config({
             heading: fields.text({ label: 'Titlu secțiune', defaultValue: 'PRO BONO' }),
             image: fields.image({
               label: 'Imagine',
-              directory: images('program-social/pro-bono'),
+              directory: 'public/images/program-social/pro-bono',
               publicPath: '/images/program-social/pro-bono/',
             }),
             imageAlt: fields.text({
@@ -427,7 +291,7 @@ export default config({
             }),
             image: fields.image({
               label: 'Imagine',
-              directory: images('program-social/aplica-acum'),
+              directory: 'public/images/program-social/aplica-acum',
               publicPath: '/images/program-social/aplica-acum/',
             }),
             imageAlt: fields.text({
@@ -442,7 +306,7 @@ export default config({
 
     storyTime: singleton({
       label: 'Story Time',
-      path: content('story-time', 'index'),
+      path: 'src/content/story-time/index',
       format: { data: 'yaml' },
       schema: {
         title: fields.text({ label: 'Titlu pagină', defaultValue: 'Story Time — Narro' }),
@@ -456,7 +320,7 @@ export default config({
             title: fields.text({ label: 'Titlu' }),
             image: fields.image({
               label: 'Imagine',
-              directory: images('story-time'),
+              directory: 'public/images/story-time',
               publicPath: '/images/story-time/',
             }),
             imageAlt: fields.text({ label: 'Text alternativ imagine' }),
@@ -475,7 +339,7 @@ export default config({
 
     politicaCookies: singleton({
       label: 'Politica de Cookies',
-      path: content('politica-cookies', 'index'),
+      path: 'src/content/politica-cookies/index',
       format: { data: 'yaml' },
       schema: {
         title: fields.text({ label: 'Titlu pagină', defaultValue: 'Politica de Cookies — Narro' }),
@@ -494,7 +358,7 @@ export default config({
 
     termeniConditii: singleton({
       label: 'Termeni și Condiții',
-      path: content('termeni-si-conditii', 'index'),
+      path: 'src/content/termeni-si-conditii/index',
       format: { data: 'yaml' },
       schema: {
         title: fields.text({ label: 'Titlu pagină', defaultValue: 'Termeni și Condiții — Narro' }),
