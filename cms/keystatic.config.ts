@@ -171,7 +171,7 @@ export default config({
     pathPrefix: 'frontend',
   },
   cloud: {
-    project: 'doruletzz/narro',
+    project: 'narro/narro',
   },
 
   collections: {
