@@ -26,7 +26,7 @@ export default config({
     pathPrefix: 'frontend',
   },
   cloud: {
-    project: 'narro/narro', // <--- REPLACE with your Cloud project slug
+    project: 'doruletzz/narro',
   },
 
   collections: {
