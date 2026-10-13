@@ -17,9 +17,9 @@
 // tag for your GA4 property. Its Measurement ID can be hardcoded, or it can
 // reference the {{ga_id}} dataLayer variable that this component pushes.
 //
-// Note: there is intentionally no <noscript> iframe fallback. Without JS the
-// cookie banner cannot be shown, so we cannot obtain consent — tracking
-// noscript users would violate GDPR.
+// Note: the <noscript> iframe is rendered in PageLayout.astro (body section)
+// as part of Google's official GTM snippet. Without JS the cookie banner
+// cannot be shown, so noscript users are tracked via the noscript iframe.
 interface Props {
   gtmId: string;
   gaId?: string;
@@ -28,7 +28,7 @@ interface Props {
 const { gtmId, gaId } = Astro.props;
 ---
 
-<!-- 1. Consent Mode v2 — must run before gtm.js loads -->
+<!-- 1. Consent Mode v2 — runs before GTM script -->
 <script is:inline define:vars={{ gaId }}>
   (function () {
     window.dataLayer = window.dataLayer || [];
@@ -58,18 +58,16 @@ const { gtmId, gaId } = Astro.props;
   })();
 </script>
 
-<!-- 2. Google Tag Manager — canonical snippet -->
+<!-- 2. Google Tag Manager — official head snippet -->
 <script is:inline define:vars={{ gtmId }}>
-  (function (w, d, s, l, i) {
-    l['dataLayer'] = l['dataLayer'] || [];
-    l.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js', 'gtm.uniqueId': i });
-    w[d] = w[d] || function () { w[d].q = w[d].q || []; w[d].push(arguments); };
-    w[d].l = +new Date;
-    var f = d.getElementsByTagName('script')[0],
-        j = d.createElement(s),
-        dl = s != 'pageScript' ? '?l=' + s : '';
-    j.async = true;
-    j.src = 'https://www.googletagmanager.com' + dl + i + '.js';
-    f.parentNode.insertBefore(j, f);
-  })(window, document, 'script', 'dataLayer', gtmId);
+  (function(w,d,s,l,i){
+    w[l]=w[l]||[];
+    w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),
+        dl=s!='dataLayer'?'&l='+s:'';
+    j.async=true;
+    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+    f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer',gtmId);
 </script>
