@@ -4,7 +4,8 @@ description: >-
   Da-ne un beep!
 heading: DA-NE UN BEEP
 intro: >-
-  Scrie-ne ce faci și ce te doare. Răspundem în două zile lucrătoare, cu un om, nu cu un formular automat.
+  Scrie-ne ce faci și ce te doare. Răspundem în două zile lucrătoare, cu un om,
+  nu cu un formular automat.
 form:
   submitLabel: Trimite
   fields:
@@ -56,8 +57,8 @@ form:
       inputType: text
       required: false
       options:
-        - label: Sub 5.000 EUR
-          value: <5000
+        - label: Sub 1.500 EUR
+          value: <1.500 EUR
         - label: 5.000 - 10.000 EUR
           value: 5000-10000
         - label: 10.000 - 20.000 EUR
