@@ -1,19 +1,36 @@
 ---
 // Cookie Consent Banner Component
-// Implements localStorage-based consent tracking with smooth animation
-// Matches Figma design tokens (cream, primary, accent)
-
+//
+// Consent model (per the legal review):
+//   * Necessary cookies always run; analytics (GA4 via GTM) load ONLY after
+//     the visitor clicks Accept. Refuz / closing the banner loads nothing.
+//   * The choice is remembered in localStorage AND in a first-party cookie
+//     (6 months) so it survives localStorage being cleared.
+//   * "Detalii" links to the cookie policy. The footer's "Setări cookies"
+//     reopens this banner (window.__narroOpenCookieConsent).
+//
+// Matches Figma design tokens (cream, primary, accent).
 interface Props {
   acceptText?: string;
   declineText?: string;
+  detailsText?: string;
   message?: string;
   policyLink?: string;
+}
+
+declare global {
+  interface Window {
+    __narroEnableAnalytics?: () => void;
+    __narroDisableAnalytics?: () => void;
+    __narroOpenCookieConsent?: () => void;
+  }
 }
 
 const {
   acceptText = 'Accept',
   declineText = 'Refuz',
-  message = 'Folosim cookie-uri pentru a îmbunătăți experiența ta. Continui, și de acord cu politica noastră de cookie-uri.',
+  detailsText = 'Detalii',
+  message = 'Folosim cookie-uri necesare ca să meargă site-ul și, doar dacă ești de acord, cookie-uri de analiză ca să vedem ce citesc oamenii.',
   policyLink = '/politica-cookies',
 } = Astro.props;
 ---
@@ -26,25 +43,25 @@ const {
   aria-live="polite"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 mb-8">
-    <div class="bg-[#2200d8] text-white rounded-2xl shadow-lg p-4 sm:p-3 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-      <p class="flex-1 text-lg text-white/80 lg:ml-4">
+    <div class="bg-[#2200d8] text-white rounded-2xl shadow-lg p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <p class="flex-1 text-base sm:text-lg text-white/85 lg:ml-4">
         {message}
-        <a href={policyLink} class="text-[#ff99d8] hover:text-white underline transition-colors ml-1">
-          Cookie Policy
+        <a href={policyLink} class="text-[#ff99d8] hover:text-white underline underline-offset-2 transition-colors ml-1">
+          {detailsText}
         </a>
       </p>
       <div class="flex items-center gap-3 flex-shrink-0 mr-1">
         <button
           type="button"
           id="cookie-decline"
-          class="px-4 py-2 text-lg w-24 font-medium text-white bg-transparent border border-white/30 rounded-xl hover:bg-white/10 hover:border-white/50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff99d8] focus:ring-offset-2 focus:ring-offset-[#2200d8]"
+          class="px-4 py-2 text-base sm:text-lg w-24 font-medium text-white bg-transparent border border-white/30 rounded-xl hover:bg-white/10 hover:border-white/50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff99d8] focus:ring-offset-2 focus:ring-offset-[#2200d8]"
         >
           {declineText}
         </button>
         <button
           type="button"
           id="cookie-accept"
-          class="px-4 py-2 text-lg w-24 font-medium text-primary bg-[#ff99d8] rounded-lg hover:bg-[#ff88c8] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff99d8] focus:ring-offset-2 focus:ring-offset-[#2200d8]"
+          class="px-4 py-2 text-base sm:text-lg w-24 font-medium text-primary bg-[#ff99d8] rounded-lg hover:bg-[#ff88c8] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ff99d8] focus:ring-offset-2 focus:ring-offset-[#2200d8]"
         >
           {acceptText}
         </button>
@@ -54,55 +71,73 @@ const {
 </div>
 
 <script>
+
   const COOKIE_CONSENT_KEY = 'narro_cookie_consent';
-  const banner = document.getElementById('cookie-consent');
-  const acceptBtn = document.getElementById('cookie-accept');
-  const declineBtn = document.getElementById('cookie-decline');
+  const SIX_MONTHS_SECONDS = 60 * 60 * 24 * 182;
 
-  function setConsent(accepted: boolean) {
-    localStorage.setItem(COOKIE_CONSENT_KEY, String(accepted));
-    banner?.classList.add('translate-y-full');
-    updateConsentMode(accepted);
-  }
+  function initCookieConsent() {
+    const banner = document.getElementById('cookie-consent');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const declineBtn = document.getElementById('cookie-decline');
 
-  // Google Consent Mode v2 — release (or keep) the GA4 tag that GTM holds.
-  // On accept, the GA4 tag fires retroactively and records the current
-  // pageview immediately, without waiting for the next page load.
-  // No-op if GTM is not loaded (e.g. no container configured).
-  function updateConsentMode(accepted: boolean) {
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('consent', 'update', {
-      ad_storage: accepted ? 'granted' : 'denied',
-      ad_user_data: accepted ? 'granted' : 'denied',
-      ad_personalization: accepted ? 'granted' : 'denied',
-      analytics_storage: accepted ? 'granted' : 'denied',
-    });
-  }
+    if (!banner) return;
 
-  function showBanner() {
-    setTimeout(() => {
-      banner?.classList.remove('translate-y-full');
-    }, 500);
-  }
+    function getConsent() {
+      const match = document.cookie.match(
+        /(?:^|;\s*)narro_cookie_consent=([^;]*)/
+      );
 
-  // Check if consent was already given
-  const existingConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
-  if (!existingConsent) {
-    showBanner();
-  }
+      if (match) return decodeURIComponent(match[1]);
 
-  acceptBtn?.addEventListener('click', () => setConsent(true));
-  declineBtn?.addEventListener('click', () => setConsent(false));
-
-  // Keyboard support: Enter/Space on buttons
-  [acceptBtn, declineBtn].forEach((btn) => {
-    btn?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        btn.click();
+      try {
+        return localStorage.getItem(COOKIE_CONSENT_KEY);
+      } catch {
+        return null;
       }
-    });
-  });
+    }
+
+    function setConsent(accepted: boolean) {
+      const value = accepted ? '1' : '0';
+
+      try {
+        localStorage.setItem(COOKIE_CONSENT_KEY, value);
+      } catch {
+        // Storage unavailable.
+      }
+
+      document.cookie =
+        `${COOKIE_CONSENT_KEY}=${value}; path=/; max-age=${SIX_MONTHS_SECONDS}; SameSite=Lax`;
+
+      banner.classList.add('translate-y-full');
+
+      if (accepted) {
+        (window as any).__narroEnableAnalytics?.();
+      } else {
+        (window as any).__narroDisableAnalytics?.();
+      }
+    }
+
+    function openBanner() {
+      banner.classList.remove('translate-y-full');
+    }
+
+    // Expose function for the footer cookie settings button.
+    (window as any).__narroOpenCookieConsent = openBanner;
+
+    // Show banner only if no decision has been saved.
+    if (getConsent() === null) {
+      setTimeout(openBanner, 500);
+    }
+
+    acceptBtn?.addEventListener('click', () => setConsent(true));
+    declineBtn?.addEventListener('click', () => setConsent(false));
+
+    document.getElementById('cookie-settings')?.addEventListener(
+      'click',
+      openBanner
+    );
+  }
+
+  initCookieConsent();
+
 </script>

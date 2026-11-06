@@ -1,15 +1,16 @@
 ---
-// Footer component — matches Figma: purple-to-blue gradient bg, logo, 5-column layout, social media, copyright
+// Footer component — matches Figma: purple bg, logo, link columns, social media,
+// company data (Legea 365/2002), EU co-financing emblem, legal links, cookie settings.
 ---
 
 <footer class="bg-[#2200d8] text-white" role="contentinfo">
-  <div class="max-w-6xl mx-auto px-2">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Main footer content -->
     <div class="py-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8">
-      
+
       <!-- Logo & Brand info column -->
       <div class="col-span-2 md:col-span-3 lg:col-span-2 space-y-3">
-        <a href="/" class="inline-block flex-shrink-0 fill-red-500">
+        <a href="/" class="inline-block flex-shrink-0">
           <img src="/logo-light.svg" width="64" height="32" alt="Narro" />
         </a>
         <p class="text-md text-white/80">narro, ergo sum — povestesc, deci exist.</p>
@@ -20,7 +21,7 @@
       <div>
         <h3 class="text-md font-semibold tracking-wider text-[#ff99d8] mb-3">Linkuri</h3>
         <div class="space-y-2">
-          <a href="/" class="block text-md text-white/80 hover:text-white transition-colors">Acasa</a>
+          <a href="/" class="block text-md text-white/80 hover:text-white transition-colors">Acasă</a>
           <a href="/servicii" class="block text-md text-white/80 hover:text-white transition-colors">Servicii</a>
           <!-- <a href="/studii-de-caz" class="block text-md text-white/80 hover:text-white transition-colors">Portofoliu</a> --> <!-- HIDDEN (TODO: activate when ready) -->
         </div>
@@ -54,7 +55,7 @@
           </a>
           <a href="https://www.instagram.com/narrobranding" class="flex items-center gap-2 text-md text-white/80 hover:text-white transition-colors">
             <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324A6.162 6.162 0 0012 5.838zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
             </svg>
             <span>@narrobranding</span>
           </a>
@@ -62,14 +63,49 @@
       </div>
     </div>
 
-    <!-- Legal links row -->
-    <div class="pb-4 flex justify-center gap-6 text-md text-white/70 mt-12">
-      <a href="/politica-cookies" class="hover:text-white/80 transition-colors">Politica Cookies</a>
-      <a href="/termeni-si-conditii" class="hover:text-white/80 transition-colors">Termeni și Condiții</a>
+    <!-- Company data (Legea 365/2002) -->
+    <div class="mt-4 pt-6 border-t border-white/10">
+      <p class="text-sm text-white/70 leading-relaxed">
+        NARRO BRANDING SRL · CUI 52551185 · Nr. Reg. Com. J2025071996005 · EUID ROONRC.J2025071996005 ·
+        Sediu: Sat Florești, com. Florești, Str. Ioachim Olteanu nr. 27A, jud. Cluj ·
+        Întreprindere socială, atestat seria CJ/A nr. 0394/13.10.2025 ·
+        <a href="mailto:narro.branding@gmail.com" class="underline underline-offset-2 hover:text-white transition-colors">narro.branding@gmail.com</a>
+      </p>
+    </div>
+
+    <!-- Legal links row + cookie settings -->
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-md text-white/70">
+      <a href="/informatii-legale" class="hover:text-white/90 transition-colors">Informații legale</a>
+      <a href="/politica-de-confidentialitate" class="hover:text-white/90 transition-colors">Politica de confidențialitate</a>
+      <a href="/politica-cookies" class="hover:text-white/90 transition-colors">Politica de cookies</a>
+      <a href="/termeni-si-conditii" class="hover:text-white/90 transition-colors">Termeni și condiții</a>
+      <button
+        type="button"
+        id="cookie-settings"
+        class="hover:text-white/90 transition-colors underline underline-offset-2 cursor-pointer"
+      >
+        Setări cookies
+      </button>
+    </div>
+
+    <!-- EU co-financing emblem + consumer protection (SAL ANPC) -->
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
+      <a href="https://inforegio.ec.europa.eu/funding/" class="flex flex-col items-center gap-1" title="Cofinanțat de Uniunea Europeană">
+        <span class="bg-white rounded-md p-2">
+          <img src="/logos/eu-emblem.svg" alt="Cofinanțat de Uniunea Europeană" class="h-8 w-auto" width="147" height="48" loading="lazy" decoding="async" />
+        </span>
+        <span class="text-xs text-white/70">Cofinanțat de Uniunea Europeană</span>
+      </a>
+      <a href="https://anpc.ro/ce-este-sal/" class="flex flex-col items-center gap-1" title="Soluționarea alternativă a litigiilor (SAL) — ANPC">
+        <span class="bg-white rounded-md p-2">
+          <img src="/logos/sal.png" alt="SAL — Soluționarea alternativă a litigiilor" class="h-7 w-auto" width="201" height="50" loading="lazy" decoding="async" />
+        </span>
+        <span class="text-xs text-white/70">Protejați ca consumer — SAL</span>
+      </a>
     </div>
 
     <!-- Bottom bar -->
-    <div class="py-4 border-t border-white/5">
+    <div class="py-4 mt-8 border-t border-white/5">
       <p class="text-md text-white/65 text-center">2026© NARRO BRANDING SRL. Toate drepturile rezervate.</p>
     </div>
   </div>

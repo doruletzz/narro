@@ -244,7 +244,7 @@ export default config({
         teaser: fields.object(
           {
             label: fields.text({ label: 'Etichetă secțiune', defaultValue: 'TEASER' }),
-            youtubeId: fields.text({ label: 'ID video YouTube', defaultValue: 'dQw4w9WgXcQ' }),
+            youtubeId: fields.text({ label: 'ID video YouTube (lasă gol până ai video)' }),
             description: fields.text({ label: 'Descriere', multiline: true }),
             ctaLabel: fields.text({ label: 'Text buton', defaultValue: 'Află mai multe' }),
             ctaHref: fields.text({ label: 'Link buton', defaultValue: '/contact' }),
@@ -503,6 +503,44 @@ export default config({
           label: 'Conținut',
           multiline: true,
           defaultValue: '# Termeni și Condiții\n\n**Last updated: ianuarie 2025**\n\n## 1. Introducere\n\nBine ați venit pe site-ul Narro.',
+        }),
+      },
+    }),
+
+    informatiiLegale: singleton({
+      label: 'Informații legale',
+      path: 'src/content/informatii-legale/index',
+      format: { data: 'yaml' },
+      schema: {
+        title: fields.text({ label: 'Titlu pagină', defaultValue: 'Informații legale — Narro' }),
+        description: fields.text({
+          label: 'Meta descriere',
+          multiline: true,
+          defaultValue: 'Termeni și condiții, politica de confidențialitate, politica de cookies și datele firmei NARRO BRANDING SRL.',
+        }),
+        content: fields.text({
+          label: 'Conținut',
+          multiline: true,
+          defaultValue: '# Informații legale\n\nAici găsești tot ce ține de partea legală a site-ului și a colaborării cu noi.',
+        }),
+      },
+    }),
+
+    politicaConfidentialitate: singleton({
+      label: 'Politica de confidențialitate',
+      path: 'src/content/politica-de-confidentialitate/index',
+      format: { data: 'yaml' },
+      schema: {
+        title: fields.text({ label: 'Titlu pagină', defaultValue: 'Politica de confidențialitate — Narro' }),
+        description: fields.text({
+          label: 'Meta descriere',
+          multiline: true,
+          defaultValue: 'Cum colectăm, folosim și păstrăm datele tale pe narro.co.com, în conformitate cu GDPR.',
+        }),
+        content: fields.text({
+          label: 'Conținut',
+          multiline: true,
+          defaultValue: '# Politica de confidențialitate\n\n**Ultima actualizare: 6 noiembrie 2026**',
         }),
       },
     }),

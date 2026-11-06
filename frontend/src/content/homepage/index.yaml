@@ -73,10 +73,9 @@ directia:
       href: /servicii#social-media
 teaser:
   label: TEASER
-  youtubeId: dQw4w9WgXcQ
-  description: >-
-    Lorem ipsum dolor sit amet consectetur. Facilisis elit amet sed sem nunc
-    mattis. Quis etiam sem nunc mattis amet bibendum risus.
+  # No video yet — the section stays hidden until a real YouTube ID is added.
+  youtubeId: ''
+  description: ''
   ctaLabel: Află mai multe
   ctaHref: /contact
 studiiDeCaz:

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://narro.ro/sitemap.xml
+Sitemap: https://narro.co.com/sitemap.xml

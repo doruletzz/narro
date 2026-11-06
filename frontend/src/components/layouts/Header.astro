@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 // Header component — matches Figma: white bg, purple text, narro logo, contact pill button
 ---
 
-<header class="bg-[#f5f0eb] -mb-4 sticky top-0 z-50 transition-[shadow,transform] duration-[700ms] ease-in-out" id="site-header">
+<header class="bg-[#f5f0eb] -mb-4 sticky top-0 z-50 transition-[shadow,transform] max-w-[100vw] overflow-hidden duration-[700ms] ease-in-out" id="site-header">
   <div class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
@@ -61,7 +61,7 @@ import { Image } from "astro:assets";
 
   <!-- Mobile menu panel (slides in from right) -->
   <div
-    class="lg:hidden fixed inset-y-0 right-0 z-50 w-[80vw] max-w-sm bg-[#f5f0eb] shadow-2xl translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto"
+    class="lg:hidden fixed inset-y-0 right-0 z-50 w-[80vw] max-w-sm bg-[#f5f0eb] translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto"
     id="mobile-menu"
     aria-hidden="true"
     inert

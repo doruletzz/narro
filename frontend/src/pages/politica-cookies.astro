@@ -88,6 +88,33 @@ const content = await renderMarkdown(page.content || '');
       border-radius: 0.75rem;
       margin: 1.5rem 0;
     }
+    .studiu-markdown table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 1.5rem;
+      font-size: 0.9375rem;
+    }
+    .studiu-markdown th,
+    .studiu-markdown td {
+      border: 1px solid #d8d2c8;
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .studiu-markdown th {
+      background: #2200d8;
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .studiu-markdown tr:nth-child(even) td {
+      background: #faf7f2;
+    }
+    .studiu-markdown code {
+      background: #efe9df;
+      padding: 0.1em 0.4em;
+      border-radius: 0.25rem;
+      font-size: 0.9em;
+    }
   </style>
 
   <section class="px-2 sm:px-6 lg:px-8 py-16 relative bg-[#f5f0eb]">

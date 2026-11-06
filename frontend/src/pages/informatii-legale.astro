@@ -1,0 +1,106 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { renderMarkdown } from '@/lib/markdown';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const page = await reader.singletons.informatiiLegale.read();
+
+if (!page) {
+  return Astro.redirect('/');
+}
+
+const { title, description } = page;
+const content = await renderMarkdown(page.content || '');
+---
+
+<PageLayout title={`${title}`} description={description}>
+  <style is:global>
+    .studiu-markdown {
+      color: #37352f;
+      line-height: 1.75;
+      font-size: 1.0625rem;
+    }
+    .studiu-markdown > :first-child {
+      margin-top: 0;
+    }
+    .studiu-markdown h1,
+    .studiu-markdown h2,
+    .studiu-markdown h3 {
+      font-family: var(--font-heading, inherit);
+      font-weight: 700;
+      color: #2200d8;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+    .studiu-markdown h1 {
+      font-size: 2.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .studiu-markdown h2 {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #ff99d8;
+    }
+    .studiu-markdown h3 {
+      font-size: 1.25rem;
+    }
+    .studiu-markdown p {
+      margin-bottom: 1.25rem;
+    }
+    .studiu-markdown ul,
+    .studiu-markdown ol {
+      margin: 0 0 1.25rem 1.5rem;
+    }
+    .studiu-markdown ul {
+      list-style: disc;
+    }
+    .studiu-markdown ol {
+      list-style: decimal;
+    }
+    .studiu-markdown li {
+      margin-bottom: 0.5rem;
+    }
+    .studiu-markdown a {
+      color: #2200d8;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .studiu-markdown a:hover {
+      color: #ff99d8;
+    }
+    .studiu-markdown strong {
+      font-weight: 700;
+      color: #171614;
+    }
+    .studiu-markdown blockquote {
+      border-left: 3px solid #ff99d8;
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      color: #525252;
+      font-style: italic;
+    }
+    .studiu-markdown img {
+      border-radius: 0.75rem;
+      margin: 1.5rem 0;
+    }
+  </style>
+
+  <section class="px-2 sm:px-6 lg:px-8 py-16 relative bg-[#f5f0eb]">
+    <div class="max-w-3xl mx-auto z-10">
+      <div class="studiu-markdown [&>*]:z-10" set:html={content} />
+
+      <!-- Sigle proiect: emblema UE, Guvernul României, SIAB Development, Social Rural -->
+      <div class="mt-10 flex flex-wrap justify-center items-center gap-x-12 md:gap-x-16 gap-y-6 rounded-3xl bg-white md:p-6 p-3">
+        <img src="/logos/gov-romania.jpg" alt="Guvernul României" class="h-12 w-auto" width="275" height="124" loading="lazy" decoding="async" />
+        <img src="/logos/eu-emblem.png" alt="Cofinanțat de Uniunea Europeană" class="h-10 w-auto" width="147" height="48" loading="lazy" decoding="async" />
+        <img src="/logos/siab.png" alt="SIAB Development" class="h-10 bg-gray-900 rounded-md p-1 w-auto" width="300" height="98" loading="lazy" decoding="async" />
+        <img src="/logos/social-rural.jpg" alt="Social Rural – Oportunități de dezvoltare" class="h-12 w-auto" width="220" height="60" loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </section>
+</PageLayout>

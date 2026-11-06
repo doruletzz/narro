@@ -60,7 +60,13 @@ const introWords = (intro || '').split(' ').filter(Boolean);
       transform: rotate(45deg);
     }
 
-    /* Category image swap */
+    /* Category image area — hidden until a service is clicked (no white
+       block by default). The accordion grows to fill the freed space. */
+    .cat-imgs {
+      opacity: 0;
+    }
+
+    /* One image per service; only the active one is shown. */
     .cat-img {
       position: absolute;
       inset: 0;
@@ -92,62 +98,35 @@ const introWords = (intro || '').split(' ').filter(Boolean);
 
     document.querySelectorAll('.doodle-scribble').forEach((el) => observer.observe(el));
 
-    // Service accordion + image swap logic
+    // Service accordion + image swap logic.
+    // Images are hidden by default (no white block) and appear only when a
+    // service is clicked. Each image is lazy-loaded on first activation.
     const servicesWrappers = document.querySelectorAll('.services-accordion-wrapper');
     servicesWrappers.forEach((servicesWrapper) => {
       const serviceCards = servicesWrapper.querySelectorAll('.service-card');
       if (serviceCards.length === 0) return;
 
-      // Find images in the SAME category row (parent of servicesWrapper)
+      // Find the image area + images in the SAME category row.
       const catFlexRow = servicesWrapper.closest('.flex.gap-4');
-      const catImgs = catFlexRow ? catFlexRow.querySelectorAll('.cat-img') : [];
-
-      // Single service: auto-open
-      if (serviceCards.length === 1) {
-        serviceCards[0].classList.add('is-active');
-        if (catImgs.length > 0) catImgs[0].classList.add('is-active');
-        return;
-      }
+      const catImgsWrap = catFlexRow ? catFlexRow.querySelector('.cat-imgs') : null;
+      const catImgs = catFlexRow ? Array.from(catFlexRow.querySelectorAll('.cat-img')) : [];
 
       const DEFAULT_ACTIVE_INDEX = 0;
-      let hoverTimeout = null; // Timer reference scoped to this accordion instance
-
       const setActiveService = (index) => {
         serviceCards.forEach((card, i) => card.classList.toggle('is-active', i === index));
-        catImgs.forEach((img, i) => img.classList.toggle('is-active', i === index));
+
       };
 
+      // Click-only on all viewports (no hover). Let inner links work.
       serviceCards.forEach((card, index) => {
-        card.addEventListener('mouseenter', () => {
-          if (window.innerWidth < 768) return;
-
-          // Clear any pending state reset or card switch
-          clearTimeout(hoverTimeout);
-
-          // Delay execution by 100ms to ignore accidental mouse passes
-          hoverTimeout = setTimeout(() => {
-            setActiveService(index);
-          }, 100);
-        });
-
         card.addEventListener('click', (e) => {
-          if (window.innerWidth >= 768 || e.target.closest('a')) return;
+          if (e.target.closest('a')) return;
           setActiveService(index);
         });
       });
 
-      // servicesWrapper.addEventListener('mouseleave', () => {
-      //   if (window.innerWidth < 768) return;
-
-      //   // Clear active hover timeout
-      //   clearTimeout(hoverTimeout);
-
-      //   // Delay reverting to default so brief exits don't flash
-      //   hoverTimeout = setTimeout(() => {
-      //     setActiveService(DEFAULT_ACTIVE_INDEX);
-      //   }, 100);
-      // });
-
+      // Default: expand the first service for content (page "stays the same"),
+      // but do NOT reveal an image until the user clicks.
       setActiveService(DEFAULT_ACTIVE_INDEX);
     });
   });
@@ -189,9 +168,9 @@ const introWords = (intro || '').split(' ').filter(Boolean);
   </section>
 
   <!-- ===== Proiectul de Brand (featured) ===== -->
-  <section id={slugify(proiectDeBrand.title)} class="relative overflow-hidden px-4 py-12 lg:py-24 bg-white scroll-mt-24 ">
+  <section id={slugify(proiectDeBrand.title)} class="relative overflow-hidden -mt-24 px-4 pt-12 lg:pt-24 scroll-mt-24 ">
     <div class="max-w-4xl mx-auto">
-      <div class:list={['service-card fade-in  bg-[#f5f0eb] rounded-xl p-5 overflow-hidden [&.is-active]:flex-1 flex-grow-0', 'is-active', 'fade-delay-2']}>
+      <div class:list={['service-card fade-in  bg-white lg:-mt-20 rounded-xl p-5 overflow-hidden [&.is-active]:flex-1 flex-grow-0', 'is-active', 'fade-delay-2']}>
                       <div class="flex items-center justify-between gap-4">
                         <h4 class="text-2xl font-heading font-semibold" style="color: #2200d8;">{proiectDeBrand.title}</h4>
                       </div>
@@ -250,7 +229,7 @@ const introWords = (intro || '').split(' ').filter(Boolean);
     </div>
 
     <div class="max-w-6xl mx-auto ">
-      <div id="categories-stack-wrapper" class="categories-stack-wrapper flex flex-col gap-12 md:gap-20">
+      <div class="categories-stack-wrapper flex flex-col gap-12 md:gap-20">
         {categories?.map((cat, catIndex) => {
           const firstService = cat.services?.[0];
           const hasImage = firstService?.image;
@@ -260,15 +239,15 @@ const introWords = (intro || '').split(' ').filter(Boolean);
 
           return (
             <div class:list={['fade-in', 'fade-delay-' + fadeDelay]}>
-              <h2 class="fade-in text-3xl md:text-4xl font-heading items-stretch font-bold uppercase tracking-[0.2em] mb-4" style="color: #ff99d8;">{cat.name}</h2>
+              <h2 class="fade-in text-3xl md:text-4xl font-heading text-center items-stretch font-bold uppercase tracking-[0.2em] mb-8" style="color: #ff99d8;">{cat.name}</h2>
       
               <!-- Category intro -->
               {cat.intro && (
-                <p class="text-neutral-700 leading-relaxed mb-4 max-w-lg">{cat.intro}</p>
+                <p class="text-neutral-700 leading-relaxed max-w-lg text-center mx-auto mb-8">{cat.intro}</p>
               )}
-              <div class={`flex gap-4 flex-col   ${catIndex % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse "}`}>
+              <div class={`flex gap-4 flex-col ${catIndex % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse "}`}>
                 <!-- Services accordion -->
-                <div id="services-accordion-wrapper" class="services-accordion-wrapper flex flex-col gap-3 min-h-[32rem]">
+                <div class="services-accordion-wrapper flex flex-col gap-3 min-h-[32rem]">
                   {cat.services?.map((service, sIndex) => (
                     <div class:list={['service-card fade-in bg-white rounded-xl p-5 overflow-hidden [&.is-active]:flex-1 flex-grow-0', singleService && 'is-active', 'fade-delay-' + (catIndex * 2 + sIndex + 3)]}>
                       <div class="flex items-center justify-between gap-4">
@@ -332,16 +311,16 @@ const introWords = (intro || '').split(' ').filter(Boolean);
                   ))}
                 </div>
 
-              <!-- Right: category images (one per service, swaps on hover) -->
-                <div class="w-full">
-                  <div class="relative h-full md:min-h-[32rem] min-h-80 overflow-hidden rounded-xl">
-                    {cat.services?.filter(s => s.image).map((service, imgIndex) => (
+              <!-- Right: category images — hidden until a service is clicked -->
+                <div class="cat-imgs w-full">
+                  <div class="cat-imgs-inner">
+                    {cat.services?.map((service, sIndex) => service.image && (
                           <img
-                            src={service.image}
+                            data-service-index={sIndex}
+                            data-src={service.image}
                             alt={service.imageAlt || service.title || cat.name}
-                            loading={imgIndex === 0 ? 'eager' : 'lazy'}
                             decoding="async"
-                            class:list={['cat-img', singleService && 'is-active']}
+                            class:list={['cat-img']}
                           />
                     ))}
                   </div>

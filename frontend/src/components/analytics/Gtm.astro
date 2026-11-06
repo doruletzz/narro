@@ -1,25 +1,32 @@
 ---
-// Google Tag Manager + Google Analytics 4, with Google Consent Mode v2.
+// Google Tag Manager + Google Analytics 4, loaded ONLY after the visitor
+// consents to analytics cookies.
 //
-// How it works:
-// 1. The first inline script sets the Consent Mode v2 state BEFORE gtm.js
-//    loads. If the user already consented (CookieConsent stores the choice in
-//    localStorage), the state is 'granted' and the GA4 tag inside the GTM
-//    container fires normally. Otherwise the state is 'denied': gtm.js still
-//    loads (first-party, non-personal), but the GA4 tag is withheld and no
-//    tracking cookies are set.
-// 2. The second script is the canonical GTM snippet (loads gtm.js async).
-// 3. When the user clicks Accept/Refuz in the cookie banner, CookieConsent
-//    pushes gtag('consent', 'update', ...). On accept, the GA4 tag fires
-//    retroactively and records the current pageview immediately.
+// Why this design (per the legal review, 2.1):
+//   "GA4 și GTM nu au voie să pornească înainte de Accept … nu trebuie să
+//    apară requesturi către googletagmanager.com sau google-analytics.com."
+//
+// So before consent we load NOTHING from Google — not even gtm.js. The only
+// thing that runs on page load is the tiny inline script below, which reads
+// the stored consent choice:
+//   * If the visitor already accepted (see CookieConsent), it injects the GTM
+//     snippet with Consent Mode v2 set to 'granted' for every consent type.
+//     The GA4 Configuration tag inside the container then fires and records
+//     the current pageview immediately.
+//   * If the visitor refused (or never chose), nothing is injected — zero
+//     requests to googletagmanager.com / google-analytics.com.
+//
+// The cookie banner (CookieConsent.astro) calls:
+//   * window.__narroEnableAnalytics()  on Accept  → injects GTM (granted).
+//   * window.__narroDisableAnalytics() on Refuz   → removes the GA4 cookies.
 //
 // One-time setup in the GTM UI: create a "Google Analytics: Configuration"
 // tag for your GA4 property. Its Measurement ID can be hardcoded, or it can
 // reference the {{ga_id}} dataLayer variable that this component pushes.
 //
-// Note: the <noscript> iframe is rendered in PageLayout.astro (body section)
-// as part of Google's official GTM snippet. Without JS the cookie banner
-// cannot be shown, so noscript users are tracked via the noscript iframe.
+// Note: there is intentionally no <noscript> GTM iframe. Without JS the
+// banner cannot be shown, so a noscript visitor never consents and is
+// therefore never tracked.
 interface Props {
   gtmId: string;
   gaId?: string;
@@ -28,46 +35,77 @@ interface Props {
 const { gtmId, gaId } = Astro.props;
 ---
 
-<!-- 1. Consent Mode v2 — runs before GTM script -->
-<script is:inline define:vars={{ gaId }}>
+<script is:inline define:vars={{ gtmId, gaId }}>
   (function () {
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    var CONSENT_KEY = 'narro_cookie_consent';
 
-    // Expose the GA4 measurement ID to the GTM container as a dataLayer
-    // variable, so the GA4 Configuration tag can reference {{ga_id}}.
-    if (gaId) {
-      dataLayer.push({ ga_id: gaId });
+    // Read the stored choice. 'granted' only if the visitor already accepted.
+    // We check the cookie first, then localStorage (the banner writes both).
+    function readConsent() {
+      try {
+        var m = document.cookie.match(new RegExp('(?:^|; )' + CONSENT_KEY + '=([^;]*)'));
+        if (m) return decodeURIComponent(m[1]) === '1' ? 'granted' : 'denied';
+      } catch (e) { /* ignore */ }
+      try {
+        return localStorage.getItem(CONSENT_KEY) === '1' ? 'granted' : 'denied';
+      } catch (e) {
+        return 'denied'; // storage blocked (e.g. private mode) → stay denied
+      }
     }
 
-    // 'granted' only if the user already consented (see CookieConsent).
-    var state = 'denied';
-    try {
-      state = localStorage.getItem('narro_cookie_consent') === '1' ? 'granted' : 'denied';
-    } catch (e) {
-      /* storage blocked (e.g. private mode) → stay denied */
+    // Inject the GTM snippet with Consent Mode v2. `state` is 'granted' or
+    // 'denied'. Idempotent — safe to call more than once.
+    function loadGtm(state) {
+      if (window.__narroGtmLoaded) return;
+      window.__narroGtmLoaded = true;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };
+      gtag('js', new Date());
+
+      // Expose the GA4 measurement ID to the container as a dataLayer variable.
+      if (gaId) {
+        dataLayer.push({ ga_id: gaId });
+      }
+
+      // Consent Mode v2 — all consent types follow the visitor's choice.
+      gtag('consent', 'default', {
+        ad_storage: state,
+        ad_user_data: state,
+        ad_personalization: state,
+        analytics_storage: state,
+      });
+
+      // Official GTM head snippet.
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', gtmId);
     }
 
-    gtag('consent', 'default', {
-      ad_storage: state,
-      ad_user_data: state,
-      ad_personalization: state,
-      analytics_storage: state,
-    });
+    // Public API used by the cookie banner.
+    window.__narroEnableAnalytics = function () {
+      loadGtm('granted');
+    };
+
+    window.__narroDisableAnalytics = function () {
+      // Remove the GA4 cookies that were set while consent was granted.
+      var names = ['_ga', '_gid'];
+      if (gaId) names.push('_ga_' + gaId);
+      names.forEach(function (n) {
+        document.cookie = n + '=; path=/; max-age=0; expires=Thu, 01 Jan 1970 GMT';
+      });
+    };
+
+    // On load: if the visitor already consented, start analytics now.
+    if (readConsent() === 'granted') {
+      loadGtm('granted');
+    }
   })();
-</script>
-
-<!-- 2. Google Tag Manager — official head snippet -->
-<script is:inline define:vars={{ gtmId }}>
-  (function(w,d,s,l,i){
-    w[l]=w[l]||[];
-    w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-    var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),
-        dl=s!='dataLayer'?'&l='+s:'';
-    j.async=true;
-    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-    f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer',gtmId);
 </script>
