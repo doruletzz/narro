@@ -9,6 +9,13 @@ import '../styles/global.css';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+    <!-- Universal fallback for Windows shortcuts and old browsers -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    
+    <!-- Reliable PNG fallback for Android, Linux, and standard browsers -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    
+    <!-- Modern crisp SVG for macOS and supported modern browsers -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
     <!-- Preload local fonts so they load in parallel, not chained behind CSS -->
