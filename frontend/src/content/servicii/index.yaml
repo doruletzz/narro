@@ -64,6 +64,7 @@ categories:
           - Manual vizual
         price: Hai să ne auzim. Dă-ne un beep.
         noteHighlight: false
+        image: /categories/1/services/0/image.png
         tiers: []
       - title: Kit de Pornire
         lead: Construim baza vizuală și primele materiale pentru un brand nou.
@@ -118,6 +119,7 @@ categories:
           - Texte-model
         price: Hai să ne auzim. Dă-ne un beep.
         noteHighlight: false
+        image: /categories/2/services/0/image.png
         tiers: []
   - name: Conținut
     intro: >-
@@ -155,6 +157,7 @@ categories:
         primesti: []
         note: 'Ședință foto-video suplimentară: 700 lei'
         noteHighlight: false
+        image: /categories/3/services/1/image.png
         tiers:
           - name: Foundation
             price: Hai să ne auzim. Dă-ne un beep.
