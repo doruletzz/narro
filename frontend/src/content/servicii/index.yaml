@@ -20,7 +20,7 @@ proiectDeBrand:
   closing: >-
     La final, reunim toate deciziile într-un sistem de brand și îl aplicăm în
     materialele de care businessul are nevoie.
-  price: 9.000 – 14.000 lei · 8–12 săptămâni
+  price: Hai să ne auzim. Dă-ne un beep.
 categories:
   - name: Strategie
     services:
@@ -179,35 +179,39 @@ finePrint:
   sedinte:
     label: Ședințele foto-video
     items:
-      - 1 ședință pe lună, maximum 4 ore
+      - 1 ședință pe lună, maximum 2 ore
       - >-
         La sediul clientului sau într-o locație stabilită de comun acord, în
         Cluj-Napoca și pe o rază de 30 km
-      - Peste această rază, deplasarea se facturează separat
-      - Ședința neconsumată într-o lună nu se reportează în luna următoare
+      - Peste această rază, deplasarea se facturează separat.
+      - Ședința neconsumată într-o lună nu se reportează în luna următoare.
   separat:
     label: Ce se cotează separat
     items:
-      - Producții video complexe, filmări cu scenariu, echipă extinsă sau studio
-      - Materiale tipărite și costurile de producție
-      - Materiale peste volumul lunar inclus
-      - Licențe foto, video, fonturi sau muzică
-      - Bugete de promovare plătită
+      - >-
+        Producții video complexe, filmări cu scenariu, echipă extinsă sau
+        studio.
+      - Materiale tipărite și costurile de producție.
+      - Materiale peste volumul lunar inclus.
+      - Licențe foto, video, fonturi sau muzică.
+      - Bugete de promovare plătită.
   conditii:
     label: Condiții
     items:
-      - '**Prețuri** — NARRO BRANDING SRL nu este plătitoare de TVA. Prețurile afișate sunt finale.'
       - >-
-        **Revizii** — fiecare proiect include 2 runde de revizii. Rundele
+        **Prețuri** - NARRO BRANDING SRL nu este plătitoare de TVA. Prețurile
+        afișate sunt finale.
+      - >-
+        **Revizii** - fiecare proiect include 2 runde de revizii. Rundele
         suplimentare se tarifează separat.
       - >-
-        **Plată** — 50% avans la începerea proiectului, 50% la livrare.
+        **Plată** - 50% avans la începerea proiectului, 50% la livrare.
         Serviciile lunare se facturează la începutul fiecărei luni.
       - >-
-        **Durată** — Radiografia 5 zile lucrătoare · Kit de Pornire 3 săptămâni
+        **Durată** - Radiografia 5 zile lucrătoare · Kit de Pornire 3 săptămâni
         · Identitate Vizuală 4–6 săptămâni · Proiectul de Brand 8–12 săptămâni.
       - >-
-        **Valabilitate** — oferta este valabilă 30 de zile de la data
+        **Valabilitate** - oferta este valabilă 30 de zile de la data
         transmiterii.
 cta:
   description: >-
