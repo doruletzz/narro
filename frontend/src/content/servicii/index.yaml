@@ -21,6 +21,7 @@ proiectDeBrand:
     La final, reunim toate deciziile într-un sistem de brand și îl aplicăm în
     materialele de care businessul are nevoie.
   price: Hai să ne auzim. Dă-ne un beep.
+  image: /proiectDeBrand/image.jpg
 categories:
   - name: Strategie
     services:
@@ -88,6 +89,7 @@ categories:
           businessul există deja și are volum de comunicare, mergi pe Identitate
           Vizuală.
         noteHighlight: true
+        image: /categories/1/services/1/image.png
         tiers: []
       - title: Design Grafic
         lead: Realizăm materiale grafice punctuale, pentru digital sau print.
@@ -119,7 +121,7 @@ categories:
           - Texte-model
         price: Hai să ne auzim. Dă-ne un beep.
         noteHighlight: false
-        image: /categories/2/services/0/image.png
+        image: /categories/2/services/0/image.jpg
         tiers: []
   - name: Conținut
     intro: >-
