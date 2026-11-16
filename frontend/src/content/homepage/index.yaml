@@ -21,13 +21,14 @@ manifesto:
       Culoarea e deja aleasă. Tonul e deja stabilit. Rămâne execuția, care e
       ușoară.
     - >-
-      Practic, asta arată așa: cineva se ocupă de identitate — nume, logo,
-      culori, reguli. Altcineva de ce se vede lunar — postări, texte,
+      Practic, asta arată așa: cineva se ocupă de identitate - nume, logo,
+      culori, reguli. Altcineva se ocupă de ce se vede lunar - postări, texte,
       fotografii. Uneori de amândouă, uneori doar de una. Depinde unde ești.
 directia:
   label: Sunt mai multe treburi. Le luăm pe rând.
   cards:
-    - title: Branding
+    - eyebrow: Treaba despre..
+      title: Branding
       description: >-
         Aici intră tot ce face ca businessul tău să fie recunoscut înainte să-și
         spună numele. Pornim de la business, de la ce faci, pentru cine, în ce
@@ -43,9 +44,10 @@ directia:
         fiecare marți. Culoarea e deja aleasă. Tonul e deja stabilit. De aici
         totul alunecă mai ușor.
       image: /images/directia/directia/cards/0/image.webp
-      imageAlt: Branding — Identitate vizuală
+      imageAlt: Branding - Identitate vizuală
       href: /servicii#branding
-    - title: Conținut
+    - eyebrow: 'Care-i treaba cu '
+      title: Conținut
       description: >-
         Scriem textele, facem vizualurile și venim la tine cu aparatul. Lunar,
         primești materialele gata de publicat și un calendar editorial care
@@ -57,9 +59,10 @@ directia:
 
         Textele sună a om. Pozele sunt poze adevărate și nu le mai are nimeni.
       image: /images/directia/directia/cards/1/image.webp
-      imageAlt: Conținut — Content creation
+      imageAlt: Conținut - Content creation
       href: /servicii#continut
-    - title: Social Media
+    - eyebrow: 'Treaba cu '
+      title: Social Media
       description: >-
         Preluăm conturile de tot. Planificăm, scriem, publicăm, răspundem la
         mesaje și comentarii, măsurăm ce s-a întâmplat. La sfârșit de lună
@@ -69,13 +72,14 @@ directia:
         Vine în trei praguri, în funcție de câte platforme ții și cât de des
         publici.
       image: /images/directia/directia/cards/2/image.webp
-      imageAlt: Social Media — Social media management
+      imageAlt: Social Media - Social media management
       href: /servicii#social-media
 teaser:
   label: TEASER
-  # No video yet — the section stays hidden until a real YouTube ID is added.
-  youtubeId: ''
-  description: ''
+  youtubeId: dQw4w9WgXcQ
+  description: >-
+    Lorem ipsum dolor sit amet consectetur. Facilisis elit amet sed sem nunc
+    mattis. Quis etiam sem nunc mattis amet bibendum risus.
   ctaLabel: Află mai multe
   ctaHref: /contact
 studiiDeCaz:
@@ -105,7 +109,7 @@ studiiDeCaz:
       href: /contact
 ctaBanner:
   image: /images/cta-banner/ctaBanner/image.webp
-  imageAlt: CTA — Vreau radiografia
+  imageAlt: CTA - Vreau radiografia
   description: >-
     Nu știi de unde să începi? Începe cu Radiografia. 900 lei, cinci zile
     lucrătoare, și se scade integral din orice proiect contractat în următoarele
