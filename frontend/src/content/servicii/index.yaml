@@ -36,7 +36,7 @@ categories:
           - Analiză scrisă
           - 3 direcții de lucru prioritizate
           - Discuție de o oră
-        price: 900 lei · 5 zile lucrătoare
+        price: Hai să ne auzim. Dă-ne un beep.
         note: >-
           Se scade integral din orice proiect contractat în următoarele 30 de
           zile.
@@ -62,9 +62,8 @@ categories:
           - Iconografie și elemente grafice
           - Sistem complet de template-uri
           - Manual vizual
-        price: 5.000 – 7.000 lei · 4–6 săptămâni
+        price: Hai să ne auzim. Dă-ne un beep.
         noteHighlight: false
-        image: /categories/1/services/0/image.png
         tiers: []
       - title: Kit de Pornire
         lead: Construim baza vizuală și primele materiale pentru un brand nou.
@@ -77,18 +76,17 @@ categories:
         primesti:
           - Logo + variante
           - Paletă de culori
-          - 1–2 fonturi
+          - 1-2 fonturi
           - Mini-ghid vizual
           - Set de template-uri de bază pentru social media
           - 3 materiale de lansare
-        price: 3.900 lei · 3 săptămâni
+        price: Hai să ne auzim. Dă-ne un beep.
         note: >-
           Kitul de Pornire te scoate rapid în piață. Identitatea Vizuală
           construiește sistemul pe care brandul îl folosește ani întregi. Dacă
           businessul există deja și are volum de comunicare, mergi pe Identitate
           Vizuală.
         noteHighlight: true
-        image: /categories/1/services/1/image.png
         tiers: []
       - title: Design Grafic
         lead: Realizăm materiale grafice punctuale, pentru digital sau print.
@@ -99,7 +97,7 @@ categories:
             existente a brandului.
         primesti: []
         primestiInline: 'Primești: piesa sau setul solicitat, în formatele necesare.'
-        price: De la 350 lei/piesă
+        price: Hai să ne auzim. Dă-ne un beep.
         noteHighlight: false
         image: /categories/1/services/2/image.png
         tiers: []
@@ -118,9 +116,8 @@ categories:
           - Reguli de scriere
           - Exemple bun/greșit
           - Texte-model
-        price: 1.800 lei
+        price: Hai să ne auzim. Dă-ne un beep.
         noteHighlight: false
-        image: /categories/2/services/0/image.png
         tiers: []
   - name: Conținut
     intro: >-
@@ -144,9 +141,8 @@ categories:
             (maxim 4 formate video)
           - 1 ședință foto-video la locație, cu echipa NARRO
           - Calendar editorial
-        price: 2.500 lei/lună
+        price: Hai să ne auzim. Dă-ne un beep.
         noteHighlight: false
-        image: /categories/3/services/0/image.png
         tiers: []
       - title: Social Media
         lead: >-
@@ -159,18 +155,17 @@ categories:
         primesti: []
         note: 'Ședință foto-video suplimentară: 700 lei'
         noteHighlight: false
-        image: /categories/3/services/1/image.png
         tiers:
           - name: Foundation
-            price: 1.800 lei/lună
+            price: Hai să ne auzim. Dă-ne un beep.
             details: 1 platformă · 8 postări/lună · community management · raport lunar
           - name: Momentum
-            price: 2.400 lei/lună
+            price: Hai să ne auzim. Dă-ne un beep.
             details: >-
               2 platforme · 12 postări/lună + 1 reel · community management ·
               raport lunar
           - name: Signature
-            price: 3.600 lei/lună
+            price: Hai să ne auzim. Dă-ne un beep.
             details: >-
               3 platforme · 16 postări/lună + 4 reels · community management ·
               raport lunar · 1 ședință foto-video la locație · consultanță
