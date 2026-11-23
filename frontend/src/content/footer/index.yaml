@@ -1,0 +1,35 @@
+# Footer — edit in the CMS (singletons → "Footer").
+# Contact-column icons are inferred from the href: empty → location pin,
+# mailto: → envelope, instagram URL → Instagram glyph.
+tagline: narro, ergo sum — povestesc, deci exist.
+socialLabel: Întreprindere socială.
+columns:
+  - title: Linkuri
+    links:
+      - label: Acasă
+        href: /
+      - label: Servicii
+        href: /servicii
+  - title: Despre
+    links:
+      - label: Program Social
+        href: /program-social
+      - label: Story Time
+        href: /story-time
+  - title: Contact
+    links:
+      - label: Cluj-Napoca
+        href: ""
+      - label: narro.branding@gmail.com
+        href: "mailto:narro.branding@gmail.com"
+      - label: "@narrobranding"
+        href: "https://www.instagram.com/narrobranding"
+legalLinks:
+  - label: Informații legale
+    href: /informatii-legale
+  - label: Politica de confidențialitate
+    href: /politica-de-confidentialitate
+  - label: Politica de cookies
+    href: /politica-cookies
+  - label: Termeni și condiții
+    href: /termeni-si-conditii

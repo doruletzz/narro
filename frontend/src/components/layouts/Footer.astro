@@ -1,6 +1,41 @@
 ---
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
+
 // Footer component — matches Figma: purple bg, logo, link columns, social media,
 // company data (Legea 365/2002), EU co-financing emblem, legal links, cookie settings.
+// The tagline, link columns and legal links are CMS-driven (singletons → "Footer").
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const footerData = await reader.singletons.footer.read();
+
+// Defaults keep the footer intact if the CMS config is missing/empty.
+const tagline = footerData?.tagline || 'narro, ergo sum — povestesc, deci exist.';
+const socialLabel = footerData?.socialLabel || 'Întreprindere socială.';
+const columns = footerData?.columns?.length
+  ? footerData.columns
+  : [
+      { title: 'Linkuri', links: [{ label: 'Acasă', href: '/' }, { label: 'Servicii', href: '/servicii' }] },
+      { title: 'Despre', links: [{ label: 'Program Social', href: '/program-social' }, { label: 'Story Time', href: '/story-time' }] },
+      { title: 'Contact', links: [{ label: 'Cluj-Napoca', href: '' }, { label: 'narro.branding@gmail.com', href: 'mailto:narro.branding@gmail.com' }, { label: '@narrobranding', href: 'https://www.instagram.com/narrobranding' }] },
+    ];
+const legalLinks = footerData?.legalLinks?.length
+  ? footerData.legalLinks
+  : [
+      { label: 'Informații legale', href: '/informatii-legale' },
+      { label: 'Politica de confidențialitate', href: '/politica-de-confidentialitate' },
+      { label: 'Politica de cookies', href: '/politica-cookies' },
+      { label: 'Termeni și condiții', href: '/termeni-si-conditii' },
+    ];
+
+// Infer a contact icon from the href: empty → location pin, mailto: → envelope,
+// instagram URL → glyph. Internal paths (other columns) get no icon.
+const contactIcon = (href: string): 'location' | 'email' | 'instagram' | 'none' => {
+  if (!href) return 'location';
+  if (href.startsWith('mailto:')) return 'email';
+  if (href.includes('instagram')) return 'instagram';
+  return 'none';
+};
 ---
 
 <footer class="bg-[#2200d8] text-white" role="contentinfo">
@@ -13,54 +48,46 @@
         <a href="/" class="inline-block flex-shrink-0">
           <img src="/logo-light.svg" width="64" height="32" alt="Narro" />
         </a>
-        <p class="text-md text-white/80">narro, ergo sum — povestesc, deci exist.</p>
-        <p class="text-md font-semibold text-[#ff99d8]">Întreprindere socială.</p>
+        <p class="text-md text-white/80">{tagline}</p>
+        <p class="text-md font-semibold text-[#ff99d8]">{socialLabel}</p>
       </div>
 
-      <!-- Linkuri column -->
-      <div>
-        <h3 class="text-md font-semibold tracking-wider text-[#ff99d8] mb-3">Linkuri</h3>
-        <div class="space-y-2">
-          <a href="/" class="block text-md text-white/80 hover:text-white transition-colors">Acasă</a>
-          <a href="/servicii" class="block text-md text-white/80 hover:text-white transition-colors">Servicii</a>
-          <!-- <a href="/studii-de-caz" class="block text-md text-white/80 hover:text-white transition-colors">Portofoliu</a> --> <!-- HIDDEN (TODO: activate when ready) -->
-        </div>
-      </div>
-
-      <!-- Despre column -->
-      <div>
-        <h3 class="text-md font-semibold tracking-wider text-[#ff99d8] mb-3">Despre</h3>
-        <div class="space-y-2">
-          <a href="/program-social" class="block text-md text-white/80 hover:text-white transition-colors">Program Social</a>
-          <a href="/story-time" class="block text-md text-white/80 hover:text-white transition-colors">Story Time</a>
-        </div>
-      </div>
-
-      <!-- Contact column -->
-      <div>
-        <h3 class="text-md font-semibold tracking-wider text-[#ff99d8] mb-3">Contact</h3>
-        <div class="space-y-3">
-          <div class="flex items-center gap-2 text-md text-white/80">
-            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span>Cluj-Napoca</span>
+      <!-- Link columns (CMS-driven) -->
+      {columns.map((col) => (
+        <div>
+          <h3 class="text-md font-semibold tracking-wider text-[#ff99d8] mb-3">{col.title}</h3>
+          <div class="space-y-2">
+            {col.links.map((link) => {
+              const icon = contactIcon(link.href);
+              const iconEl = icon === 'location' ? (
+                <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              ) : icon === 'email' ? (
+                <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              ) : icon === 'instagram' ? (
+                <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324A6.162 6.162 0 0012 5.838zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                </svg>
+              ) : null;
+              return link.href ? (
+                <a href={link.href} class="flex items-center gap-2 text-md text-white/80 hover:text-white transition-colors">
+                  {iconEl}
+                  <span>{link.label}</span>
+                </a>
+              ) : (
+                <div class="flex items-center gap-2 text-md text-white/80">
+                  {iconEl}
+                  <span>{link.label}</span>
+                </div>
+              );
+            })}
           </div>
-          <a href="mailto:narro.branding@gmail.com" class="flex items-center gap-2 text-md text-white/80 hover:text-white transition-colors">
-            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <span>narro.branding@gmail.com</span>
-          </a>
-          <a href="https://www.instagram.com/narrobranding" class="flex items-center gap-2 text-md text-white/80 hover:text-white transition-colors">
-            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324A6.162 6.162 0 0012 5.838zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-            </svg>
-            <span>@narrobranding</span>
-          </a>
         </div>
-      </div>
+      ))}
     </div>
 
     <!-- Company data (Legea 365/2002) -->
@@ -75,10 +102,9 @@
 
     <!-- Legal links row + cookie settings -->
     <div class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-md text-white/70">
-      <a href="/informatii-legale" class="hover:text-white/90 transition-colors">Informații legale</a>
-      <a href="/politica-de-confidentialitate" class="hover:text-white/90 transition-colors">Politica de confidențialitate</a>
-      <a href="/politica-cookies" class="hover:text-white/90 transition-colors">Politica de cookies</a>
-      <a href="/termeni-si-conditii" class="hover:text-white/90 transition-colors">Termeni și condiții</a>
+      {legalLinks.map((link) => (
+        <a href={link.href} class="hover:text-white/90 transition-colors">{link.label}</a>
+      ))}
       <button
         type="button"
         id="cookie-settings"

@@ -1,7 +1,22 @@
 ---
 import { Image } from "astro:assets";
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
 
 // Header component — matches Figma: white bg, purple text, narro logo, contact pill button
+
+// Nav items are CMS-driven (singletons → "Navigație (header)"). Every item is
+// rendered; to hide a link, remove it from the config. Falls back to the
+// default set if the config is missing/empty.
+const reader = createReader(process.cwd(), keystaticConfig);
+const navData = await reader.singletons.nav.read();
+const navItems = navData?.items?.length
+  ? navData.items
+  : [
+      { label: 'Servicii', href: '/servicii' },
+      { label: 'Program Social', href: '/program-social' },
+      { label: 'Story Time', href: '/story-time' },
+    ];
 ---
 
 <header class="bg-[#f5f0eb] -mb-4 sticky top-0 z-50 transition-[shadow,transform] max-w-[100vw] overflow-hidden duration-[700ms] ease-in-out" id="site-header">
@@ -14,10 +29,11 @@ import { Image } from "astro:assets";
 
       <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center space-x-6" aria-label="Main navigation">
-        <a href="/servicii" class="text-sm fade-in fade-delay-1 font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Servicii</a>
-        <!-- <a href="/studii-de-caz" class="text-sm  fade-in fade-delay-2 font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Portofoliu</a> --> <!-- HIDDEN (TODO: activate when ready) -->
-        <a href="/program-social" class="text-sm  fade-in fade-delay-3 font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Program Social</a>
-        <a href="/story-time" class="text-sm  fade-in fade-delay-4 font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide">Story Time</a>
+        {navItems.map((item, i) => (
+          <a href={item.href} class={`text-sm fade-in fade-delay-${Math.min(i + 1, 7)} font-medium uppercase text-primary hover:text-accent transition-colors tracking-wide`}>
+            {item.label}
+          </a>
+        ))}
       </nav>
 
       <!-- Contact Button (desktop) -->
@@ -67,10 +83,11 @@ import { Image } from "astro:assets";
     inert
   >
     <nav class="flex flex-col h-full px-6 py-8 space-y-3" aria-label="Mobile navigation">
-      <a href="/servicii" class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">Servicii</a>
-      <!-- <a href="/studii-de-caz" class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">Portofoliu</a> --> <!-- HIDDEN (TODO: activate when ready) -->
-      <a href="/program-social" class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">Program Social</a>
-      <a href="/story-time" class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">Story Time</a>
+      {navItems.map((item) => (
+        <a href={item.href} class="block text-base font-medium uppercase text-primary hover:text-accent transition-colors py-2">
+          {item.label}
+        </a>
+      ))}
 
       <div class="">
         <a
