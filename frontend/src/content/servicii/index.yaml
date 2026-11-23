@@ -43,7 +43,7 @@ categories:
           zile.
         noteHighlight: false
         image: /categories/0/services/0/image.png
-        hideImage: false
+        hideImage: true
         tiers: []
   - name: Identitate
     services:
