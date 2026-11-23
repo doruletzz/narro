@@ -11,8 +11,6 @@ columns:
       - label: Servicii
         href: /servicii
         icon: none
-  - title: Despre
-    links:
       - label: Program Social
         href: /program-social
         icon: none
@@ -22,7 +20,7 @@ columns:
   - title: Contact
     links:
       - label: Cluj-Napoca
-        href: ""
+        href: "https://www.google.com/maps?q=Sat%20Flore%C8%99ti%2C%20com.%20Flore%C8%99ti%2C%20Str.%20Ioachim%20Olteanu%20nr.%2027A%2C%20jud.%20Cluj"
         icon: location
       - label: narro.branding@gmail.com
         href: "mailto:narro.branding@gmail.com"
@@ -42,3 +40,12 @@ legalLinks:
     href: /politica-cookies
   - label: Termeni și condiții
     href: /termeni-si-conditii
+workingHours:
+  label: Program de lucru
+  items:
+    - day: Luni - Vineri
+      hours: 09:00 - 18:00
+    - day: Sâmbătă
+      hours: 10:00 - 14:00
+    - day: Duminică
+      hours: Închis

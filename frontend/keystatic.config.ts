@@ -289,6 +289,31 @@ export default config({
           { label: 'Studii de caz' }
         ),
 
+        testimonials: fields.object(
+          {
+            hidden: fields.checkbox({ label: 'Ascunde secțiunea', defaultValue: true }),
+            label: fields.text({ label: 'Etichetă secțiune', defaultValue: 'TESTIMONIALE' }),
+            description: fields.text({ label: 'Descriere', multiline: true }),
+            items: fields.array(
+              fields.object({
+                photo: fields.image({
+                  label: 'Fotografie',
+                  directory: 'public/images/testimonials',
+                  publicPath: '/images/testimonials/',
+                }),
+                quote: fields.text({ label: 'Citat', multiline: true }),
+                author: fields.text({ label: 'Autor' }),
+                role: fields.text({ label: 'Rol / Business' }),
+              }),
+              {
+                label: 'Testimoniale',
+                itemLabel: (props) => props.fields.author.value || 'Testimonial nou',
+              }
+            ),
+          },
+          { label: 'Testimoniale' }
+        ),
+
         ctaBanner: fields.object(
           {
             hidden: fields.checkbox({ label: 'Ascunde secțiunea', defaultValue: false }),
@@ -384,6 +409,23 @@ export default config({
           publicPath: '/images/contact/',
         }),
         imageAlt: fields.text({ label: 'Text alternativ imagine', defaultValue: 'Contact — Da-ne un beep' }),
+        map: fields.object(
+          {
+            hidden: fields.checkbox({ label: 'Ascunde harta', defaultValue: false }),
+            label: fields.text({ label: 'Titlu secțiune', defaultValue: 'GASIREA NOASTRĂ' }),
+            query: fields.text({
+              label: 'Locație (pentru hartă)',
+              description: 'Adresa sau locul căutat în hartă (ex: Florești, Cluj).',
+              defaultValue: 'Sat Florești, com. Florești, Str. Ioachim Olteanu nr. 27A, jud. Cluj',
+            }),
+            address: fields.text({
+              label: 'Adresă (afișată lângă hartă)',
+              multiline: true,
+              defaultValue: 'Sat Florești, com. Florești, Str. Ioachim Olteanu nr. 27A, jud. Cluj',
+            }),
+          },
+          { label: 'Hartă' }
+        ),
       },
     }),
     servicii,
@@ -611,6 +653,19 @@ export default config({
             href: fields.text({ label: 'Href (URL)' }),
           }),
           { label: 'Linkuri legale', itemLabel: (props) => props.fields.label.value || 'Link nou' }
+        ),
+        workingHours: fields.object(
+          {
+            label: fields.text({ label: 'Titlu', defaultValue: 'Program de lucru' }),
+            items: fields.array(
+              fields.object({
+                day: fields.text({ label: 'Zi' }),
+                hours: fields.text({ label: 'Ore' }),
+              }),
+              { label: 'Program', itemLabel: (props) => props.fields.day.value || 'Zi nouă' }
+            ),
+          },
+          { label: 'Program de lucru' }
         ),
       },
     }),

@@ -73,3 +73,11 @@ form:
       options: []
 image: /images/contact/image.png
 imageAlt: Contact — Da-ne un beep
+map:
+  hidden: false
+  label: GASIREA NOASTRĂ
+  query: Sat Florești, com. Florești, Str. Ioachim Olteanu nr. 27A, jud. Cluj
+  address: >-
+    Sat Florești, com. Florești,
+    Str. Ioachim Olteanu nr. 27A,
+    jud. Cluj
