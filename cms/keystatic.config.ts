@@ -560,6 +560,19 @@ export default config({
               fields.object({
                 label: fields.text({ label: 'Label' }),
                 href: fields.text({ label: 'Href (URL)' }),
+                icon: fields.select({
+                  label: 'Iconiță',
+                  description: 'Automat = dedusă din link (mailto: → e-mail, instagram → Instagram, tel: → telefon, gol → locație).',
+                  options: [
+                    { label: 'Automat (din link)', value: 'auto' },
+                    { label: 'Fără iconiță', value: 'none' },
+                    { label: 'Locație', value: 'location' },
+                    { label: 'E-mail', value: 'mail' },
+                    { label: 'Instagram', value: 'instagram' },
+                    { label: 'Telefon', value: 'telephone' },
+                  ],
+                  defaultValue: 'auto',
+                }),
               }),
               { label: 'Linkuri', itemLabel: (props) => props.fields.label.value || 'Link nou' }
             ),

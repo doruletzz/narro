@@ -1,3 +1,5 @@
+# Footer — edit in the CMS (singletons → "Footer").
+# Each link can set an explicit icon, or "auto" to infer from the href.
 tagline: narro, ergo sum — povestesc, deci exist.
 socialLabel: Întreprindere socială.
 columns:
@@ -5,23 +7,32 @@ columns:
     links:
       - label: Acasă
         href: /
+        icon: none
       - label: Servicii
         href: /servicii
+        icon: none
   - title: Despre
     links:
       - label: Program Social
         href: /program-social
+        icon: none
       - label: Story Time
         href: /story-time
+        icon: none
   - title: Contact
     links:
       - label: Cluj-Napoca
+        href: ""
+        icon: location
       - label: narro.branding@gmail.com
-        href: mailto:narro.branding@gmail.com
-      - label: '@narrobranding'
-        href: https://www.instagram.com/narrobranding
-      - label: +40 7412 3456 78
-        href: tel:+407412345678
+        href: "mailto:narro.branding@gmail.com"
+        icon: mail
+      - label: "@narrobranding"
+        href: "https://www.instagram.com/narrobranding"
+        icon: instagram
+      - label: "+40 000 000 000" # TODO: replace with the real phone number
+        href: "tel:+40000000000"
+        icon: telephone
 legalLinks:
   - label: Informații legale
     href: /informatii-legale
