@@ -1,9 +1,8 @@
-# Header navigation — edit in the CMS (singletons → "Navigație (header)").
-# Every item here is shown in the header (desktop + mobile). To hide a link,
-# remove it from this list.
 items:
   - label: Servicii
     href: /servicii
+  - label: Studii De Caz
+    href: studii-de-caz
   - label: Program Social
     href: /program-social
   - label: Story Time
