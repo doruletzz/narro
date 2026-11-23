@@ -1,11 +1,6 @@
-import { config, collection, fields, singleton } from '@keystatic/core';
+import { collection, config, fields, singleton } from '@keystatic/core';
 
-// ---------------------------------------------------------------------------
-// Schema definitions (inlined to avoid cross-package imports).
-// Keystatic Cloud (api.keystatic.cloud) pushes content to GitHub.
-// No local API routes needed — the cms package runs Keystatic on Netlify.
-// ---------------------------------------------------------------------------
-
+ 
 export const servicii = singleton({
   label: 'Servicii',
   path: 'src/content/servicii/index',
@@ -135,7 +130,7 @@ export const servicii = singleton({
     ),
   },
 });
-
+ 
 export const studiiDeCazPage = singleton({
   label: 'Studii de Caz (pagină)',
   path: 'src/content/studii-de-caz/index',
@@ -165,19 +160,12 @@ export const studiiDeCazPage = singleton({
   },
 });
 
-// ---------------------------------------------------------------------------
-// Cloud storage config — pushes content directly to Keystatic Cloud.
-// pathPrefix: 'frontend' offsets paths so cloud writes land in `frontend/...`
-// ---------------------------------------------------------------------------
-
 export default config({
-  storage: {
-    kind: 'cloud',
-    pathPrefix: 'frontend',
-  },
-  cloud: {
-    project: 'narro/narro',
-  },
+  // The CMS (cms/) writes content to the repo.
+  // The frontend reads from local files at build time via createReader.
+  // `kind: 'local'` satisfies the Config type; the reader itself ignores
+  // `storage` and reads YAML/MD from `src/content/` relative to cwd.
+  storage: { kind: 'local' },
 
   collections: {
     studiiDeCaz: collection({
@@ -189,8 +177,8 @@ export default config({
         title: fields.text({ label: 'Titlu' }),
         bannerImage: fields.image({
           label: 'Imagine banner',
-          directory: 'public/images/manifesto',
-          publicPath: '/images/manifesto/',
+          directory: 'public',
+          publicPath: '/',
         }),
         bannerImageAlt: fields.text({ label: 'Text alternativ imagine' }),
         content: fields.mdx({ label: 'Conținut', extension: 'md' }),
@@ -228,7 +216,7 @@ export default config({
             paragraphs: fields.array(
               fields.text({ label: 'Paragraf', multiline: true }),
               {
-                label: 'Paragafe',
+                label: 'Paragrafe',
                 itemLabel: (props) => props.value?.slice(0, 50) || 'Paragraf',
               }
             ),
@@ -266,7 +254,7 @@ export default config({
           {
             hidden: fields.checkbox({ label: 'Ascunde secțiunea', defaultValue: true }),
             label: fields.text({ label: 'Etichetă secțiune', defaultValue: 'TEASER' }),
-            youtubeId: fields.text({ label: 'ID video YouTube', defaultValue: 'dQw4w9WgXcQ' }),
+            youtubeId: fields.text({ label: 'ID video YouTube (lasă gol până ai video)' }),
             description: fields.text({ label: 'Descriere', multiline: true }),
             ctaLabel: fields.text({ label: 'Text buton', defaultValue: 'Află mai multe' }),
             ctaHref: fields.text({ label: 'Link buton', defaultValue: '/contact' }),
@@ -299,6 +287,31 @@ export default config({
             ),
           },
           { label: 'Studii de caz' }
+        ),
+
+        testimonials: fields.object(
+          {
+            hidden: fields.checkbox({ label: 'Ascunde secțiunea', defaultValue: true }),
+            label: fields.text({ label: 'Etichetă secțiune', defaultValue: 'TESTIMONIALE' }),
+            description: fields.text({ label: 'Descriere', multiline: true }),
+            items: fields.array(
+              fields.object({
+                photo: fields.image({
+                  label: 'Fotografie',
+                  directory: 'public/images/testimonials',
+                  publicPath: '/images/testimonials/',
+                }),
+                quote: fields.text({ label: 'Citat', multiline: true }),
+                author: fields.text({ label: 'Autor' }),
+                role: fields.text({ label: 'Rol / Business' }),
+              }),
+              {
+                label: 'Testimoniale',
+                itemLabel: (props) => props.fields.author.value || 'Testimonial nou',
+              }
+            ),
+          },
+          { label: 'Testimoniale' }
         ),
 
         ctaBanner: fields.object(
@@ -396,6 +409,23 @@ export default config({
           publicPath: '/images/contact/',
         }),
         imageAlt: fields.text({ label: 'Text alternativ imagine', defaultValue: 'Contact — Da-ne un beep' }),
+        map: fields.object(
+          {
+            hidden: fields.checkbox({ label: 'Ascunde harta', defaultValue: false }),
+            label: fields.text({ label: 'Titlu secțiune', defaultValue: 'GASIREA NOASTRĂ' }),
+            query: fields.text({
+              label: 'Locație (pentru hartă)',
+              description: 'Adresa sau locul căutat în hartă (ex: Florești, Cluj).',
+              defaultValue: 'Sat Florești, com. Florești, Str. Ioachim Olteanu nr. 27A, jud. Cluj',
+            }),
+            address: fields.text({
+              label: 'Adresă (afișată lângă hartă)',
+              multiline: true,
+              defaultValue: 'Sat Florești, com. Florești, Str. Ioachim Olteanu nr. 27A, jud. Cluj',
+            }),
+          },
+          { label: 'Hartă' }
+        ),
       },
     }),
     servicii,
@@ -426,7 +456,7 @@ export default config({
               defaultValue: 'Pro Bono — Echipa Narro la voluntariat',
             }),
             paragraphs: fields.array(fields.text({ label: 'Paragraf', multiline: true }), {
-              label: 'Paragafe',
+              label: 'Paragrafe',
               itemLabel: (props) => props.value?.slice(0, 50) || 'Paragraf',
             }),
           },
@@ -481,7 +511,7 @@ export default config({
             }),
             imageAlt: fields.text({ label: 'Text alternativ imagine' }),
             paragraphs: fields.array(fields.text({ label: 'Paragraf', multiline: true }), {
-              label: 'Paragafe',
+              label: 'Paragrafe',
               itemLabel: (props) => props.value?.slice(0, 50) || 'Paragraf',
             }),
           }),
@@ -527,6 +557,44 @@ export default config({
           label: 'Conținut',
           multiline: true,
           defaultValue: '# Termeni și Condiții\n\n**Last updated: ianuarie 2025**\n\n## 1. Introducere\n\nBine ați venit pe site-ul Narro.',
+        }),
+      },
+    }),
+
+    informatiiLegale: singleton({
+      label: 'Informații legale',
+      path: 'src/content/informatii-legale/index',
+      format: { data: 'yaml' },
+      schema: {
+        title: fields.text({ label: 'Titlu pagină', defaultValue: 'Informații legale — Narro' }),
+        description: fields.text({
+          label: 'Meta descriere',
+          multiline: true,
+          defaultValue: 'Termeni și condiții, politica de confidențialitate, politica de cookies și datele firmei NARRO BRANDING SRL.',
+        }),
+        content: fields.text({
+          label: 'Conținut',
+          multiline: true,
+          defaultValue: '# Informații legale\n\nAici găsești tot ce ține de partea legală a site-ului și a colaborării cu noi.',
+        }),
+      },
+    }),
+
+    politicaConfidentialitate: singleton({
+      label: 'Politica de confidențialitate',
+      path: 'src/content/politica-de-confidentialitate/index',
+      format: { data: 'yaml' },
+      schema: {
+        title: fields.text({ label: 'Titlu pagină', defaultValue: 'Politica de confidențialitate — Narro' }),
+        description: fields.text({
+          label: 'Meta descriere',
+          multiline: true,
+          defaultValue: 'Cum colectăm, folosim și păstrăm datele tale pe narro.co.com, în conformitate cu GDPR.',
+        }),
+        content: fields.text({
+          label: 'Conținut',
+          multiline: true,
+          defaultValue: '# Politica de confidențialitate\n\n**Ultima actualizare: 6 noiembrie 2026**',
         }),
       },
     }),
@@ -585,6 +653,19 @@ export default config({
             href: fields.text({ label: 'Href (URL)' }),
           }),
           { label: 'Linkuri legale', itemLabel: (props) => props.fields.label.value || 'Link nou' }
+        ),
+        workingHours: fields.object(
+          {
+            label: fields.text({ label: 'Titlu', defaultValue: 'Program de lucru' }),
+            items: fields.array(
+              fields.object({
+                day: fields.text({ label: 'Zi' }),
+                hours: fields.text({ label: 'Ore' }),
+              }),
+              { label: 'Program', itemLabel: (props) => props.fields.day.value || 'Zi nouă' }
+            ),
+          },
+          { label: 'Program de lucru' }
         ),
       },
     }),
