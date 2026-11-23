@@ -165,7 +165,13 @@ export default config({
   // The frontend reads from local files at build time via createReader.
   // `kind: 'local'` satisfies the Config type; the reader itself ignores
   // `storage` and reads YAML/MD from `src/content/` relative to cwd.
-  storage: { kind: 'local' },
+  storage: {
+      kind: 'cloud',
+      pathPrefix: 'frontend',
+    },
+    cloud: {
+      project: 'narro/narro',
+    },
 
   collections: {
     studiiDeCaz: collection({
