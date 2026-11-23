@@ -43,7 +43,7 @@ categories:
           zile.
         noteHighlight: false
         image: /categories/0/services/0/image.png
-        hideImage: true
+        hideImage: false
         tiers: []
   - name: Identitate
     services:
@@ -67,7 +67,7 @@ categories:
         price: Hai să ne auzim. Dă-ne un beep.
         noteHighlight: false
         image: /categories/1/services/0/image.png
-        hideImage: true
+        hideImage: false
         tiers: []
       - title: Kit de Pornire
         lead: Construim baza vizuală și primele materiale pentru un brand nou.
@@ -92,7 +92,7 @@ categories:
           Vizuală.
         noteHighlight: true
         image: /categories/1/services/1/image.png
-        hideImage: true
+        hideImage: false
         tiers: []
       - title: Design Grafic
         lead: Realizăm materiale grafice punctuale, pentru digital sau print.
@@ -106,7 +106,7 @@ categories:
         price: Hai să ne auzim. Dă-ne un beep.
         noteHighlight: false
         image: /categories/1/services/2/image.png
-        hideImage: true
+        hideImage: false
         tiers: []
   - name: Comunicare
     services:
@@ -126,7 +126,7 @@ categories:
         price: Hai să ne auzim. Dă-ne un beep.
         noteHighlight: false
         image: /categories/2/services/0/image.jpg
-        hideImage: true
+        hideImage: false
         tiers: []
   - name: Conținut
     intro: >-
@@ -152,6 +152,7 @@ categories:
           - Calendar editorial
         price: Hai să ne auzim. Dă-ne un beep.
         noteHighlight: false
+        image: /categories/3/services/0/image.svg
         hideImage: true
         tiers: []
       - title: Social Media
@@ -166,7 +167,7 @@ categories:
         note: 'Ședință foto-video suplimentară: 700 lei'
         noteHighlight: false
         image: /categories/3/services/1/image.png
-        hideImage: true
+        hideImage: false
         tiers:
           - name: Foundation
             price: Hai să ne auzim. Dă-ne un beep.
