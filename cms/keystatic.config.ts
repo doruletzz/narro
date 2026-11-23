@@ -530,8 +530,6 @@ export default config({
         }),
       },
     }),
-  },
-
 
     nav: singleton({
       label: 'Navigație (header)',
@@ -577,4 +575,5 @@ export default config({
         ),
       },
     }),
+  },
 });
