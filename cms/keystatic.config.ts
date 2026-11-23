@@ -531,4 +531,50 @@ export default config({
       },
     }),
   },
+
+
+    nav: singleton({
+      label: 'Navigație (header)',
+      path: 'src/content/nav/index',
+      format: { data: 'yaml' },
+      schema: {
+        items: fields.array(
+          fields.object({
+            label: fields.text({ label: 'Label' }),
+            href: fields.text({ label: 'Href (URL)' }),
+          }),
+          { label: 'Itemuri', itemLabel: (props) => props.fields.label.value || 'Item nou' }
+        ),
+      },
+    }),
+
+    footer: singleton({
+      label: 'Footer',
+      path: 'src/content/footer/index',
+      format: { data: 'yaml' },
+      schema: {
+        tagline: fields.text({ label: 'Tagline', defaultValue: 'narro, ergo sum — povestesc, deci exist.' }),
+        socialLabel: fields.text({ label: 'Etichetă socială', defaultValue: 'Întreprindere socială.' }),
+        columns: fields.array(
+          fields.object({
+            title: fields.text({ label: 'Titlu coloană' }),
+            links: fields.array(
+              fields.object({
+                label: fields.text({ label: 'Label' }),
+                href: fields.text({ label: 'Href (URL)' }),
+              }),
+              { label: 'Linkuri', itemLabel: (props) => props.fields.label.value || 'Link nou' }
+            ),
+          }),
+          { label: 'Coloane de linkuri', itemLabel: (props) => props.fields.title.value || 'Coloană nouă' }
+        ),
+        legalLinks: fields.array(
+          fields.object({
+            label: fields.text({ label: 'Label' }),
+            href: fields.text({ label: 'Href (URL)' }),
+          }),
+          { label: 'Linkuri legale', itemLabel: (props) => props.fields.label.value || 'Link nou' }
+        ),
+      },
+    }),
 });
