@@ -60,11 +60,32 @@ const introWords = (intro || '').split(' ').filter(Boolean);
       transform: rotate(45deg);
     }
 
-    /* Category image area — hidden until a service is clicked (no white
-       block by default). The accordion grows to fill the freed space. */
+    /* Category image area — hidden by default (no white block). Shown via
+       .is-visible when the active service's image should be displayed. */
     .cat-imgs {
       opacity: 0;
+      transition: opacity 0.5s ease;
     }
+
+    .cat-imgs.is-visible {
+      opacity: 1;
+    }
+
+    /* The image holder only gets a height while the area is visible, so the
+       absolutely-positioned images have space to render. When hidden it
+       collapses to 0 and the accordion takes the full width. */
+    .cat-imgs > .cat-imgs-inner {
+      width: 100%;
+      position: relative;
+      height: 0;
+      transition: height 0.5s ease;
+    }
+
+    .cat-imgs.is-visible > .cat-imgs-inner {
+      height: 100%;
+      min-height: 100%;
+    }
+
 
     /* One image per service; only the active one is shown. */
     .cat-img {
@@ -110,11 +131,23 @@ const introWords = (intro || '').split(' ').filter(Boolean);
       const catFlexRow = servicesWrapper.closest('.flex.gap-4');
       const catImgsWrap = catFlexRow ? catFlexRow.querySelector('.cat-imgs') : null;
       const catImgs = catFlexRow ? Array.from(catFlexRow.querySelectorAll('.cat-img')) : [];
+      const catRow = catFlexRow ? catFlexRow.closest('.cat-row') : null;
 
       const DEFAULT_ACTIVE_INDEX = 0;
       const setActiveService = (index) => {
         serviceCards.forEach((card, i) => card.classList.toggle('is-active', i === index));
 
+        // Reveal the active service's image (unless hidden via CMS) and show
+        // the image area only when an image is actually visible.
+        let imageVisible = false;
+        catImgs.forEach((img) => {
+          const imgIndex = parseInt(img.dataset.serviceIndex, 10);
+          const show = imgIndex === index && img.dataset.hidden !== 'true';
+          img.classList.toggle('is-active', show);
+          if (show) imageVisible = true;
+        });
+        if (catImgsWrap) catImgsWrap.classList.toggle('is-visible', imageVisible);
+        if (catRow) catRow.classList.toggle('no-image', !imageVisible);
       };
 
       // Click-only on all viewports (no hover). Let inner links work.
@@ -246,7 +279,7 @@ const introWords = (intro || '').split(' ').filter(Boolean);
               {cat.intro && (
                 <p class="text-neutral-700 leading-relaxed max-w-lg text-center mx-auto mb-8">{cat.intro}</p>
               )}
-              <div class={`flex gap-4 flex-col ${catIndex % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse "}`}>
+              <div class={`cat-row flex gap-4 flex-col ${catIndex % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse "}`}>
                 <!-- Services accordion -->
                 <div class="services-accordion-wrapper flex flex-col gap-3 min-h-[32rem]">
                   {cat.services?.map((service, sIndex) => (
@@ -313,15 +346,16 @@ const introWords = (intro || '').split(' ').filter(Boolean);
                 </div>
 
               <!-- Right: category images — hidden until a service is clicked -->
-                <div class="cat-imgs w-full">
+                <div class="cat-imgs w-full md:min-h-auto min-h-[32rem] rounded-lg overflow-hidden">
                   <div class="cat-imgs-inner">
                     {cat.services?.map((service, sIndex) => service.image && (
                           <img
                             data-service-index={sIndex}
-                            data-src={service.image}
+                            src={service.image}
+                            data-hidden={service.hideImage ? 'true' : 'false'}
                             alt={service.imageAlt || service.title || cat.name}
                             decoding="async"
-                            class:list={['cat-img']}
+                            class:list={['cat-img', 'h-full bg-contain']}
                           />
                     ))}
                   </div>

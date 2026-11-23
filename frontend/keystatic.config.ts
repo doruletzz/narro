@@ -66,6 +66,11 @@ export const servicii = singleton({
               publicPath: '/',
             }),
             imageAlt: fields.text({ label: 'Text alternativ imagine' }),
+            hideImage: fields.checkbox({
+              label: 'Ascunde imaginea',
+              description: 'Bifează pentru a ascunde imaginea acestui serviciu.',
+              defaultValue: true,
+            }),
             tiers: fields.array(
               fields.object({
                 name: fields.text({ label: 'Nume prag' }),
@@ -157,9 +162,10 @@ export const studiiDeCazPage = singleton({
 
 export default config({
   // The CMS (cms/) writes content to the repo.
-  // The frontend reads from local files at build time.
-  // No storage needed — `createReader(process.cwd(), config)` reads
-  // YAML/MD from `src/content/` relative to the working directory.
+  // The frontend reads from local files at build time via createReader.
+  // `kind: 'local'` satisfies the Config type; the reader itself ignores
+  // `storage` and reads YAML/MD from `src/content/` relative to cwd.
+  storage: { kind: 'local' },
 
   collections: {
     studiiDeCaz: collection({
@@ -188,6 +194,7 @@ export default config({
       schema: {
         hero: fields.object(
           {
+            hidden: fields.checkbox({ label: 'Ascunde secțiunea', defaultValue: false }),
             title: fields.text({ label: 'Titlu Hero', multiline: true }),
             subtitle: fields.text({ label: 'Subtitlu (sub titlu)', defaultValue: 'Noi traducem.' }),
             ctaLabel: fields.text({ label: 'Text buton CTA', defaultValue: 'ZI-NE CARE-I TREABA' }),
@@ -198,6 +205,7 @@ export default config({
 
         manifesto: fields.object(
           {
+            hidden: fields.checkbox({ label: 'Ascunde secțiunea', defaultValue: false }),
             label: fields.text({ label: 'Etichetă secțiune', defaultValue: 'MANIFESTO' }),
             image: fields.image({
               label: 'Imagine',
@@ -218,6 +226,7 @@ export default config({
 
         directia: fields.object(
           {
+            hidden: fields.checkbox({ label: 'Ascunde secțiunea', defaultValue: false }),
             label: fields.text({ label: 'Etichetă secțiune', defaultValue: 'DIRECTIA' }),
             cards: fields.array(
               fields.object({
@@ -243,6 +252,7 @@ export default config({
 
         teaser: fields.object(
           {
+            hidden: fields.checkbox({ label: 'Ascunde secțiunea', defaultValue: true }),
             label: fields.text({ label: 'Etichetă secțiune', defaultValue: 'TEASER' }),
             youtubeId: fields.text({ label: 'ID video YouTube (lasă gol până ai video)' }),
             description: fields.text({ label: 'Descriere', multiline: true }),
@@ -254,6 +264,7 @@ export default config({
 
         studiiDeCaz: fields.object(
           {
+            hidden: fields.checkbox({ label: 'Ascunde secțiunea', defaultValue: true }),
             label: fields.text({ label: 'Etichetă secțiune', defaultValue: 'STUDII DE CAZ' }),
             description: fields.text({ label: 'Descriere', multiline: true }),
             items: fields.array(
@@ -280,6 +291,7 @@ export default config({
 
         ctaBanner: fields.object(
           {
+            hidden: fields.checkbox({ label: 'Ascunde secțiunea', defaultValue: false }),
             image: fields.image({
               label: 'Imagine fundal',
               directory: 'public/images/cta-banner',

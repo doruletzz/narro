@@ -75,6 +75,7 @@ directia:
       imageAlt: Social Media - Social media management
       href: /servicii#social-media
 teaser:
+  hidden: true
   label: TEASER
   youtubeId: dQw4w9WgXcQ
   description: >-
@@ -83,6 +84,7 @@ teaser:
   ctaLabel: Află mai multe
   ctaHref: /contact
 studiiDeCaz:
+  hidden: true
   label: STUDII DE CAZ
   description: >-
     Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna

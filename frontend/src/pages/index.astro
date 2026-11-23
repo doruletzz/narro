@@ -45,6 +45,7 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
 
 
   <!-- ===== Hero Section ===== -->
+  {!hero.hidden && (
   <section class="relative overflow-hidden py-16 sm:py-20 lg:py-24 px-2 sm:px-6 lg:px-8 min-h-[92vh] md:min-h-[93vh] flex items-center bg-[#f5f0eb]">
     <!-- Doodle decorations matching Figma style — colorful scattered scribbles -->
     <div class="absolute -top-36 -left-24 sm:left-16 xl:left-80 w-64 pointer-events-none doodle-scribble fade-in fade-delay-6" style="transform: rotate(-12deg);">
@@ -149,8 +150,10 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
       </div>
     </div>
   </section>
+  )}
 
   <!-- ===== Cele 3 direcții Section ===== -->
+  {!directia.hidden && (
   <section class="relative overflow-hidden px-4 py-20 lg:py-32 bg-white">
     <!-- Background shape -->
     <div class="absolute -left-full -right-full -bottom-full top-1/2 mt-20 bg-[#f5f0eb] -rotate-6"></div>
@@ -206,8 +209,10 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
       </div>
     </div>
   </section>
+  )}
 
   <!-- ===== „Bine, bine...” Section ===== -->
+  {!manifesto.hidden && (
   <section class="relative overflow-hidden px-4 py-20 lg:py-32 bg-white">
     <!-- Sketch doodle decorations -->
     <div class="absolute bottom-1/4 mb-16 -left-16 w-72 pointer-events-none doodle-scribble fade-in fade-delay-1">
@@ -245,9 +250,10 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
       </div>
     </div>
   </section>
+  )}
 
-  <!-- ===== Teaser Section — HIDDEN (TODO: activate when ready) ===== -->
-  <div hidden>
+  <!-- ===== Teaser Section ===== -->
+  {!teaser.hidden && (
     <section class="relative overflow-hidden py-12" style="background-color: #2200d8;">
       <!-- Heading bar -->
       <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-12">
@@ -337,11 +343,11 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
         </div>
       )}
     </section>
-  </div>
-  <!-- /Teaser Section — HIDDEN -->
+  )}
+  <!-- /Teaser Section -->
 
-  <!-- ===== Studii de Caz Section — HIDDEN (TODO: activate when ready) ===== -->
-  <div hidden>
+  <!-- ===== Studii de Caz Section ===== -->
+  {!studiiDeCaz.hidden && (
     <section class="relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24" style="background-color: #f5f0eb;">
       <!-- Sketch doodle decorations -->
       <div class="absolute top-2 sm:top-36 right-2 md:block hidden sm:right-12 w-64 pointer-events-none doodle-scribble fade-in fade-delay-1">
@@ -391,11 +397,11 @@ const totalHeroWords = heroSegments.reduce((count, segment) => count + segment.w
         </div>
       </div>
     </section>
-  </div>
-  <!-- /Studii de Caz Section — HIDDEN -->
+  )}
+  <!-- /Studii de Caz Section -->
 
   <!-- ===== CTA Banner ===== -->
-  <CtaBanner ctaBanner={page.ctaBanner} />
+  {!page.ctaBanner.hidden && <CtaBanner ctaBanner={page.ctaBanner} />}
 
 </PageLayout>
 </script>
