@@ -1,6 +1,4 @@
-# Footer — edit in the CMS (singletons → "Footer").
-# Each link can set an explicit icon, or "auto" to infer from the href.
-tagline: narro, ergo sum — povestesc, deci exist.
+tagline: narro, ergo sum - povestesc, deci exist.
 socialLabel: Întreprindere socială.
 columns:
   - title: Linkuri
@@ -20,16 +18,17 @@ columns:
   - title: Contact
     links:
       - label: Cluj-Napoca
-        href: "https://www.google.com/maps?q=Sat%20Flore%C8%99ti%2C%20com.%20Flore%C8%99ti%2C%20Str.%20Ioachim%20Olteanu%20nr.%2027A%2C%20jud.%20Cluj"
+        href: >-
+          https://www.google.com/maps?q=Sat%20Flore%C8%99ti%2C%20com.%20Flore%C8%99ti%2C%20Str.%20Ioachim%20Olteanu%20nr.%2027A%2C%20jud.%20Cluj
         icon: location
       - label: narro.branding@gmail.com
-        href: "mailto:narro.branding@gmail.com"
+        href: mailto:narro.branding@gmail.com
         icon: mail
-      - label: "@narrobranding"
-        href: "https://www.instagram.com/narrobranding"
+      - label: '@narrobranding'
+        href: https://www.instagram.com/narrobranding
         icon: instagram
-      - label: "+40 000 000 000" # TODO: replace with the real phone number
-        href: "tel:+40000000000"
+      - label: +40 0748921883
+        href: tel:+40748921883
         icon: telephone
 legalLinks:
   - label: Informații legale
@@ -46,6 +45,6 @@ workingHours:
     - day: Luni - Vineri
       hours: 09:00 - 18:00
     - day: Sâmbătă
-      hours: 10:00 - 14:00
+      hours: Închis
     - day: Duminică
       hours: Închis
