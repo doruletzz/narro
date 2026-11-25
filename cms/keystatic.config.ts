@@ -155,7 +155,7 @@ export default config({
       path: 'src/content/studii-de-caz/*/**',
       slugField: 'slug',
       schema: {
-        slug: fields.slug(),
+        slug: fields.slug({ name: { label: 'Slug' } }),
         title: fields.text({ label: 'Titlu' }),
         tag: fields.text({ label: 'Etichetă (afișată pe card)' }),
         bannerImage: fields.image({
