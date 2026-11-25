@@ -7,14 +7,18 @@ import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 
 const reader = createReader(process.cwd(), keystaticConfig);
-const page = await reader.singletons.studiiDeCazPage.read();
 const home = await reader.singletons.homepage.read();
 
-if (!page) {
-  throw new Error('Studii de Caz content not found — fill it in at /keystatic');
-}
-
-const { label, items } = page;
+// Cards come from the `studiiDeCaz` collection — one entry per case study
+// (edit them in the CMS; each entry also powers /studii-de-caz/<slug>).
+const label = 'STUDII DE CAZ';
+const items = (await reader.collections.studiiDeCaz.all()).map(({ slug, entry }) => ({
+  slug,
+  title: entry.title ?? '',
+  tag: entry.tag ?? '',
+  image: entry.bannerImage ?? '',
+  imageAlt: entry.bannerImageAlt ?? '',
+}));
 const { ctaBanner } = home || {};
 const DEFAULT_STUDII_INDEX = -1;
 ---

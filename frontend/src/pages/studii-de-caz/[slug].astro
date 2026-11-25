@@ -1,37 +1,45 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
 import CtaBanner from '@/components/sections/CtaBanner.astro';
-import { getCollection, render } from 'astro:content';
 import { createReader } from '@keystatic/core/reader';
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import rehypeStringify from 'rehype-stringify';
 import keystaticConfig from '../../../keystatic.config';
 
-// Detail entries are markdown files managed by Keystatic
-// (see `studiiDeCaz` collection in keystatic.config.ts).
+// Detail entries are the `studiiDeCaz` collection, managed in the CMS
+// (see keystatic.config.ts): <slug>.yaml holds the fields, <slug>/content.md
+// holds the markdown body.
+const reader = createReader(process.cwd(), keystaticConfig);
+
 export async function getStaticPaths() {
-  const entries = await getCollection('studii-de-caz');
-  return entries.map((entry) => ({
-    params: { slug: entry.slug },
+  const reader = createReader(process.cwd(), keystaticConfig);
+  const slugs = await reader.collections.studiiDeCaz.list();
+  return slugs.map((slug) => ({
+    params: { slug },
   }));
 }
 
 const { slug } = Astro.params;
-const entries = await getCollection('studii-de-caz');
-const entry = entries.find((e) => e.slug === slug);
+const entry = await reader.collections.studiiDeCaz.read(slug);
 
 if (!entry) {
   return Astro.redirect('/studii-de-caz');
 }
 
-const { Content } = await render(entry);
-const { title, bannerImage, bannerImageAlt } = entry.data;
+const { title, bannerImage, bannerImageAlt } = entry;
+const markdown = await entry.content();
+const html = String(
+  await unified().use(remarkParse).use(remarkRehype).use(rehypeStringify).process(markdown)
+);
 
-const reader = createReader(process.cwd(), keystaticConfig);
 const home = await reader.singletons.homepage.read();
 const { ctaBanner } = home || {};
 
 ---
 
-<PageLayout title={`${title} — Studiu de Caz — Narro`} description={`Studiu de caz ${title} — Narro branding și comunicare vizuală.`}>
+<PageLayout title={`${title ?? 'Studiu de caz'} — Studiu de Caz — Narro`} description={`Studiu de caz ${title ?? ''} — Narro branding și comunicare vizuală.`}>
   <style is:global>
     /* Markdown content styling (no typography plugin in this project) */
     .studiu-markdown {
@@ -152,9 +160,7 @@ const { ctaBanner } = home || {};
         </a>
       </div>
 
-      <div class="studiu-markdown">
-        <Content />
-      </div>
+      <div class="studiu-markdown" set:html={html} />
     </div>
   </section>
 

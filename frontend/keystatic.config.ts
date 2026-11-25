@@ -131,34 +131,10 @@ export const servicii = singleton({
   },
 });
  
-export const studiiDeCazPage = singleton({
-  label: 'Studii de Caz (pagină)',
-  path: 'src/content/studii-de-caz/index',
-  format: { data: 'yaml' },
-  schema: {
-    label: fields.text({ label: 'Titlu secțiune', defaultValue: 'STUDII DE CAZ' }),
-    items: fields.array(
-      fields.object({
-        title: fields.text({ label: 'Titlu' }),
-        slug: fields.text({
-          label: 'Slug (link detaliat)',
-          description: 'Adresa paginii de detaliu: /studii-de-caz/<slug>',
-        }),
-        tag: fields.text({ label: 'Etichetă suprapusă pe imagine' }),
-        image: fields.image({
-          label: 'Imagine',
-          directory: 'public',
-          publicPath: '/',
-        }),
-        imageAlt: fields.text({ label: 'Text alternativ imagine' }),
-      }),
-      {
-        label: 'Studii de caz',
-        itemLabel: (props) => props.fields.title.value || 'Studiu de caz nou',
-      }
-    ),
-  },
-});
+// NOTE: the listing page (src/pages/studii-de-caz.astro) reads its cards
+// directly from the `studiiDeCaz` collection below — there is no separate
+// singleton for it. (A singleton file inside the collection directory would
+// be picked up by the collection reader and break it.)
 
 export default config({
   // The CMS (cms/) writes content to the repo.
@@ -175,6 +151,7 @@ export default config({
       schema: {
         slug: fields.slug({ name: { label: 'Slug' } }),
         title: fields.text({ label: 'Titlu' }),
+        tag: fields.text({ label: 'Etichetă (afișată pe card)' }),
         bannerImage: fields.image({
           label: 'Imagine banner',
           directory: 'public',
@@ -429,7 +406,6 @@ export default config({
       },
     }),
     servicii,
-    studiiDeCazPage,
 
     programSocial: singleton({
       label: 'Program Social',
