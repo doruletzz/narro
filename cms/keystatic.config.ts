@@ -245,7 +245,7 @@ export default config({
           { label: 'Teaser' }
         ),
 
-        studiiDeCaz: fields.object(
+        studiiDeCazuri: fields.object(
           {
             hidden: fields.checkbox({ label: 'Ascunde secțiunea', defaultValue: true }),
             label: fields.text({ label: 'Etichetă secțiune', defaultValue: 'STUDII DE CAZ' }),
