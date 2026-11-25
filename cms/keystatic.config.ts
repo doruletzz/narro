@@ -152,7 +152,7 @@ export default config({
   collections: {
     studiiDeCaz: collection({
       label: 'Studii de Caz (detaliat)',
-      path: 'src/content/studii-de-caz/*',
+      path: 'src/content/studii-de-caz/*/**',
       slugField: 'slug',
       schema: {
         slug: fields.slug({ name: { label: 'Slug' } }),
