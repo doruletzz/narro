@@ -1,3 +1,8 @@
+---
+title: "Studiu Două"
+bannerImage: /manifesto.png
+bannerImageAlt: "Studiu Două banner"
+---
 # Studiu Două
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

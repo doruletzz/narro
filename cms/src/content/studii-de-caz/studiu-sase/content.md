@@ -1,3 +1,8 @@
+---
+title: "Studiu Șase"
+bannerImage: /cta-banner.png
+bannerImageAlt: "Studiu Șase banner"
+---
 # Studiu Șase
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.

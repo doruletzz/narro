@@ -1,3 +1,8 @@
+---
+title: "Studiu Trei"
+bannerImage: /images/studii-de-caz/studiiDeCaz/items/0/image.webp
+bannerImageAlt: "Studiu Trei banner"
+---
 # Studiu Trei
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.

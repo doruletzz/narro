@@ -1,3 +1,8 @@
+---
+title: "Studiu Patru"
+bannerImage: /images/studii-de-caz/studiiDeCaz/items/1/image.webp
+bannerImageAlt: "Studiu Patru banner"
+---
 # Studiu Patru
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.

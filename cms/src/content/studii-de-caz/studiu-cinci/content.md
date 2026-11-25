@@ -1,3 +1,8 @@
+---
+title: "Studiu Cinci"
+bannerImage: /studiu-prim/bannerImage.png
+bannerImageAlt: "Studiu Cinci banner"
+---
 # Studiu Cinci
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
