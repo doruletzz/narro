@@ -12,5 +12,5 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
 
 ## Rezultat
 
-- Nisi ut aliquip ex ea commodo consequat
-- Duis aute irure dolor in reprehenderit in voluptate
+* Nisi ut aliquip ex ea commodo consequat
+* Duis aute irure dolor in reprehenderit in voluptate
