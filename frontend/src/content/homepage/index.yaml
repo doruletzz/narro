@@ -113,7 +113,7 @@ studiiDeCazuri:
       ctaLabel: Află mai multe
       href: /contact
 testimonials:
-  hidden: true
+  hidden: false
   label: TESTIMONIALE
   description: Ce spun clienții despre colaborarea cu noi.
   items:
