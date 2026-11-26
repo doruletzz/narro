@@ -115,16 +115,13 @@ testimonials:
   description: >-
     Ce spun clienții despre colaborarea cu noi.
   items:
-    - photo: /images/studii-de-caz/studiiDeCaz/items/0/image.webp
-      quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
+    - quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
       author: Nume Client
       role: Business
-    - photo: /images/studii-de-caz/studiiDeCaz/items/1/image.webp
-      quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
+    - quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
       author: Nume Client
       role: Business
-    - photo: /images/directia/directia/cards/0/image.webp
-      quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
+    - quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
       author: Nume Client
       role: Business
 ctaBanner:
