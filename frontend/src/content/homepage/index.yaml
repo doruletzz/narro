@@ -119,10 +119,12 @@ testimonials:
       quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
       author: Nume Client
       role: Business
-    - quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
+    - photo: /images/testimonials/testimonials/items/1/photo.png
+      quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
       author: Nume Client
       role: Business
-    - quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
+    - photo: /images/testimonials/testimonials/items/2/photo.png
+      quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
       author: Nume Client
       role: Business
 ctaBanner:
