@@ -117,7 +117,8 @@ testimonials:
   label: TESTIMONIALE
   description: Ce spun clienții despre colaborarea cu noi.
   items:
-    - quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
+    - photo: /images/testimonials/testimonials/items/0/photo.png
+      quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
       author: Nume Client
       role: Business
     - quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
