@@ -273,6 +273,11 @@ export default config({
             description: fields.text({ label: 'Descriere', multiline: true }),
             items: fields.array(
               fields.object({
+                  photo: fields.image({
+                    label: 'Fotografie',
+                    directory: 'public/images/testimonials',
+                    publicPath: '/images/testimonials/',
+                  }),
                 quote: fields.text({ label: 'Citat', multiline: true }),
                 author: fields.text({ label: 'Autor' }),
                 role: fields.text({ label: 'Rol / Business' }),
