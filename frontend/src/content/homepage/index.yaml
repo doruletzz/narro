@@ -1,4 +1,5 @@
 hero:
+  hidden: false
   title: >-
     Știi perfect de ce ești altfel. Doar că-ți iese __calitate și
     profesionalism__
@@ -6,6 +7,7 @@ hero:
   ctaLabel: ZI-NE CARE-I TREABA
   ctaHref: /contact
 manifesto:
+  hidden: false
   label: Bine, bine, dar cu ce mă ajută asta pe mine?
   image: /images/manifesto/manifesto/image.webp
   imageAlt: Echipa Narro
@@ -25,6 +27,7 @@ manifesto:
       culori, reguli. Altcineva se ocupă de ce se vede lunar - postări, texte,
       fotografii. Uneori de amândouă, uneori doar de una. Depinde unde ești.
 directia:
+  hidden: false
   label: Sunt mai multe treburi. Le luăm pe rând.
   cards:
     - eyebrow: Treaba despre..
@@ -96,7 +99,7 @@ studiiDeCazuri:
         Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis
         magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
         bibendum risus.
-      image: /images/studii-de-caz/studiiDeCaz/items/0/image.webp
+      image: /images/studii-de-caz/studiiDeCazuri/items/0/image.webp
       imageAlt: Studiu de caz 1
       ctaLabel: Află mai multe
       href: /contact
@@ -105,15 +108,14 @@ studiiDeCazuri:
         Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis
         magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
         bibendum risus.
-      image: /images/studii-de-caz/studiiDeCaz/items/1/image.webp
+      image: /images/studii-de-caz/studiiDeCazuri/items/1/image.webp
       imageAlt: Studiu de caz 2
       ctaLabel: Află mai multe
       href: /contact
 testimonials:
-  hidden: false
+  hidden: true
   label: TESTIMONIALE
-  description: >-
-    Ce spun clienții despre colaborarea cu noi.
+  description: Ce spun clienții despre colaborarea cu noi.
   items:
     - quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
       author: Nume Client
@@ -125,6 +127,7 @@ testimonials:
       author: Nume Client
       role: Business
 ctaBanner:
+  hidden: false
   image: /images/cta-banner/ctaBanner/image.webp
   imageAlt: CTA - Vreau radiografia
   description: >-
