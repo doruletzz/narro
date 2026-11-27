@@ -152,8 +152,8 @@ categories:
           - Calendar editorial
         price: Hai să ne auzim. Dă-ne un beep.
         noteHighlight: false
-        image: /categories/3/services/0/image.svg
-        hideImage: true
+        image: /categories/3/services/0/image.png
+        hideImage: false
         tiers: []
       - title: Social Media
         lead: >-
