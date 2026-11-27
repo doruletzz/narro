@@ -78,7 +78,7 @@ directia:
       imageAlt: Social Media - Social media management
       href: /servicii#social-media
 teaser:
-  hidden: false
+  hidden: true
   label: TEASER
   youtubeId: dQw4w9WgXcQ
   description: >-
@@ -88,26 +88,28 @@ teaser:
   ctaHref: /contact
 studiiDeCazuri:
   hidden: false
-  label: STUDII DE CAZ
-  description: >-
-    Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis magna
-    etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet bibendum
-    risus.
+  label: Studii de caz
+  description: Ce am mai văzut | Ce am mai gândit | Ce ni s-a părut interesant
   items:
-    - title: 'STUDIU DE CAZ #1'
+    - title: „The future's bright, the future's Orange."
       description: >-
-        Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis
-        magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
-        bibendum risus.
-      imageAlt: Studiu de caz 1
+        nchide ochii și du-te în anii ’90. Un telefon mobil era cât o cărămidă,
+        costa cât o vacanță, și suna doar dacă erai în locul potrivit.
+        Tehnologia era scumpă, complicată și, sincer, un pic rece. 
+      image: /images/studii-de-caz/studiiDeCazuri/items/0/image.png
+      imageAlt: „The future's bright, the future's Orange."
       ctaLabel: Află mai multe
       href: /contact
-    - title: 'STUDIU DE CAZ #2'
-      description: >-
-        Lorem ipsum dolor sit amet consectetur. Ut adipiscing risus mi quis
-        magna etiam sem nunc. Magnis volutpat amet diam natoque nunc mattis amet
-        bibendum risus.
-      imageAlt: Studiu de caz 2
+    - title: Firme vechi vs firme noi - design în stradă vs reclame luminoase
+      description: >
+        Ce s-a câștigat și ce s-a pierdut când firmele au încetat să mai fie
+        pictate cu mâna.
+
+        Până prin anii '80, aproape orice firmă de pe stradă era pictată manual.
+        Exista chiar o meserie pentru asta, cu nume și cu respect - omul care o
+        făcea era un fel de artizan care știa litere, culoare și compoziție.
+        Fiecare firmă era făcută o singură dată, pentru un singur perete. 
+      imageAlt: Firme vechi vs firme noi - design în stradă vs reclame luminoase
       ctaLabel: Află mai multe
       href: /contact
 testimonials:
