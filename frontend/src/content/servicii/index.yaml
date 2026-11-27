@@ -20,7 +20,7 @@ proiectDeBrand:
   closing: >-
     La final, reunim toate deciziile într-un sistem de brand și îl aplicăm în
     materialele de care businessul are nevoie.
-  price: Hai să ne auzim. Dă-ne un beep.
+  price: 9.000 – 14.000 lei
   image: /proiectDeBrand/image.jpg
 categories:
   - name: Strategie
@@ -37,7 +37,7 @@ categories:
           - Analiză scrisă
           - 3 direcții de lucru prioritizate
           - Discuție de o oră
-        price: Hai să ne auzim. Dă-ne un beep.
+        price: 900 lei
         note: >-
           Se scade integral din orice proiect contractat în următoarele 30 de
           zile.
@@ -64,7 +64,7 @@ categories:
           - Iconografie și elemente grafice
           - Sistem complet de template-uri
           - Manual vizual
-        price: Hai să ne auzim. Dă-ne un beep.
+        price: 5.000 – 7.000 lei
         noteHighlight: false
         image: /categories/1/services/0/image.png
         hideImage: false
@@ -84,7 +84,7 @@ categories:
           - Mini-ghid vizual
           - Set de template-uri de bază pentru social media
           - 3 materiale de lansare
-        price: Hai să ne auzim. Dă-ne un beep.
+        price: 3.900 lei
         note: >-
           Kitul de Pornire te scoate rapid în piață. Identitatea Vizuală
           construiește sistemul pe care brandul îl folosește ani întregi. Dacă
@@ -103,7 +103,7 @@ categories:
             existente a brandului.
         primesti: []
         primestiInline: 'Primești: piesa sau setul solicitat, în formatele necesare.'
-        price: Hai să ne auzim. Dă-ne un beep.
+        price: De la 350 lei/piesă
         noteHighlight: false
         image: /categories/1/services/2/image.png
         hideImage: false
@@ -123,7 +123,7 @@ categories:
           - Reguli de scriere
           - Exemple bun/greșit
           - Texte-model
-        price: Hai să ne auzim. Dă-ne un beep.
+        price: 1.800 lei
         noteHighlight: false
         image: /categories/2/services/0/image.jpg
         hideImage: false
@@ -150,7 +150,7 @@ categories:
             (maxim 4 formate video)
           - 1 ședință foto-video la locație, cu echipa NARRO
           - Calendar editorial
-        price: Hai să ne auzim. Dă-ne un beep.
+        price: 2.500 lei/lună
         noteHighlight: false
         image: /categories/3/services/0/image.png
         hideImage: false
@@ -170,15 +170,15 @@ categories:
         hideImage: false
         tiers:
           - name: Foundation
-            price: Hai să ne auzim. Dă-ne un beep.
+            price: 1.800 lei/lună
             details: 1 platformă · 8 postări/lună · community management · raport lunar
           - name: Momentum
-            price: Hai să ne auzim. Dă-ne un beep.
+            price: 2.400 lei/lună
             details: >-
               2 platforme · 12 postări/lună + 1 reel · community management ·
               raport lunar
           - name: Signature
-            price: Hai să ne auzim. Dă-ne un beep.
+            price: '3.600 lei/lună '
             details: >-
               3 platforme · 16 postări/lună + 4 reels · community management ·
               raport lunar · 1 ședință foto-video la locație · consultanță
