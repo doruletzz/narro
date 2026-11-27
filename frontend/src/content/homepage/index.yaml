@@ -119,16 +119,21 @@ testimonials:
   description: Ce spun clienții despre colaborarea cu noi.
   items:
     - photo: /images/testimonials/testimonials/items/0/photo.png
-      quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
-      author: Nume Client
+      quote: '"Recomand! Au răbdare cu noi chiar dacă mai întârziem cu aprobările“'
+      author: Andrei B
       role: Business
     - photo: /images/testimonials/testimonials/items/1/photo.png
-      quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
-      author: Nume Client
+      quote: >-
+        Lucrăm cu ei de vreo 4 luni. Se vede diferența, ne întreabă lumea cine
+        ne face pozele.
+      author: Sorana S.
       role: Business
     - photo: /images/testimonials/testimonials/items/2/photo.png
-      quote: Lorem ipsum dolor sit amet consectetur adipiscing elit.
-      author: Nume Client
+      quote: >-
+        Le-am zis că nu ne pricepem la instagram și nici nu prea avem timp. De
+        atunci nu m-am mai gândit la el, dar văd că vin oameni care zic că ne-au
+        găsit acolo
+      author: Raluca M.
       role: Business
 ctaBanner:
   hidden: false
